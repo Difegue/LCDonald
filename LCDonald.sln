@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCDonald", "LCDonald\LCDonald.csproj", "{9A5BF4AB-2BA7-4918-846C-BC630282AD58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCDonald.Core", "LCDonald.Core\LCDonald.Core.csproj", "{56E65383-EAD9-41F2-B6B3-578BD3DD9497}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A5BF4AB-2BA7-4918-846C-BC630282AD58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5BF4AB-2BA7-4918-846C-BC630282AD58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5BF4AB-2BA7-4918-846C-BC630282AD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5BF4AB-2BA7-4918-846C-BC630282AD58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E65383-EAD9-41F2-B6B3-578BD3DD9497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E65383-EAD9-41F2-B6B3-578BD3DD9497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E65383-EAD9-41F2-B6B3-578BD3DD9497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E65383-EAD9-41F2-B6B3-578BD3DD9497}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B995E7CC-CD12-4B4E-AEC3-2A12E67C1E2E}
+	EndGlobalSection
+EndGlobal

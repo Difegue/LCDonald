@@ -1,0 +1,94 @@
+<!-- tskypatrol.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="front_open">
+		<image file="tskypatrol_front_open.jpg" />
+	</element>
+	<element name="front_closed">
+		<image file="tskypatrol_front_closed.jpg" />
+	</element>
+	<element name="back_open">
+		<image file="tskypatrol_back_open.jpg" />
+	</element>
+	<element name="back_closed">
+		<image file="tskypatrol_back_closed.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="tskypatrol_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front_Open">
+		<screen index="0">
+			<bounds x="886" y="555" width="2228" height="1671" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="4000" height="2780" />
+		</element>
+		<element ref="front_open">
+			<bounds x="25" y="724" width="770" height="1333" />
+		</element>
+		<element ref="inst2">
+			<bounds x="3205" y="724" width="770" height="1333" />
+		</element>
+	</view>
+
+	<view name="Front_Closed">
+		<screen index="0">
+			<bounds x="886" y="555" width="2228" height="1671" />
+		</screen>
+		<element ref="bezel">
+			<bounds x="0" y="0" width="4000" height="2780" />
+		</element>
+		<element ref="inst1">
+			<bounds x="25" y="724" width="770" height="1333" />
+		</element>
+		<element ref="inst2">
+			<bounds x="3205" y="724" width="770" height="1333" />
+		</element>
+	</view>
+
+	<view name="Back_Open">
+		<screen index="0">
+			<bounds x="886" y="555" width="2228" height="1671" />
+		</screen>
+		<element ref="bezel">
+			<bounds x="0" y="0" width="4000" height="2780" />
+		</element>
+		<element ref="inst1">
+			<bounds x="25" y="724" width="770" height="1333" />
+		</element>
+		<element ref="inst2">
+			<bounds x="3205" y="724" width="770" height="1333" />
+		</element>
+	</view>
+
+	<view name="Back_Closed">
+		<screen index="0">
+			<bounds x="886" y="555" width="2228" height="1671" />
+		</screen>
+		<element ref="bezel">
+			<bounds x="0" y="0" width="4000" height="2780" />
+		</element>
+		<element ref="inst1">
+			<bounds x="25" y="724" width="770" height="1333" />
+		</element>
+		<element ref="inst2">
+			<bounds x="3205" y="724" width="770" height="1333" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+
+- Artwork type: Bezel, Inst. Card
+- Scanned Inst. Cards provided by TheGuru
+- Raster cleanup by UDb23
+- Lay file by Mr. Do
+
+-->
+
