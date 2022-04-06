@@ -15,7 +15,7 @@
   <StackPanel>
     <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-    <Svg Path="/Assets/GameAssets/tskypatrol/tskypatrol.svg"/>
+	  <SKPictureControl Name="SvgTest" Width="200" />
   </StackPanel>
 
 

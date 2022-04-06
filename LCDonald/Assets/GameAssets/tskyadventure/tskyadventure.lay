@@ -1,23 +1,23 @@
-<!-- tskypatrol.lay -->
+<!-- tskyadventure.lay -->
 
 <mamelayout version="2">
 
 <!-- Define Elements -->
 
 	<element name="front_open">
-		<image file="tskypatrol_front_open.jpg" />
+		<image file="tskyadventure_front_open.jpg" />
 	</element>
 	<element name="front_closed">
-		<image file="tskypatrol_front_closed.jpg" />
+		<image file="tskyadventure_front_closed.jpg" />
 	</element>
 	<element name="back_open">
-		<image file="tskypatrol_back_open.jpg" />
+		<image file="tskyadventure_back_open.jpg" />
 	</element>
 	<element name="back_closed">
-		<image file="tskypatrol_back_closed.jpg" />
+		<image file="tskyadventure_back_closed.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="tskypatrol_bg.jpg" />
+		<image file="tskyadventure_bg.jpg" />
 	</element>
 	
 <!-- Define Views -->
@@ -54,7 +54,7 @@
 </mamelayout>
 
 <!--
-
+Tails' Sky Adventure
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
 
