@@ -15,7 +15,7 @@
   <StackPanel>
     <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-	  <SKPictureControl Name="SvgTest" Width="200" />
+	  <Canvas Name="CanvasTest" RenderTransformOrigin="0,0"/>
   </StackPanel>
 
 

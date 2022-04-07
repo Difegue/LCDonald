@@ -17,11 +17,11 @@ namespace LCDonald.Core.Layout
         {
         }
 
-        public MAMELayout Parse(string xml)
+        public MAMELayout Parse(string xmlPath)
         {
             var layout = new MAMELayout();
             var doc = new XmlDocument();
-            doc.LoadXml(xml);
+            doc.Load(xmlPath);
 
             var root = doc.DocumentElement;
             if (root.Name != "mamelayout")
@@ -70,10 +70,10 @@ namespace LCDonald.Core.Layout
             var view = new MAMEView
             {
                 Name = node.Attributes["name"].Value,
-                ScreenHeight = int.Parse(screenBounds.Attributes["height"].Value),
-                ScreenWidth = int.Parse(screenBounds.Attributes["width"].Value),
-                ScreenX = int.Parse(screenBounds.Attributes["x"].Value),
-                ScreenY = int.Parse(screenBounds.Attributes["y"].Value)
+                ScreenHeight = screenBounds != null ? int.Parse(screenBounds.Attributes["height"].Value) : -1,
+                ScreenWidth = screenBounds != null ? int.Parse(screenBounds.Attributes["width"].Value) : -1,
+                ScreenX = screenBounds != null ? int.Parse(screenBounds.Attributes["x"].Value) : -1,
+                ScreenY = screenBounds != null ? int.Parse(screenBounds.Attributes["y"].Value) : -1
 
             };
             view.Elements.AddRange(ParseViewElements(node));

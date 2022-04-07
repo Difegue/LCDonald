@@ -26,11 +26,11 @@
 		<screen index="0">
 			<bounds x="1832" y="1313" width="300" height="380" />
 		</screen>
-		<element ref="game_bg">
-			<bounds x="1832" y="1313" width="300" height="380" />
-		</element>
 		<element ref="front_open">
 			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="1832" y="1313" width="300" height="380" />
 		</element>
 	</view>
 
