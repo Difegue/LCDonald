@@ -1,6 +1,4 @@
 ﻿namespace LCDonald.Core.Model
 {
-    public class LCDGameSound
-    {
-    }
+    public record LCDGameSound(string AudioFileName);
 }

@@ -7,14 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Games\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="IsExternalInit" Version="1.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SharpAudio" Version="1.0.53-beta" />
+    <PackageReference Include="SharpAudio.Codec" Version="1.0.53-beta" />
   </ItemGroup>
 
 </Project>

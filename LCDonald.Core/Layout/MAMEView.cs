@@ -11,5 +11,7 @@ namespace LCDonald.Core.Layout
         public int ScreenHeight { get; init; }
 
         public List<MAMEElementRef> Elements { get; init; } = new List<MAMEElementRef>();
+
+        public override string ToString() => Name;
     }
 }

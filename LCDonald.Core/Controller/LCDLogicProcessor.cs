@@ -1,58 +1,100 @@
 ﻿using LCDonald.Core.Model;
+using SharpAudio;
+using SharpAudio.Codec;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace LCDonald.Core.Controller
 {
-    public class LCDLogicProcessor
+    public class LCDLogicProcessor: IDisposable
     {
+        private readonly ILCDGame _currentGame;
+        private readonly ILCDView _currentView;
+        private readonly AudioEngine _gameAudio;
 
-        private ILCDGame _currentGame;
-        private ILCDView _currentView;
-        
         private bool _isPaused;
+        private bool _isStopped;
         private Timer? _gameTimer;
-
+        
         public LCDLogicProcessor(ILCDGame game, ILCDView view)
         {
             _currentGame = game;
             _currentView = view;
             _isPaused = false;
+
+            _gameAudio = AudioEngine.CreateDefault();
+
+            _currentGame.Started += StartGame;
+            _currentGame.Stopped += StopGame;
+            _currentGame.Paused += PauseResumeGame;
         }
 
-        public void StartGame()
+        private void StartGame(object sender, EventArgs e)
         {
             _gameTimer?.Stop();
             _gameTimer?.Dispose();
 
-            _currentGame.Start();
             _gameTimer = new Timer(_currentGame.GetGameSpeed());
             _gameTimer.Elapsed += UpdateGameState;
+
+            _isStopped = false;
+            
+            Task.Run(() => GameLoop());
         }
 
-        public void Pause()
+
+        private void StopGame(object sender, EventArgs e) => _isStopped = true;
+
+        private void PauseResumeGame(object sender, EventArgs e)
+        {
+            if (_isPaused)
+                Resume();
+            else
+                Pause();
+        }            
+
+        private void Pause()
         {
             _isPaused = true;
             _gameTimer?.Stop();
         }
 
-        public void Resume()
+        private void Resume()
         {
             _isPaused = false;
             _gameTimer?.Start();
         }
 
-        public void GameLoop()
+        private void GameLoop()
         {
-            while (true)
+            while (!_isStopped)
             {
                 if (!_isPaused)
                 {
                     var currentInputs = _currentView.GetPressedInputs();
                     _currentGame.HandleInputs(currentInputs);
 
-                    var soundsToPlay = _currentGame.GetSoundsToPlay();
-                    _currentView.PlaySounds(soundsToPlay);
+                    _currentView.UpdateDisplay(_currentGame.GetVisibleGameElements());
+
+                    PlaySounds(_currentGame.GetSoundsToPlay());
                 }
+            }
+        }
+
+        private void PlaySounds(List<LCDGameSound> gameSounds)
+        {
+            foreach (var sound in gameSounds)
+            {
+                // TODO preload files into memory
+                var soundFile = File.OpenRead(sound.AudioFileName);
+                var soundStream = new SoundStream(soundFile, _gameAudio)
+                {
+                    Volume = 0.5f
+                };
+                soundStream.Play();
             }
         }
 
@@ -63,5 +105,17 @@ namespace LCDonald.Core.Controller
             // Update speed in case the game sped up
             ((Timer)sender).Interval = _currentGame.GetGameSpeed();
         }
+
+        public void Dispose()
+        {
+            _gameTimer?.Stop();
+            _gameTimer?.Dispose();
+            _gameAudio.Dispose();
+            
+            _currentGame.Started -= StartGame;
+            _currentGame.Stopped -= StopGame;
+            _currentGame.Paused -= PauseResumeGame;
+        }
+
     }
 }

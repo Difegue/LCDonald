@@ -3,7 +3,7 @@
              xmlns:local="using:LCDonald"
              x:Class="LCDonald.App">
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        
     </Application.DataTemplates>
 
     <Application.Styles>

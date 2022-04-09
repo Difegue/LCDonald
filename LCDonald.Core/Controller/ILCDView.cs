@@ -9,6 +9,6 @@ namespace LCDonald.Core.Controller
     public interface ILCDView
     {
         List<LCDGameInput> GetPressedInputs();
-        void PlaySounds(List<LCDGameSound> soundsToPlay);
+        void UpdateDisplay(List<string> visibleElements);
     }
 }

@@ -1,11 +1,34 @@
-using System;
+using CommunityToolkit.Mvvm.ComponentModel;
+using LCDonald.Core.Controller;
+using LCDonald.Core.Games;
+using LCDonald.Core.Layout;
+using LCDonald.Core.Model;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 
 namespace LCDonald.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public partial class MainWindowViewModel : ObservableObject
     {
-        public string Greeting => "Welcome to Avalonia!";
+
+        [ObservableProperty]
+        private ILCDGame _game;
+
+        [ObservableProperty]
+        private List<MAMEView> _availableViews;
+
+        [ObservableProperty]
+        private MAMEView _selectedView;
+
+        public MainWindowViewModel()
+        {
+            Game = new TailsSkyAdventure();
+            AvailableViews = new List<MAMEView>();
+        }
+
+        public void StartGame()
+        {
+            Game.Start();
+        }
     }
 }

@@ -1,6 +1,4 @@
 ﻿namespace LCDonald.Core.Model
 {
-    public class LCDGameElement
-    {
-    }
+    public record LCDGameElement(string SvgGroupName);
 }
