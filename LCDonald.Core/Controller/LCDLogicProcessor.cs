@@ -37,6 +37,9 @@ namespace LCDonald.Core.Controller
             _gameTimer?.Stop();
             _gameTimer?.Dispose();
 
+            // Flush input buffer
+            _currentView.GetPressedInputs();
+
             _gameTimer = new Timer(_currentGame.GetGameSpeed());
             _gameTimer.Elapsed += UpdateGameState;
 

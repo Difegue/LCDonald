@@ -67,19 +67,19 @@ namespace LCDonald.Core.Games
                 {
                     Name = "Left",
                     Description = "",
-                    KeyCode = "left",
+                    KeyCode = 23, // left
                 },
                 new LCDGameInput
                 {
                     Name = "Right",
                     Description = "",
-                    KeyCode = "right",
+                    KeyCode = 25, // right
                 },
                 new LCDGameInput
                 {
                     Name = "Fire",
                     Description = "",
-                    KeyCode = "space",
+                    KeyCode = 18, // space
                 }
             };          
         }
@@ -100,6 +100,8 @@ namespace LCDonald.Core.Games
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
         {
+            foreach (var input in pressedInputs)
+                Console.WriteLine(input.Name);
             // TODO
         }
 

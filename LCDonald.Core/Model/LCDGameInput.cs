@@ -7,7 +7,7 @@
 
         public string Description { get; init; }
 
-        public string KeyCode { get; set; }
+        public int KeyCode { get; set; }
 
     }
 

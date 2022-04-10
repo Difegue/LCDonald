@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Skia;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Svg.Skia;
@@ -29,6 +31,7 @@ namespace LCDonald.Controls
 
         private List<string> _gameElements;
         private List<string> _visibleGameElements;
+        private List<LCDGameInput> _inputBuffer;
 
         public static readonly DirectProperty<AvaloniaLCDView, ILCDGame> CurrentGameProperty =
             AvaloniaProperty.RegisterDirect<AvaloniaLCDView, ILCDGame>(
@@ -60,19 +63,30 @@ namespace LCDonald.Controls
         {
             InitializeComponent();
             _visibleGameElements = new List<string>();
+            _inputBuffer = new List<LCDGameInput>();
             _lcdCanvas = this.FindControl<Canvas>("LCDCanvas");
-
+            KeyDown += HandleInput;
+            PointerPressed += (s, e) => Focus();
         }
 
-        private void InitializeComponent()
+        private void HandleInput(object? sender, KeyEventArgs e)
         {
-            AvaloniaXamlLoader.Load(this);
+            _currentGame.GetAvailableInputs().ForEach(input =>
+            {
+                if (input.KeyCode == (int)e.Key)
+                {
+                    _inputBuffer.Add(input);
+                }
+            });
+            e.Handled = true;
         }
 
         public List<LCDGameInput> GetPressedInputs()
         {
-            // TODO
-            return new List<LCDGameInput>();
+            // Return inputbuffer and clear it
+            var inputs = new List<LCDGameInput>(_inputBuffer);
+            _inputBuffer.Clear();
+            return inputs;
         }
 
         public void UpdateDisplay(List<string> visibleElements)
