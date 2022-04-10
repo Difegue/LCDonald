@@ -31,7 +31,7 @@ namespace LCDonald.Controls
 
         private List<string> _gameElements;
         private List<string> _visibleGameElements;
-        private List<LCDGameInput> _inputBuffer;
+        private readonly List<LCDGameInput> _inputBuffer;
 
         public static readonly DirectProperty<AvaloniaLCDView, ILCDGame> CurrentGameProperty =
             AvaloniaProperty.RegisterDirect<AvaloniaLCDView, ILCDGame>(

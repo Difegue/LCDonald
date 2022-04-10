@@ -40,8 +40,9 @@ namespace LCDonald.Core.Controller
             // Flush input buffer
             _currentView.GetPressedInputs();
 
-            _gameTimer = new Timer(_currentGame.GetGameSpeed());
-            _gameTimer.Elapsed += UpdateGameState;
+            _gameTimer = new Timer(100);
+            _gameTimer.Elapsed += (s, e) => _currentGame.Update();
+            _gameTimer.Start();
 
             _isStopped = false;
             
@@ -84,6 +85,7 @@ namespace LCDonald.Core.Controller
 
                     PlaySounds(_currentGame.GetSoundsToPlay());
                 }
+                System.Threading.Thread.Sleep(10);
             }
         }
 
@@ -99,14 +101,6 @@ namespace LCDonald.Core.Controller
                 };
                 soundStream.Play();
             }
-        }
-
-        private void UpdateGameState(object sender, ElapsedEventArgs e)
-        {
-            _currentGame.UpdateGameState();
-
-            // Update speed in case the game sped up
-            ((Timer)sender).Interval = _currentGame.GetGameSpeed();
         }
 
         public void Dispose()

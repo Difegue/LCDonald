@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LCDonald.Core.Model
 {
@@ -23,7 +22,6 @@ namespace LCDonald.Core.Model
 
         /// <summary>
         /// Called every frame. Can update the game state.
-        /// Inputs are only handled once -> Keeping a button pressed isn't recorded
         /// </summary>
         /// <param name="pressedInputs">Newly pressed inputs for this frame</param>
         public void HandleInputs(List<LCDGameInput> pressedInputs);
@@ -42,15 +40,9 @@ namespace LCDonald.Core.Model
 
         /// <summary>
         /// Compute and update the next game state.
-        /// Is called every X milliseconds, X being the current game speed.
+        /// Is called every 100 milliseconds.
         /// </summary>
-        public void UpdateGameState();
-
-        /// <summary>
-        /// Get the current rate at which UpdateGameState has to be called.
-        /// </summary>
-        /// <returns>The update rate</returns>
-        public int GetGameSpeed();
+        public void Update();
 
         /// <summary>
         /// Get all the inputs this game uses.
@@ -69,55 +61,4 @@ namespace LCDonald.Core.Model
 
     }
 
-    public abstract class LCDGameBase : ILCDGame
-    {
-#pragma warning disable CS8618 
-        public event EventHandler Started;
-        public event EventHandler Paused;
-        public event EventHandler Stopped;
-#pragma warning restore CS8618
-        
-        public abstract string GetGameName();
-        public abstract string GetAssetFolderName();
-        public abstract void InitializeGameState();
-        public abstract void UpdateGameState();
-        public abstract List<LCDGameInput> GetAvailableInputs();
-        public abstract void HandleInputs(List<LCDGameInput> pressedInputs);
-        public abstract List<string> GetAllGameElements();
-        public abstract List<string> GetVisibleGameElements();
-
-        protected int _gameSpeed = 100;
-        public int GetGameSpeed() => _gameSpeed;
-
-        private List<LCDGameSound> _gameSounds = new();
-
-        public List<LCDGameSound> GetSoundsToPlay()
-        {
-            // Copy _gameSounds, clear it and return the copy
-            List<LCDGameSound> soundsToPlay = new List<LCDGameSound>(_gameSounds);
-            _gameSounds.Clear();
-            return soundsToPlay;
-        }
-        
-        protected void QueueSound(LCDGameSound sound) 
-        {
-            _gameSounds.Add(sound);
-        }
-
-        public void Start()
-        {
-            InitializeGameState();
-            Started?.Invoke(this, new EventArgs());
-        }
-
-        public void PauseResume()
-        {
-            Paused?.Invoke(this, new EventArgs());
-        }
-
-        public void Stop() 
-        {
-            Stopped?.Invoke(this, new EventArgs());
-        }
-    }
 }

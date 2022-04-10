@@ -84,36 +84,73 @@ namespace LCDonald.Core.Games
             };          
         }
 
+        private int _tailsPosition = 1;
+        private int _lifeCount = 3;
+        private int _level = 1;
+
         public override List<string> GetVisibleGameElements()
         {
-            // TODO
-            return new List<string>()
-            {
-                LIFE_1,LIFE_2,(LIFE_3),(LEVEL_1),(LEVEL_2),
-                (LEVEL_3),
-                (ENEMY_11),
-                (ENEMY_12),
-                (ENEMY_13),
-                (TAILS_CENTER)
-            };
-        }
+            var elements = new List<string>();
+            
+            if (_lifeCount >= 1)
+                elements.Add(LIFE_1);
+            if (_lifeCount >= 2)
+                elements.Add(LIFE_2);
+            if (_lifeCount == 3)
+                elements.Add(LIFE_3);
 
-        public override void HandleInputs(List<LCDGameInput> pressedInputs)
-        {
-            foreach (var input in pressedInputs)
-                Console.WriteLine(input.Name);
-            // TODO
+            if (_level >= 1)
+                elements.Add(LEVEL_1);
+            if (_level >= 2)
+                elements.Add(LEVEL_2);
+            if (_level == 3)
+                elements.Add(LEVEL_3);
+
+
+            if (_tailsPosition == 0)
+                elements.Add(TAILS_LEFT);
+            else if (_tailsPosition == 1)
+                elements.Add(TAILS_CENTER);
+            else if (_tailsPosition == 2)
+                elements.Add(TAILS_RIGHT);
+
+            return elements;
         }
 
         public override void InitializeGameState()
         {
-            // TODO
+            _tailsPosition = 1;
+            _lifeCount = 3;
+            _level = 1;
+        }        
+
+        public override void HandleInputs(List<LCDGameInput> pressedInputs)
+        {
+            foreach (var input in pressedInputs)
+            {
+                if (input.Name == "Left" && _tailsPosition > 0)
+                {
+                    _tailsPosition--;
+                }
+                else if (input.Name == "Right" && _tailsPosition < 2)
+                {
+                    _tailsPosition++;
+                }
+                else if (input.Name == "Fire")
+                {
+                    // TODO
+                }
+            }
         }
 
-        public override void UpdateGameState()
+        public override void Update()
         {
             // TODO
         }
-        
+
+        public override void CustomUpdate()
+        {
+            // TODO
+        }
     }
 }
