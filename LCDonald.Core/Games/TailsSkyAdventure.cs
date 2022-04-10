@@ -84,9 +84,15 @@ namespace LCDonald.Core.Games
             };          
         }
 
-        private int _tailsPosition = 1;
-        private int _lifeCount = 3;
-        private int _level = 1;
+        private int _tailsPosition;
+        private int _lifeCount;
+        private int _level;
+
+        private int _enemiesHit;
+        private int _enemiesMissed;
+
+        private int _projectilePos;
+        private int _enemyPos;
 
         public override List<string> GetVisibleGameElements()
         {
@@ -114,6 +120,12 @@ namespace LCDonald.Core.Games
             else if (_tailsPosition == 2)
                 elements.Add(TAILS_RIGHT);
 
+            if (_projectilePos != -1)
+                elements.Add("projectile-" + _projectilePos);
+
+            if (_enemyPos != -1)
+                elements.Add("enemy-" + _enemyPos);
+
             return elements;
         }
 
@@ -122,12 +134,20 @@ namespace LCDonald.Core.Games
             _tailsPosition = 1;
             _lifeCount = 3;
             _level = 1;
+
+            _enemiesHit = 0;
+            _enemiesMissed = 0;
+
+            _projectilePos = -1;
+            _enemyPos = -1;
         }        
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
         {
             foreach (var input in pressedInputs)
             {
+                if (input == null) continue;
+
                 if (input.Name == "Left" && _tailsPosition > 0)
                 {
                     _tailsPosition--;
@@ -136,16 +156,18 @@ namespace LCDonald.Core.Games
                 {
                     _tailsPosition++;
                 }
-                else if (input.Name == "Fire")
+                else if (input.Name == "Fire" && _projectilePos == -1)
                 {
-                    // TODO
+                    _projectilePos = _tailsPosition == 0 ? 31 : _tailsPosition == 1 ? 32 : 33;
                 }
             }
         }
 
         public override void Update()
         {
-            // TODO
+            if (_projectilePos > 10)
+                _projectilePos -= 10;
+            else _projectilePos = -1;
         }
 
         public override void CustomUpdate()

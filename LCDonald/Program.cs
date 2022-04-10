@@ -17,6 +17,8 @@ namespace LCDonald
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+            .With(new Win32PlatformOptions { AllowEglInitialization = true })
+            .With(new SkiaOptions { MaxGpuResourceSizeBytes = 256000000})
                 .LogToTrace();
     }
 }
