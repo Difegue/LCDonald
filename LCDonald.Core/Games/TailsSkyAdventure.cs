@@ -134,7 +134,7 @@ namespace LCDonald.Core.Games
 
         public override void InitializeGameState()
         {
-            _tailsPosition = 1;
+            _tailsPosition = 2;
             _lifeCount = 3;
             _level = 0;
 

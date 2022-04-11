@@ -9,6 +9,7 @@ namespace LCDonald.Core.Model
 #pragma warning disable CS8618 
         public event EventHandler Started;
         public event EventHandler Paused;
+        public event EventHandler Resumed;
         public event EventHandler Stopped;
 #pragma warning restore CS8618
 
@@ -42,6 +43,8 @@ namespace LCDonald.Core.Model
             _gameSounds.Add(sound);
         }
 
+        private bool _isPaused;
+        private bool _isStopped = true;
         private Timer? _customTimer;
         public void Start()
         {
@@ -54,29 +57,34 @@ namespace LCDonald.Core.Model
             _customTimer.Elapsed += UpdateGameState;
             _customTimer?.Start();
 
+            _isStopped = false;
             Started?.Invoke(this, new EventArgs());
         }
 
-        private bool _isPaused;
-        public void PauseResume()
+        public void Pause()
         {
-            if (_isPaused)
-            {
-                _isPaused = false;
-                _customTimer?.Start();
-            }
-            else
+            if (!_isPaused && !_isStopped)
             {
                 _isPaused = true;
                 _customTimer?.Stop();
+                Paused?.Invoke(this, new EventArgs());
+            }   
+        }
+
+        public void Resume()
+        {
+            if (_isPaused && !_isStopped)
+            {
+                _isPaused = false;
+                _customTimer?.Start();
+                Resumed?.Invoke(this, new EventArgs());
             }
-            Paused?.Invoke(this, new EventArgs());
         }
 
         public void Stop()
         {
+            _isStopped = true;
             _customTimer?.Stop();
-            _customTimer?.Dispose();
             Stopped?.Invoke(this, new EventArgs());
         }
 

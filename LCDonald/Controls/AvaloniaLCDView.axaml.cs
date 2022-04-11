@@ -43,30 +43,54 @@ namespace LCDonald.Controls
         public ILCDGame CurrentGame
         {
             get { return _currentGame; }
-            set { SetAndRaise(CurrentGameProperty, ref _currentGame, value); if (value != null) LoadGame(); }
+            set { 
+                SetAndRaise(CurrentGameProperty, ref _currentGame, value); 
+                if (value != null) LoadGame(); 
+            }
         }
+
+        public static readonly DirectProperty<AvaloniaLCDView, List<MAMEView>> AvailableViewsProperty =
+           AvaloniaProperty.RegisterDirect<AvaloniaLCDView, List<MAMEView>>(
+               nameof(AvailableViews),
+               o => o.AvailableViews,
+               (o, v) => o.AvailableViews = v);
+        
+        private List<MAMEView> _gameViews;
+        public List<MAMEView> AvailableViews
+        {
+            get { return _gameViews; }
+            set { SetAndRaise(AvailableViewsProperty, ref _gameViews, value); }
+        }
+
 
         public static readonly DirectProperty<AvaloniaLCDView, MAMEView> CurrentViewProperty =
            AvaloniaProperty.RegisterDirect<AvaloniaLCDView, MAMEView>(
                nameof(CurrentView),
                o => o.CurrentView,
-               (o, v) => o.CurrentView = v);
+               (o, v) => { if (v != null) o.CurrentView = v; });
 
         private MAMEView _currentView;
         public MAMEView CurrentView
         {
             get { return _currentView; }
-            set { SetAndRaise(CurrentViewProperty, ref _currentView, value); if (value != null) DrawLayoutView(_currentView); }
+            set { 
+                SetAndRaise(CurrentViewProperty, ref _currentView, value); 
+                if (value != null) DrawLayoutView(_currentView); 
+            }
         }
 
         public AvaloniaLCDView()
         {
             InitializeComponent();
+            _gameViews = new List<MAMEView>();
+            _gameElements = new List<string>();
             _visibleGameElements = new List<string>();
             _inputBuffer = new List<LCDGameInput>();
+            
             _lcdCanvas = this.FindControl<Canvas>("LCDCanvas");
             KeyDown += HandleInput;
             PointerPressed += (s, e) => Focus();
+            LostFocus += (s, e) => CurrentGame?.Pause();         
         }
 
         private void HandleInput(object? sender, KeyEventArgs e)
@@ -113,6 +137,10 @@ namespace LCDonald.Controls
             // Clear previous game if any
             _logicProcessor?.Dispose();
 
+            // Add handlers to focus the control when the game starts/resumes
+            _currentGame.Started += (s, e) => Focus();
+            _currentGame.Resumed += (s, e) => Focus();
+
             // Load SVG 
             _svgDocument = SvgExtensions.Open($"{_gameAssetFolder}\\{gameID}.svg");
 
@@ -124,8 +152,8 @@ namespace LCDonald.Controls
             _logicProcessor = new LCDLogicProcessor(_currentGame, this);
 
             // Draw first view by default
-            CurrentView = _gameLayout.Views.Values.First();
-            DrawLayoutView(CurrentView);
+            AvailableViews = _gameLayout.Views.Values.ToList();
+            CurrentView = AvailableViews.First();
         }
 
         private void DrawLayoutView(MAMEView view)

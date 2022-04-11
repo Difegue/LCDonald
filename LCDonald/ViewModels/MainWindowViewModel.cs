@@ -1,17 +1,20 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LCDonald.Core.Controller;
 using LCDonald.Core.Games;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace LCDonald.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {
+        public MainWindowViewModel()
+        {
+            // TODO
+            Game = new TailsSkyAdventure();
+        }
+
 
         [ObservableProperty]
         private ILCDGame _game;
@@ -23,51 +26,43 @@ namespace LCDonald.ViewModels
                 Game.Stop();
                 Game.Started -= Game_Started;
                 Game.Paused -= Game_Paused;
+                Game.Resumed -= Game_Resumed;
                 Game.Stopped -= Game_Stopped;
             }
 
             game.Started += Game_Started;
             game.Paused += Game_Paused;
+            game.Resumed += Game_Resumed;
             game.Stopped += Game_Stopped;
         }
 
         [ObservableProperty]
         private bool _isPaused;
-        
+
         [ObservableProperty]
         private bool _isGameRunning;
-        
-        [ObservableProperty]
-        private List<MAMEView> _availableViews;
 
         [ObservableProperty]
         private MAMEView _selectedView;
-
-        public MainWindowViewModel()
-        {
-            // TODO
-            Game = new TailsSkyAdventure();
-            AvailableViews = new List<MAMEView>();
-        }
-
+        
         [ICommand]
         private void StartGame()
         {
             if (_isPaused)
             {
-                Game.PauseResume();
+                Game.Resume();
             }
             else if (!_isGameRunning)
                 Game.Start();
         }
 
-        [ICommand(CanExecute = "IsGameRunning")]
+        [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
         private void PauseGame()
         {  
-            Game.PauseResume();
+            Game.Pause();
         }
 
-        [ICommand(CanExecute = "IsGameRunning")]
+        [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
         private void StopGame()
         {
             Game.Stop();
@@ -75,15 +70,20 @@ namespace LCDonald.ViewModels
 
         private void Game_Started(object? sender, System.EventArgs e)
         {
-            _isGameRunning = true;
+            IsGameRunning = true;
         }
         private void Game_Paused(object? sender, EventArgs e)
         {
-            _isPaused = !_isPaused;
+            IsPaused = true;
+        }
+        private void Game_Resumed(object? sender, EventArgs e)
+        {
+            IsPaused = false;
         }
         private void Game_Stopped(object? sender, EventArgs e)
         {
-            _isGameRunning = false;
+            IsGameRunning = false;
+            IsPaused = false;
         }
     }
 }

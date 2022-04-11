@@ -33,36 +33,39 @@
 					<ColumnDefinition Width="160"/>
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Text="Tails' Sky Adventure (2006)" Grid.Row="0" Grid.Column="0"
+				<TextBlock Text="Tails' Sky Adventure (2006)" Grid.Row="0" Grid.Column="0" Margin="8,0,0,0"
 					   FontWeight="SemiBold" FontSize="18" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
 					   HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 				<StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center"
 							Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
 					<Label Content="View:" />
-					<ComboBox >
-						<ComboBoxItem IsSelected="True" Content="Front_Open"/>
-					</ComboBox>
+					<ComboBox Items="{Binding #LCDView.AvailableViews}" 
+							  SelectedItem="{Binding SelectedView}"/>
 					<Separator/>
 				</StackPanel>
 				<ui:CommandBar Grid.Row="0" Grid.Column="2" VerticalContentAlignment="Center" >
 					<ui:CommandBar.PrimaryCommands>
 						<ui:CommandBarSeparator />
-						<ui:CommandBarButton Icon="Play" Label="Play" Command="{Binding StartGameCommand}" />
+						<ui:CommandBarButton Icon="Play" Label="Play" Command="{Binding StartGameCommand}"/>
 						<ui:CommandBarButton Icon="Pause" Label="Pause" Command="{Binding PauseGameCommand}"/>
 						<ui:CommandBarButton Icon="Stop" Label="Stop" Command="{Binding StopGameCommand}"/>
 						<ui:CommandBarSeparator />
 						<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" />
 					</ui:CommandBar.PrimaryCommands>
 				</ui:CommandBar>
-				<controls:AvaloniaLCDView Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+				
+				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
 										  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-					CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView}"/>
+										  CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView}"/>
+
+				<Button Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+						IsVisible="{Binding IsPaused, Mode=OneWay}" Command="{Binding StartGameCommand}" Background="#c5ffffff" >
+					<ui:SymbolIcon Symbol="PlayFilled" FontSize="96" Margin="-8,0,0,0" Foreground="#292929"/>
+				</Button>
+				
 			</Grid>
 		</ui:NavigationView.Content>
 
 	</ui:NavigationView>
-
-
-
 
 </Window>

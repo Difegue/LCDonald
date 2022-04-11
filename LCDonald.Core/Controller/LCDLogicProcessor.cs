@@ -32,6 +32,7 @@ namespace LCDonald.Core.Controller
             _currentGame.Started += StartGame;
             _currentGame.Stopped += StopGame;
             _currentGame.Paused += PauseResumeGame;
+            _currentGame.Resumed += PauseResumeGame;
 
             _gameAssetFolder = "F:\\Projects\\LCDonald\\LCDonald\\Assets\\GameAssets\\tskyadventure\\"; //TODO
         }
