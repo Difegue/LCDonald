@@ -18,18 +18,22 @@ namespace LCDonald.Core.Controller
         private bool _isPaused;
         private bool _isStopped;
         private Timer? _gameTimer;
+
+        private string _gameAssetFolder;
         
         public LCDLogicProcessor(ILCDGame game, ILCDView view)
         {
             _currentGame = game;
             _currentView = view;
             _isPaused = false;
-
+            
             _gameAudio = AudioEngine.CreateDefault();
 
             _currentGame.Started += StartGame;
             _currentGame.Stopped += StopGame;
             _currentGame.Paused += PauseResumeGame;
+
+            _gameAssetFolder = "F:\\Projects\\LCDonald\\LCDonald\\Assets\\GameAssets\\tskyadventure\\"; //TODO
         }
 
         private void StartGame(object sender, EventArgs e)
@@ -93,8 +97,10 @@ namespace LCDonald.Core.Controller
         {
             foreach (var sound in gameSounds)
             {
+                if (sound == null) continue;
+                
                 // TODO preload files into memory
-                var soundFile = File.OpenRead(sound.AudioFileName);
+                var soundFile = File.OpenRead(_gameAssetFolder + sound.AudioFileName);
                 var soundStream = new SoundStream(soundFile, _gameAudio)
                 {
                     Volume = 0.5f

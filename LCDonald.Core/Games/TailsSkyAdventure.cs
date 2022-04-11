@@ -93,6 +93,9 @@ namespace LCDonald.Core.Games
 
         private int _projectilePos;
         private int _enemyPos;
+        private bool _spawnEnemyNextUpdate;
+
+        private Random _rng = new Random();
 
         public override List<string> GetVisibleGameElements()
         {
@@ -113,11 +116,11 @@ namespace LCDonald.Core.Games
                 elements.Add(LEVEL_3);
 
 
-            if (_tailsPosition == 0)
+            if (_tailsPosition == 1)
                 elements.Add(TAILS_LEFT);
-            else if (_tailsPosition == 1)
-                elements.Add(TAILS_CENTER);
             else if (_tailsPosition == 2)
+                elements.Add(TAILS_CENTER);
+            else if (_tailsPosition == 3)
                 elements.Add(TAILS_RIGHT);
 
             if (_projectilePos != -1)
@@ -133,13 +136,16 @@ namespace LCDonald.Core.Games
         {
             _tailsPosition = 1;
             _lifeCount = 3;
-            _level = 1;
+            _level = 0;
 
             _enemiesHit = 0;
             _enemiesMissed = 0;
 
             _projectilePos = -1;
             _enemyPos = -1;
+
+            _customUpdateSpeed = 900;
+            QueueSound(new LCDGameSound("game_start.ogg"));
         }        
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
@@ -148,31 +154,110 @@ namespace LCDonald.Core.Games
             {
                 if (input == null) continue;
 
-                if (input.Name == "Left" && _tailsPosition > 0)
+                if (input.Name == "Left" && _tailsPosition > 1)
                 {
                     _tailsPosition--;
                 }
-                else if (input.Name == "Right" && _tailsPosition < 2)
+                else if (input.Name == "Right" && _tailsPosition < 3)
                 {
                     _tailsPosition++;
                 }
                 else if (input.Name == "Fire" && _projectilePos == -1)
                 {
-                    _projectilePos = _tailsPosition == 0 ? 31 : _tailsPosition == 1 ? 32 : 33;
+                    QueueSound(new LCDGameSound("fire.ogg"));
+                    _projectilePos = _tailsPosition + 30;
                 }
             }
         }
 
         public override void Update()
         {
+            // +10 tolerance in case the projectile passed while the enemy moved forward
+            if (_projectilePos != -1 && (_projectilePos == _enemyPos || _projectilePos + 10 == _enemyPos) )
+            {
+                // TODO blink enemy
+                QueueSound(new LCDGameSound("hit.ogg"));
+                _enemyPos = _projectilePos = -1;
+                _enemiesHit++;
+
+            }
+
             if (_projectilePos > 10)
                 _projectilePos -= 10;
             else _projectilePos = -1;
+
         }
 
         public override void CustomUpdate()
         {
-            // TODO
+            if (_enemiesHit == 15)
+            {
+                QueueSound(new LCDGameSound("level_up.ogg"));
+                _enemiesHit = 0;
+                // TODO blink
+                _level++;
+                _customUpdateSpeed -= 200;
+            }
+
+            if (_enemyPos != -1)
+            {
+                _enemyPos += 10;
+
+                if (_enemyPos > 40)
+                {
+                    var digit = _enemyPos % 10;
+                    if (digit == _tailsPosition)
+                    {
+                        // TODO blink
+                        _lifeCount--;
+                        QueueSound(new LCDGameSound("life_loss.ogg"));
+                        if (_lifeCount == 0) GameOverAnimation();
+                    } 
+                    else
+                    {
+                        _enemiesMissed++;
+                        QueueSound(new LCDGameSound("miss.ogg"));
+                        if (_enemiesMissed > 15) GameOverAnimation();
+                    }
+
+                    _enemyPos = -1;
+                }
+                else
+                {
+                    // Randomly shift enemy left or right
+                    var shift = _rng.Next(-1, 2);
+                    _enemyPos += shift;
+
+                    // Adjust out of bounds
+                    if (_enemyPos % 10 == 0)
+                        _enemyPos++;
+
+                    if (_enemyPos % 10 == 4)
+                        _enemyPos--;
+                }
+                
+            }
+            else if (!_spawnEnemyNextUpdate)
+                _spawnEnemyNextUpdate = true;
+            else
+            {
+                _spawnEnemyNextUpdate = false;
+                
+               // Randomly spawn enemy at 11, 12 or 13
+               _enemyPos = _rng.Next(11, 14);
+            }
+        }
+
+        private void GameOverAnimation()
+        {
+            QueueSound(new LCDGameSound("game_over.ogg"));
+            //Stop();
+        }
+
+        private void VictoryAnimation()
+        {
+            QueueSound(new LCDGameSound("game_win.ogg"));
+            //Stop();
         }
     }
 }
