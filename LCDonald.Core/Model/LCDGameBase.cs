@@ -75,6 +75,8 @@ namespace LCDonald.Core.Model
 
         public void Stop()
         {
+            _customTimer?.Stop();
+            _customTimer?.Dispose();
             Stopped?.Invoke(this, new EventArgs());
         }
 

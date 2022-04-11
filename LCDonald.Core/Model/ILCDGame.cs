@@ -55,6 +55,16 @@ namespace LCDonald.Core.Model
         /// </summary>
         public void Start();
 
+        /// <summary>
+        /// Pause/resume the game
+        /// </summary>
+        public void PauseResume();
+
+        /// <summary>
+        /// Stop the game
+        /// </summary>
+        public void Stop();
+
         event EventHandler Started;
         event EventHandler Paused;
         event EventHandler Stopped;

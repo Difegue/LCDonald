@@ -3,6 +3,7 @@
         xmlns:vm="using:LCDonald.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:ui="using:FluentAvalonia.UI.Controls"
 		xmlns:controls="using:LCDonald.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LCDonald.Views.MainWindow"
@@ -13,12 +14,55 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<Grid x:Name="LayoutRoot" Margin="8,0,8,8">
-	  <controls:AvaloniaLCDView CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView}" 
-								HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+	<ui:NavigationView PaneDisplayMode="LeftCompact" IsSettingsVisible="False">
+		<ui:NavigationView.MenuItems>
+			<ui:NavigationViewItem Content="Menu Item1" Tag="SamplePage1" Icon="Play"/>
+			<ui:NavigationViewItem Content="Menu Item2" Tag="SamplePage2" Icon="Save" />
+			<ui:NavigationViewItem Content="Menu Item3" Tag="SamplePage3" Icon="Refresh" />
+			<ui:NavigationViewItem Content="Menu Item4" Tag="SamplePage4" Icon="Download" />
+		</ui:NavigationView.MenuItems>
 
-		<Button Command="{Binding StartGame}" Content="Start" />
-    </Grid>
+		<ui:NavigationView.Content>
+			<Grid Margin="8,4,8,8">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="48"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="160"/>
+					<ColumnDefinition Width="268"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Tails' Sky Adventure (2006)" Grid.Row="0" Grid.Column="0"
+					   FontWeight="SemiBold" FontSize="18" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
+					   HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+				<StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center"
+							Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+					<Label Content="View:" />
+					<ComboBox >
+						<ComboBoxItem IsSelected="True" Content="Front_Open"/>
+					</ComboBox>
+					<Separator/>
+				</StackPanel>
+				<ui:CommandBar Grid.Row="0" Grid.Column="2" VerticalContentAlignment="Center" >
+					<ui:CommandBar.PrimaryCommands>
+						<ui:CommandBarSeparator />
+						<ui:CommandBarButton Icon="Play" Label="Play" Command="{Binding StartGameCommand}" />
+						<ui:CommandBarButton Icon="Pause" Label="Pause" Command="{Binding PauseGameCommand}"/>
+						<ui:CommandBarButton Icon="Stop" Label="Stop" Command="{Binding StopGameCommand}"/>
+						<ui:CommandBarSeparator />
+						<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" />
+					</ui:CommandBar.PrimaryCommands>
+				</ui:CommandBar>
+				<controls:AvaloniaLCDView Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+										  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView}"/>
+			</Grid>
+		</ui:NavigationView.Content>
+
+	</ui:NavigationView>
+
+
 
 
 </Window>
