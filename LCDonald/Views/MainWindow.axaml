@@ -8,6 +8,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LCDonald.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
+		Width="1588"
+		Height="1080"
         Title="LCDonald">
 
     <Design.DataContext>

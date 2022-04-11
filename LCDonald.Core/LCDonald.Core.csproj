@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -13,6 +13,12 @@
     </PackageReference>
     <PackageReference Include="SharpAudio" Version="1.0.53-beta" />
     <PackageReference Include="SharpAudio.Codec" Version="1.0.53-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="GameAssets\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

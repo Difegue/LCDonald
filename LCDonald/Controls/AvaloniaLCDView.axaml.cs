@@ -15,7 +15,9 @@ using Svg;
 using Svg.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace LCDonald.Controls
 {
@@ -27,7 +29,7 @@ namespace LCDonald.Controls
         private SvgDocument? _svgDocument;
 
         // Game stuff
-        private string? _gameAssetFolder;
+        private string _gameAssetFolder;
         private MAMELayout? _gameLayout;
         private LCDLogicProcessor? _logicProcessor;
 
@@ -146,7 +148,8 @@ namespace LCDonald.Controls
         private void LoadGame()
         {
             var gameID = _currentGame.GetAssetFolderName();
-            _gameAssetFolder = "F:\\Projects\\LCDonald\\LCDonald\\Assets\\GameAssets\\tskyadventure\\"; //TODO
+            var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            _gameAssetFolder = Path.Combine(appFolder, "GameAssets", gameID);
 
             // Clear previous game if any
             _logicProcessor?.Dispose();
@@ -177,13 +180,14 @@ namespace LCDonald.Controls
             foreach (var element in view.Elements)
             {
                 var elementPicture = _gameLayout?.Elements[element.Ref].Image.File;
+                if (elementPicture == null) continue;
                 
                 // Define child Canvas element
                 var imageControl = new Image
                 {
                     Width = element.Width,
                     Height = element.Height,
-                    Source = new Bitmap(_gameAssetFolder + elementPicture)
+                    Source = new Bitmap(Path.Combine(_gameAssetFolder,elementPicture))
                 };
                 Canvas.SetTop(imageControl, element.Y);
                 Canvas.SetLeft(imageControl, element.X);

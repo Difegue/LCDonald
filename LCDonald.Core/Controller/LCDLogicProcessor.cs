@@ -4,6 +4,7 @@ using SharpAudio.Codec;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -34,7 +35,8 @@ namespace LCDonald.Core.Controller
             _currentGame.Paused += PauseResumeGame;
             _currentGame.Resumed += PauseResumeGame;
 
-            _gameAssetFolder = "F:\\Projects\\LCDonald\\LCDonald\\Assets\\GameAssets\\tskyadventure\\"; //TODO
+            var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            _gameAssetFolder = Path.Combine(appFolder, "GameAssets", _currentGame.GetAssetFolderName());
         }
 
         private void StartGame(object sender, EventArgs e)
@@ -101,7 +103,7 @@ namespace LCDonald.Core.Controller
                 if (sound == null) continue;
                 
                 // TODO preload files into memory
-                var soundFile = File.OpenRead(_gameAssetFolder + sound.AudioFileName);
+                var soundFile = File.OpenRead(Path.Combine(_gameAssetFolder, sound.AudioFileName));
                 var soundStream = new SoundStream(soundFile, _gameAudio)
                 {
                     Volume = 0.5f
