@@ -4,5 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LCDonald.Controls.AvaloniaLCDView">
-	<Canvas x:Name="LCDCanvas" RenderTransformOrigin="0,0" RenderTransform="scale(0.4)"/>
+	<Canvas x:Name="LCDCanvas" RenderTransformOrigin="0,0" />
 </UserControl>

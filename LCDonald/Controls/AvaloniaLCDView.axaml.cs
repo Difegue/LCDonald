@@ -4,6 +4,7 @@ using Avalonia.Controls.Skia;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Svg.Skia;
 using Avalonia.Threading;
@@ -12,6 +13,7 @@ using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
 using Svg;
 using Svg.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,9 +90,21 @@ namespace LCDonald.Controls
             _inputBuffer = new List<LCDGameInput>();
             
             _lcdCanvas = this.FindControl<Canvas>("LCDCanvas");
+            _lcdCanvas.EffectiveViewportChanged += ComputeScale;
             KeyDown += HandleInput;
             PointerPressed += (s, e) => Focus();
             LostFocus += (s, e) => CurrentGame?.Pause();         
+        }
+
+        private void ComputeScale(object? sender, Avalonia.Layout.EffectiveViewportChangedEventArgs e)
+        {
+            // Get the largest child of the canvas
+            var largestChild = _lcdCanvas.Children.OrderByDescending(c => c.Width * c.Height).First();
+
+            // Scale the canvas so that it fits in the current window size
+            var scale = Math.Min(Bounds.Width / largestChild.Width, Bounds.Height / largestChild.Height);
+            if (scale > 0)
+                _lcdCanvas.RenderTransform = new ScaleTransform(scale, scale);
         }
 
         private void HandleInput(object? sender, KeyEventArgs e)
@@ -153,7 +167,7 @@ namespace LCDonald.Controls
 
             // Draw first view by default
             AvailableViews = _gameLayout.Views.Values.ToList();
-            CurrentView = AvailableViews.First();
+            CurrentView = AvailableViews.First(); // TODO we shouldn't have to do this, selecting currentview is the VM's job
         }
 
         private void DrawLayoutView(MAMEView view)
@@ -192,6 +206,8 @@ namespace LCDonald.Controls
 
                 _lcdCanvas?.Children.Add(_svgElement);
             }
+
+            ComputeScale(this, new Avalonia.Layout.EffectiveViewportChangedEventArgs(new Rect()));
         }
     }
 }

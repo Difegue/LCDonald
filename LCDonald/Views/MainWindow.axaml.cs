@@ -17,8 +17,6 @@ namespace LCDonald.Views
 {
     public partial class MainWindow : Window
     {        
-        private Canvas canvas;
-        
         public MainWindow()
         {
             InitializeComponent();
@@ -32,19 +30,6 @@ namespace LCDonald.Views
         this.AttachDevTools();
 #endif
 
-            //ClientSizeProperty.Changed.Subscribe(size => ScaleCanvas());
         }
-
-        private void ScaleCanvas()
-        {
-            // Get the largest child of the canvas
-            var largestChild = canvas.Children.OrderByDescending(c => c.Width * c.Height).First();
-
-            // Scale the canvas so that it fits in the current window size
-            var scale = Math.Min(this.Width / largestChild.Width, this.Height / largestChild.Height);
-            canvas.RenderTransform = new ScaleTransform(scale, scale);
-        }
-        
-        
     }
 }
