@@ -85,11 +85,15 @@ namespace LCDonald.Core.Controller
             {
                 if (!_isPaused)
                 {
+                    // Inputs
                     var currentInputs = _currentView.GetPressedInputs();
-                    _currentGame.HandleInputs(currentInputs);
-
+                    if (!_currentGame.IsInputBlocked())
+                        _currentGame.HandleInputs(currentInputs);
+                    
+                    // Display
                     _currentView.UpdateDisplay(_currentGame.GetVisibleGameElements());
 
+                    // Sound
                     PlaySounds(_currentGame.GetSoundsToPlay());
                 }
                 System.Threading.Thread.Sleep(10);

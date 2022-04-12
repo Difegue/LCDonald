@@ -37,6 +37,7 @@ namespace LCDonald.Controls
         private List<string> _visibleGameElements;
         private readonly List<LCDGameInput> _inputBuffer;
 
+        #region DependencyProperties
         public static readonly DirectProperty<AvaloniaLCDView, ILCDGame> CurrentGameProperty =
             AvaloniaProperty.RegisterDirect<AvaloniaLCDView, ILCDGame>(
                 nameof(CurrentGame),
@@ -82,7 +83,8 @@ namespace LCDonald.Controls
                 if (value != null) DrawLayoutView(_currentView); 
             }
         }
-
+        #endregion
+        
         public AvaloniaLCDView()
         {
             InitializeComponent();

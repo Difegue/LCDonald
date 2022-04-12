@@ -97,7 +97,7 @@ namespace LCDonald.Core.Games
 
         private Random _rng = new Random();
 
-        public override List<string> GetVisibleGameElements()
+        protected override List<string> GetVisibleElements()
         {
             var elements = new List<string>();
             
@@ -112,16 +112,10 @@ namespace LCDonald.Core.Games
                 elements.Add(LEVEL_1);
             if (_level >= 2)
                 elements.Add(LEVEL_2);
-            if (_level == 3)
+            if (_level >= 3)
                 elements.Add(LEVEL_3);
 
-
-            if (_tailsPosition == 1)
-                elements.Add(TAILS_LEFT);
-            else if (_tailsPosition == 2)
-                elements.Add(TAILS_CENTER);
-            else if (_tailsPosition == 3)
-                elements.Add(TAILS_RIGHT);
+            elements.Add(GetTailsElement());
 
             if (_projectilePos != -1)
                 elements.Add("projectile-" + _projectilePos);
@@ -130,6 +124,18 @@ namespace LCDonald.Core.Games
                 elements.Add("enemy-" + _enemyPos);
 
             return elements;
+        }
+
+        private string GetTailsElement()
+        {
+            if (_tailsPosition == 1)            
+                return TAILS_LEFT;
+            else if (_tailsPosition == 2)
+                return TAILS_CENTER;
+            else if (_tailsPosition == 3)
+                return TAILS_RIGHT;
+
+            return "";
         }
 
         public override void InitializeGameState()
@@ -170,22 +176,23 @@ namespace LCDonald.Core.Games
             }
         }
 
-        public override void Update()
+        protected override void UpdateCore()
         {
             // +10 tolerance in case the projectile passed while the enemy moved forward
             if (_projectilePos != -1 && (_projectilePos == _enemyPos || _projectilePos + 10 == _enemyPos) )
             {
-                // TODO blink enemy
+                BlinkElement("enemy-" + _enemyPos, 3);
                 QueueSound(new LCDGameSound("hit.ogg"));
                 _enemyPos = _projectilePos = -1;
                 _enemiesHit++;
 
             }
 
+            // Move projectile forward
             if (_projectilePos > 10)
                 _projectilePos -= 10;
-            else _projectilePos = -1;
-
+            else 
+                _projectilePos = -1;
         }
 
         public override void CustomUpdate()
@@ -194,8 +201,8 @@ namespace LCDonald.Core.Games
             {
                 QueueSound(new LCDGameSound("level_up.ogg"));
                 _enemiesHit = 0;
-                // TODO blink
                 _level++;
+                BlinkElement("level-" + _level, 2);
                 _customUpdateSpeed -= 200;
             }
 
@@ -208,9 +215,15 @@ namespace LCDonald.Core.Games
                     var digit = _enemyPos % 10;
                     if (digit == _tailsPosition)
                     {
-                        // TODO blink
                         _lifeCount--;
                         QueueSound(new LCDGameSound("life_loss.ogg"));
+
+                        _isInputBlocked = true;
+                        BlinkElement(GetTailsElement(), 1);
+                        // Wait for blinking to end
+                        while (IsBlinking(GetTailsElement())) { }
+                        _isInputBlocked = false;
+
                         if (_lifeCount == 0) GameOverAnimation();
                     } 
                     else
@@ -250,12 +263,14 @@ namespace LCDonald.Core.Games
 
         private void GameOverAnimation()
         {
+            _isInputBlocked = true;
             QueueSound(new LCDGameSound("game_over.ogg"));
             //Stop();
         }
 
         private void VictoryAnimation()
         {
+            _isInputBlocked = true;
             QueueSound(new LCDGameSound("game_win.ogg"));
             //Stop();
         }

@@ -21,10 +21,21 @@ namespace LCDonald.Core.Model
         public List<LCDGameSound> GetSoundsToPlay();
 
         /// <summary>
+        /// Get all the inputs this game uses.
+        /// </summary>
+        /// <returns>a list of inputs.</returns>
+        public List<LCDGameInput> GetAvailableInputs();
+
+        /// <summary>
         /// Called every frame. Can update the game state.
         /// </summary>
         /// <param name="pressedInputs">Newly pressed inputs for this frame</param>
         public void HandleInputs(List<LCDGameInput> pressedInputs);
+
+        /// <summary>
+        /// Whether the LogicProcessor should handle incoming user inputs.
+        /// </summary>
+        public bool IsInputBlocked();
 
         /// <summary>
         /// Returns all the existing elements of the LCD game.
@@ -43,12 +54,6 @@ namespace LCDonald.Core.Model
         /// Is called every 100 milliseconds.
         /// </summary>
         public void Update();
-
-        /// <summary>
-        /// Get all the inputs this game uses.
-        /// </summary>
-        /// <returns>a list of inputs.</returns>
-        public List<LCDGameInput> GetAvailableInputs();
 
         /// <summary>
         /// (Re)start the game, initializing the gamestate.
