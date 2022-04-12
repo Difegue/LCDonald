@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ui="using:FluentAvalonia.UI.Controls"
+		xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
 		xmlns:controls="using:LCDonald.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LCDonald.Views.MainWindow"
@@ -16,13 +17,105 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<ui:NavigationView PaneDisplayMode="LeftCompact" IsSettingsVisible="False">
+	<Window.Styles>
+		<Style Selector="ui|NavigationView">
+			<Setter Property="CompactPaneLength" Value="72" />
+		</Style>
+		<Style Selector="uip|NavigationViewItemPresenter">
+			<Setter Property="MinHeight" Value="56" />
+			<Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
+			<Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border Name="LayoutRoot"
+                        MinHeight="{DynamicResource NavigationViewItemOnLeftMinHeight}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{DynamicResource OverlayCornerRadius}"
+                        Margin="4,2,4,2"
+                        TemplatedControl.IsTemplateFocusTarget="True">
+
+                    <Panel Name="PresenterContentRootGrid">
+
+                        <Panel HorizontalAlignment="Left"
+                               VerticalAlignment="Center">
+                            
+                            <Border Name="SelectionIndicator"
+									Background="{DynamicResource NavigationViewSelectionIndicatorForeground}"
+									Opacity="0" />                            
+                        </Panel>
+
+                        <Grid Name="ContentGrid"
+                              MinHeight="{DynamicResource NavigationViewItemOnLeftMinHeight}"
+                              HorizontalAlignment="Stretch"
+                              ColumnDefinitions="Auto,*,Auto,Auto">
+
+                            <Border Name="IconColumn" Margin="0,0,8,0">
+                                <Viewbox Name="IconBox"
+										 Width="112"
+                                         Height="36"
+										 HorizontalAlignment="Center"
+                                         >
+                                    <ContentPresenter Name="Icon"
+                                                      Content="{TemplateBinding Icon}" />
+                                </Viewbox>
+                            </Border>
+                            
+                            <ContentPresenter Name="ContentPresenter"
+                                              Grid.Column="1"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Padding="{TemplateBinding Padding}" />
+
+                            <Panel Name="ExpandCollapseChevron"
+                                   Grid.Column="3"
+                                   HorizontalAlignment="Right"
+                                   Width="40"
+                                   Margin="{DynamicResource NavigationViewItemExpandedChevronMargin}"
+                                   Background="Transparent">
+                                <TextBlock Foreground="{DynamicResource NavigationViewItemForeground}"
+                                           FontSize="{DynamicResource NavigationViewItemExpandedGlyphFontSize}"
+                                           Text="{StaticResource NavigationViewItemExpandedGlyph}"
+                                           FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                            </Panel>
+							
+							<ContentPresenter Name="InfoBadgePresenter"
+											  Content="{TemplateBinding InfoBadge}" />
+                            
+                        </Grid>
+                        
+                        
+                    </Panel>
+                    
+                </Border></ControlTemplate>
+			</Setter>
+		</Style>
+	</Window.Styles>
+
+	<ui:NavigationView PaneDisplayMode="LeftCompact" 
+					   IsSettingsVisible="False" 
+					   PaneTitle="McD's Sonic Simulator">
 		<ui:NavigationView.MenuItems>
-			<ui:NavigationViewItem Content="Menu Item1" Tag="SamplePage1" Icon="Play"/>
-			<ui:NavigationViewItem Content="Menu Item2" Tag="SamplePage2" Icon="Save" />
-			<ui:NavigationViewItem Content="Menu Item3" Tag="SamplePage3" Icon="Refresh" />
-			<ui:NavigationViewItem Content="Menu Item4" Tag="SamplePage4" Icon="Download" />
+			<!-- TODO actual navigation -->
+			<ui:NavigationViewItem Content="Tails' Sky Adventure (2005)">
+				<ui:NavigationViewItem.Icon>
+					<ui:BitmapIcon UriSource="avares://LCDonald/Assets/Icons/tskyicon.png" Width="112" Height="96" />
+				</ui:NavigationViewItem.Icon>
+			</ui:NavigationViewItem>
+
+			<ui:NavigationViewItem Content="More coming soon!">
+				<ui:NavigationViewItem.Icon>
+					<ui:BitmapIcon UriSource="avares://LCDonald/Assets/Icons/sicon.png" Width="112" Height="96" />
+				</ui:NavigationViewItem.Icon>
+			</ui:NavigationViewItem>
 		</ui:NavigationView.MenuItems>
+
+		<ui:NavigationView.PaneCustomContent>
+			<Border Height="18"/>
+		</ui:NavigationView.PaneCustomContent>
 
 		<ui:NavigationView.Content>
 			<Grid Margin="8,4,8,8">
@@ -35,7 +128,7 @@
 					<ColumnDefinition Width="160"/>
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Text="Tails' Sky Adventure (2006)" Grid.Row="0" Grid.Column="0" Margin="8,0,0,0"
+				<TextBlock Text="Tails' Sky Adventure (2005)" Grid.Row="0" Grid.Column="0" Margin="8,0,0,0"
 					   FontWeight="SemiBold" FontSize="18" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
 					   HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 				<StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center"
