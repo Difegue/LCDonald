@@ -100,7 +100,7 @@
 					   PaneTitle="McD's Sonic Simulator">
 		<ui:NavigationView.MenuItems>
 			<!-- TODO actual navigation -->
-			<ui:NavigationViewItem Content="Tails' Sky Adventure (2005)">
+			<ui:NavigationViewItem Content="Tails' Sky Adventure (2005)" IsSelected="True">
 				<ui:NavigationViewItem.Icon>
 					<ui:BitmapIcon UriSource="avares://LCDonald/Assets/Icons/tskyicon.png" Width="112" Height="96" />
 				</ui:NavigationViewItem.Icon>

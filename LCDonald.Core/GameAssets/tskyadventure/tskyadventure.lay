@@ -4,6 +4,9 @@
 
 <!-- Define Elements -->
 
+	<element name="manual_fr">
+		<image file="tskyadventure_manual.jpg" />
+	</element>
 	<element name="front_open">
 		<image file="tskyadventure_front_open.jpg" />
 	</element>
@@ -58,6 +61,12 @@
 	<view name="Back Closed">
 		<element ref="back_closed">
 			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+	</view>
+
+	<view name="Instructions (FR)">
+		<element ref="manual_fr">
+			<bounds x="0" y="0" width="2343" height="2343" />
 		</element>
 	</view>
 </mamelayout>
