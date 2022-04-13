@@ -11,7 +11,7 @@
         Icon="/Assets/avalonia-logo.ico"
 		Width="1588"
 		Height="1080"
-        Title="LCDonald">
+        Title="McD's Sonic Simulator 0.1 Alpha">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -160,6 +160,12 @@
 				
 			</Grid>
 		</ui:NavigationView.Content>
+
+		<ui:NavigationView.PaneFooter>
+			<StackPanel Name="FooterStackPanel" Orientation="Vertical" IsVisible="True">
+				<ui:NavigationViewItem Icon="More" Content="About..." PointerPressed="Open_About"/>
+			</StackPanel>
+		</ui:NavigationView.PaneFooter>
 
 	</ui:NavigationView>
 
