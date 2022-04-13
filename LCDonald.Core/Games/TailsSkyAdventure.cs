@@ -203,7 +203,8 @@ namespace LCDonald.Core.Games
                 _enemiesHit = 0;
                 _level++;
                 BlinkElement("level-" + _level, 2);
-                _customUpdateSpeed -= 150;
+                // Speed up
+                _customUpdateSpeed -= 175;
             }
 
             if (_level == 4)
@@ -236,10 +237,23 @@ namespace LCDonald.Core.Games
                     else
                     {
                         _enemiesMissed++;
-                        QueueSound(new LCDGameSound("miss.ogg"));
+                        if ( _enemiesMissed == 5)
+                        {
+                            _lifeCount--;
+                            QueueSound(new LCDGameSound("life_loss.ogg"));
+                            _isInputBlocked = true;
+                            // Life loss, character blinks
+                            var spr = GetTailsElement();
+                            BlinkElement(spr, 2);
+                            // Wait for blinking to end
+                            while (IsBlinking(spr)) { }
+                            _isInputBlocked = false;
+                        } 
+                        else
+                            QueueSound(new LCDGameSound("miss.ogg"));
                     }
 
-                    if (_lifeCount == 0 || _enemiesMissed == 5)
+                    if (_lifeCount == 0)
                         GameOver();
                 }
                 else
