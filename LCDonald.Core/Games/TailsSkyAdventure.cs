@@ -7,8 +7,8 @@ namespace LCDonald.Core.Games
 {
     public class TailsSkyAdventure : LCDGameBase
     {
-        public override string GetAssetFolderName() => "tskyadventure";
-        public override string GetGameName() => "Tails' Sky Adventure";
+        public override string ShortName => "tskyadventure";
+        public override string Name => "Tails' Sky Adventure (2005)";
 
         #region SVG Group Names
         public const string LIFE_1 = "life-1";
@@ -206,6 +206,12 @@ namespace LCDonald.Core.Games
                 _customUpdateSpeed -= 200;
             }
 
+            if (_level == 4)
+            {
+                Victory();
+                return;
+            }
+
             if (_enemyPos != -1)
             {
                 _enemyPos += 10;
@@ -219,21 +225,23 @@ namespace LCDonald.Core.Games
                         QueueSound(new LCDGameSound("life_loss.ogg"));
 
                         _isInputBlocked = true;
-                        BlinkElement(GetTailsElement(), 1);
+                        // Life loss, both character and enemy blink
+                        BlinkElement(GetTailsElement(), 2);
+                        BlinkElement("enemy-3" + digit, 3);
                         // Wait for blinking to end
-                        while (IsBlinking(GetTailsElement())) { }
+                        while (IsBlinking("enemy-3" + digit)) { }
                         _isInputBlocked = false;
-
-                        if (_lifeCount == 0) GameOverAnimation();
                     } 
                     else
                     {
                         _enemiesMissed++;
                         QueueSound(new LCDGameSound("miss.ogg"));
-                        if (_enemiesMissed > 15) GameOverAnimation();
                     }
 
                     _enemyPos = -1;
+
+                    if (_lifeCount == 0 || _enemiesMissed == 5)
+                        GameOver();
                 }
                 else
                 {
@@ -260,19 +268,42 @@ namespace LCDonald.Core.Games
                _enemyPos = _rng.Next(11, 14);
             }
         }
-
-        private void GameOverAnimation()
+        
+        private void GameOver()
         {
-            _isInputBlocked = true;
             QueueSound(new LCDGameSound("game_over.ogg"));
-            //Stop();
+
+            var gameOverFrame1 = new List<string> { TAILS_CENTER, ENEMY_31, ENEMY_32, ENEMY_33 };
+            var gameOverFrame2 = new List<string> { TAILS_CENTER };
+
+            // slow 4x blink
+            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
+            PlayAnimation(gameOverAnimation);
+            _tailsPosition = -1;
+            Stop();
         }
 
-        private void VictoryAnimation()
+        private void Victory()
         {
-            _isInputBlocked = true;
             QueueSound(new LCDGameSound("game_win.ogg"));
-            //Stop();
+
+            var victoryFrame1 = new List<string> { TAILS_CENTER, PROJECTILE_31, PROJECTILE_32, PROJECTILE_33 };
+            var victoryFrame2 = new List<string> { TAILS_CENTER, PROJECTILE_21, PROJECTILE_22, PROJECTILE_23 };
+            var victoryFrame3 = new List<string> { TAILS_CENTER, PROJECTILE_11, PROJECTILE_12, PROJECTILE_13 };
+
+            // slow 4x sequence
+            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3};
+            PlayAnimation(victoryAnimation);
+            _tailsPosition = -1;
+            Stop();
         }
     }
 }

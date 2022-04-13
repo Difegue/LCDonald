@@ -5,7 +5,7 @@ using System.Timers;
 namespace LCDonald.Core.Model
 {
     /// <summary>
-    /// Base class for LCD Game simulation with a few common elements: Blinking, custom timers, and a few other things.
+    /// Base class for LCD Game simulation with a few common elements: Animations, blinking, custom timers, and a few other things.
     /// </summary>
     public abstract class LCDGameBase : ILCDGame
     {
@@ -23,9 +23,10 @@ namespace LCDonald.Core.Model
         private Timer? _customTimer;
         private List<LCDGameSound> _gameSounds = new();
         private Dictionary<string, float> _blinkingElements = new();
+        private List<List<string>>? _currentAnimation;
 
-        public abstract string GetGameName();
-        public abstract string GetAssetFolderName();
+        public abstract string Name { get; }
+        public abstract string ShortName { get; }
         public abstract void InitializeGameState();
         public abstract List<LCDGameInput> GetAvailableInputs();
         public abstract void HandleInputs(List<LCDGameInput> pressedInputs);
@@ -62,7 +63,37 @@ namespace LCDonald.Core.Model
         /// <param name="times">Number of blink cycles</param>
         protected void BlinkElement(string element, int times)
         {
-            _blinkingElements.Add(element, times);
+            if (_blinkingElements.ContainsKey(element))
+            {
+                _blinkingElements[element] = times;
+            }
+            else
+            {
+                _blinkingElements.Add(element, times);
+            }
+        }
+
+        /// <summary>
+        /// Sets a given sequence of visible elements to be played as an animation.
+        /// Animations block input until they are finished.
+        /// This method blocks until the animation is complete, so you should probably only call this in CustomUpdate blocks.
+        /// </summary>
+        /// <param name="animation">Sequence of visible elements to play.</param>
+        protected void PlayAnimation(List<List<string>> animation)
+        {
+            _isInputBlocked = true;
+
+            _currentAnimation = animation;
+
+            // Wait for animation to be null again
+            _customTimer?.Stop();
+            while (_currentAnimation != null)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+            _customTimer?.Start();
+            
+            _isInputBlocked = false;
         }
         
         public void Start()
@@ -122,10 +153,21 @@ namespace LCDonald.Core.Model
                     _blinkingElements.Remove(element);
                 }
             }
+
+            // If there's an animation, go to its next frame
+            _currentAnimation?.RemoveAt(0);
+            if (_currentAnimation?.Count == 0)
+                _currentAnimation = null;
         }
 
         public List<string> GetVisibleGameElements() 
         {
+            // If there's an animation, disregard the game and play it directly
+            if (_currentAnimation != null)
+            {
+                return _currentAnimation[0];
+            }
+
             // Get the shown elements from the game implementation
             var visibleElements = GetVisibleElements();
 

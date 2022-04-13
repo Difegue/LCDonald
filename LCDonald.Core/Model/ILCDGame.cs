@@ -5,13 +5,15 @@ namespace LCDonald.Core.Model
 {
     public interface ILCDGame
     {
-        public abstract string GetGameName();
-        
         /// <summary>
-        /// Get the Asset folder name of the game.
+        /// Name of the Game.
         /// </summary>
-        /// <returns></returns>
-        public abstract string GetAssetFolderName();
+        public abstract string Name { get; }
+
+        /// <summary>
+        /// Short version of the name. Used for asset folder/layout file naming.
+        /// </summary>
+        public abstract string ShortName { get; }
 
         /// <summary>
         /// Called every frame. 

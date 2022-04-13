@@ -149,7 +149,7 @@ namespace LCDonald.Controls
 
         private void LoadGame()
         {
-            var gameID = _currentGame.GetAssetFolderName();
+            var gameID = _currentGame.ShortName;
             var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _gameAssetFolder = Path.Combine(appFolder, "GameAssets", gameID);
 
@@ -161,6 +161,7 @@ namespace LCDonald.Controls
             _currentGame.Resumed += (s, e) => Focus();
 
             // Load SVG 
+            // TODO: Hide all screen elements after 3 seconds to simulate LCD game init?
             _svgDocument = SvgExtensions.Open($"{_gameAssetFolder}\\{gameID}.svg");
 
             // Load layout
@@ -207,6 +208,7 @@ namespace LCDonald.Controls
                     Height = view.ScreenHeight,
                     Picture = new SvgSource().FromSvgDocument(_svgDocument)
                 };
+                
                 Canvas.SetTop(_svgElement, view.ScreenY);
                 Canvas.SetLeft(_svgElement, view.ScreenX);
 

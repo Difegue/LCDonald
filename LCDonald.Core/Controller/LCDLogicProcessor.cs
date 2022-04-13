@@ -36,7 +36,7 @@ namespace LCDonald.Core.Controller
             _currentGame.Resumed += PauseResumeGame;
 
             var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            _gameAssetFolder = Path.Combine(appFolder, "GameAssets", _currentGame.GetAssetFolderName());
+            _gameAssetFolder = Path.Combine(appFolder, "GameAssets", _currentGame.ShortName);
         }
 
         private void StartGame(object sender, EventArgs e)

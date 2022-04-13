@@ -128,7 +128,7 @@
 					<ColumnDefinition Width="160"/>
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Text="Tails' Sky Adventure (2005)" Grid.Row="0" Grid.Column="0" Margin="8,0,0,0"
+				<TextBlock Text="{Binding Game.Name}" Grid.Row="0" Grid.Column="0" Margin="8,0,0,0"
 					   FontWeight="SemiBold" FontSize="18" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
 					   HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 				<StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center"
