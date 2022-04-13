@@ -203,7 +203,7 @@ namespace LCDonald.Core.Games
                 _enemiesHit = 0;
                 _level++;
                 BlinkElement("level-" + _level, 2);
-                _customUpdateSpeed -= 200;
+                _customUpdateSpeed -= 150;
             }
 
             if (_level == 4)
@@ -216,9 +216,10 @@ namespace LCDonald.Core.Games
             {
                 _enemyPos += 10;
 
-                if (_enemyPos > 40)
+                if (_enemyPos > 40 && _projectilePos != _enemyPos - 10)
                 {
                     var digit = _enemyPos % 10;
+                    _enemyPos = -1;
                     if (digit == _tailsPosition)
                     {
                         _lifeCount--;
@@ -237,8 +238,6 @@ namespace LCDonald.Core.Games
                         _enemiesMissed++;
                         QueueSound(new LCDGameSound("miss.ogg"));
                     }
-
-                    _enemyPos = -1;
 
                     if (_lifeCount == 0 || _enemiesMissed == 5)
                         GameOver();

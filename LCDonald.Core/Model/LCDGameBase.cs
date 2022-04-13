@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Timers;
 
@@ -22,7 +23,7 @@ namespace LCDonald.Core.Model
         private bool _isStopped = true;
         private Timer? _customTimer;
         private List<LCDGameSound> _gameSounds = new();
-        private Dictionary<string, float> _blinkingElements = new();
+        private ConcurrentDictionary<string, float> _blinkingElements = new();
         private List<List<string>>? _currentAnimation;
 
         public abstract string Name { get; }
@@ -63,14 +64,8 @@ namespace LCDonald.Core.Model
         /// <param name="times">Number of blink cycles</param>
         protected void BlinkElement(string element, int times)
         {
-            if (_blinkingElements.ContainsKey(element))
-            {
-                _blinkingElements[element] = times;
-            }
-            else
-            {
-                _blinkingElements.Add(element, times);
-            }
+            // Reset blinkcount in case the key is still there
+            _blinkingElements.AddOrUpdate(element, times, (key, oldValue) => times);
         }
 
         /// <summary>
@@ -150,7 +145,7 @@ namespace LCDonald.Core.Model
 
                 if (_blinkingElements[element] < 0)
                 {
-                    _blinkingElements.Remove(element);
+                    _blinkingElements.Remove(element, out _);
                 }
             }
 
@@ -174,14 +169,12 @@ namespace LCDonald.Core.Model
             // Add elements that are blinking, remove the ones that aren't
             foreach (var element in _blinkingElements.Keys)
             {
-                // TODO dumb workaround for lack of proper threadlocks
-                if (!_blinkingElements.ContainsKey(element)) continue;
+                var isVisible = _blinkingElements[element] % 1 != 0.5;
 
-                if (_blinkingElements[element] % 1 == 0.5)
-                    visibleElements.Remove(element);
-
-                if (_blinkingElements[element] % 1 == 0)
+                if (isVisible)
                     visibleElements.Add(element);
+                else
+                    visibleElements.Remove(element);
             }
 
             return visibleElements;

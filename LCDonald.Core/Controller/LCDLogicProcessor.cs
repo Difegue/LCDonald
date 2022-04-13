@@ -16,8 +16,8 @@ namespace LCDonald.Core.Controller
         private readonly ILCDView _currentView;
         private readonly AudioEngine _gameAudio;
 
-        private bool _isPaused;
-        private bool _isStopped;
+        private bool _isPaused = false;
+        private bool _isStopped = true;
         private Timer? _gameTimer;
 
         private string _gameAssetFolder;
@@ -26,7 +26,6 @@ namespace LCDonald.Core.Controller
         {
             _currentGame = game;
             _currentView = view;
-            _isPaused = false;
             
             _gameAudio = AudioEngine.CreateDefault();
 
@@ -52,6 +51,7 @@ namespace LCDonald.Core.Controller
             _gameTimer.Start();
 
             _isStopped = false;
+            _isPaused = false;
             
             Task.Run(() => GameLoop());
         }
