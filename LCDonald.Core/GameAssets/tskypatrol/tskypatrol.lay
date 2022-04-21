@@ -1,0 +1,65 @@
+<!-- tskypatrol.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="tskypatrol_manual.jpg" />
+	</element>
+	<element name="front">
+		<image file="tskypatrol_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="tskypatrol_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="tskypatrol_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="tskypatrol_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1530" y="1391" width="643" height="500" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3968" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1510" y="1366" width="713" height="545" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="81" y="72" width="1016" height="793" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="1160" height="910" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3968" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="2343" height="2343" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Tails' Sky Patrol
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+
