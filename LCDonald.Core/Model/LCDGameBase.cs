@@ -93,6 +93,7 @@ namespace LCDonald.Core.Model
         
         public void Start()
         {
+            _isInputBlocked = false;
             InitializeGameState();
 
             _customTimer?.Stop();
@@ -102,7 +103,6 @@ namespace LCDonald.Core.Model
             _customTimer.Elapsed += UpdateGameState;
             _customTimer?.Start();
 
-            _isInputBlocked = false;
             _isStopped = false;
             Started?.Invoke(this, new EventArgs());
         }
