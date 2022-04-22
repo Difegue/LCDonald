@@ -66,19 +66,19 @@ namespace LCDonald.Core.Games
                 new LCDGameInput
                 {
                     Name = "Left",
-                    Description = "",
+                    Description = "Move Tails Left",
                     KeyCode = 23, // left
                 },
                 new LCDGameInput
                 {
                     Name = "Right",
-                    Description = "",
+                    Description = "Move Tails Right",
                     KeyCode = 25, // right
                 },
                 new LCDGameInput
                 {
                     Name = "Fire",
-                    Description = "",
+                    Description = "Shoot a projectile",
                     KeyCode = 18, // space
                 }
             };          

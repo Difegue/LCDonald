@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
+		<image file="sspeedway_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="sspeedway_front.jpg" />
@@ -51,7 +51,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="2343" height="2343" />
+			<bounds x="0" y="0" width="1225" height="1155" />
 		</element>
 	</view>
 </mamelayout>
@@ -60,6 +60,6 @@
 Sonic Speedway
 - Artwork type: Photo, Background, ripped flash game 
 - McDonald's Sonic Games Assets by Difegue
-
+- Manual taken from Sonic Retro.
 -->
 

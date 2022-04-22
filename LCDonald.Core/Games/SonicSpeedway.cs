@@ -6,32 +6,32 @@ using System.Text;
 
 namespace LCDonald.Core.Games
 {
-    public class TailsSkyPatrol : LCDGameBase
+    public class SonicSpeedway : LCDGameBase
     {
-        public override string ShortName => "tskypatrol";
-        public override string Name => "Tails' Sky Patrol (2003)";
+        public override string ShortName => "sspeedway";
+        public override string Name => "Sonic Speedway (2003)";
 
         #region SVG Group Names
-        public const string MISS_CENTER = "miss-center";
-        public const string MISS_BOTTOM = "miss-bottom";
+        public const string HIT_LEFT = "hit-left";
+        public const string HIT_RIGHT = "hit-right";
         public const string LEVEL_1 = "level-1";
         public const string LEVEL_2 = "level-2";
         public const string LEVEL_3 = "level-3";
-        public const string RING_11 = "ring-11";
-        public const string RING_12 = "ring-12";
-        public const string RING_13 = "ring-13";
-        public const string RING_21 = "ring-21";
-        public const string RING_22 = "ring-22";
-        public const string RING_23 = "ring-23";
-        public const string RING_31 = "ring-31";
-        public const string RING_32 = "ring-32";
-        public const string RING_33 = "ring-33";
-        public const string RING_41 = "ring-41";
-        public const string RING_42 = "ring-42";
-        public const string RING_43 = "ring-43";
-        public const string TAILS_TOP = "tails-top";
-        public const string TAILS_BOTTOM = "tails-bottom";
-        public const string TAILS_CENTER = "tails-center";
+        public const string CAR_11 = "car-11";
+        public const string CAR_12 = "car-12";
+        public const string CAR_13 = "car-13";
+        public const string CAR_21 = "car-21";
+        public const string CAR_22 = "car-22";
+        public const string CAR_23 = "car-23";
+        public const string CAR_31 = "car-31";
+        public const string CAR_32 = "car-32";
+        public const string CAR_33 = "car-33";
+        public const string CAR_41 = "car-41";
+        public const string CAR_42 = "car-42";
+        public const string CAR_43 = "car-43";
+        public const string SONIC_CENTER = "sonic-center";
+        public const string SONIC_LEFT = "sonic-left";
+        public const string SONIC_RIGHT = "sonic-right";
         #endregion SVG Group Names
 
         public override List<string> GetAllGameElements()
@@ -39,12 +39,13 @@ namespace LCDonald.Core.Games
             return new List<string>()
             {
                 LEVEL_1, LEVEL_2, LEVEL_3,
-
-                RING_11,  RING_21,  RING_31, RING_41,    TAILS_TOP,
-                                                MISS_CENTER,
-                RING_12,  RING_22,  RING_32, RING_42,    TAILS_CENTER,
-                                                MISS_BOTTOM,
-                RING_13,  RING_23,  RING_33, RING_43,    TAILS_BOTTOM
+                
+                                        CAR_11, CAR_12, CAR_13,
+                                CAR_21,   CAR_22,   CAR_23,
+                        CAR_31,     CAR_32,     CAR_33,
+                    CAR_41,       CAR_42,       CAR_43,
+                        HIT_LEFT,       HIT_RIGHT,
+                SONIC_LEFT,  SONIC_CENTER,  SONIC_RIGHT
             };
         }
 
@@ -54,26 +55,26 @@ namespace LCDonald.Core.Games
             {
                 new LCDGameInput
                 {
-                    Name = "Up",
-                    Description = "Move Tails Up",
-                    KeyCode = 24, // up
+                    Name = "Left",
+                    Description = "Move Sonic Left",
+                    KeyCode = 23, // left
                 },
                 new LCDGameInput
                 {
-                    Name = "Down",
-                    Description = "Move Tails Down",
-                    KeyCode = 26, // down
-                }
+                    Name = "Right",
+                    Description = "Move Sonic Right",
+                    KeyCode = 25, // right
+                },
             };
         }
 
-        private int _tailsPosition;
-        private int _ringsCollected;
-        private int _ringsMissed;
+        private int _sonicPosition;
+        private int _carRowsDodged;
+        private int _carsHit;
         private int _level;
 
-        private List<int> _ringPositions = new List<int>();
-        private int _blockRingSpawnCount;
+        private List<int> _carPositions = new List<int>();
+        private int _blockSpawnCounter;
 
         private Random _rng = new Random();
 
@@ -88,41 +89,41 @@ namespace LCDonald.Core.Games
             if (_level >= 3)
                 elements.Add(LEVEL_3);
 
-            elements.Add(GetTailsElement());
+            elements.Add(GetSonicElement());
 
-            foreach (var ringPos in ThreadSafeRingList())
-                elements.Add("ring-" + ringPos);
+            foreach (var carPos in ThreadSafeCarList())
+                elements.Add("car-" + carPos);
 
             return elements;
         }
 
-        private string GetTailsElement()
+        private string GetSonicElement()
         {
-            if (_tailsPosition == 1)
-                return TAILS_TOP;
-            else if (_tailsPosition == 2)
-                return TAILS_CENTER;
-            else if (_tailsPosition == 3)
-                return TAILS_BOTTOM;
+            if (_sonicPosition == 1)
+                return SONIC_LEFT;
+            else if (_sonicPosition == 2)
+                return SONIC_CENTER;
+            else if (_sonicPosition == 3)
+                return SONIC_RIGHT;
 
             return "";
         }
 
         public override void InitializeGameState()
         {
-            _tailsPosition = 2;
-            _ringsCollected = 0;
-            _ringsMissed = 0;
+            _sonicPosition = 2;
+            _carRowsDodged = 0;
+            _carsHit = 0;
             _level = 0;
 
-            _ringPositions = new List<int>();
+            _carPositions = new List<int>();
 
-            _customUpdateSpeed = 900;
+            _customUpdateSpeed = 800;
             QueueSound(new LCDGameSound("../common/game_start.ogg"));
 
             // Wait for sound to end before spawning rings 
             // 2x custom loop is about the correct speed.
-            _blockRingSpawnCount = 2;
+            _blockSpawnCounter = 2;
             _isInputBlocked = true;
         }
 
@@ -132,44 +133,32 @@ namespace LCDonald.Core.Games
             {
                 if (input == null) continue;
 
-                if (input.Name == "Up" && _tailsPosition > 1)
+                if (input.Name == "Left" && _sonicPosition > 1)
                 {
-                    _tailsPosition--;
+                    _sonicPosition--;
                 }
-                else if (input.Name == "Down" && _tailsPosition < 3)
+                else if (input.Name == "Right" && _sonicPosition < 3)
                 {
-                    _tailsPosition++;
+                    _sonicPosition++;
                 }
             }
         }
 
         protected override void UpdateCore()
         {
-            // Collect rings if tails is in front
-            foreach (var ringPos in ThreadSafeRingList())
-            {
-                var digit = ringPos % 10;
-                
-                if (digit == _tailsPosition && ringPos > 40)
-                {
-                    QueueSound(new LCDGameSound("../common/hit.ogg"));
-                    _ringPositions.Remove(ringPos);
-                    _ringsCollected++;                    
-                }
-            }
-            
+            // Unused in this game
         }
 
         public override void CustomUpdate()
         {
-            if (_ringsCollected >= 30)
+            if (_carRowsDodged >= 30)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
-                _ringsMissed = 0;
-                _ringsCollected = 0;
+                _carsHit = 0;
+                _carRowsDodged = 0;
                 _level++;
                 // Speed up
-                _customUpdateSpeed -= 175;
+                _customUpdateSpeed -= 125;
             }
 
             if (_level == 4)
@@ -178,79 +167,87 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            if (_blockRingSpawnCount > 0)
+            if (_blockSpawnCounter > 0)
             {
-                _blockRingSpawnCount--;
+                _blockSpawnCounter--;
                 _isInputBlocked = false;
             }
             else
             {   
                 // Move rings forward
-                _ringPositions = ThreadSafeRingList().Select(x => x += 10).ToList();
+                _carPositions = ThreadSafeCarList().Select(x => x += 10).ToList();
 
-                foreach (var ringPos in ThreadSafeRingList())
+                bool hasDodgedCar = false;
+                bool hasBeenHit = false;
+                foreach (var carPos in ThreadSafeCarList())
                 {
-                    if (ringPos > 50)
+                    if (carPos > 50)
                     {
-                        QueueSound(new LCDGameSound("../common/miss.ogg"));
-                        _ringPositions.Remove(ringPos);
-                        _ringsMissed++;
+                        _carPositions.Remove(carPos);
+                        var horizontalPos = carPos % 10;
 
-                        // Pause ring spawn/advance if there was a miss
-                        _blockRingSpawnCount = 1;
-
-                        var verticalPos = ringPos % 10;
-
-                        // Show miss indicators depending on which rings were missed
-                        if (verticalPos == 1)
-                            BlinkElement(MISS_CENTER, 1);
-                        else if (verticalPos == 2)
+                        if (horizontalPos == _sonicPosition)
                         {
-                            BlinkElement(MISS_CENTER, 1);
-                            BlinkElement(MISS_BOTTOM, 1);
+                            QueueSound(new LCDGameSound("../common/miss.ogg"));
+                            _carsHit++;
+                            hasBeenHit = true;
 
+                            // Show miss indicators depending on which rings were missed
+                            if (horizontalPos == 1)
+                                BlinkElement(HIT_LEFT, 1);
+                            else if (horizontalPos == 2)
+                            {
+                                BlinkElement(HIT_LEFT, 1);
+                                BlinkElement(HIT_RIGHT, 1);
+
+                            }
+                            else if (horizontalPos == 3)
+                                BlinkElement(HIT_RIGHT, 1);
                         }
-                        else if (verticalPos == 3)
-                            BlinkElement(MISS_BOTTOM, 1);
+                        else
+                            hasDodgedCar = true;
                     }
                 }
 
-                if (_ringsMissed == 10)
+                // Only count a row as dodged if the player hasn't been hit
+                if (hasDodgedCar && !hasBeenHit)
+                {
+                    QueueSound(new LCDGameSound("../common/hit.ogg"));
+                    _carRowsDodged++;
+                }
+                
+                if (_carsHit == 5)
                 {
                     GameOver();
                     return;
                 }
                     
-                // If rings were missed, cancel the previous forward move
-                if (_blockRingSpawnCount > 0)
-                    _ringPositions = ThreadSafeRingList().Select(x => x -= 10).ToList();
-                else
+                
+                // Spawn new row of cars
+                var firstCar = _rng.Next(11, 14);
+                _carPositions.Add(firstCar);
+
+                // 50% chance to add a second car
+                if (_rng.Next(0, 2) == 0)
                 {
-                    // Spawn new row of rings
-                    var firstRing = _rng.Next(11, 14);
-                    _ringPositions.Add(firstRing);
+                    var secondCar = firstCar;
 
-                    // 50% chance to add a second ring
-                    if (_rng.Next(0, 2) == 0)
-                    {
-                        var secondRing = firstRing;
-
-                        do { secondRing = _rng.Next(11, 14); } while (secondRing == firstRing);
-                        _ringPositions.Add(secondRing);
-                    }
+                    do { secondCar = _rng.Next(11, 14); } while (secondCar == firstCar);
+                    _carPositions.Add(secondCar);
                 }
+                
             }
         }
 
         private void GameOver()
         {
-            _tailsPosition = -1;
+            _sonicPosition = -1;
             _level = 0;
-            _ringPositions.Clear();
+            _carPositions.Clear();
             
             QueueSound(new LCDGameSound("../common/game_over.ogg"));
 
-            var gameOverFrame1 = new List<string> { RING_11, RING_12, RING_13, RING_21, RING_22, RING_23, RING_31, RING_32, RING_33, RING_41, RING_42, RING_43 };
+            var gameOverFrame1 = new List<string> { SONIC_CENTER, CAR_42, HIT_LEFT, HIT_RIGHT };
             var gameOverFrame2 = new List<string>();
 
             // slow 4x blink
@@ -265,9 +262,9 @@ namespace LCDonald.Core.Games
 
         private void Victory()
         {
-            _tailsPosition = -1;
+            _sonicPosition = -1;
             _level = 0;
-            _ringPositions.Clear();
+            _carPositions.Clear();
             
             QueueSound(new LCDGameSound("../common/game_win.ogg"));
 
@@ -293,6 +290,6 @@ namespace LCDonald.Core.Games
             Stop();
         }
 
-        private List<int> ThreadSafeRingList() => new List<int>(_ringPositions);
+        private List<int> ThreadSafeCarList() => new List<int>(_carPositions);
     }
 }
