@@ -1,0 +1,65 @@
+<!-- sspeedway.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="../common/manual_placeholder.jpg" />
+	</element>
+	<element name="front">
+		<image file="sspeedway_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="sspeedway_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="sspeedway_bg_crop.png" />
+	</element>
+	<element name="game_bg">
+		<image file="sspeedway_bg.png" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1576" y="1088" width="690" height="535" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1579" y="1087" width="690" height="531" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="2" y="2" width="690" height="535" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="712" height="551" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="2343" height="2343" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Sonic Speedway
+- Artwork type: Photo, Background, ripped flash game 
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+
