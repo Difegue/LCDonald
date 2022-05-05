@@ -4,6 +4,7 @@ using LCDonald.Core.Games;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
 using System;
+using System.Collections.Generic;
 
 namespace LCDonald.ViewModels
 {
@@ -11,10 +12,20 @@ namespace LCDonald.ViewModels
     {
         public MainWindowViewModel()
         {
-            // TODO
-            Game = new TailsSkyAdventure();
+            _availableGames = new List<ILCDGame>
+            {
+                new SonicActionGame(),
+                new TailsSkyPatrol(),
+                new SonicSpeedway(),
+                new TailsSkyAdventure()
+            };
+
+            // Pick a random game
+            Game = _availableGames[new Random().Next(0, _availableGames.Count)];
         }
 
+        [ObservableProperty]
+        private List<ILCDGame> _availableGames;
 
         [ObservableProperty]
         private ILCDGame _game;

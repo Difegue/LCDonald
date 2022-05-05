@@ -6,6 +6,8 @@
 		xmlns:ui="using:FluentAvalonia.UI.Controls"
 		xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
 		xmlns:controls="using:LCDonald.Controls"
+		xmlns:core="using:LCDonald.Core.Model"
+		xmlns:converters="using:LCDonald.Converters"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LCDonald.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -16,6 +18,10 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+
+	<Window.Resources>
+		<converters:GameIconConverter x:Key="GameIconConverter"/>
+	</Window.Resources>
 
 	<Window.Styles>
 		<Style Selector="ui|NavigationView">
@@ -97,21 +103,19 @@
 
 	<ui:NavigationView PaneDisplayMode="LeftCompact" 
 					   IsSettingsVisible="False" 
-					   PaneTitle="McD's Sonic Simulator">
-		<ui:NavigationView.MenuItems>
-			<!-- TODO actual navigation -->
-			<ui:NavigationViewItem Content="Tails' Sky Adventure (2005)" IsSelected="True">
-				<ui:NavigationViewItem.Icon>
-					<ui:BitmapIcon UriSource="avares://LCDonald/Assets/Icons/tskyicon.png" Width="112" Height="96" />
-				</ui:NavigationViewItem.Icon>
-			</ui:NavigationViewItem>
-
-			<ui:NavigationViewItem Content="More coming soon!">
-				<ui:NavigationViewItem.Icon>
-					<ui:BitmapIcon UriSource="avares://LCDonald/Assets/Icons/sicon.png" Width="112" Height="96" />
-				</ui:NavigationViewItem.Icon>
-			</ui:NavigationViewItem>
-		</ui:NavigationView.MenuItems>
+					   PaneTitle="McD's Sonic Simulator"
+					   MenuItems="{Binding AvailableGames}"
+					   SelectedItem="{Binding Game}">
+		<ui:NavigationView.MenuItemTemplate>
+			<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
+				<ui:NavigationViewItem Content="{Binding Name}">
+					<ui:NavigationViewItem.Icon>
+						<ui:BitmapIcon UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}" 
+									   Width="112" Height="96" />
+					</ui:NavigationViewItem.Icon>
+				</ui:NavigationViewItem>
+			</DataTemplate>
+		</ui:NavigationView.MenuItemTemplate>
 
 		<ui:NavigationView.PaneCustomContent>
 			<Border Height="18"/>
