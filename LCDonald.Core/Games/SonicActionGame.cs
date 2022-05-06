@@ -66,6 +66,7 @@ namespace LCDonald.Core.Games
         private int _level;
 
         private List<int> _platformPositions = new List<int>();
+        private List<int> _ringPositions = new List<int>();
         private int _blockSpawnCounter;
 
         private Random _rng = new Random();
@@ -86,6 +87,9 @@ namespace LCDonald.Core.Games
             foreach (var platform in ThreadSafePlatformList())
                 elements.Add("platform-" + platform);
 
+            foreach (var ring in _ringPositions)
+                elements.Add("ring-" + ring);
+
             return elements;
         }
 
@@ -99,6 +103,7 @@ namespace LCDonald.Core.Games
             _level = 0;
 
             _platformPositions = new List<int>();
+            _ringPositions = new List<int>();
 
             _customUpdateSpeed = 800;
             QueueSound(new LCDGameSound("../common/game_start.ogg"));
@@ -154,11 +159,42 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            // Don't spawn platforms ?
-            if (_blockSpawnCounter > 0)
+            // Move platforms & rings forward
+            bool hasDodgedPlatform = false;
+            bool hasBeenHit = false;
+            _platformPositions = ThreadSafePlatformList().Select(x => x-= 1).ToList();
+            _ringPositions = _ringPositions.Select(x => x-= 1).ToList();
+
+            if (_ringPositions.Contains(0) && _sonicPosition == 3)
             {
-                _blockSpawnCounter--;
-                _isInputBlocked = false;
+                _ringPositions.Remove(0);
+                hasDodgedPlatform = true;
+            }
+
+            var platformListSnapshot = ThreadSafePlatformList();
+            foreach (var platform in platformListSnapshot)
+            {
+                if (platform == 10 || platform == 20)
+                    _platformPositions.Remove(platform);
+
+                if (platform == 11 && _sonicPosition == 1)
+                {
+                    hasBeenHit = true;
+                    BlinkElement(HIT_1, 1);
+                }
+
+                if (platform == 21 && _sonicPosition == 2)
+                {
+                    hasBeenHit = true;
+                    BlinkElement(HIT_2, 1);
+                }
+
+                if (platform == 11 && _sonicPosition > 1)
+                {
+                    // If this is not a L-block platform, count this as a dodged platform
+                    if (!platformListSnapshot.Contains(22))
+                        hasDodgedPlatform = true;
+                }
             }
 
             // Apply gravity to sonic - unless there's a top platform he's standing on
@@ -171,41 +207,18 @@ namespace LCDonald.Core.Games
                     _sonicPosition = 1;
             }
 
-            // TODO: Move platforms & rings forward
-            _platformPositions = ThreadSafePlatformList().Select(x => x--).ToList();
-
-            bool hasDodgedPlatform = false;
-            bool hasBeenHit = false;
-            foreach (var platform in ThreadSafePlatformList())
+            if (hasBeenHit)
             {
-                if (platform > 50)
-                {
-                    _platformPositions.Remove(platform);
-                    var horizontalPos = platform % 10;
+                QueueSound(new LCDGameSound("../common/miss.ogg"));
+                _platformPositions.Remove(11);
+                _platformPositions.Remove(12);
+                _platformPositions.Remove(21);
+                _platformPositions.Remove(22);
 
-                    if (horizontalPos == _sonicPosition)
-                    {
-                        QueueSound(new LCDGameSound("../common/miss.ogg"));
-                        _platformsHit++;
-                        hasBeenHit = true;
-
-                        // Show miss indicators depending on which rings were missed
-                        if (horizontalPos == 1)
-                            BlinkElement(HIT_1, 1);
-                        else if (horizontalPos == 2)
-                        {
-                            BlinkElement(HIT_2, 1);
-                        }
-                        //else if (horizontalPos == 3)
-                            //BlinkElement(HIT_RIGHT, 1);
-                    }
-                    else
-                        hasDodgedPlatform = true;
-                }
+                _ringPositions.Remove(1);
+                _platformsHit++;
             }
-
-            // Only count a row as dodged if the player hasn't been hit
-            if (hasDodgedPlatform && !hasBeenHit)
+            else if (hasDodgedPlatform)
             {
                 QueueSound(new LCDGameSound("../common/hit.ogg"));
                 _platformsDodged++;
@@ -217,20 +230,39 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-
-            // Spawn new row of cars
-            var firstCar = _rng.Next(11, 14);
-            _platformPositions.Add(firstCar);
-
-            // 50% chance to add a second car
-            if (_rng.Next(0, 2) == 0)
+            // Don't spawn platforms ?
+            if (_blockSpawnCounter > 0)
             {
-                var secondCar = firstCar;
-
-                do { secondCar = _rng.Next(11, 14); } while (secondCar == firstCar);
-                _platformPositions.Add(secondCar);
+                _blockSpawnCounter--;
+                _isInputBlocked = false;
             }
-
+            else
+            {
+                // Spawn platform: 3 random possibilities
+                switch (_rng.Next(1, 4))
+                {
+                    // Single platform
+                    case 1:
+                        _platformPositions.Add(14);
+                        // Wait one cycle before spawning another platform
+                        _blockSpawnCounter = 1;
+                        break;
+                    // L-block platform set
+                    case 2:
+                        _platformPositions.Add(14);
+                        _platformPositions.Add(15);
+                        _platformPositions.Add(25);
+                        _ringPositions.Add(4);
+                        // Wait two cycles before spawning another platform
+                        _blockSpawnCounter = 2;
+                        break;
+                    // No platform
+                    case 3:
+                        // Wait one cycle before spawning another platform
+                        _blockSpawnCounter = 1;
+                        break;
+                }
+            }
         }
 
         private void GameOver()
@@ -238,10 +270,11 @@ namespace LCDonald.Core.Games
             _sonicPosition = -1;
             _level = 0;
             _platformPositions.Clear();
+            _ringPositions.Clear();
 
             QueueSound(new LCDGameSound("../common/game_over.ogg"));
 
-            var gameOverFrame1 = new List<string> { SONIC_1, HIT_1, PLATFORM_11 };
+            var gameOverFrame1 = new List<string> { SONIC_1, HIT_1, PLATFORM_12 };
             var gameOverFrame2 = new List<string>();
 
             // slow 4x blink
@@ -259,6 +292,7 @@ namespace LCDonald.Core.Games
             _sonicPosition = -1;
             _level = 0;
             _platformPositions.Clear();
+            _ringPositions.Clear();
 
             QueueSound(new LCDGameSound("../common/game_win.ogg"));
 
