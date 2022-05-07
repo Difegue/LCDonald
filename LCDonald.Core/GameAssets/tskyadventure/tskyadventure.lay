@@ -64,7 +64,7 @@
 		</element>
 	</view>
 
-	<view name="Instructions (FR)">
+	<view name="Instructions">
 		<element ref="manual_fr">
 			<bounds x="0" y="0" width="2343" height="2343" />
 		</element>

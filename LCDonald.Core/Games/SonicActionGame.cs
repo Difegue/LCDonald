@@ -239,6 +239,7 @@ namespace LCDonald.Core.Games
             else
             {
                 // Spawn platform: 3 random possibilities
+                // Note: The original game seems to loop through predefined sets of platforms instead, but it's easier to just rng it..
                 switch (_rng.Next(1, 4))
                 {
                     // Single platform

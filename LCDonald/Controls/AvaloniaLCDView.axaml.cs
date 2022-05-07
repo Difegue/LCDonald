@@ -171,9 +171,8 @@ namespace LCDonald.Controls
             // Create logic processor
             _logicProcessor = new LCDLogicProcessor(_currentGame, this);
 
-            // Draw first view by default
+            // View selection is handled by the viewmodel hosting this control
             AvailableViews = _gameLayout.Views.Values.ToList();
-            CurrentView = AvailableViews.First(); // TODO we shouldn't have to do this, selecting currentview is the VM's job
         }
 
         private void DrawLayoutView(MAMEView view)

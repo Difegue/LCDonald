@@ -1,10 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LCDonald.Core.Controller;
 using LCDonald.Core.Games;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LCDonald.ViewModels
 {
@@ -28,7 +30,10 @@ namespace LCDonald.ViewModels
         private List<ILCDGame> _availableGames;
 
         [ObservableProperty]
-        private ILCDGame _game;
+        private List<MAMEView> _availableViews;
+
+        [ObservableProperty]
+        private ILCDGame _game;     
 
         partial void OnGameChanging(ILCDGame game)
         {
@@ -45,6 +50,15 @@ namespace LCDonald.ViewModels
             game.Paused += Game_Paused;
             game.Resumed += Game_Resumed;
             game.Stopped += Game_Stopped;
+        }
+
+        partial void OnAvailableViewsChanged(List<MAMEView> views)
+        {
+            var viewList = views;
+            if (viewList.Count > 0)
+            {
+                SelectedView = viewList[0];
+            }
         }
 
         [ObservableProperty]
@@ -77,6 +91,12 @@ namespace LCDonald.ViewModels
         private void StopGame()
         {
             Game.Stop();
+        }
+
+        [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
+        private void SetCurrentView(MAMEView v)
+        {
+            SelectedView = v;
         }
 
         private void Game_Started(object? sender, System.EventArgs e)
