@@ -162,17 +162,15 @@
 					</ItemsRepeater>
 				</ScrollViewer>
 
-				<ui:CommandBarSeparator  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
+				<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
 				
-				<ui:CommandBar Grid.Row="0" Grid.Column="2" VerticalContentAlignment="Center" >
-					<ui:CommandBar.PrimaryCommands>
+				<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
 						<ui:CommandBarButton Icon="Play" Label="Play" Command="{Binding StartGameCommand}"/>
 						<ui:CommandBarButton Icon="Pause" Label="Pause" Command="{Binding PauseGameCommand}"/>
 						<ui:CommandBarButton Icon="Stop" Label="Stop" Command="{Binding StopGameCommand}"/>
 						<ui:CommandBarSeparator />
 						<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" />
-					</ui:CommandBar.PrimaryCommands>
-				</ui:CommandBar>
+				</StackPanel>
 				
 				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
 										  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
