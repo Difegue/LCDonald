@@ -64,12 +64,10 @@ namespace LCDonald.Core.Games
         private int _platformsDodged;
         private int _platformsHit;
         private int _level;
+        private int _blockSpawnCounter;
 
         private List<int> _platformPositions = new List<int>();
         private List<int> _ringPositions = new List<int>();
-        private int _blockSpawnCounter;
-
-        private Random _rng = new Random();
 
         protected override List<string> GetVisibleElements()
         {
@@ -106,12 +104,8 @@ namespace LCDonald.Core.Games
             _ringPositions = new List<int>();
 
             _customUpdateSpeed = 800;
-            QueueSound(new LCDGameSound("../common/game_start.ogg"));
 
-            // Wait for sound to end before spawning platforms 
-            // 2x custom loop is about the correct speed.
-            _blockSpawnCounter = 2;
-            _isInputBlocked = true;
+            StartupMusic();
         }
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
@@ -234,7 +228,6 @@ namespace LCDonald.Core.Games
             if (_blockSpawnCounter > 0)
             {
                 _blockSpawnCounter--;
-                _isInputBlocked = false;
             }
             else
             {
@@ -273,18 +266,7 @@ namespace LCDonald.Core.Games
             _platformPositions.Clear();
             _ringPositions.Clear();
 
-            QueueSound(new LCDGameSound("../common/game_over.ogg"));
-
-            var gameOverFrame1 = new List<string> { SONIC_1, HIT_1, PLATFORM_12 };
-            var gameOverFrame2 = new List<string>();
-
-            // slow 4x blink
-            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
-            PlayAnimation(gameOverAnimation);
+            GenericGameOverAnimation(new List<string> { SONIC_1, HIT_1, PLATFORM_12 });
             Stop();
         }
 
@@ -295,27 +277,7 @@ namespace LCDonald.Core.Games
             _platformPositions.Clear();
             _ringPositions.Clear();
 
-            QueueSound(new LCDGameSound("../common/game_win.ogg"));
-
-            // 3x levels + 10x all
-            var victoryFrame1 = new List<string> { LEVEL_1, LEVEL_2, LEVEL_3 };
-            var victoryFrame2 = new List<string>();
-            var victoryFrame3 = GetAllGameElements();
-
-            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2};
-            PlayAnimation(victoryAnimation);
+            GenericVictoryAnimation(new List<string> { LEVEL_1, LEVEL_2, LEVEL_3 });
             Stop();
         }
 

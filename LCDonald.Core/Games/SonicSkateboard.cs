@@ -84,11 +84,8 @@ namespace LCDonald.Core.Games
         private int _lives;
         private int _level;
 
-        private List<int> _bombPositions = new List<int>();
-        private List<int> _ringPositions = new List<int>();
-        private int _blockSpawnCounter;
-
-        private Random _rng = new Random();
+        private List<int> _bombPositions = new();
+        private List<int> _ringPositions = new();
 
         protected override List<string> GetVisibleElements()
         {
@@ -150,12 +147,8 @@ namespace LCDonald.Core.Games
             _ringPositions = new List<int>();
 
             _customUpdateSpeed = 950;
-            QueueSound(new LCDGameSound("../common/game_start.ogg"));
 
-            // Wait for sound to end before spawning anything 
-            // 2x custom loop is about the correct speed.
-            _blockSpawnCounter = 2;
-            _isInputBlocked = true;
+            StartupMusic();
         }
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
@@ -189,11 +182,6 @@ namespace LCDonald.Core.Games
                     _ringsCollected++;
                 }
             }
-
-            if (_blockSpawnCounter == 0)
-            {
-                _isInputBlocked = false;
-            }
         }
 
         public override void CustomUpdate()
@@ -214,70 +202,66 @@ namespace LCDonald.Core.Games
 
             }
 
-            if (_blockSpawnCounter > 0)
+
+
+            // Move bombs and rings forward
+            _bombPositions = ThreadSafeBombList().Select(x => x += 10).ToList();
+            _ringPositions = ThreadSafeRingList().Select(x => x += 10).ToList();
+
+            foreach (var bombPos in ThreadSafeBombList().Where(b => b > 40))
             {
-                _blockSpawnCounter--;
+                _bombPositions.Remove(bombPos);
+                var horizontalPos = bombPos % 10;
+
+                if (horizontalPos == _sonicPosition)
+                {
+                    QueueSound(new LCDGameSound("../common/miss.ogg"));
+                    _bombsHit++;
+                    _isInputBlocked = true;
+                    BlinkElement(GetSonicElement(), 1);
+                }
             }
-            else
+
+            foreach (var ringPos in ThreadSafeRingList().Where(r => r > 40))
             {
-                // Move bombs and rings forward
-                _bombPositions = ThreadSafeBombList().Select(x => x += 10).ToList();
-                _ringPositions = ThreadSafeRingList().Select(x => x += 10).ToList();
+                _ringPositions.Remove(ringPos);
+            }
 
-                foreach (var bombPos in ThreadSafeBombList().Where(b => b > 40))
+            if (_bombsHit == 5)
+            {
+                _lives--;
+                if (_lives == 0)
+                    GameOver();
+                return;
+            }
+
+            // 90% chance to spawn at least one bomb
+            if (_rng.Next(0, 100) < 90)
+            {
+                var firstBomb = _rng.Next(11, 14);
+                _bombPositions.Add(firstBomb);
+
+                // 33% chance to spawn a second bomb
+                if (_rng.Next(0, 100) < 33)
                 {
-                    _bombPositions.Remove(bombPos);
-                    var horizontalPos = bombPos % 10;
+                    var secondBomb = firstBomb;
 
-                    if (horizontalPos == _sonicPosition)
-                    {
-                        QueueSound(new LCDGameSound("../common/miss.ogg"));
-                        _bombsHit++;
-                        _isInputBlocked = true;
-                        BlinkElement(GetSonicElement(), 1);
-                    }
+                    do { secondBomb = _rng.Next(11, 14); } while (secondBomb == firstBomb);
+                    _bombPositions.Add(secondBomb);
                 }
 
-                foreach (var ringPos in ThreadSafeRingList().Where(r => r > 40))
+                // 33% chance to spawn ring(s)
+                if (_rng.Next(0, 100) < 33)
                 {
-                    _ringPositions.Remove(ringPos);
-                }
-
-                if (_bombsHit == 5)
-                {
-                    _lives--;
-                    if (_lives == 0)
-                        GameOver();
-                    return;
-                }
-
-                // 90% chance to spawn at least one bomb
-                if (_rng.Next(0, 100) < 90)
-                {
-                    var firstBomb = _rng.Next(11, 14);
-                    _bombPositions.Add(firstBomb);
-
-                    // 33% chance to spawn a second bomb
-                    if (_rng.Next(0, 100) < 33)
-                    {
-                        var secondBomb = firstBomb;
-
-                        do { secondBomb = _rng.Next(11, 14); } while (secondBomb == firstBomb);
-                        _bombPositions.Add(secondBomb);
-                    }
-
-                    // 33% chance to spawn ring(s)
-                    if (_rng.Next(0, 100) < 33)
-                    {
-                        SpawnRings();
-                    }
-                }
-                else
-                {
-                    // No bombs, spawn at least one ring
                     SpawnRings();
                 }
             }
+            else
+            {
+                // No bombs, spawn at least one ring
+                SpawnRings();
+            }
+
         }
 
         private void SpawnRings()
@@ -306,7 +290,7 @@ namespace LCDonald.Core.Games
             _bombsHit = 0;
             _ringsCollected = 0;
             _sonicPosition = 2;
-            
+
             var levelUpFrame1 = new List<string>(GetLivesAndLevelElements()) { SONIC_CENTER, BIGRING_1 };
             var levelUpFrame2 = new List<string>(GetLivesAndLevelElements()) { SONIC_CENTER, BIGRING_2 };
             var levelUpFrame3 = new List<string>(GetLivesAndLevelElements()) { SONIC_CENTER, BIGRING_3 };
@@ -326,18 +310,7 @@ namespace LCDonald.Core.Games
             _bombPositions.Clear();
             _ringPositions.Clear();
 
-            QueueSound(new LCDGameSound("../common/game_over.ogg"));
-
-            var gameOverFrame1 = new List<string> { SONIC_CENTER, BOMB_11, BOMB_12, BOMB_13, BOMB_21, BOMB_22, BOMB_23, BOMB_31, BOMB_32, BOMB_33 };
-            var gameOverFrame2 = new List<string>();
-
-            // slow 4x blink
-            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
-            PlayAnimation(gameOverAnimation);
+            GenericGameOverAnimation(new List<string> { SONIC_CENTER, BOMB_11, BOMB_12, BOMB_13, BOMB_21, BOMB_22, BOMB_23, BOMB_31, BOMB_32, BOMB_33 });
             Stop();
         }
 

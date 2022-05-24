@@ -95,8 +95,6 @@ namespace LCDonald.Core.Games
         private int _enemyPos;
         private bool _spawnEnemyNextUpdate;
 
-        private Random _rng = new Random();
-
         protected override List<string> GetVisibleElements()
         {
             var elements = new List<string>();
@@ -151,7 +149,7 @@ namespace LCDonald.Core.Games
             _enemyPos = -1;
 
             _customUpdateSpeed = 900;
-            QueueSound(new LCDGameSound("game_start.ogg"));
+            StartupMusic("game_start.ogg", 0);
         }        
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)

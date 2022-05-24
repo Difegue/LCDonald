@@ -16,9 +16,12 @@ namespace LCDonald.Core.Model
         public event EventHandler Resumed;
         public event EventHandler Stopped;
 #pragma warning restore CS8618
-
+        
         protected int _customUpdateSpeed = 100;
+        protected int _blockedCustomUpdates;
         protected bool _isInputBlocked;
+        protected Random _rng = new();
+        
         private bool _isPaused;
         private bool _isStopped = true;
         private Timer? _customTimer;
@@ -77,7 +80,6 @@ namespace LCDonald.Core.Model
         protected void PlayAnimation(List<List<string>> animation)
         {
             _isInputBlocked = true;
-
             _currentAnimation = animation;
 
             // Wait for animation to be null again
@@ -87,10 +89,80 @@ namespace LCDonald.Core.Model
                 System.Threading.Thread.Sleep(100);
             }
             _customTimer?.Start();
-            
+         
             _isInputBlocked = false;
         }
-        
+
+        /// <summary>
+        /// Play the startup music for the game.
+        /// This will block inputs for the given amount of cycles.
+        /// </summary>
+        /// <param name="musicFile">path to music file</param>
+        /// <param name="blockInputCycles">How many cycles input should be blocked for. 1x custom loop is usually the correct speed.</param>
+        protected void StartupMusic(string musicFile = "../common/game_start.ogg", int blockInputCycles = 1)
+        {
+            QueueSound(new LCDGameSound(musicFile));
+
+            // Wait for sound to end before running custom updates
+            _blockedCustomUpdates = blockInputCycles;
+            _isInputBlocked = true;
+        }
+
+        /// <summary>
+        /// Block custom updates for a given amount of cycles.
+        /// </summary>
+        /// <param name="blockedUpdates"></param>
+        protected void BlockCustomUpdates(int blockedUpdates) => _blockedCustomUpdates = blockedUpdates;
+
+        /// <summary>
+        /// Play a generic game over animation: Slow 4x blink of the given elements.
+        /// </summary>
+        /// <param name="elementsToBlink">List of SVG elements to blink</param>
+        protected void GenericGameOverAnimation(List<string> elementsToBlink)
+        {
+            QueueSound(new LCDGameSound("../common/game_over.ogg"));
+
+            var gameOverFrame1 = elementsToBlink;
+            var gameOverFrame2 = new List<string>();
+
+            // slow 4x blink
+            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
+            PlayAnimation(gameOverAnimation);
+        }
+
+        /// <summary>
+        /// Play a generic victory animation: 3x blink of the given elements, then 10x blink of all elements.
+        /// </summary>
+        /// <param name="elementsToBlink">List of SVG elements to blink</param>
+        protected void GenericVictoryAnimation(List<string> elementsToBlink)
+        {
+            QueueSound(new LCDGameSound("../common/game_win.ogg"));
+
+            // 3x + 10x all
+            var victoryFrame1 = elementsToBlink;
+            var victoryFrame2 = new List<string>();
+            var victoryFrame3 = GetAllGameElements();
+
+            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2};
+            PlayAnimation(victoryAnimation);
+        }
+
         public void Start()
         {
             _isInputBlocked = false;
@@ -195,7 +267,15 @@ namespace LCDonald.Core.Model
         
         private void UpdateGameState(object sender, ElapsedEventArgs e)
         {
-            CustomUpdate();
+            if (_blockedCustomUpdates > 0)
+            {
+                _blockedCustomUpdates--;
+            }
+            else
+            {
+                _isInputBlocked = false;
+                CustomUpdate();
+            }
 
             // Update speed in case the game sped it up
             ((Timer)sender).Interval = _customUpdateSpeed;

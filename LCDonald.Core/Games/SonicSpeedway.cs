@@ -39,7 +39,7 @@ namespace LCDonald.Core.Games
             return new List<string>()
             {
                 LEVEL_1, LEVEL_2, LEVEL_3,
-                
+
                                         CAR_11, CAR_12, CAR_13,
                                 CAR_21,   CAR_22,   CAR_23,
                         CAR_31,     CAR_32,     CAR_33,
@@ -74,9 +74,6 @@ namespace LCDonald.Core.Games
         private int _level;
 
         private List<int> _carPositions = new List<int>();
-        private int _blockSpawnCounter;
-
-        private Random _rng = new Random();
 
         protected override List<string> GetVisibleElements()
         {
@@ -117,14 +114,9 @@ namespace LCDonald.Core.Games
             _level = 0;
 
             _carPositions = new List<int>();
-
             _customUpdateSpeed = 800;
-            QueueSound(new LCDGameSound("../common/game_start.ogg"));
-
-            // Wait for sound to end before spawning rings 
-            // 2x custom loop is about the correct speed.
-            _blockSpawnCounter = 2;
-            _isInputBlocked = true;
+            
+            StartupMusic();
         }
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
@@ -167,76 +159,68 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            if (_blockSpawnCounter > 0)
+            // Move rings forward
+            _carPositions = ThreadSafeCarList().Select(x => x += 10).ToList();
+
+            bool hasDodgedCar = false;
+            bool hasBeenHit = false;
+            foreach (var carPos in ThreadSafeCarList())
             {
-                _blockSpawnCounter--;
-                _isInputBlocked = false;
-            }
-            else
-            {   
-                // Move rings forward
-                _carPositions = ThreadSafeCarList().Select(x => x += 10).ToList();
-
-                bool hasDodgedCar = false;
-                bool hasBeenHit = false;
-                foreach (var carPos in ThreadSafeCarList())
+                if (carPos > 50)
                 {
-                    if (carPos > 50)
+                    _carPositions.Remove(carPos);
+                    var horizontalPos = carPos % 10;
+
+                    if (horizontalPos == _sonicPosition)
                     {
-                        _carPositions.Remove(carPos);
-                        var horizontalPos = carPos % 10;
+                        QueueSound(new LCDGameSound("../common/miss.ogg"));
+                        _carsHit++;
+                        hasBeenHit = true;
 
-                        if (horizontalPos == _sonicPosition)
+                        // Show miss indicators depending on which rings were missed
+                        if (horizontalPos == 1)
+                            BlinkElement(HIT_LEFT, 1);
+                        else if (horizontalPos == 2)
                         {
-                            QueueSound(new LCDGameSound("../common/miss.ogg"));
-                            _carsHit++;
-                            hasBeenHit = true;
+                            BlinkElement(HIT_LEFT, 1);
+                            BlinkElement(HIT_RIGHT, 1);
 
-                            // Show miss indicators depending on which rings were missed
-                            if (horizontalPos == 1)
-                                BlinkElement(HIT_LEFT, 1);
-                            else if (horizontalPos == 2)
-                            {
-                                BlinkElement(HIT_LEFT, 1);
-                                BlinkElement(HIT_RIGHT, 1);
-
-                            }
-                            else if (horizontalPos == 3)
-                                BlinkElement(HIT_RIGHT, 1);
                         }
-                        else
-                            hasDodgedCar = true;
+                        else if (horizontalPos == 3)
+                            BlinkElement(HIT_RIGHT, 1);
                     }
+                    else
+                        hasDodgedCar = true;
                 }
-
-                // Only count a row as dodged if the player hasn't been hit
-                if (hasDodgedCar && !hasBeenHit)
-                {
-                    QueueSound(new LCDGameSound("../common/hit.ogg"));
-                    _carRowsDodged++;
-                }
-                
-                if (_carsHit == 5)
-                {
-                    GameOver();
-                    return;
-                }
-                    
-                
-                // Spawn new row of cars
-                var firstCar = _rng.Next(11, 14);
-                _carPositions.Add(firstCar);
-
-                // 50% chance to add a second car
-                if (_rng.Next(0, 2) == 0)
-                {
-                    var secondCar = firstCar;
-
-                    do { secondCar = _rng.Next(11, 14); } while (secondCar == firstCar);
-                    _carPositions.Add(secondCar);
-                }
-                
             }
+
+            // Only count a row as dodged if the player hasn't been hit
+            if (hasDodgedCar && !hasBeenHit)
+            {
+                QueueSound(new LCDGameSound("../common/hit.ogg"));
+                _carRowsDodged++;
+            }
+
+            if (_carsHit == 5)
+            {
+                GameOver();
+                return;
+            }
+
+
+            // Spawn new row of cars
+            var firstCar = _rng.Next(11, 14);
+            _carPositions.Add(firstCar);
+
+            // 50% chance to add a second car
+            if (_rng.Next(0, 2) == 0)
+            {
+                var secondCar = firstCar;
+
+                do { secondCar = _rng.Next(11, 14); } while (secondCar == firstCar);
+                _carPositions.Add(secondCar);
+            }
+
         }
 
         private void GameOver()
@@ -244,19 +228,8 @@ namespace LCDonald.Core.Games
             _sonicPosition = -1;
             _level = 0;
             _carPositions.Clear();
-            
-            QueueSound(new LCDGameSound("../common/game_over.ogg"));
 
-            var gameOverFrame1 = new List<string> { SONIC_CENTER, CAR_42, HIT_LEFT, HIT_RIGHT };
-            var gameOverFrame2 = new List<string>();
-
-            // slow 4x blink
-            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
-            PlayAnimation(gameOverAnimation);
+            GenericGameOverAnimation(new List<string> { SONIC_CENTER, CAR_42, HIT_LEFT, HIT_RIGHT });
             Stop();
         }
 
@@ -265,28 +238,8 @@ namespace LCDonald.Core.Games
             _sonicPosition = -1;
             _level = 0;
             _carPositions.Clear();
-            
-            QueueSound(new LCDGameSound("../common/game_win.ogg"));
 
-            // 3x levels + 10x all
-            var victoryFrame1 = new List<string> { LEVEL_1, LEVEL_2, LEVEL_3};
-            var victoryFrame2 = new List<string>();
-            var victoryFrame3 = GetAllGameElements();
-
-            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
-                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2};
-            PlayAnimation(victoryAnimation);
+            GenericVictoryAnimation(new List<string> { LEVEL_1, LEVEL_2, LEVEL_3 });
             Stop();
         }
 
