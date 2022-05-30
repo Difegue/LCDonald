@@ -118,9 +118,9 @@ namespace LCDonald.Core.Model
         /// Play a generic game over animation: Slow 4x blink of the given elements.
         /// </summary>
         /// <param name="elementsToBlink">List of SVG elements to blink</param>
-        protected void GenericGameOverAnimation(List<string> elementsToBlink)
+        protected void GenericGameOverAnimation(List<string> elementsToBlink, string animationSound = "../common/game_over.ogg")
         {
-            QueueSound(new LCDGameSound("../common/game_over.ogg"));
+            QueueSound(new LCDGameSound(animationSound));
 
             var gameOverFrame1 = elementsToBlink;
             var gameOverFrame2 = new List<string>();
