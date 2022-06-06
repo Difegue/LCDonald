@@ -21,6 +21,7 @@ namespace LCDonald.ViewModels
                 new SonicSpeedway(),
                 new SonicExtremeBoarding(),
                 new SonicSkateboard(),
+                new AmyRougeTennis(),
                 new TailsSkyAdventure()
             };
 
