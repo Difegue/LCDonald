@@ -89,6 +89,7 @@ namespace LCDonald.Core.Games
         private int _currentScore;
 
         private int _aiResistance;
+        private int _nextBallSpawn;
 
         private bool _batEngaged;
         private bool _ballDirection; // false = default, true = reversed
@@ -123,7 +124,10 @@ namespace LCDonald.Core.Games
         {
             _amyPosition = 2;
             _ballPosition = -1;
-            _rougePosition = _rng.Next(1, 3); // TODO record this initial spawn so it can be mirrored for each new ball
+            _rougePosition = -1;
+            
+            // record this initial spawn so it can be mirrored for each new ball
+            _nextBallSpawn = _rng.Next(1, 3);
             _level = 0;
 
             _customUpdateSpeed = 500;
@@ -158,7 +162,7 @@ namespace LCDonald.Core.Games
             if (_ballPosition > 40 && _ballPosition % 10 == _amyPosition && _batEngaged)
             {
                 _ballDirection = true;
-                // TODO sound
+                QueueSound(new LCDGameSound("hit.ogg"));
             }
             _batEngaged = false;
         }
@@ -168,6 +172,9 @@ namespace LCDonald.Core.Games
             // Spawn ball at rougepos
             if (_ballPosition == -1)
             {
+                _rougePosition = _nextBallSpawn;
+                _nextBallSpawn = _rougePosition == 1 ? 2 : 1;
+                
                 _ballPosition = _rougePosition + 10;
                 _ballDirection = false;
 
@@ -185,7 +192,6 @@ namespace LCDonald.Core.Games
             else
             {
                 // Move ball depending on direction
-                // TODO deviation
                 if (_ballDirection)
                 {
                     _ballPosition -= 10;
@@ -194,6 +200,23 @@ namespace LCDonald.Core.Games
                 {
                     _ballPosition += 10;
                 }
+
+                // Randomly shift ball left or right
+                if (_ballPosition > 20 && _ballPosition < 40) {
+                    var shift = _rng.Next(-1, 2);
+                    _ballPosition += shift;
+
+                    // Adjust out of bounds
+                    if (_ballPosition % 10 == 0)
+                        _ballPosition++;
+
+                    if (_ballPosition % 10 == 4)
+                        _ballPosition--;
+                }
+
+                // impossible
+                if (_ballPosition == 13)
+                    _ballPosition = 12;
             }
 
             if (_ballPosition > 50)
@@ -201,15 +224,17 @@ namespace LCDonald.Core.Games
                 _currentScore--;
                 _ballPosition = -1;
                 BlinkElement(MISS, 1);
-                QueueSound(new LCDGameSound("../common/miss.ogg"));
+                QueueSound(new LCDGameSound("miss.ogg"));
             }
 
-            if (_ballPosition < 20 && _ballPosition != -1 && _aiResistance > 0)
+            if (_ballPosition < 20 && _ballPosition != -1 && _aiResistance > 0 && _ballDirection)
             {
-                
                 _aiResistance--;
-                // TODO move rouge in front of ball + sound
+                QueueSound(new LCDGameSound("hit.ogg"));
                 _ballDirection = false;
+
+                // move rouge in front of ball 
+                _rougePosition = _ballPosition % 10;
             }
 
             if (_ballPosition < 10 && _ballPosition != -1 && _aiResistance == 0)
@@ -221,14 +246,10 @@ namespace LCDonald.Core.Games
 
             if (_currentScore == 4)
             {
-                QueueSound(new LCDGameSound("../common/level_up.ogg"));
-                _currentScore = 0;
-                
-                //TODO animation
-                _level++;
+                LevelUpAnimation();
 
                 // Speed up
-                _customUpdateSpeed -= 75;
+                _customUpdateSpeed -= 65;
             }
 
             if (_level == 5)
@@ -237,11 +258,27 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            if (_currentScore == -3)
+            if (_currentScore == -4)
             {
                 GameOver();
                 return;
             }
+        }
+
+        private void LevelUpAnimation()
+        {
+            _isInputBlocked = true;
+            _currentScore = 0;
+
+            var levelUpFrame0 = new List<string>(GetVisibleGameElements()) { SCORE_CENTER };
+            var levelUpFrame1 = new List<string>(GetVisibleGameElements()) { SCORE_A1 };
+            var levelUpFrame2 = new List<string>(GetVisibleGameElements()) { SCORE_A2 };
+            var levelUpFrame3 = new List<string>(GetVisibleGameElements()) { SCORE_A3 };
+            
+            var levelUpAnimation = new List<List<string>> { levelUpFrame0, levelUpFrame1,  levelUpFrame2, levelUpFrame3, };
+            QueueSound(new LCDGameSound("../common/level_up.ogg"));
+            PlayAnimation(levelUpAnimation);
+            _level++;
         }
 
         private void GameOver()
@@ -252,9 +289,26 @@ namespace LCDonald.Core.Games
             _ballPosition = -1;
             _currentScore = 0;
 
-            // hit blink + advantage bar animation
+            QueueSound(new LCDGameSound("../common/game_over.ogg"));
 
-            //GenericGameOverAnimation(new List<string> { SONIC_1, HIT_1, BALL_12 });
+            // hit blink + advantage bar animation
+            var victoryFrame1 = new List<string> { SCORE_CENTER };
+            var victoryFrame2 = new List<string> { SCORE_R1 };
+            var victoryFrame3 = new List<string> { SCORE_R2 };
+            var victoryFrame4 = new List<string> { SCORE_R3 };
+            var victoryFrame1s = new List<string> { SCORE_CENTER, MISS };
+            var victoryFrame2s = new List<string> { SCORE_R1, MISS };
+            var victoryFrame3s = new List<string> { SCORE_R2, MISS };
+            var victoryFrame4s = new List<string> { SCORE_R3, MISS };
+
+
+            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,};
+            PlayAnimation(victoryAnimation);
             Stop();
         }
 
@@ -266,9 +320,32 @@ namespace LCDonald.Core.Games
             _ballPosition = -1;
             _currentScore = 0;
 
-            // amy blink + advantage bar animation
+            QueueSound(new LCDGameSound("../common/game_win_short.ogg"));
 
-            //GenericVictoryAnimation(new List<string> { LEVEL_1, LEVEL_2, LEVEL_3 });
+            // amy blink + advantage bar animation
+            var victoryFrame1 = new List<string> { SCORE_CENTER };
+            var victoryFrame2 = new List<string> { SCORE_A1 };
+            var victoryFrame3 = new List<string> { SCORE_A2 };
+            var victoryFrame4 = new List<string> { SCORE_A3 };
+            var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_2, TENNIS_2 };
+            var victoryFrame2s = new List<string> { SCORE_A1, AMY_2, TENNIS_2 };
+            var victoryFrame3s = new List<string> { SCORE_A2, AMY_2, TENNIS_2 };
+            var victoryFrame4s = new List<string> { SCORE_A3, AMY_2, TENNIS_2 };
+
+
+            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
+                                                            victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,};
+            PlayAnimation(victoryAnimation);
             Stop();
         }
     }
