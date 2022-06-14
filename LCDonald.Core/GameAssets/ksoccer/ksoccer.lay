@@ -36,7 +36,7 @@
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="4" y="-31" width="870" height="1078" />
+			<bounds x="4" y="15" width="870" height="1078" />
 		</screen>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="874" height="1124" />
