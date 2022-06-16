@@ -104,7 +104,7 @@ namespace LCDonald.Core.Controller
         {
             foreach (var sound in gameSounds)
             {
-                if (sound == null) continue;
+                if (sound == null || _gameAudio == null) continue;
                 
                 // TODO preload files into memory
                 var soundFile = File.OpenRead(Path.Combine(_gameAssetFolder, sound.AudioFileName));
@@ -120,7 +120,7 @@ namespace LCDonald.Core.Controller
         {
             _gameTimer?.Stop();
             _gameTimer?.Dispose();
-            _gameAudio.Dispose();
+            _gameAudio?.Dispose();
             
             _currentGame.Started -= StartGame;
             _currentGame.Stopped -= StopGame;

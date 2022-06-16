@@ -162,10 +162,10 @@ namespace LCDonald.Controls
 
             // Load SVG 
             // TODO: Hide all screen elements after 3 seconds to simulate LCD game init?
-            _svgDocument = SvgExtensions.Open($"{_gameAssetFolder}\\{gameID}.svg");
+            _svgDocument = SvgExtensions.Open(Path.Combine(_gameAssetFolder, $"{gameID}.svg"));
 
             // Load layout
-            _gameLayout = new MAMELayoutParser().Parse($"{_gameAssetFolder}\\{gameID}.lay");
+            _gameLayout = new MAMELayoutParser().Parse(Path.Combine(_gameAssetFolder, $"{gameID}.lay"));
             _gameElements = _currentGame.GetAllGameElements();
 
             // Create logic processor
