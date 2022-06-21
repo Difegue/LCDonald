@@ -1,9 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentAvalonia.UI.Controls;
 using LCDonald.Core.Controller;
 using LCDonald.Core.Games;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
+using LCDonald.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,7 @@ namespace LCDonald.ViewModels
                 new SonicExtremeBoarding(),
                 new SonicSkateboard(),
                 new AmyRougeTennis(),
-                new TailsSkyAdventure() 
+                new TailsSkyAdventure()
             };
 
             // Pick a random game
@@ -38,7 +40,7 @@ namespace LCDonald.ViewModels
         private List<MAMEView> _availableViews;
 
         [ObservableProperty]
-        private ILCDGame _game;     
+        private ILCDGame _game;
 
         partial void OnGameChanging(ILCDGame game)
         {
@@ -74,7 +76,7 @@ namespace LCDonald.ViewModels
 
         [ObservableProperty]
         private MAMEView _selectedView;
-        
+
         [ICommand]
         private void StartGame()
         {
@@ -88,7 +90,7 @@ namespace LCDonald.ViewModels
 
         [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
         private void PauseGame()
-        {  
+        {
             Game.Pause();
         }
 

@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
+			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
+			 xmlns:controls="using:LCDonald.Controls"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             x:Class="LCDonald.Views.SettingsPopup">
+
+	<StackPanel Spacing="8" >
+
+		<controls:OptionsDisplayItem Header="Darken game backgrounds"
+								  Description="This doesn't apply to Closeup views."
+								  Icon="DarkTheme" >
+			<controls:OptionsDisplayItem.ActionButton>
+				<ToggleSwitch Margin="0,0,-80,0"/>
+			</controls:OptionsDisplayItem.ActionButton>
+		</controls:OptionsDisplayItem>
+
+		<controls:OptionsDisplayItem Header="Show shadows behind LCD elements"
+                                          Description="(I'm the coolest)"
+                                          Icon="Restore" >
+			<controls:OptionsDisplayItem.ActionButton>
+			<ToggleSwitch Margin="0,0,-80,0"/>
+			</controls:OptionsDisplayItem.ActionButton>
+		</controls:OptionsDisplayItem>
+		
+		<Separator/>
+		
+		<TextBlock Text="About" FontSize="18" FontWeight="SemiBold"></TextBlock>
+
+		<Grid>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="400"/>
+				<ColumnDefinition Width="200"/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0">
+				<TextBlock >
+A monument to the everlasting symbiotic relationship between
+Sonic the Hedgehog and ultracapitalist fast food joints. 🏛️
+
+Powered by Avalonia and the LCDonald engine.
+Feel free to contribute to the project on GitHub!
+				</TextBlock>
+
+				<ui:HyperlinkButton Margin="0,8,0,0" Content="View Source Code on GitHub" NavigateUri="http://github.com/Difegue/LCDonald"  />
+				<ui:HyperlinkButton Content="Part of SAGE 2022 🌴" NavigateUri="https://sonicfangameshq.com/forums/showcase/"  />
+				<ui:HyperlinkButton Content="Special Thanks to Sonic Retro" NavigateUri="https://info.sonicretro.org/McDonald%27s_Sonic_LCD_games"  />
+			</StackPanel>
+
+			<Svg Grid.Column="1" Path="avares://LCDonald/Assets/SAGE22LOGOSVG.svg"/>
+			
+		</Grid>
+
+		
+	</StackPanel>
+
+</UserControl>

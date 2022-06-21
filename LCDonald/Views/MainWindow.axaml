@@ -14,7 +14,9 @@
         Icon="/Assets/avalonia-logo.ico"
 		Width="1588"
 		Height="1080"
-        Title="McD's Sonic Simulator 0.1 Alpha">
+		MinWidth="640"
+		MinHeight="600"
+        Title="Sonic McDorigins">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -106,7 +108,7 @@
 
 	<ui:NavigationView PaneDisplayMode="LeftCompact" 
 					   IsSettingsVisible="False" 
-					   PaneTitle="McD's Sonic Simulator"
+					   PaneTitle="Sonic McDorigins"
 					   MenuItems="{Binding AvailableGames}"
 					   SelectedItem="{Binding Game}">
 		<ui:NavigationView.MenuItemTemplate>
@@ -187,7 +189,7 @@
 
 		<ui:NavigationView.PaneFooter>
 			<StackPanel Name="FooterStackPanel" Orientation="Vertical" IsVisible="True">
-				<ui:NavigationViewItem Icon="More" Content="About..." PointerPressed="Open_About"/>
+				<ui:NavigationViewItem Icon="Settings" Content="Settings" PointerPressed="Open_Settings"/>
 			</StackPanel>
 		</ui:NavigationView.PaneFooter>
 

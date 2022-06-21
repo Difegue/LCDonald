@@ -7,7 +7,14 @@
         
     </Application.DataTemplates>
 
+	<Application.Resources>
+		<ResourceDictionary>
+			<x:Double x:Key="ContentDialogMaxWidth">848</x:Double>
+		</ResourceDictionary>
+	</Application.Resources>
+	
     <Application.Styles>
 		<sty:FluentAvaloniaTheme />
+		<StyleInclude Source="/Controls/OptionsDisplayItemStyles.axaml" />
     </Application.Styles>
 </Application>

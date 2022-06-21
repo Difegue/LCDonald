@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using FluentAvalonia.Styling;
 using LCDonald.ViewModels;
 using LCDonald.Views;
 
@@ -21,6 +22,9 @@ namespace LCDonald
                 {
                     DataContext = new MainWindowViewModel(),
                 };
+
+                var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
+                thm?.ForceWin32WindowToTheme(desktop.MainWindow); // Window is the Window object you want to force
             }
 
             base.OnFrameworkInitializationCompleted();
