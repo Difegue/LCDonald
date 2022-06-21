@@ -1,0 +1,65 @@
+<!-- abanana.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="../common/manual_placeholder.jpg" />
+	</element>
+	<element name="front">
+		<image file="abanana_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="abanana_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="abanana_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="abanana_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1747" y="888" width="614" height="714" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1752" y="858" width="600" height="761" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="20" y="57" width="850" height="991" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="878" height="1114" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="773" height="773" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Sonic Skateboard
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+

@@ -20,10 +20,11 @@ namespace LCDonald.ViewModels
                 new TailsSkyPatrol(),
                 new KnucklesSoccer(),
                 new SonicSpeedway(),
+                new AiAiBananaCatch(),
                 new SonicExtremeBoarding(),
                 new SonicSkateboard(),
                 new AmyRougeTennis(),
-                new TailsSkyAdventure()
+                new TailsSkyAdventure() 
             };
 
             // Pick a random game
