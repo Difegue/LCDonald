@@ -1,0 +1,64 @@
+<!-- sgrinder.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="sgrinder_manual.jpg" />
+	</element>
+	<element name="front">
+		<image file="sgrinder_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="sgrinder_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="sgrinder_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="sgrinder_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="737" y="662" width="719" height="558" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="761" y="678" width="693" height="527" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="3" y="-1" width="1126" height="872" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="1129" height="884" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="2343" height="2343" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Shadow Grinder
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+-->
+
