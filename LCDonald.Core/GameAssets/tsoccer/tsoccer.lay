@@ -1,0 +1,66 @@
+<!-- tsoccer.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="tsoccer_manual.jpg" />
+	</element>
+	<element name="front">
+		<image file="tsoccer_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="tsoccer_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="tsoccer_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="tsoccer_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1772" y="579" width="579" height="703" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3970" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1769" y="574" width="585" height="711" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="16" y="28" width="856" height="1040" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="889" height="1122" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3970" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="432" height="422" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Tails Soccer
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+- Manual taken from Sonic Retro.
+
+-->
+
