@@ -1,0 +1,83 @@
+<!-- cflower.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="../common/manual_placeholder.jpg" />
+	</element>
+	<element name="front_open">
+		<image file="cflower_front_open.jpg" />
+	</element>
+	<element name="front_closed">
+		<image file="cflower_front_closed.jpg" />
+	</element>
+	<element name="back_open">
+		<image file="cflower_back_open.jpg" />
+	</element>
+	<element name="back_closed">
+		<image file="cflower_back_closed.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="cflower_bg_crop.png" />
+	</element>
+	<element name="game_bg">
+		<image file="cflower_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front Open">
+		<screen index="0">
+			<bounds x="1759" y="1463" width="327" height="426" />
+		</screen>
+		<element ref="front_open">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1759" y="1463" width="327" height="426" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="31" y="30" width="806" height="1016" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="872" height="1119" />
+		</element>
+	</view>
+
+	<view name="Front Closed">
+		<element ref="front_closed">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back Open">
+		<element ref="back_open">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back Closed">
+		<element ref="back_closed">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="773" height="773" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Cream Flower Catch (v1)
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+
