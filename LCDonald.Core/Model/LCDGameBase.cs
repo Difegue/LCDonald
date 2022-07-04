@@ -241,6 +241,8 @@ namespace LCDonald.Core.Model
             // Add elements that are blinking, remove the ones that aren't
             foreach (var element in _blinkingElements.Keys)
             {
+                if (!_blinkingElements.ContainsKey(element)) continue;
+
                 var isVisible = _blinkingElements[element] % 1 != 0.5;
 
                 if (isVisible)

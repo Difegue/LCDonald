@@ -26,6 +26,7 @@ namespace LCDonald.ViewModels
                 new AiAiBananaCatch(),
                 new SonicExtremeBoarding(),
                 new TailsSoccer(),
+                new CreamFlowerCatch(),
                 new SonicSkateboard(),
                 new AmyRougeTennis(),
                 new TailsSkyAdventure()

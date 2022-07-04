@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
+		<image file="cflower_manual.jpg" />
 	</element>
 	<element name="front_open">
 		<image file="cflower_front_open.jpg" />
@@ -30,7 +30,7 @@
 	
 	<view name="Front Open">
 		<screen index="0">
-			<bounds x="1759" y="1463" width="327" height="426" />
+			<bounds x="1762" y="1460" width="324" height="430" />
 		</screen>
 		<element ref="front_open">
 			<bounds x="0" y="0" width="3900" height="2600" />
@@ -42,7 +42,7 @@
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="31" y="30" width="806" height="1016" />
+			<bounds x="50" y="12" width="810" height="1079" />
 		</screen>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="872" height="1119" />
@@ -69,7 +69,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="773" height="773" />
+			<bounds x="0" y="0" width="381" height="381" />
 		</element>
 	</view>
 </mamelayout>
@@ -78,6 +78,6 @@
 Cream Flower Catch (v1)
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-
+- Manual photo provided by Sonic Retro/sixthseal.com.
 -->
 
