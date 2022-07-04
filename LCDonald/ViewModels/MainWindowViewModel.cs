@@ -28,8 +28,9 @@ namespace LCDonald.ViewModels
                 new TailsSoccer(),
                 new CreamFlowerCatch(),
                 new SonicSkateboard(),
+                new TailsSkyAdventure(),
                 new AmyRougeTennis(),
-                new TailsSkyAdventure()
+                new CreamFlowerCatch2005()
             };
 
             // Pick a random game
