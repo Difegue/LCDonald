@@ -1,0 +1,65 @@
+<!-- kbaseball.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="kbaseball_manual.jpg" />
+	</element>
+	<element name="front">
+		<image file="kbaseball_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="kbaseball_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="kbaseball_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="kbaseball_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1558" y="919" width="849" height="640" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1567" y="869" width="849" height="642" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="100" y="102" width="999" height="753" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="1160" height="910" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="307" height="307" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Knuckles Baseball
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+- Manual scan from Sonic Retro.
+-->
+
