@@ -53,6 +53,7 @@
                                        VerticalAlignment="Bottom"
                                        HorizontalAlignment="Left"
                                        TextTrimming="CharacterEllipsis"
+                                       FontFamily="{StaticResource ContentControlThemeFontFamily}"
                                        Grid.Column="1"/>
 
                             <TextBlock Text="{TemplateBinding Description}"
@@ -60,6 +61,7 @@
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        VerticalAlignment="Top"
                                        TextWrapping="Wrap"
+                                       FontFamily="{StaticResource ContentControlThemeFontFamily}"
                                        Grid.Column="1"
                                        Grid.Row="1" />
 

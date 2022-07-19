@@ -12,15 +12,17 @@
 
 		<controls:OptionsDisplayItem Header="Darken game backgrounds"
 								  Description="This doesn't apply to Closeup views."
-								  Icon="DarkTheme" >
+								  Icon="DarkTheme"
+							      CornerRadius="{StaticResource ControlCornerRadius}">
 			<controls:OptionsDisplayItem.ActionButton>
 				<ToggleSwitch Margin="0,0,-80,0"/>
 			</controls:OptionsDisplayItem.ActionButton>
 		</controls:OptionsDisplayItem>
 
 		<controls:OptionsDisplayItem Header="Show shadows behind LCD elements"
-                                          Description="(I'm the coolest)"
-                                          Icon="Restore" >
+                                  Description="(I'm the coolest)"
+                                  Icon="Restore"
+								  CornerRadius="{StaticResource ControlCornerRadius}">
 			<controls:OptionsDisplayItem.ActionButton>
 			<ToggleSwitch Margin="0,0,-80,0"/>
 			</controls:OptionsDisplayItem.ActionButton>

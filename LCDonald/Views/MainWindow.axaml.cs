@@ -12,6 +12,9 @@ namespace LCDonald.Views
         public MainWindow()
         {
             InitializeComponent();
+            ExtendClientAreaChromeHints =
+               Avalonia.Platform.ExtendClientAreaChromeHints.PreferSystemChrome |
+               Avalonia.Platform.ExtendClientAreaChromeHints.OSXThickTitleBar;
         }
 
         private void InitializeComponent()
@@ -31,10 +34,40 @@ namespace LCDonald.Views
                 Title = "Settings",
                 Content = new SettingsPopup(),
                 DataContext = new ViewModels.SettingsViewModel(),
-                PrimaryButtonText = "Close"
+                PrimaryButtonText = "Close",
+                TitleTemplate = (Avalonia.Controls.Templates.IDataTemplate)Resources["DialogTitleTemplate"],
             };
 
             await dialog.ShowAsync();            
+        }
+
+        private bool isPointerPressed = false;
+        private PixelPoint startPosition = new PixelPoint(0, 0);
+        private Point mouseOffsetToOrigin = new Point(0, 0);
+
+        private void HandlePotentialDrop(object sender, PointerReleasedEventArgs e)
+        {
+            var pos = e.GetPosition(this);
+            startPosition = new PixelPoint((int)(startPosition.X + pos.X - mouseOffsetToOrigin.X), (int)(startPosition.Y + pos.Y - mouseOffsetToOrigin.Y));
+            Position = startPosition;
+            isPointerPressed = false;
+        }
+
+        private void HandlePotentialDrag(object sender, PointerEventArgs e)
+        {
+            if (isPointerPressed)
+            {
+                var pos = e.GetPosition(this);
+                startPosition = new PixelPoint((int)(startPosition.X + pos.X - mouseOffsetToOrigin.X), (int)(startPosition.Y + pos.Y - mouseOffsetToOrigin.Y));
+                Position = startPosition;
+            }
+        }
+
+        private void BeginListenForDrag(object sender, PointerPressedEventArgs e)
+        {
+            startPosition = Position;
+            mouseOffsetToOrigin = e.GetPosition(this);
+            isPointerPressed = true;
         }
     }
 }

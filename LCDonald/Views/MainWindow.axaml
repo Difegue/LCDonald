@@ -16,6 +16,9 @@
 		Height="1080"
 		MinWidth="640"
 		MinHeight="600"
+		ExtendClientAreaToDecorationsHint="True"
+		ExtendClientAreaTitleBarHeightHint="32"
+		TransparencyLevelHint="AcrylicBlur"
         Title="Sonic McDorigins">
 
     <Design.DataContext>
@@ -26,11 +29,32 @@
 		<converters:GameIconConverter x:Key="GameIconConverter"/>
 		<converters:ViewIconConverter x:Key="ViewIconConverter"/>
 		<converters:ObjectEqualsConverter x:Key="ObjectEqualityConverter"/>
+		<DataTemplate x:Key="DialogTitleTemplate">
+            <TextBlock Text="{Binding }"
+					   FontFamily="{StaticResource ContentControlThemeFontFamily}"
+                       FontSize="22" FontWeight="SemiBold"/>
+        </DataTemplate>
+		<DataTemplate x:Key="GameTitleTemplate">
+            <TextBlock Text="{Binding }"
+					   TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
+					   HorizontalAlignment="Stretch" VerticalAlignment="Center"
+					   FontFamily="{StaticResource ContentControlThemeFontFamily}"
+                       FontSize="18" FontWeight="SemiBold"/>
+        </DataTemplate>
 	</Window.Resources>
 
 	<Window.Styles>
 		<Style Selector="ui|NavigationView">
 			<Setter Property="CompactPaneLength" Value="72" />
+			<!-- Setter Property="IsPaneToggleButtonVisible" Value="False" /-->
+		</Style>
+		<Style Selector="ui|CommandBarToggleButton /template/ TextBlock#TextLabel">
+			<!--Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" /-->
+			<Setter Property="FontSize" Value="10" />
+		</Style>
+		<Style Selector="ui|CommandBarButton /template/ TextBlock#TextLabel">
+			<!--Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" /-->
+			<Setter Property="FontSize" Value="10" />
 		</Style>
 		<Style Selector="uip|NavigationViewItemPresenter">
 			<Setter Property="MinHeight" Value="56" />
@@ -106,7 +130,7 @@
 		</Style>
 	</Window.Styles>
 
-	<ui:NavigationView PaneDisplayMode="LeftCompact" 
+	<ui:NavigationView PaneDisplayMode="Left" 
 					   IsSettingsVisible="False" 
 					   PaneTitle="Sonic McDorigins"
 					   MenuItems="{Binding AvailableGames}"
@@ -137,9 +161,10 @@
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Text="{Binding Game.Name}" Grid.Row="0" Grid.Column="0" Margin="8,0,0,0"
-					   FontWeight="SemiBold" FontSize="18" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
-					   HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+				<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0"
+					   Margin="8,0,0,0"
+					   PointerPressed="BeginListenForDrag" PointerMoved="HandlePotentialDrag" PointerReleased="HandlePotentialDrop"
+					   ContentTemplate="{StaticResource GameTitleTemplate}" />
 
 				<ScrollViewer Grid.Row="0" Grid.Column="1" >
 					<ItemsRepeater Items="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
@@ -150,7 +175,8 @@
 							<DataTemplate>
 								<!-- I can't believe this works -->
 								<ui:CommandBarToggleButton Label="{Binding}" Icon="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}" 
-														   Command="{Binding #Root.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}">
+														   Command="{Binding #Root.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
+														   ToolTip.Tip="{Binding}">
 									<ui:CommandBarToggleButton.IsChecked>
 										<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
 										<MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
@@ -167,11 +193,11 @@
 				<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
 				
 				<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
-						<ui:CommandBarButton Icon="Play" Label="Play" Command="{Binding StartGameCommand}"/>
-						<ui:CommandBarButton Icon="Pause" Label="Pause" Command="{Binding PauseGameCommand}"/>
-						<ui:CommandBarButton Icon="Stop" Label="Stop" Command="{Binding StopGameCommand}"/>
+						<ui:CommandBarButton Icon="Play" Label="Play" ToolTip.Tip="Play" Command="{Binding StartGameCommand}"/>
+						<ui:CommandBarButton Icon="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"/>
+						<ui:CommandBarButton Icon="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"/>
 						<ui:CommandBarSeparator />
-						<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" />
+						<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" ToolTip.Tip="Keybinds"/>
 				</StackPanel>
 				
 				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
