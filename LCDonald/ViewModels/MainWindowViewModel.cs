@@ -48,6 +48,8 @@ namespace LCDonald.ViewModels
         [ObservableProperty]
         private ILCDGame _game;
 
+        public bool ShowPaneToggle => OperatingSystem.IsWindows();
+
         partial void OnGameChanging(ILCDGame game)
         {
             if (Game != null)

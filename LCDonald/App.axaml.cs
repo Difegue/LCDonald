@@ -36,7 +36,7 @@ namespace LCDonald
                     Resources.Add("NavigationViewContentGridCornerRadius", new CornerRadius(0));
                     Resources.Add("NavigationViewExpandedPaneBackground", Colors.Transparent);
                     Resources.Add("NavigationViewDefaultPaneBackground", Colors.Transparent);
-                };
+                }
             }
 
             base.OnFrameworkInitializationCompleted();

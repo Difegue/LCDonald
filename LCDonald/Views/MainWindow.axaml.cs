@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace LCDonald.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : CoreWindow
     {        
         public MainWindow()
         {
@@ -20,9 +20,10 @@ namespace LCDonald.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            
 
-#if DEBUG 
-        this.AttachDevTools();
+#if DEBUG
+            this.AttachDevTools();
 #endif
         }
 

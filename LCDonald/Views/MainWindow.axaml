@@ -12,12 +12,12 @@
         x:Class="LCDonald.Views.MainWindow"
 		x:Name="Root"
         Icon="/Assets/avalonia-logo.ico"
-		Width="1588"
+		Width="1200"
 		Height="1080"
 		MinWidth="640"
 		MinHeight="600"
 		ExtendClientAreaToDecorationsHint="True"
-		ExtendClientAreaTitleBarHeightHint="32"
+		ExtendClientAreaTitleBarHeightHint="-1"
 		TransparencyLevelHint="AcrylicBlur"
         Title="Sonic McDorigins">
 
@@ -43,11 +43,7 @@
         </DataTemplate>
 	</Window.Resources>
 
-	<Window.Styles>
-		<Style Selector="ui|NavigationView">
-			<Setter Property="CompactPaneLength" Value="72" />
-			<!-- Setter Property="IsPaneToggleButtonVisible" Value="False" /-->
-		</Style>
+	<Window.Styles>		
 		<Style Selector="ui|CommandBarToggleButton /template/ TextBlock#TextLabel">
 			<!--Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" /-->
 			<Setter Property="FontSize" Value="10" />
@@ -130,11 +126,13 @@
 		</Style>
 	</Window.Styles>
 
-	<ui:NavigationView PaneDisplayMode="Left" 
+	<ui:NavigationView IsPaneToggleButtonVisible="{Binding ShowPaneToggle}"
+					   CompactPaneLength="72"
+					   OpenPaneLength="296"
 					   IsSettingsVisible="False" 
-					   PaneTitle="Sonic McDorigins"
 					   MenuItems="{Binding AvailableGames}"
-					   SelectedItem="{Binding Game}">
+					   SelectedItem="{Binding Game}" 
+					   >
 		<ui:NavigationView.MenuItemTemplate>
 			<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
 				<ui:NavigationViewItem Content="{Binding Name}">
@@ -215,10 +213,18 @@
 
 		<ui:NavigationView.PaneFooter>
 			<StackPanel Name="FooterStackPanel" Orientation="Vertical" IsVisible="True">
-				<ui:NavigationViewItem Icon="Settings" Content="Settings" PointerPressed="Open_Settings"/>
+				<ui:NavigationViewItem Content="Settings" PointerPressed="Open_Settings">
+					<ui:NavigationViewItem.Icon>
+						<!-- Cheap hack to make the settings icon avoid the oversizing of the other NavViewItems-->
+						<ui:SymbolIcon Symbol="Settings">
+							<ui:SymbolIcon.RenderTransform>
+								<ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
+							</ui:SymbolIcon.RenderTransform>
+						</ui:SymbolIcon>
+					</ui:NavigationViewItem.Icon>
+				</ui:NavigationViewItem>
 			</StackPanel>
 		</ui:NavigationView.PaneFooter>
 
 	</ui:NavigationView>
-
 </Window>
