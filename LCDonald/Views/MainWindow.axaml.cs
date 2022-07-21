@@ -4,6 +4,10 @@ using Avalonia;
 using Avalonia.Input;
 using FluentAvalonia.UI.Controls;
 using System.Diagnostics;
+using FluentAvalonia.Styling;
+using Avalonia.Metadata;
+using Avalonia.Controls.Templates;
+using System;
 
 namespace LCDonald.Views
 {
@@ -15,16 +19,19 @@ namespace LCDonald.Views
             ExtendClientAreaChromeHints =
                Avalonia.Platform.ExtendClientAreaChromeHints.PreferSystemChrome |
                Avalonia.Platform.ExtendClientAreaChromeHints.OSXThickTitleBar;
-        }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            
+            if (OperatingSystem.IsMacOS())
+            {
+                // More Macification
+                NavView.PaneDisplayMode = NavigationViewPaneDisplayMode.Left;
+                NavView.OpenPaneLength = 248;
+                NavView.IsPaneToggleButtonVisible = false;
+                PaneBottomPadding.Height = 32;
 
-#if DEBUG
-            this.AttachDevTools();
-#endif
+                var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
+                if (thm?.RequestedTheme == "Dark")
+                    MacWindowBorder.IsVisible = true;
+            }
         }
 
         private async void Open_Settings(object sender, PointerPressedEventArgs e)
@@ -35,13 +42,15 @@ namespace LCDonald.Views
                 Title = "Settings",
                 Content = new SettingsPopup(),
                 DataContext = new ViewModels.SettingsViewModel(),
+                DefaultButton = ContentDialogButton.Primary,
                 PrimaryButtonText = "Close",
-                TitleTemplate = (Avalonia.Controls.Templates.IDataTemplate)Resources["DialogTitleTemplate"],
+                TitleTemplate = (Avalonia.Controls.Templates.IDataTemplate)Resources["DialogTitleTemplate"]
             };
 
             await dialog.ShowAsync();            
         }
 
+        #region Custom Drag area implementation
         private bool isPointerPressed = false;
         private PixelPoint startPosition = new PixelPoint(0, 0);
         private Point mouseOffsetToOrigin = new Point(0, 0);
@@ -70,5 +79,6 @@ namespace LCDonald.Views
             mouseOffsetToOrigin = e.GetPosition(this);
             isPointerPressed = true;
         }
+        #endregion
     }
 }

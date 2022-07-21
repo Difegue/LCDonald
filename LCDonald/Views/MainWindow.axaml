@@ -18,7 +18,6 @@
 		MinHeight="600"
 		ExtendClientAreaToDecorationsHint="True"
 		ExtendClientAreaTitleBarHeightHint="-1"
-		TransparencyLevelHint="AcrylicBlur"
         Title="Sonic McDorigins">
 
     <Design.DataContext>
@@ -45,186 +44,194 @@
 
 	<Window.Styles>		
 		<Style Selector="ui|CommandBarToggleButton /template/ TextBlock#TextLabel">
-			<!--Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" /-->
+			<Setter Property="FontWeight" Value="Medium"/>
 			<Setter Property="FontSize" Value="10" />
 		</Style>
 		<Style Selector="ui|CommandBarButton /template/ TextBlock#TextLabel">
-			<!--Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" /-->
+			<Setter Property="FontWeight" Value="Medium"/>
 			<Setter Property="FontSize" Value="10" />
 		</Style>
-		<Style Selector="uip|NavigationViewItemPresenter">
-			<Setter Property="MinHeight" Value="56" />
+		<Style Selector="ui|NavigationViewItem.GameMac uip|NavigationViewItemPresenter">
+			<Setter Property="Margin" Value="8,0"/>
 			<Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
 			<Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+		</Style>
+		<Style Selector="ui|NavigationViewItem.Game uip|NavigationViewItemPresenter">
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Border Name="LayoutRoot"
                         MinHeight="{DynamicResource NavigationViewItemOnLeftMinHeight}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="{DynamicResource OverlayCornerRadius}"
-                        Margin="4,2,4,2"
+                        Margin="4,2"
                         TemplatedControl.IsTemplateFocusTarget="True">
 
-                    <Panel Name="PresenterContentRootGrid">
+						<Panel Name="PresenterContentRootGrid">
 
-                        <Panel HorizontalAlignment="Left"
-                               VerticalAlignment="Center">
+							<Panel HorizontalAlignment="Left"
+								   VerticalAlignment="Center">
                             
-                            <Border Name="SelectionIndicator"
-									Background="{DynamicResource NavigationViewSelectionIndicatorForeground}"
-									Opacity="0" />                            
-                        </Panel>
+								<Border Name="SelectionIndicator"
+										Background="{DynamicResource NavigationViewSelectionIndicatorForeground}"
+										Opacity="0" />                            
+							</Panel>
 
-                        <Grid Name="ContentGrid"
-                              MinHeight="{DynamicResource NavigationViewItemOnLeftMinHeight}"
-                              HorizontalAlignment="Stretch"
-                              ColumnDefinitions="Auto,*,Auto,Auto">
+							<Grid Name="ContentGrid"
+								  MinHeight="{DynamicResource NavigationViewItemOnLeftMinHeight}"
+								  HorizontalAlignment="Stretch"
+								  ColumnDefinitions="Auto,*,Auto,Auto">
 
-                            <Border Name="IconColumn" Margin="0,0,8,0">
-                                <Viewbox Name="IconBox"
-										 Width="112"
-                                         Height="36"
-										 HorizontalAlignment="Center"
-                                         >
-                                    <ContentPresenter Name="Icon"
-                                                      Content="{TemplateBinding Icon}" />
-                                </Viewbox>
-                            </Border>
+								<Border Name="IconColumn" Margin="0,0,8,0">
+									<Viewbox Name="IconBox"
+											 Width="112"
+											 Height="36"
+											 HorizontalAlignment="Center"
+											 >
+										<ContentPresenter Name="Icon"
+														  Content="{TemplateBinding Icon}" />
+									</Viewbox>
+								</Border>
                             
-                            <ContentPresenter Name="ContentPresenter"
-                                              Grid.Column="1"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Padding="{TemplateBinding Padding}" />
-
-                            <Panel Name="ExpandCollapseChevron"
-                                   Grid.Column="3"
-                                   HorizontalAlignment="Right"
-                                   Width="40"
-                                   Margin="{DynamicResource NavigationViewItemExpandedChevronMargin}"
-                                   Background="Transparent">
-                                <TextBlock Foreground="{DynamicResource NavigationViewItemForeground}"
-                                           FontSize="{DynamicResource NavigationViewItemExpandedGlyphFontSize}"
-                                           Text="{StaticResource NavigationViewItemExpandedGlyph}"
-                                           FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center" />
-                            </Panel>
-							
-							<ContentPresenter Name="InfoBadgePresenter"
-											  Content="{TemplateBinding InfoBadge}" />
+								<ContentPresenter Name="ContentPresenter"
+												  Grid.Column="1"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  Content="{TemplateBinding Content}"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+												  Padding="{TemplateBinding Padding}" />
                             
-                        </Grid>
-                        
-                        
-                    </Panel>
-                    
-                </Border></ControlTemplate>
+							</Grid>
+						</Panel>
+					</Border>
+				</ControlTemplate>
 			</Setter>
 		</Style>
 	</Window.Styles>
 
-	<ui:NavigationView IsPaneToggleButtonVisible="{Binding ShowPaneToggle}"
-					   CompactPaneLength="72"
-					   OpenPaneLength="296"
-					   IsSettingsVisible="False" 
-					   MenuItems="{Binding AvailableGames}"
-					   SelectedItem="{Binding Game}" 
-					   >
-		<ui:NavigationView.MenuItemTemplate>
-			<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
-				<ui:NavigationViewItem Content="{Binding Name}">
-					<ui:NavigationViewItem.Icon>
-						<ui:BitmapIcon UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}" 
-									   Width="112" Height="96" />
-					</ui:NavigationViewItem.Icon>
-				</ui:NavigationViewItem>
-			</DataTemplate>
-		</ui:NavigationView.MenuItemTemplate>
+	<Grid>
+		<Border Name="MacWindowBorder" IsVisible="False"
+			BorderBrush="{DynamicResource ControlStrongStrokeColorDisabledBrush}"
+			BorderThickness="1" CornerRadius="9"/>
+		
+		<ui:NavigationView Name="NavView"
+						   CompactPaneLength="72"
+						   OpenPaneLength="296"
+						   IsSettingsVisible="False" 
+						   MenuItems="{Binding AvailableGames}"
+						   SelectedItem="{Binding Game}">
 
-		<ui:NavigationView.PaneCustomContent>
-			<Border Height="18"/>
-		</ui:NavigationView.PaneCustomContent>
+			<ui:NavigationView.MenuItemTemplateSelector>
+				<vm:MenuItemTemplateSelector>
+					<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
+						<ui:NavigationViewItem Content="{Binding Name}" Height="56" Classes="Game">
+							<ui:NavigationViewItem.Icon>
+								<ui:BitmapIcon UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}"
+											   Width="112" Height="96" />
+							</ui:NavigationViewItem.Icon>
+						</ui:NavigationViewItem>
+					</DataTemplate>
 
-		<ui:NavigationView.Content>
-			<Grid Margin="8,4,8,8">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="64" />
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition MinWidth="96" MaxWidth="256"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="268"/>
-				</Grid.ColumnDefinitions>
-				<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0"
-					   Margin="8,0,0,0"
-					   PointerPressed="BeginListenForDrag" PointerMoved="HandlePotentialDrag" PointerReleased="HandlePotentialDrop"
-					   ContentTemplate="{StaticResource GameTitleTemplate}" />
+					<vm:MenuItemTemplateSelector.MacTemplate>
+						<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
+							<ui:NavigationViewItem Content="{Binding Name}" Classes="MacGame">
+								<ui:NavigationViewItem.Icon>
+									<ui:BitmapIcon UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}"
+												   Width="38" Height="32" />
+								</ui:NavigationViewItem.Icon>
+							</ui:NavigationViewItem>
+						</DataTemplate>
+					</vm:MenuItemTemplateSelector.MacTemplate>
 
-				<ScrollViewer Grid.Row="0" Grid.Column="1" >
-					<ItemsRepeater Items="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
-						<ItemsRepeater.Layout>
-							<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
-						</ItemsRepeater.Layout>
-						<ItemsRepeater.ItemTemplate>
-							<DataTemplate>
-								<!-- I can't believe this works -->
-								<ui:CommandBarToggleButton Label="{Binding}" Icon="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}" 
-														   Command="{Binding #Root.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
-														   ToolTip.Tip="{Binding}">
-									<ui:CommandBarToggleButton.IsChecked>
-										<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
-										<MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
-											<Binding />
-											<Binding Path="#LCDView.CurrentView" />
-										</MultiBinding>
-									</ui:CommandBarToggleButton.IsChecked>
-								</ui:CommandBarToggleButton> 
-							</DataTemplate>
-						</ItemsRepeater.ItemTemplate>
-					</ItemsRepeater>
-				</ScrollViewer>
+					<vm:MenuItemTemplateSelector.SettingsTemplate>
+						<DataTemplate>
+							<ui:NavigationViewItem SelectsOnInvoked="False" Icon="Settings"
+								Content="Settings" PointerPressed="Open_Settings"/>
+						</DataTemplate>
+					</vm:MenuItemTemplateSelector.SettingsTemplate>
+				</vm:MenuItemTemplateSelector>
+			</ui:NavigationView.MenuItemTemplateSelector>
 
-				<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
+			<ui:NavigationView.PaneCustomContent>
+				<Border Name="PaneBottomPadding" Height="18"/>
+			</ui:NavigationView.PaneCustomContent>
+									  
+			<ui:NavigationView.Content>
+				<Grid Margin="8,4,8,8">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="64" />
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition MinWidth="96" MaxWidth="256"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="268"/>
+					</Grid.ColumnDefinitions>
+					<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0"
+						   Margin="8,0,0,0" PointerPressed="BeginListenForDrag" PointerMoved="HandlePotentialDrag" PointerReleased="HandlePotentialDrop"
+						   ContentTemplate="{StaticResource GameTitleTemplate}" />
+
+					<ScrollViewer Grid.Row="0" Grid.Column="1" >
+						<ItemsRepeater Items="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
+							<ItemsRepeater.Layout>
+								<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
+							</ItemsRepeater.Layout>
+							<ItemsRepeater.ItemTemplate>
+								<DataTemplate>
+									<!-- I can't believe this works -->
+									<ui:CommandBarToggleButton Label="{Binding}" Icon="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}" 
+															   Command="{Binding #Root.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
+															   ToolTip.Tip="{Binding}">
+										<ui:CommandBarToggleButton.IsChecked>
+											<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
+											<MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+												<Binding />
+												<Binding Path="#LCDView.CurrentView" />
+											</MultiBinding>
+										</ui:CommandBarToggleButton.IsChecked>
+									</ui:CommandBarToggleButton> 
+								</DataTemplate>
+							</ItemsRepeater.ItemTemplate>
+						</ItemsRepeater>
+					</ScrollViewer>
+
+					<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
 				
-				<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
-						<ui:CommandBarButton Icon="Play" Label="Play" ToolTip.Tip="Play" Command="{Binding StartGameCommand}"/>
-						<ui:CommandBarButton Icon="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"/>
-						<ui:CommandBarButton Icon="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"/>
-						<ui:CommandBarSeparator />
-						<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" ToolTip.Tip="Keybinds"/>
-				</StackPanel>
+					<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
+							<ui:CommandBarButton Icon="Play" Label="Play" ToolTip.Tip="Play" Command="{Binding StartGameCommand}"/>
+							<ui:CommandBarButton Icon="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"/>
+							<ui:CommandBarButton Icon="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"/>
+							<ui:CommandBarSeparator />
+							<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" ToolTip.Tip="Keybinds"/>
+					</StackPanel>
 				
-				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
-										  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-										  AvailableViews="{Binding AvailableViews, Mode=OneWayToSource}"
-										  CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView, Mode=OneWay}"/>
+					<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+											  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+											  AvailableViews="{Binding AvailableViews, Mode=OneWayToSource}"
+											  CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView, Mode=OneWay}"/>
 
-				<Button Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
-						IsVisible="{Binding IsPaused, Mode=OneWay}" Command="{Binding StartGameCommand}" Background="#c5ffffff" >
-					<ui:SymbolIcon Symbol="PlayFilled" FontSize="96" Margin="-8,0,0,0" Foreground="#292929"/>
-				</Button>
+					<Button Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" 
+							IsVisible="{Binding IsPaused, Mode=OneWay}" Command="{Binding StartGameCommand}" Background="#c5ffffff" >
+						<ui:SymbolIcon Symbol="PlayFilled" FontSize="96" Margin="-8,0,0,0" Foreground="#292929"/>
+					</Button>
 				
-			</Grid>
-		</ui:NavigationView.Content>
+				</Grid>
+			</ui:NavigationView.Content>
 
-		<ui:NavigationView.PaneFooter>
-			<StackPanel Name="FooterStackPanel" Orientation="Vertical" IsVisible="True">
-				<ui:NavigationViewItem Content="Settings" PointerPressed="Open_Settings">
-					<ui:NavigationViewItem.Icon>
-						<!-- Cheap hack to make the settings icon avoid the oversizing of the other NavViewItems-->
-						<ui:SymbolIcon Symbol="Settings">
-							<ui:SymbolIcon.RenderTransform>
-								<ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
-							</ui:SymbolIcon.RenderTransform>
-						</ui:SymbolIcon>
-					</ui:NavigationViewItem.Icon>
-				</ui:NavigationViewItem>
-			</StackPanel>
-		</ui:NavigationView.PaneFooter>
-
-	</ui:NavigationView>
+			<ui:NavigationView.FooterMenuItems>
+				<!-- Converted into settings through templateselector -->
+					<ui:NavigationViewItem/>
+			</ui:NavigationView.FooterMenuItems>
+		</ui:NavigationView>
+		
+		<!-- Custom drag area -->
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="64"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Border Height="64" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,0,800,0" MinWidth="200"
+			  PointerPressed="BeginListenForDrag" PointerMoved="HandlePotentialDrag" PointerReleased="HandlePotentialDrop" Background="Green"/>
+		</Grid>
+		
+	</Grid>
 </Window>

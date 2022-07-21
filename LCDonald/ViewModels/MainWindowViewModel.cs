@@ -1,3 +1,5 @@
+using Avalonia.Controls.Templates;
+using Avalonia.Metadata;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentAvalonia.UI.Controls;
@@ -47,8 +49,6 @@ namespace LCDonald.ViewModels
 
         [ObservableProperty]
         private ILCDGame _game;
-
-        public bool ShowPaneToggle => OperatingSystem.IsWindows();
 
         partial void OnGameChanging(ILCDGame game)
         {
@@ -130,6 +130,20 @@ namespace LCDonald.ViewModels
         {
             IsGameRunning = false;
             IsPaused = false;
+        }
+    }
+
+    public class MenuItemTemplateSelector : DataTemplateSelector
+    {
+        [Content]
+        public IDataTemplate GameTemplate { get; set; }
+
+        public IDataTemplate MacTemplate { get; set; }
+        public IDataTemplate SettingsTemplate { get; set; }
+
+        protected override IDataTemplate SelectTemplateCore(object item)
+        {
+            return item is LCDGameBase ? OperatingSystem.IsMacOS() ? MacTemplate : GameTemplate : SettingsTemplate;
         }
     }
 }
