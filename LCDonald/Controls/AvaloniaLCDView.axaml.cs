@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.PanAndZoom;
 using Avalonia.Controls.Skia;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -15,6 +16,7 @@ using Svg;
 using Svg.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +27,8 @@ namespace LCDonald.Controls
     {
         // View stuff
         private Canvas? _lcdCanvas;
+        private Slider? _scaleSlider;
+        private ZoomBorder? _zoomBorder;
         private SKPictureControl _svgElement;
         private SvgDocument? _svgDocument;
 
@@ -95,9 +99,38 @@ namespace LCDonald.Controls
             
             _lcdCanvas = this.FindControl<Canvas>("LCDCanvas");
             _lcdCanvas.EffectiveViewportChanged += ComputeScale;
+            
+            _scaleSlider = this.FindControl<Slider>("ScaleSlider");
+            _scaleSlider.PropertyChanged += ForceScale;
+
+            _zoomBorder = this.FindControl<ZoomBorder>("ZoomBorder");
+            _zoomBorder.ZoomChanged += HandleZoom;
+
             KeyDown += HandleInput;
             PointerPressed += (s, e) => Focus();
             LostFocus += (s, e) => CurrentGame?.Pause();         
+        }
+
+        private void HandleScroll(object? sender, PointerWheelEventArgs e)
+        {
+            if (e.Delta.Y > 0)
+                _zoomBorder.ZoomIn();
+            else
+                _zoomBorder.ZoomOut();
+        }
+
+        private void HandleZoom(object sender, ZoomChangedEventArgs e)
+        {
+            if (_zoomBorder.ZoomX != _scaleSlider.Value)
+                _scaleSlider.Value = _zoomBorder.ZoomX;
+        }
+
+        private void ForceScale(object? sender, AvaloniaPropertyChangedEventArgs e)
+        {
+            if (e.Property.Name == "Value")
+            {
+                _zoomBorder.Zoom(_scaleSlider.Value, 0,0);
+            }
         }
 
         private void ComputeScale(object? sender, Avalonia.Layout.EffectiveViewportChangedEventArgs e)
@@ -108,8 +141,48 @@ namespace LCDonald.Controls
             // Scale the canvas so that it fits in the current window size
             var scale = Math.Min(Bounds.Width / largestChild.Width, Bounds.Height / largestChild.Height);
             if (scale > 0)
-                _lcdCanvas.RenderTransform = new ScaleTransform(scale, scale);
+            {
+                _scaleSlider.Value = scale;
+            }
         }
+
+        private bool isPointerPressed = false;
+        private Point startPosition = new Point();
+        private Point mouseOffsetToOrigin = new Point(0, 0);
+
+        private void HandlePotentialDrop(object sender, PointerReleasedEventArgs e)
+        {
+            var pos = e.GetPosition(this);
+            
+            var newX = (int)(startPosition.X + ((pos.X - mouseOffsetToOrigin.X) * 10 * _scaleSlider.Value));
+            var newY = (int)(startPosition.Y + ((pos.Y - mouseOffsetToOrigin.Y) * 10 * _scaleSlider.Value));
+            _lcdCanvas.RenderTransformOrigin = new RelativePoint(new Point(newX, newY), RelativeUnit.Absolute);
+            _lcdCanvas.RenderTransform = new ScaleTransform(_scaleSlider.Value, _scaleSlider.Value);
+            isPointerPressed = false;
+            Debug.WriteLine($"{newX} - {newY}");
+        }
+
+        private void HandlePotentialDrag(object sender, PointerEventArgs e)
+        {
+            if (isPointerPressed)
+            {
+                var pos = e.GetPosition(this);
+                var newX = (int)(startPosition.X + ((pos.X - mouseOffsetToOrigin.X) * 10 * _scaleSlider.Value));
+                var newY = (int)(startPosition.Y + ((pos.Y - mouseOffsetToOrigin.Y) * 10 * _scaleSlider.Value));
+                _lcdCanvas.RenderTransformOrigin = new RelativePoint(new Point(newX,newY), RelativeUnit.Absolute);
+                _lcdCanvas.RenderTransform = new ScaleTransform(_scaleSlider.Value, _scaleSlider.Value);
+                Debug.WriteLine($"{newX} - {newY}");
+            }
+        }
+
+        private void BeginListenForDrag(object sender, PointerPressedEventArgs e)
+        {
+            startPosition = _lcdCanvas.RenderTransformOrigin.Point;
+            mouseOffsetToOrigin = e.GetPosition(this);
+            isPointerPressed = true;
+            Debug.WriteLine($"{startPosition.X} - {startPosition.Y}");
+        }
+
 
         private void HandleInput(object? sender, KeyEventArgs e)
         {

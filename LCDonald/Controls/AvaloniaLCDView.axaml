@@ -2,7 +2,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:paz="using:Avalonia.Controls.PanAndZoom"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LCDonald.Controls.AvaloniaLCDView">
-	<Canvas x:Name="LCDCanvas" RenderTransformOrigin="0,0" />
+	<Grid>
+
+		<paz:ZoomBorder Name="ZoomBorder" ZoomSpeed="1.2" PanButton="Left" MaxZoomX="1" MaxZoomY="1" MinZoomX="0.1" MinZoomY="0.1"
+						ClipToBounds="True" Focusable="False" EnableGestureZoom="True" EnableGestureTranslation="True">
+			<Canvas x:Name="LCDCanvas" />
+		</paz:ZoomBorder>
+
+		<Border HorizontalAlignment="Right" VerticalAlignment="Bottom"
+				Background="{DynamicResource ControlFillColorDefaultBrush}"
+				BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+				BorderThickness="1" Margin="0,0,0,0"
+				CornerRadius="{StaticResource ControlCornerRadius}">
+			
+			<StackPanel Orientation="Vertical" Spacing="4">
+				<Label Content="➕" HorizontalAlignment="Center"/>
+				<Slider Orientation="Vertical" Margin="0,0,0,-4"
+						x:Name="ScaleSlider" PointerWheelChanged="HandleScroll"
+						Minimum="0.1" Maximum="0.99" Height="125"/>
+				<Label Content="➖" HorizontalAlignment="Center"/>
+			</StackPanel>
+		</Border>
+	</Grid>
+
 </UserControl>
