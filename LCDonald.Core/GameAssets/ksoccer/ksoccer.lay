@@ -10,8 +10,14 @@
 	<element name="front">
 		<image file="ksoccer_front.jpg" />
 	</element>
+	<element name="front_us">
+		<image file="ksoccer_front_us.jpg" />
+	</element>
 	<element name="back">
 		<image file="ksoccer_back.jpg" />
+	</element>
+	<element name="back_us">
+		<image file="ksoccer_back_us.jpg" />
 	</element>
 	<element name="game_bg_crop">
 		<image file="ksoccer_bg_crop.png" />
@@ -34,6 +40,18 @@
 		</element>
 	</view>
 
+	<view name="Front (US)">
+		<screen index="0">
+			<bounds x="888" y="472" width="498" height="632" />
+		</screen>
+		<element ref="front_us">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="889" y="476" width="498" height="635" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="4" y="15" width="870" height="1078" />
@@ -45,6 +63,12 @@
 
 	<view name="Back">
 		<element ref="back">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (US)">
+		<element ref="back_us">
 			<bounds x="0" y="0" width="2237" height="2600" />
 		</element>
 	</view>

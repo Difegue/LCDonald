@@ -13,6 +13,12 @@
 	<element name="back">
 		<image file="sspeedway_back.jpg" />
 	</element>
+	<element name="front_us">
+		<image file="sspeedway_front_us.jpg" />
+	</element>
+	<element name="back_us">
+		<image file="sspeedway_back_us.jpg" />
+	</element>
 	<element name="game_bg_crop">
 		<image file="sspeedway_bg_crop.png" />
 	</element>
@@ -34,6 +40,18 @@
 		</element>
 	</view>
 
+	<view name="Front (US)">
+		<screen index="0">
+			<bounds x="1576" y="1088" width="690" height="535" />
+		</screen>
+		<element ref="front_us">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1579" y="1087" width="690" height="531" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="2" y="2" width="690" height="535" />
@@ -45,6 +63,12 @@
 
 	<view name="Back">
 		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (US)">
+		<element ref="back_us">
 			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
