@@ -12,6 +12,7 @@ using Avalonia.Threading;
 using LCDonald.Core.Controller;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
+using LCDonald.ViewModels;
 using Svg;
 using Svg.Model;
 using System;
@@ -132,7 +133,6 @@ namespace LCDonald.Controls
                 _zoomBorder.Zoom(_scaleSlider.Value, 0,0);
             }
         }
-
         private void ComputeScale(object? sender, Avalonia.Layout.EffectiveViewportChangedEventArgs e)
         {
             // Get the largest child of the canvas
@@ -145,44 +145,6 @@ namespace LCDonald.Controls
                 _scaleSlider.Value = scale;
             }
         }
-
-        private bool isPointerPressed = false;
-        private Point startPosition = new Point();
-        private Point mouseOffsetToOrigin = new Point(0, 0);
-
-        private void HandlePotentialDrop(object sender, PointerReleasedEventArgs e)
-        {
-            var pos = e.GetPosition(this);
-            
-            var newX = (int)(startPosition.X + ((pos.X - mouseOffsetToOrigin.X) * 10 * _scaleSlider.Value));
-            var newY = (int)(startPosition.Y + ((pos.Y - mouseOffsetToOrigin.Y) * 10 * _scaleSlider.Value));
-            _lcdCanvas.RenderTransformOrigin = new RelativePoint(new Point(newX, newY), RelativeUnit.Absolute);
-            _lcdCanvas.RenderTransform = new ScaleTransform(_scaleSlider.Value, _scaleSlider.Value);
-            isPointerPressed = false;
-            Debug.WriteLine($"{newX} - {newY}");
-        }
-
-        private void HandlePotentialDrag(object sender, PointerEventArgs e)
-        {
-            if (isPointerPressed)
-            {
-                var pos = e.GetPosition(this);
-                var newX = (int)(startPosition.X + ((pos.X - mouseOffsetToOrigin.X) * 10 * _scaleSlider.Value));
-                var newY = (int)(startPosition.Y + ((pos.Y - mouseOffsetToOrigin.Y) * 10 * _scaleSlider.Value));
-                _lcdCanvas.RenderTransformOrigin = new RelativePoint(new Point(newX,newY), RelativeUnit.Absolute);
-                _lcdCanvas.RenderTransform = new ScaleTransform(_scaleSlider.Value, _scaleSlider.Value);
-                Debug.WriteLine($"{newX} - {newY}");
-            }
-        }
-
-        private void BeginListenForDrag(object sender, PointerPressedEventArgs e)
-        {
-            startPosition = _lcdCanvas.RenderTransformOrigin.Point;
-            mouseOffsetToOrigin = e.GetPosition(this);
-            isPointerPressed = true;
-            Debug.WriteLine($"{startPosition.X} - {startPosition.Y}");
-        }
-
 
         private void HandleInput(object? sender, KeyEventArgs e)
         {
@@ -251,17 +213,20 @@ namespace LCDonald.Controls
         private void DrawLayoutView(MAMEView view)
         {
             _lcdCanvas?.Children.Clear();
-
+            
             foreach (var element in view.Elements)
             {
                 var elementPicture = _gameLayout?.Elements[element.Ref].Image.File;
                 if (elementPicture == null) continue;
-                
+
+                var darkenBackground = view.Name.ToLower().Contains("front") && element.Ref.ToLower().Contains("bg") && SettingsViewModel.CurrentSettings.DarkenGameBackgrounds;
+
                 // Define child Canvas element
                 var imageControl = new Image
                 {
                     Width = element.Width,
                     Height = element.Height,
+                    Opacity = darkenBackground ? 0.6 : 1,
                     Source = new Bitmap(Path.Combine(_gameAssetFolder,elementPicture))
                 };
                 Canvas.SetTop(imageControl, element.Y);
@@ -274,6 +239,12 @@ namespace LCDonald.Controls
             // Draw screen
             if (view.ScreenHeight > -1)
             {
+                // Draw a second SVG layer for the shadow if enabled
+                if (SettingsViewModel.CurrentSettings.DrawLCDShadows)
+                {
+                    // TODO: This is surprisingly difficult to make unless https://github.com/wieslawsoltes/Svg.Skia/discussions/82 happens
+                }
+
                 _svgElement = new SKPictureControl
                 {
                     Width = view.ScreenWidth,
@@ -285,6 +256,7 @@ namespace LCDonald.Controls
                 Canvas.SetLeft(_svgElement, view.ScreenX);
 
                 _lcdCanvas?.Children.Add(_svgElement);
+                
             }
 
             ComputeScale(this, new Avalonia.Layout.EffectiveViewportChangedEventArgs(new Rect()));

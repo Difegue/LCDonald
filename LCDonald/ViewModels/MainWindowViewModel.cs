@@ -80,12 +80,14 @@ namespace LCDonald.ViewModels
         private bool _isPaused;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(PauseGameCommand))]
+        [NotifyCanExecuteChangedFor(nameof(StopGameCommand))]
         private bool _isGameRunning;
 
         [ObservableProperty]
         private MAMEView _selectedView;
 
-        [ICommand]
+        [RelayCommand]
         private void StartGame()
         {
             if (_isPaused)
@@ -96,19 +98,19 @@ namespace LCDonald.ViewModels
                 Game.Start();
         }
 
-        [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
+        [RelayCommand(CanExecute = "IsGameRunning")] 
         private void PauseGame()
         {
             Game.Pause();
         }
 
-        [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
+        [RelayCommand(CanExecute = "IsGameRunning")]
         private void StopGame()
         {
             Game.Stop();
         }
 
-        [ICommand] // TODO (CanExecute = "IsGameRunning") doesn't work
+        [RelayCommand]
         private void SetCurrentView(MAMEView v)
         {
             SelectedView = v;

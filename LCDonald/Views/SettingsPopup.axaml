@@ -1,4 +1,5 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:vm="using:LCDonald.ViewModels"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,6 +9,10 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="LCDonald.Views.SettingsPopup">
 
+	<Design.DataContext>
+		<vm:SettingsViewModel/>
+	</Design.DataContext>
+
 	<StackPanel Spacing="8" >
 
 		<controls:OptionsDisplayItem Header="Darken game backgrounds"
@@ -15,16 +20,16 @@
 								  Icon="DarkTheme"
 							      CornerRadius="{StaticResource ControlCornerRadius}">
 			<controls:OptionsDisplayItem.ActionButton>
-				<ToggleSwitch Margin="0,0,-80,0"/>
+				<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding DarkenGameBackgrounds}"/>
 			</controls:OptionsDisplayItem.ActionButton>
 		</controls:OptionsDisplayItem>
 
 		<controls:OptionsDisplayItem Header="Show shadows behind LCD elements"
                                   Description="(I'm the coolest)"
-                                  Icon="Restore"
+                                  Icon="Restore" IsVisible="False"
 								  CornerRadius="{StaticResource ControlCornerRadius}">
 			<controls:OptionsDisplayItem.ActionButton>
-			<ToggleSwitch Margin="0,0,-80,0"/>
+			<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding DrawLCDShadows}"/>
 			</controls:OptionsDisplayItem.ActionButton>
 		</controls:OptionsDisplayItem>
 		

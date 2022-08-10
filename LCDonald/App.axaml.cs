@@ -19,9 +19,12 @@ namespace LCDonald
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                var settings = new SettingsViewModel();
+
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainWindowViewModel(),
+                    Settings = settings
                 };
 
                 var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();

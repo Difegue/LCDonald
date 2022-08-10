@@ -8,11 +8,14 @@ using FluentAvalonia.Styling;
 using Avalonia.Metadata;
 using Avalonia.Controls.Templates;
 using System;
+using LCDonald.ViewModels;
 
 namespace LCDonald.Views
 {
     public partial class MainWindow : CoreWindow
-    {        
+    {
+        public SettingsViewModel Settings { get; set; }
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -41,13 +44,17 @@ namespace LCDonald.Views
             {
                 Title = "Settings",
                 Content = new SettingsPopup(),
-                DataContext = new ViewModels.SettingsViewModel(),
+                DataContext = Settings,
                 DefaultButton = ContentDialogButton.Primary,
                 PrimaryButtonText = "Close",
-                TitleTemplate = (Avalonia.Controls.Templates.IDataTemplate)Resources["DialogTitleTemplate"]
+                TitleTemplate = (IDataTemplate)Resources["DialogTitleTemplate"]
             };
 
-            await dialog.ShowAsync();            
+            await dialog.ShowAsync();
+
+            // Refresh Game View
+            var lcdView = this.FindControl<Controls.AvaloniaLCDView>("LCDView");
+            lcdView.CurrentView = lcdView.CurrentView; // heh
         }
 
         #region Custom Drag area implementation
