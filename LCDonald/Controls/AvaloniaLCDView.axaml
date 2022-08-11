@@ -18,7 +18,7 @@
 				BorderThickness="1" Margin="0,0,0,0"
 				CornerRadius="{StaticResource ControlCornerRadius}">
 			
-			<StackPanel Orientation="Vertical" Spacing="4">
+			<StackPanel Orientation="Vertical" Spacing="4" ToolTip.Tip="Zoom on Game">
 				<Label Content="➕" HorizontalAlignment="Center"/>
 				<Slider Orientation="Vertical" Margin="0,0,0,-4"
 						x:Name="ScaleSlider" PointerWheelChanged="HandleScroll"

@@ -219,6 +219,7 @@ namespace LCDonald.Controls
                 var elementPicture = _gameLayout?.Elements[element.Ref].Image.File;
                 if (elementPicture == null) continue;
 
+                // This is jank af
                 var darkenBackground = view.Name.ToLower().Contains("front") && element.Ref.ToLower().Contains("bg") && SettingsViewModel.CurrentSettings.DarkenGameBackgrounds;
 
                 // Define child Canvas element
