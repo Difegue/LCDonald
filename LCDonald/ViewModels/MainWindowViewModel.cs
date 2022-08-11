@@ -45,6 +45,9 @@ namespace LCDonald.ViewModels
         private List<ILCDGame> _availableGames;
 
         [ObservableProperty]
+        private List<LCDGameInput> _currentInputs;
+
+        [ObservableProperty]
         private List<MAMEView> _availableViews;
 
         [ObservableProperty]
@@ -65,6 +68,8 @@ namespace LCDonald.ViewModels
             game.Paused += Game_Paused;
             game.Resumed += Game_Resumed;
             game.Stopped += Game_Stopped;
+
+            _currentInputs = game.GetAvailableInputs();
         }
 
         partial void OnAvailableViewsChanged(List<MAMEView> views)

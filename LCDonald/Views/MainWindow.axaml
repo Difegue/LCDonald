@@ -25,6 +25,7 @@
     </Design.DataContext>
 
 	<Window.Resources>
+		<converters:KeyCodeConverter x:Key="KeyCodeConverter"/>
 		<converters:GameIconConverter x:Key="GameIconConverter"/>
 		<converters:ViewIconConverter x:Key="ViewIconConverter"/>
 		<converters:ObjectEqualsConverter x:Key="ObjectEqualityConverter"/>
@@ -241,7 +242,36 @@
 							<ui:CommandBarButton Icon="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"/>
 							<ui:CommandBarButton Icon="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"/>
 							<ui:CommandBarSeparator />
-							<ui:CommandBarButton Icon="Keyboard" Label="Keybinds" ToolTip.Tip="Keybinds"/>
+						<ui:CommandBarButton Icon="Keyboard" Label="Controls" ToolTip.Tip="Controls">
+							<ui:CommandBarButton.Flyout>
+								<Flyout Placement="BottomEdgeAlignedLeft">
+
+									<StackPanel Orientation="Vertical" Spacing="8" Width="200" Margin="8,8,8,0">
+
+										<ItemsRepeater Items="{Binding CurrentInputs}">
+											<ItemsRepeater.Layout>
+												<UniformGridLayout Orientation="Vertical" MinRowSpacing="8" ItemsJustification="End" />
+											</ItemsRepeater.Layout>
+											<ItemsRepeater.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Orientation="Horizontal" Spacing="4">
+														<Border CornerRadius="4" BorderBrush="{StaticResource ComboBoxBorderThemeBrush}" BorderThickness="1"
+																Width="84">
+															<Label Content="{Binding KeyCode, Converter={StaticResource KeyCodeConverter}}" 
+																   HorizontalAlignment="Center"/>
+														</Border>
+														<Label Content="{Binding Description}"/>
+													</StackPanel>
+												</DataTemplate>
+											</ItemsRepeater.ItemTemplate>
+										</ItemsRepeater>
+
+										<ui:InfoBadge Classes="Attention Dot" Margin="-12,16,12,-16" HorizontalAlignment="Left"/>
+										<TextBlock TextWrapping="Wrap" FontSize="10" Text="You can use the mouse to pan and zoom over the games." />
+									</StackPanel>
+								</Flyout>
+							</ui:CommandBarButton.Flyout>
+						</ui:CommandBarButton>
 					</StackPanel>
 				
 					<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
