@@ -3,18 +3,21 @@
              xmlns:local="using:LCDonald"
 			 xmlns:sty="using:FluentAvalonia.Styling"
              x:Class="LCDonald.App">
-    <Application.DataTemplates>
-        
-    </Application.DataTemplates>
+
+	<NativeMenu.Menu>
+		<NativeMenu>
+			<NativeMenuItem Header="About Sonic McDorigins" Click="AboutMenuItem_OnClick" />
+		</NativeMenu>
+	</NativeMenu.Menu>
 
 	<Application.Resources>
 		<ResourceDictionary>
 			<x:Double x:Key="ContentDialogMaxWidth">848</x:Double>
 		</ResourceDictionary>
 	</Application.Resources>
-	
-    <Application.Styles>
+
+	<Application.Styles>
 		<sty:FluentAvaloniaTheme />
 		<StyleInclude Source="/Controls/OptionsDisplayItemStyles.axaml" />
-    </Application.Styles>
+	</Application.Styles>
 </Application>

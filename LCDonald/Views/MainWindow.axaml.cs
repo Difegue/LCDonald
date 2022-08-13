@@ -37,7 +37,7 @@ namespace LCDonald.Views
             }
         }
 
-        private async void Open_Settings(object sender, PointerPressedEventArgs e)
+        public async void Open_Settings(object sender, PointerPressedEventArgs e)
         {
             // Kinda unclean to do this in codebehind but this is a simple game, itll do
             var dialog = new ContentDialog()

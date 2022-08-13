@@ -5,6 +5,7 @@ using Avalonia.Media;
 using FluentAvalonia.Styling;
 using LCDonald.ViewModels;
 using LCDonald.Views;
+using System;
 
 namespace LCDonald
 {
@@ -43,6 +44,14 @@ namespace LCDonald
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        private void AboutMenuItem_OnClick(object sender, EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && desktop.MainWindow is MainWindow win)
+            {
+                win.Open_Settings(sender, null);
+            }
         }
     }
 }
