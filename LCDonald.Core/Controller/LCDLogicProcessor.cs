@@ -21,6 +21,8 @@ namespace LCDonald.Core.Controller
         private Timer? _gameTimer;
 
         private string _gameAssetFolder;
+
+        private List<SoundStream> _soundsPlaying;
         
         public LCDLogicProcessor(ILCDGame game, ILCDView view)
         {
@@ -28,6 +30,7 @@ namespace LCDonald.Core.Controller
             _currentView = view;
             
             _gameAudio = AudioEngine.CreateDefault();
+            _soundsPlaying = new List<SoundStream>();
 
             _currentGame.Started += StartGame;
             _currentGame.Stopped += StopGame;
@@ -71,6 +74,7 @@ namespace LCDonald.Core.Controller
         {
             _isPaused = true;
             _gameTimer?.Stop();
+            FlushSounds();
         }
 
         private void Resume()
@@ -95,9 +99,11 @@ namespace LCDonald.Core.Controller
 
                     // Sound
                     PlaySounds(_currentGame.GetSoundsToPlay());
+                    _soundsPlaying.RemoveAll(ss => !ss.IsPlaying);
                 }
                 System.Threading.Thread.Sleep(10);
             }
+            FlushSounds();
         }
 
         private void PlaySounds(List<LCDGameSound> gameSounds)
@@ -113,6 +119,16 @@ namespace LCDonald.Core.Controller
                     Volume = 0.5f
                 };
                 soundStream.Play();
+                _soundsPlaying.Add(soundStream);
+            }
+        }
+
+        private void FlushSounds()
+        {
+            foreach (var stream in _soundsPlaying)
+            {
+                stream.Stop();
+                stream.Dispose();
             }
         }
 
@@ -120,6 +136,8 @@ namespace LCDonald.Core.Controller
         {
             _gameTimer?.Stop();
             _gameTimer?.Dispose();
+
+            FlushSounds();
             _gameAudio?.Dispose();
             
             _currentGame.Started -= StartGame;
