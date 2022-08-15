@@ -62,6 +62,10 @@ namespace LCDonald.Core.Games
             };
         }
 
+        // Spawnlists gleaned by looking at the real game. Platforms spawn following this looping pattern.
+        public static List<bool> SPAWNMAP_LEFT = new List<bool> {true, false, true, false, true, false, true, true, false, true, false, true, false, false };
+        public static List<bool> SPAWNMAP_RIGHT = new List<bool> {true, false, false, false, true, false, true, false, true, false, false, true };
+
         public override List<LCDGameInput> GetAvailableInputs()
         {
             return new List<LCDGameInput>()
@@ -86,16 +90,15 @@ namespace LCDonald.Core.Games
             {
                 if (input == null) continue;
 
+                _hasKnucklesMoved = true;
                 if (input.Name == "Left" && _knucklesPosition % 10 > 1)
                 {
                     _knucklesPosition--;
-                    _hasKnucklesMoved = true;
                     QueueSound(new LCDGameSound("move.ogg"));
                 }
                 else if (input.Name == "Right" && _knucklesPosition % 10 < 4)
                 {
                     _knucklesPosition++;
-                    _hasKnucklesMoved = true;
                     QueueSound(new LCDGameSound("move.ogg"));
                 }
             }
@@ -109,10 +112,10 @@ namespace LCDonald.Core.Games
         private int _emeraldTimeLimit;
         private List<int> _platformPositions;
         private List<int> _emeraldPositions;
-
+        
         private int _platformsToMoveNextUpdate;
-        private bool _spawnLeftPlatformNextUpdate;
-        private bool _spawnRightPlatformNextUpdate;
+        private int _currentLeftSpawn;
+        private int _currentRightSpawn;
         private bool _isFalling;
         private bool _isFirstEmerald;
         private bool _hasKnucklesMoved;
@@ -155,10 +158,12 @@ namespace LCDonald.Core.Games
 
             _knucklesPosition = 31;
             _platformsToMoveNextUpdate = 2;
+            _currentLeftSpawn = 0;
+            _currentRightSpawn = 0;
             _platformPositions = new List<int>();
             _emeraldPositions = new List<int>();
 
-            _customUpdateSpeed = 900;
+            _customUpdateSpeed = 1000;
             StartupMusic("game_start.ogg", 2);
         }
 
@@ -193,14 +198,17 @@ namespace LCDonald.Core.Games
             QueueSound(new LCDGameSound("emerald_spawn.ogg"));
             PlayAnimation(spawnAnimation);
 
-            // 10 cycles before emeralds start blinking
-            _emeraldTimeLimit = 10;
+            // 10 + level cycles before emeralds start blinking
+            _emeraldTimeLimit = 10 + _level;
 
             _isInputBlocked = false;
         }
 
         private int GetRandomEmeraldPosition()
         {
+            if (ThreadSafeEmeraldList().Count == 5)
+                return -1;
+
             if (_isFirstEmerald)
             {
                 // First emerald is always at position 4
@@ -219,39 +227,46 @@ namespace LCDonald.Core.Games
 
         private void FallAnimation()
         {
-            // TODO Fallup
-
             if (_isFalling) return;
 
             _isFalling = true;
             _isInputBlocked = true;
             _emeraldPositions.Clear();
 
-            // Center knuckles in case he's in the border zones
-            if (_knucklesPosition % 10 == 1)
-                _knucklesPosition++;
-            if (_knucklesPosition % 10 == 4)
-                _knucklesPosition--;
-
-            // Dynamic amount of frames depending on the current player position
-            // Fall all the way to the bottom, then blink FALL_DOWN twice
-            while (_knucklesPosition <= 33)
+            
+            var fallFrame1 = new List<string>(GetPlatformElements()) { FALL_DOWN };
+            if (_knucklesPosition == 2)
             {
-                QueueSound(new LCDGameSound("fall.ogg"));
+                // Special fallup case, just blink FALL_UP twice
+                fallFrame1 = new List<string>(GetPlatformElements()) { FALL_UP };
+            }
+            else
+            {
+                // Center knuckles in case he's in the border zones
+                if (_knucklesPosition % 10 == 1)
+                    _knucklesPosition++;
+                if (_knucklesPosition % 10 == 4)
+                    _knucklesPosition--;
 
-                var fallFrame = GetKnucklesAndPlatformElements();
-                PlayAnimation(new List<List<string>> { fallFrame, fallFrame, fallFrame, fallFrame, fallFrame, fallFrame });
+                // Dynamic amount of frames depending on the current player position
+                // Fall all the way to the bottom, then blink FALL_DOWN twice
+                while (_knucklesPosition <= 33)
+                {
+                    QueueSound(new LCDGameSound("fall.ogg"));
 
-                _knucklesPosition += 10;
+                    var fallFrame = GetKnucklesAndPlatformElements();
+                    PlayAnimation(new List<List<string>> { fallFrame, fallFrame, fallFrame, fallFrame, fallFrame, fallFrame });
+
+                    _knucklesPosition += 10;
+                }
             }
 
-            var fallFrame1 = new List<string>(GetPlatformElements()) { FALL_DOWN };
             var fallFrame2 = new List<string>(GetPlatformElements());
 
-            var endAnimation = new List<List<string>> { fallFrame1, fallFrame1, fallFrame1, 
-                                                        fallFrame2, fallFrame2, fallFrame2,
-                                                        fallFrame1, fallFrame1, fallFrame1,
-                                                        fallFrame2, fallFrame2, fallFrame2};
+            var endAnimation = new List<List<string>> { fallFrame1, fallFrame1, fallFrame1, fallFrame1, 
+                                                        fallFrame2, fallFrame2, fallFrame2, fallFrame2, 
+                                                        fallFrame1, fallFrame1, fallFrame1, fallFrame1, 
+                                                        fallFrame2, fallFrame2, fallFrame2, fallFrame2};
             QueueSound(new LCDGameSound("fall_end.ogg"));
             PlayAnimation(endAnimation);
 
@@ -288,7 +303,10 @@ namespace LCDonald.Core.Games
                 }
 
                 if (ThreadSafeEmeraldList().Count == 0)
+                {
+                    _isInputBlocked = true;
                     _blockedCustomUpdates = 1; // Block one custom update so that emerald spawn doesn't happen instantly
+                }
             }
 
         }
@@ -323,7 +341,7 @@ namespace LCDonald.Core.Games
 
             // Check emerald time limit
             _emeraldTimeLimit--;
-            if (_emeraldTimeLimit < -5) // After 15 cycles, force a life loss
+            if (_emeraldTimeLimit < (-5 - _level)) // After 5 more cycles + level, force a life loss
             {
                 FallAnimation();
             }
@@ -335,14 +353,14 @@ namespace LCDonald.Core.Games
                     BlinkElement("emerald-" + emerald, 1);
                 }
             }
-
+            
             // Platform spawn and movement -- should be on a separate timer to be truly PCB-accurate
 
             // Remove platforms that scrolled past the end of the screen
             _platformPositions.Remove(2);
             _platformPositions.Remove(43);
 
-            // Move platforms
+            // Platforms move the left column first, then the right
             foreach (var platform in ThreadSafePlatformList().Where(p => p % 10 == _platformsToMoveNextUpdate))
             {
                 _platformPositions.Remove(platform);
@@ -360,31 +378,32 @@ namespace LCDonald.Core.Games
                 }
             }
 
-            // Platforms move the left column first, then the right
-            // If there's less than two platforms in a column, spawn a new one next cycle
+            // Spawn platforms, according to the spawnlists
             if (_platformsToMoveNextUpdate == 2)
             {
                 _platformsToMoveNextUpdate = 3;
 
-                if (_spawnLeftPlatformNextUpdate)
+                if (SPAWNMAP_LEFT[_currentLeftSpawn])
                 {
-                    _spawnLeftPlatformNextUpdate = false;
                     _platformPositions.Add(32);
                 }
-                else if (_platformPositions.Count(x => x % 10 == 2) <= 1)
-                    _spawnLeftPlatformNextUpdate = true;
+                _currentLeftSpawn++;
+
+                if (_currentLeftSpawn == SPAWNMAP_LEFT.Count())
+                    _currentLeftSpawn = 0;
             }
             else
             {
                 _platformsToMoveNextUpdate = 2;
 
-                if (_spawnRightPlatformNextUpdate)
+                if (SPAWNMAP_RIGHT[_currentRightSpawn])
                 {
-                    _spawnRightPlatformNextUpdate = false;
                     _platformPositions.Add(3);
                 }
-                else if (_platformPositions.Count(x => x % 10 == 3) <= 1)
-                    _spawnRightPlatformNextUpdate = true;
+                _currentRightSpawn++;
+
+                if (_currentRightSpawn == SPAWNMAP_RIGHT.Count())
+                    _currentRightSpawn = 0;
             }
         }
 
@@ -409,7 +428,7 @@ namespace LCDonald.Core.Games
             _lifeCount = 3;
 
             // Speed up
-            _customUpdateSpeed -= 175;
+            _customUpdateSpeed -= 75;
         }
 
         private void GameOver()
@@ -417,16 +436,18 @@ namespace LCDonald.Core.Games
             QueueSound(new LCDGameSound("game_over.ogg"));
 
             // fall up -> fall down slow blink
-            /*var gameOverFrame1 = new List<string> { TAILS_CENTER, PLATFORM_31, PLATFORM_32, PLATFORM_33 };
-            var gameOverFrame2 = new List<string> { TAILS_CENTER };
+            var gameOverFrame1 = new List<string> { FALL_UP };
+            var gameOverFrame2 = new List<string> { FALL_DOWN };
 
-            // slow 4x blink
-            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
-                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
-            PlayAnimation(gameOverAnimation);*/
+            var gameOverAnimation = new List<List<string>> { gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1,
+                                                             gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, 
+                                                             gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1,
+                                                             gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2,
+                                                             gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1, gameOverFrame1,
+                                                             gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2, gameOverFrame2};
+            PlayAnimation(gameOverAnimation);
             _knucklesPosition = -1;
             Stop();
         }
@@ -436,17 +457,20 @@ namespace LCDonald.Core.Games
             QueueSound(new LCDGameSound("game_win.ogg"));
 
             // knuckles21 solid + all emeralds blink
-            /*var victoryFrame1 = new List<string> { TAILS_CENTER, KNUCKLES_31, KNUCKLES_32, KNUCKLES_33 };
-            var victoryFrame2 = new List<string> { TAILS_CENTER, KNUCKLES_21, KNUCKLES_22, KNUCKLES_23 };
-            var victoryFrame3 = new List<string> { TAILS_CENTER, KNUCKLES_11, KNUCKLES_12, KNUCKLES_13 };
+            var victoryFrame1 = new List<string> { KNUCKLES_21 };
+            var victoryFrame2 = new List<string> { KNUCKLES_21, EMERALD_1, EMERALD_2, EMERALD_3, EMERALD_4, EMERALD_5 };
 
-            // slow 4x sequence
-            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
-                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3};
-            PlayAnimation(victoryAnimation);*/
+            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 
+                                                            victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 
+                                                            victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, 
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 
+                                                            victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, 
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 
+                                                            victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, 
+                                                            victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 
+                                                            victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, };
+            PlayAnimation(victoryAnimation);
             _knucklesPosition = -1;
             Stop();
         }
