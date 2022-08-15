@@ -13,7 +13,7 @@
 		<UseAppHost>true</UseAppHost>
 	</PropertyGroup>
 	<PropertyGroup>
-		<CFBundleName>LCDonald</CFBundleName>
+		<CFBundleName>Sonic McDorigins</CFBundleName>
 		<!-- Also defines .app file name -->
 		<CFBundleDisplayName>Sonic McDorigins</CFBundleDisplayName>
 		<CFBundleIdentifier>com.tvc16.lcdonald</CFBundleIdentifier>
@@ -21,7 +21,7 @@
 		<CFBundleShortVersionString>1.0.0</CFBundleShortVersionString>
 		<CFBundlePackageType>APPL</CFBundlePackageType>
 		<CFBundleSignature>????</CFBundleSignature>
-		<CFBundleExecutable>AppName</CFBundleExecutable>
+		<CFBundleExecutable>LCDonald</CFBundleExecutable>
 		<CFBundleIconFile>AppIcon.icns</CFBundleIconFile>
 		<!-- Will be copied from output directory -->
 		<NSPrincipalClass>NSApplication</NSPrincipalClass>
