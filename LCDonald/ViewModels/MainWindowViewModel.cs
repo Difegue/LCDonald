@@ -1,5 +1,6 @@
 using Avalonia.Controls.Templates;
 using Avalonia.Metadata;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentAvalonia.UI.Controls;
@@ -32,6 +33,7 @@ namespace LCDonald.ViewModels
                 new CreamFlowerCatch(),
                 new SonicSkateboard(),
                 new TailsSkyAdventure(),
+                new KnucklesTreasureHunt(),
                 new AmyRougeTennis(),
                 new CreamFlowerCatch2005(),
                 new BillyGiantEgg()
@@ -123,7 +125,7 @@ namespace LCDonald.ViewModels
 
         private void Game_Started(object? sender, System.EventArgs e)
         {
-            IsGameRunning = true;
+            Dispatcher.UIThread.Post(() => IsGameRunning = true);
         }
         private void Game_Paused(object? sender, EventArgs e)
         {
@@ -135,8 +137,12 @@ namespace LCDonald.ViewModels
         }
         private void Game_Stopped(object? sender, EventArgs e)
         {
-            IsGameRunning = false;
-            IsPaused = false;
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsGameRunning = false;
+                IsPaused = false;
+            });
+
         }
     }
 
