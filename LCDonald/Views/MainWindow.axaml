@@ -18,7 +18,7 @@
 		MinHeight="600"
 		ExtendClientAreaToDecorationsHint="True"
 		ExtendClientAreaTitleBarHeightHint="-1"
-        Title="Sonic McDorigins">
+        Title="Sonic McOrigins">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>

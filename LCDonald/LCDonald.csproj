@@ -15,7 +15,7 @@
 	<PropertyGroup>
 		<CFBundleName>Sonic McDorigins</CFBundleName>
 		<!-- Also defines .app file name -->
-		<CFBundleDisplayName>Sonic McDorigins</CFBundleDisplayName>
+		<CFBundleDisplayName>Sonic McOrigins</CFBundleDisplayName>
 		<CFBundleIdentifier>com.tvc16.lcdonald</CFBundleIdentifier>
 		<CFBundleVersion>1.0.0</CFBundleVersion>
 		<CFBundleShortVersionString>1.0.0</CFBundleShortVersionString>

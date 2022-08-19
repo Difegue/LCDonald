@@ -6,7 +6,7 @@
 
 	<NativeMenu.Menu>
 		<NativeMenu>
-			<NativeMenuItem Header="About Sonic McDorigins" Click="AboutMenuItem_OnClick" />
+			<NativeMenuItem Header="About Sonic McOrigins" Click="AboutMenuItem_OnClick" />
 		</NativeMenu>
 	</NativeMenu.Menu>
 
