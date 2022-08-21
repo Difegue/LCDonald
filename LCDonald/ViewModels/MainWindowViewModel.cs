@@ -31,6 +31,7 @@ namespace LCDonald.ViewModels
                 new TailsSoccer(),
                 new KnucklesBaseball(),
                 new CreamFlowerCatch(),
+                new BigFishing(),
                 new SonicSkateboard(),
                 new TailsSkyAdventure(),
                 new KnucklesTreasureHunt(),

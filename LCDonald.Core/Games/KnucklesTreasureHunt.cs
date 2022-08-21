@@ -412,7 +412,6 @@ namespace LCDonald.Core.Games
             // Blink all emeralds 2x, reset knux pos
             _isInputBlocked = true;
 
-            //3x coolring blink
             var levelUpFrame1 = new List<string>(GetKnucklesAndPlatformElements()) { EMERALD_1, EMERALD_2, EMERALD_3, EMERALD_4, EMERALD_5 };
             var levelUpFrame2 = new List<string>(GetKnucklesAndPlatformElements());
 

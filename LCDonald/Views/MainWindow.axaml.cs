@@ -32,7 +32,7 @@ namespace LCDonald.Views
                 PaneBottomPadding.Height = 32;
 
                 var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
-                if (thm?.RequestedTheme == "Dark")
+                if (thm?.RequestedTheme == "Dark") // Custom outer border to simulate macOS' dark theme window decoration
                     MacWindowBorder.IsVisible = true;
             }
         }

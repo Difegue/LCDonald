@@ -74,7 +74,7 @@ namespace LCDonald.Core.Model
         /// <summary>
         /// Sets a given sequence of visible elements to be played as an animation.
         /// Animations block input until they are finished.
-        /// This method blocks until the animation is complete, so you should probably only call this in CustomUpdate blocks.
+        /// This method blocks until the animation is complete, so you should probably only call this in CustomUpdate/UpdateCore blocks.
         /// </summary>
         /// <param name="animation">Sequence of visible elements to play.</param>
         protected void PlayAnimation(List<List<string>> animation)

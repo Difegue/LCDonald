@@ -6,7 +6,7 @@ LCDonald
 Simulator engine for reproducing LCD games made by McDonald's in the 2000's.  
 Mostly focused on simulating the [McDonald's Sonic LCD games](http://info.sonicretro.org/McDonald%27s_Sonic_LCD_games).  
 
-![](https://tvc-16.science/images/lcdonald/alpha1.jpg)
+![](screenshot.png)
 
 You can read more details about the technical stack [here](https://tvc-16.science/lcdonald.html).  
 
