@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
@@ -13,7 +13,7 @@
 		<UseAppHost>true</UseAppHost>
 	</PropertyGroup>
 	<PropertyGroup>
-		<CFBundleName>Sonic McDorigins</CFBundleName>
+		<CFBundleName>Sonic McOrigins</CFBundleName>
 		<!-- Also defines .app file name -->
 		<CFBundleDisplayName>Sonic McOrigins</CFBundleDisplayName>
 		<CFBundleIdentifier>com.tvc16.lcdonald</CFBundleIdentifier>
