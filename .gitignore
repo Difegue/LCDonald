@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+LCDonald/Assets/SF-Pro-Text-Regular.otf
+LCDonald/Assets/SF-Pro-Text-Semibold.otf
+.DS_Store
