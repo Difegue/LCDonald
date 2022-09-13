@@ -41,6 +41,8 @@ namespace LCDonald.Core.Controller
             _gameAssetFolder = Path.Combine(appFolder, "GameAssets", _currentGame.ShortName);
         }
 
+        public bool MuteSound { get; set; }
+
         private void StartGame(object sender, EventArgs e)
         {
             _gameTimer?.Stop();
@@ -98,7 +100,9 @@ namespace LCDonald.Core.Controller
                     _currentView.UpdateDisplay(_currentGame.GetVisibleGameElements());
 
                     // Sound
-                    PlaySounds(_currentGame.GetSoundsToPlay());
+                    var soundsToPlay = _currentGame.GetSoundsToPlay();
+                    if (!MuteSound)
+                        PlaySounds(soundsToPlay);
                     _soundsPlaying.RemoveAll(ss => !ss.IsPlaying);
                 }
                 System.Threading.Thread.Sleep(10);

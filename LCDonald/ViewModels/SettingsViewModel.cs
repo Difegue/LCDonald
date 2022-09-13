@@ -6,13 +6,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia;
+using FluentAvalonia.Styling;
 
 namespace LCDonald.ViewModels
 {
     public class Settings
     {
-        public bool DarkenGameBackgrounds { get; set; }
-        
+        public bool DarkenGameBackgrounds { get; set; } = true;
+        public bool MuteSound { get; set; }
+        public string ApplicationTheme { get; set; } = "System";
         public bool DrawLCDShadows { get; set; }
     }
 
@@ -28,10 +31,24 @@ namespace LCDonald.ViewModels
 
             _darkenGameBackgrounds = CurrentSettings.DarkenGameBackgrounds;
             _drawLCDShadows = CurrentSettings.DrawLCDShadows;
+            _muteSound = CurrentSettings.MuteSound;
+            _applicationTheme = CurrentSettings.ApplicationTheme switch
+            {
+                "System" => 0,
+                "Light" => 1,
+                "Dark" => 2,
+                _ => 0
+            };
         }
 
         [ObservableProperty]
         private bool _darkenGameBackgrounds;
+        
+        [ObservableProperty]
+        private bool _muteSound;
+
+        [ObservableProperty]
+        private int _applicationTheme;
 
         [ObservableProperty]
         private bool _drawLCDShadows;
@@ -40,6 +57,38 @@ namespace LCDonald.ViewModels
         {
             CurrentSettings.DarkenGameBackgrounds = value;
             SaveSettings();
+        }
+
+        partial void OnMuteSoundChanged(bool value)
+        {
+            CurrentSettings.MuteSound = value;
+            SaveSettings();
+        }
+
+        partial void OnApplicationThemeChanged(int value)
+        {
+            CurrentSettings.ApplicationTheme = value switch
+            {
+                0 => "System",
+                1 => "Light",
+                2 => "Dark",
+                _ => "System",
+            };
+        
+            SaveSettings();
+
+            var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
+
+            if (CurrentSettings.ApplicationTheme == "System")
+            {
+                thm.PreferSystemTheme = true;
+                thm.RequestedTheme = null;
+            }
+            else
+            {
+                thm.PreferSystemTheme = false;
+                thm.RequestedTheme = CurrentSettings.ApplicationTheme;
+            }   
         }
 
         partial void OnDrawLCDShadowsChanged(bool value)

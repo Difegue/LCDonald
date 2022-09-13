@@ -6,6 +6,7 @@
 			 xmlns:ui="using:FluentAvalonia.UI.Controls"
 			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
 			 xmlns:controls="using:LCDonald.Controls"
+			 xmlns:system="using:System"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="LCDonald.Views.SettingsPopup">
 
@@ -14,6 +15,19 @@
 	</Design.DataContext>
 
 	<StackPanel Spacing="8" >
+
+		<controls:OptionsDisplayItem Header="Application Theme"
+									 Description="Choose your theme!"
+                                  Icon="ColorFill"
+								  CornerRadius="{StaticResource ControlCornerRadius}">
+			<controls:OptionsDisplayItem.ActionButton>
+				<ComboBox SelectedIndex="{Binding ApplicationTheme}">
+					<ComboBoxItem>System</ComboBoxItem>
+					<ComboBoxItem>Hero</ComboBoxItem>
+					<ComboBoxItem>Dark</ComboBoxItem>
+				</ComboBox>
+			</controls:OptionsDisplayItem.ActionButton>
+		</controls:OptionsDisplayItem>
 
 		<controls:OptionsDisplayItem Header="Darken game backgrounds"
 								  Description="This doesn't apply to Closeup views."
@@ -24,12 +38,12 @@
 			</controls:OptionsDisplayItem.ActionButton>
 		</controls:OptionsDisplayItem>
 
-		<controls:OptionsDisplayItem Header="Show shadows behind LCD elements"
-                                  Description="(I'm the coolest)"
-                                  Icon="Restore" IsVisible="False"
+		<controls:OptionsDisplayItem Header="Mute in-game sound"
+                                  Description="If I hear these beeps one more time i'm gonna flip"
+                                  Icon="Mute" 
 								  CornerRadius="{StaticResource ControlCornerRadius}">
 			<controls:OptionsDisplayItem.ActionButton>
-			<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding DrawLCDShadows}"/>
+			<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding MuteSound}"/>
 			</controls:OptionsDisplayItem.ActionButton>
 		</controls:OptionsDisplayItem>
 		

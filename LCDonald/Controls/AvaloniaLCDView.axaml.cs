@@ -212,6 +212,9 @@ namespace LCDonald.Controls
 
         private void DrawLayoutView(MAMEView view)
         {
+            if (_logicProcessor != null)
+                _logicProcessor.MuteSound = SettingsViewModel.CurrentSettings.MuteSound;
+            
             _lcdCanvas?.Children.Clear();
             
             foreach (var element in view.Elements)

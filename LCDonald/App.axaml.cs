@@ -31,6 +31,19 @@ namespace LCDonald
                 var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
                 thm?.ForceWin32WindowToTheme(desktop.MainWindow); // Window is the Window object you want to force
 
+                
+                if (SettingsViewModel.CurrentSettings.ApplicationTheme == "System")
+                {
+                    thm.PreferSystemTheme = true;
+                    thm.RequestedTheme = null;
+                }
+                else
+                {
+                    thm.PreferSystemTheme = false;
+                    thm.RequestedTheme = SettingsViewModel.CurrentSettings.ApplicationTheme;
+                }
+                    
+
                 if (System.OperatingSystem.IsMacOS())   
                 {
                     // Macify the styling a bit

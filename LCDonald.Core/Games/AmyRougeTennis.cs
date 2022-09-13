@@ -159,7 +159,7 @@ namespace LCDonald.Core.Games
         protected override void UpdateCore()
         {
             // Bounce ball back 
-            if (_ballPosition > 40 && _ballPosition % 10 == _amyPosition && _batEngaged)
+            if (_ballPosition > 40 && _ballPosition % 10 == _amyPosition && _batEngaged && !_ballDirection)
             {
                 _ballDirection = true;
                 QueueSound(new LCDGameSound("hit.ogg"));
