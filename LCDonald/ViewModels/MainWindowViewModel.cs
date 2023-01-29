@@ -30,6 +30,7 @@ namespace LCDonald.ViewModels
                 new SonicExtremeBoarding(),
                 new TailsSoccer(),
                 new KnucklesBaseball(),
+                new AmyRougeVolleyball(),
                 new CreamFlowerCatch(),
                 new BigFishing(),
                 new SonicSkateboard(),

@@ -1,65 +1,65 @@
-<!-- artennis.lay -->
+<!-- arvolleyball.lay -->
 
 <mamelayout version="2">
 
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="artennis_manual.jpg" />
+		<image file="arvolleyball_manual.jpg" />
 	</element>
 	<element name="front">
-		<image file="artennis_front.jpg" />
+		<image file="arvolleyball_front.jpg" />
 	</element>
 	<element name="back">
-		<image file="artennis_back.jpg" />
+		<image file="arvolleyball_back.jpg" />
 	</element>
 	<element name="game_bg_crop">
-		<image file="artennis_bg_crop.jpg" />
+		<image file="arvolleyball_bg_crop.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="artennis_bg.jpg" />
+		<image file="arvolleyball_bg.jpg" />
 	</element>
 	
 <!-- Define Views -->
 	
 	<view name="Front">
 		<screen index="0">
-			<bounds x="882" y="555" width="474" height="597" />
+			<bounds x="1656" y="758" width="561" height="718" />
 		</screen>
 		<element ref="front">
-			<bounds x="0" y="0" width="2237" height="2600" />
+			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 		<element ref="game_bg_crop">
-			<bounds x="882" y="560" width="474" height="597" />
+			<bounds x="1656" y="758" width="561" height="719" />
 		</element>
 	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="56" y="46" width="779" height="981" />
+			<bounds x="56" y="62" width="787" height="1007" />
 		</screen>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="911" height="1152" />
+			<bounds x="0" y="0" width="889" height="1131" />
 		</element>
 	</view>
 
 	<view name="Back">
 		<element ref="back">
-			<bounds x="0" y="0" width="2237" height="2600" />
+			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="2343" height="2723" />
+			<bounds x="0" y="0" width="859" height="867" />
 		</element>
 	</view>
 </mamelayout>
 
 <!--
-Amy & Rouge Tennis
+Amy & Rouge Volleyball
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-
+- Manual photo by Ender_Onryo
 -->
 

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace LCDonald.Core.Games
 {
-    public class AmyRougeTennis : LCDGameBase
+    public class AmyRougeVolleyball : LCDGameBase
     {
-        public override string ShortName => "artennis";
-        public override string Name => "Amy & Rouge Tennis (2005)";
+        public override string ShortName => "arvolleyball";
+        public override string Name => "Amy & Rouge Volleyball (2004)";
 
         #region SVG Group Names
         public const string SCORE_CENTER = "score-center";
