@@ -202,6 +202,7 @@ namespace LCDonald.Core.Model
         public void Stop()
         {
             _isStopped = true;
+            _isPaused = false;
             _customTimer?.Stop();
             Stopped?.Invoke(this, new EventArgs());
         }
