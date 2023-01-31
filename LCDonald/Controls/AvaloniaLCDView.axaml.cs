@@ -108,6 +108,7 @@ namespace LCDonald.Controls
             _zoomBorder.ZoomChanged += HandleZoom;
 
             KeyDown += HandleInput;
+            KeyUp += ClearInputs;
             PointerPressed += (s, e) => Focus();
             LostFocus += (s, e) => CurrentGame?.Pause();         
         }
@@ -146,16 +147,25 @@ namespace LCDonald.Controls
             }
         }
 
+        private List<Key> _bufferedKeyCodes = new();
         private void HandleInput(object? sender, KeyEventArgs e)
         {
-            _currentGame.GetAvailableInputs().ForEach(input =>
-            {
-                if (input.KeyCode == (int)e.Key)
+            // Prevent holding the key down from spamming the input buffer
+            if (!_bufferedKeyCodes.Contains(e.Key))
+                _currentGame.GetAvailableInputs().ForEach(input =>
                 {
-                    _inputBuffer.Add(input);
-                }
-            });
+                    if (input.KeyCode == (int)e.Key)
+                    {
+                        _inputBuffer.Add(input);
+                        _bufferedKeyCodes.Add(e.Key);
+                    }
+                });
             e.Handled = true;
+        }
+
+        private void ClearInputs(object? sender, KeyEventArgs e)
+        {
+            _bufferedKeyCodes.Clear();
         }
 
         public List<LCDGameInput> GetPressedInputs()
