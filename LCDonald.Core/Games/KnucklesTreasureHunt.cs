@@ -305,7 +305,7 @@ namespace LCDonald.Core.Games
                 if (ThreadSafeEmeraldList().Count == 0)
                 {
                     _isInputBlocked = true;
-                    _blockedCustomUpdates = 1; // Block one custom update so that emerald spawn doesn't happen instantly
+                    BlockCustomUpdates(1); // Block one custom update so that emerald spawn doesn't happen instantly
                 }
             }
 

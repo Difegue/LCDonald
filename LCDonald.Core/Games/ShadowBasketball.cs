@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace LCDonald.Core.Games
 {
@@ -54,9 +55,9 @@ namespace LCDonald.Core.Games
                   BALL_21,  BALL_22,  BALL_23,
                  HANDS_21,  HANDS_22,  HANDS_23,
                  OMEGA_1,   OMEGA_2,   OMEGA_3,
-                 HANDS_1,   HANDS_2,   HANDS_3, 
-                 
-                 BALL_11,   BALL_12,   BALL_13, 
+                 HANDS_1,   HANDS_2,   HANDS_3,
+
+                 BALL_11,   BALL_12,   BALL_13,
                 SHADOW_1,  SHADOW_2,  SHADOW_3
             };
         }
@@ -79,33 +80,36 @@ namespace LCDonald.Core.Games
                 },
                 new LCDGameInput
                 {
-                    Name = "Ball",
-                    Description = "Shoot a Basketball",
+                    Name = "Basket",
+                    Description = "Make a basket",
                     KeyCode = 18, // space
                 }
             };
         }
 
         private int _shadowPosition;
-        private int _omegaPosition; // TODO must be list
+        private List<int> _omegaPositions = new();
         private int _ballPosition;
-        private bool _handsUp;
-        
+        private List<int> _handPositions = new();
+
         private int _goalsScored;
         private int _ballsIntercepted;
         private int _level;
 
         protected override List<string> GetVisibleElements()
         {
-            var handsPosition = _omegaPosition + (_handsUp ? 20 : 0);
-
             var elements = new List<string>
             {
-                "omega-" + _omegaPosition,
-                "hands-" + handsPosition,
                 "ball-" + _ballPosition,
                 "shadow-" + _shadowPosition
             };
+
+            // Threadsafe list copies
+            foreach (var pos in new List<int>(_omegaPositions))
+                elements.Add("omega-" + pos);
+
+            foreach (var pos in new List<int>(_handPositions))
+                elements.Add("hands-" + pos);
 
             // 8-segment display
             switch (_goalsScored % 10)
@@ -162,16 +166,16 @@ namespace LCDonald.Core.Games
 
         public override void InitializeGameState()
         {
-            _shadowPosition = 1;
-            _omegaPosition = 1;
+            _shadowPosition = 2;
+            _omegaPositions = new() { 2 };
             _ballPosition = 0;
-            _handsUp = false;
+            _handPositions = new() { 2 };
             _goalsScored = 0;
             _ballsIntercepted = 0;
             _level = 0;
-            
+
             _customUpdateSpeed = 800;
-            
+
             StartupMusic();
         }
 
@@ -189,53 +193,141 @@ namespace LCDonald.Core.Games
                 {
                     _shadowPosition++;
                 }
-                else if (input.Name == "Ball" && _ballPosition == 0)
+                else if (input.Name == "Basket" && _ballPosition == 0)
                 {
                     _ballPosition = _shadowPosition + 10;
-                    // TODO sound
+                    SetBallSlowdown(true);
                 }
             }
         }
 
+        private void SetBallSlowdown(bool slowdown)
+        {
+            // This simulates a weird behavior in the OG game where the defenders move more slowly when a ball is out.
+            if (slowdown)
+                _customUpdateSpeed += 50;
+            else
+                _customUpdateSpeed -= 50;
+        }
+
+        private bool _ballHalfStep = false;
         protected override void UpdateCore()
         {
-            // Unused in this game
+            if (_ballPosition == 0) return;
+
+            // Move ball forward -- takes 2 update cycles to move 1 space
+            if (_ballHalfStep)
+            {
+                _ballHalfStep = false;
+                _ballPosition += 10;
+            }
+            else
+                _ballHalfStep = true;
+
+
+            if (_ballPosition > 40)
+            {
+                QueueSound(new LCDGameSound("../common/hit.ogg"));
+                _goalsScored += 2;
+                _ballPosition = 0;
+                SetBallSlowdown(false);
+                return;
+            }
+
+            if (_ballPosition > 23)
+                _ballPosition = 32;
+
+            if (_handPositions.Contains(_ballPosition))
+            {
+                _ballsIntercepted++;
+                _isInputBlocked = true;
+                QueueSound(new LCDGameSound("../common/miss.ogg"));
+
+                BlinkElement("omega-" + _ballPosition % 10, 2);
+                BlinkElement("hands-" + _ballPosition, 2);
+                BlinkElement("ball-" + _ballPosition, 2);
+
+                _ballPosition = 0;
+                SetBallSlowdown(false);
+            }
         }
 
         public override void CustomUpdate()
         {
-            if (_goalsScored >= 30)
+            Victory();
+            _isInputBlocked = false;
+
+            if (_goalsScored >= 18)
             {
+                _isInputBlocked = true;
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _ballsIntercepted = 0;
                 _goalsScored = 0;
                 _level++;
+
                 // Speed up
-                _customUpdateSpeed -= 125;
+                _customUpdateSpeed -= 100;
+
+                _omegaPositions.Clear();
+                _handPositions.Clear();
+
+                // Add various amount of defenders depending on the level
+                // Level 1-2: One defender
+                // Level 3-4: Two defenders
+                // Level 5: Three defenders
+                var pos = _rng.Next(1, 4);
+                _omegaPositions.Add(pos);
+                _handPositions.Add(pos);
+
+                if (_level >= 2)
+                    AddOmega();
+
+                if (_level == 4)
+                    AddOmega();
+
+                return;
             }
 
-            if (_level == 4)
+            if (_level == 5)
             {
                 Victory();
                 return;
             }
 
-            // Move ball forward
-            if (_ballPosition != 0)
-                _ballPosition += 10;
+            // Move defenders
+            if (_omegaPositions.Count < 3)
+                for (var i = 0; i < _omegaPositions.Count; i++)
+                {
+                    var pos = _omegaPositions[i];
 
-            bool hasDodgedCar = false;
-            bool hasBeenHit = false;
+                    // Randomly shift left/right if the position isn't already taken
+                    var newPos = pos + _rng.Next(-1, 2);
+
+                    // Check boundaries
+                    if (newPos == 0)
+                        newPos = 3;
+
+                    if (newPos == 4)
+                        newPos = 1;
+
+                    // If the spot is already taken, use the other only left one (neither pos nor newPos)
+                    if (newPos != pos && _omegaPositions.Contains(newPos))
+                    {
+                        var l = new List<int> { 1, 2, 3 };
+                        l.Remove(pos);
+                        l.Remove(newPos);
+                        newPos = l.First();
+                    }
+
+                    _omegaPositions[i] = newPos;
+                    _handPositions[i] = newPos;
+                }
             
-
-            // Only count a row as dodged if the player hasn't been hit
-            if (hasDodgedCar && !hasBeenHit)
-            {
-                QueueSound(new LCDGameSound("../common/hit.ogg"));
-                _goalsScored++;
-            }
-
-            if (_ballsIntercepted == 5)
+            // 33% chance to raise hands (+20 to pos so it matches ball positioning)
+            for (var i = 0; i < _handPositions.Count; i++)
+                _handPositions[i] = _rng.Next(0, 3) == 0 ? _handPositions[i] % 10 + 20 : _handPositions[i] % 10;
+            
+            if (_ballsIntercepted >= 5)
             {
                 GameOver();
                 return;
@@ -243,25 +335,66 @@ namespace LCDonald.Core.Games
 
         }
 
+        private void AddOmega()
+        {
+            var pos = 1;
+            // Incredibly unefficient
+            while (_omegaPositions.Contains(pos))
+                pos = _rng.Next(1, 4);
+
+            _omegaPositions.Add(pos);
+            _handPositions.Add(pos);
+        }
+
         private void GameOver()
         {
             _shadowPosition = -1;
+            _omegaPositions.Clear();
+            _handPositions.Clear();
+            _goalsScored = -1;
             _ballPosition = 0;
             _level = 0;
 
-            GenericGameOverAnimation(new List<string> { SHADOW_1 });
+            GenericGameOverAnimation(new List<string> { SHADOW_2, OMEGA_2, HANDS_22 });
             Stop();
         }
 
         private void Victory()
         {
             _shadowPosition = -1;
+            _omegaPositions.Clear();
+            _handPositions.Clear();
+            _goalsScored = -1;
             _ballPosition = 0;
             _level = 0;
 
-            GenericVictoryAnimation(new List<string> { SHADOW_1 });
+            QueueSound(new LCDGameSound("../common/game_win_short.ogg"));
+
+            // 2x move across screen left to right shooting baskets
+            var victoryFrame1 = new List<string> { SHADOW_1, BALL_11 };
+            var victoryFrame2 = new List<string> { SHADOW_1, BALL_21 };
+            var victoryFrame3 = new List<string> { SHADOW_1, BALL_32 };
+            var victoryFrame4 = new List<string> { SHADOW_2, BALL_12 };
+            var victoryFrame5 = new List<string> { SHADOW_2, BALL_22 };
+            var victoryFrame6 = new List<string> { SHADOW_2, BALL_32 };
+            var victoryFrame7 = new List<string> { SHADOW_3, BALL_13 };
+            var victoryFrame8 = new List<string> { SHADOW_3, BALL_23 };
+            var victoryFrame9 = new List<string> { SHADOW_3, BALL_32 };
+
+
+            var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
+                                                            victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame4, victoryFrame4, victoryFrame4, victoryFrame4,
+                                                            victoryFrame5, victoryFrame5, victoryFrame5, victoryFrame5, victoryFrame6, victoryFrame6, victoryFrame6, victoryFrame6,
+                                                            victoryFrame7, victoryFrame7, victoryFrame7, victoryFrame7, victoryFrame8, victoryFrame8, victoryFrame8, victoryFrame8,
+                                                            victoryFrame9, victoryFrame9, victoryFrame9, victoryFrame9, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1,
+                                                            victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame3, victoryFrame3,
+                                                            victoryFrame4, victoryFrame4, victoryFrame4, victoryFrame4, victoryFrame5, victoryFrame5, victoryFrame5, victoryFrame5,
+                                                            victoryFrame6, victoryFrame6, victoryFrame6, victoryFrame6, victoryFrame7, victoryFrame7, victoryFrame7, victoryFrame7,
+                                                            victoryFrame8, victoryFrame8, victoryFrame8, victoryFrame8, victoryFrame9, victoryFrame9, victoryFrame9, victoryFrame9};
+
+            PlayAnimation(victoryAnimation);
             Stop();
         }
-        
+
     }
 }
