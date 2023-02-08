@@ -205,9 +205,9 @@ namespace LCDonald.Core.Games
         {
             // This simulates a weird behavior in the OG game where the defenders move more slowly when a ball is out.
             if (slowdown)
-                _customUpdateSpeed += 50;
+                _customUpdateSpeed += 150;
             else
-                _customUpdateSpeed -= 50;
+                _customUpdateSpeed -= 150;
         }
 
         private bool _ballHalfStep = false;
@@ -229,7 +229,11 @@ namespace LCDonald.Core.Games
             {
                 QueueSound(new LCDGameSound("../common/hit.ogg"));
                 _goalsScored += 2;
-                _ballPosition = 0;
+                
+                // hack to make the ball unshootable for 2 cycles
+                _ballPosition = -10;
+                _ballHalfStep = true;
+
                 SetBallSlowdown(false);
                 return;
             }
