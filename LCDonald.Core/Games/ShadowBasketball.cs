@@ -254,7 +254,6 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            Victory();
             _isInputBlocked = false;
 
             if (_goalsScored >= 18)

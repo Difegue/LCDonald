@@ -246,7 +246,7 @@
 							<ui:CommandBarButton.Flyout>
 								<Flyout Placement="BottomEdgeAlignedLeft">
 
-									<StackPanel Orientation="Vertical" Spacing="8" Width="200" Margin="8,8,8,0">
+									<StackPanel Orientation="Vertical" Spacing="8" Width="256" Margin="8,8,8,0">
 
 										<ItemsRepeater Items="{Binding CurrentInputs}">
 											<ItemsRepeater.Layout>

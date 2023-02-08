@@ -75,7 +75,7 @@ namespace LCDonald.Core.Games
                 },
                 new LCDGameInput
                 {
-                    Name = "Tennis",
+                    Name = "Volley",
                     Description = "Hit the ball",
                     KeyCode = 18, // space
                 }
@@ -133,7 +133,7 @@ namespace LCDonald.Core.Games
 
             _customUpdateSpeed = 500;
 
-            StartupMusic();
+            StartupMusic("game_start.ogg");
         }
 
         public override void HandleInputs(List<LCDGameInput> pressedInputs)
@@ -150,7 +150,7 @@ namespace LCDonald.Core.Games
                 {
                     _amyPosition++;
                 }
-                else if (input.Name == "Tennis")
+                else if (input.Name == "Volley")
                 {
                     _batEngaged = true;
                 }
@@ -163,6 +163,11 @@ namespace LCDonald.Core.Games
             if (_ballPosition > 40 && _ballPosition % 10 == _amyPosition && _batEngaged && !_ballDirection)
             {
                 _ballDirection = true;
+                QueueSound(new LCDGameSound("hit_confirm.ogg"));
+            } 
+            else if (_batEngaged)
+            {
+                // hit noball sound
                 QueueSound(new LCDGameSound("hit.ogg"));
             }
             _batEngaged = false;
@@ -179,14 +184,14 @@ namespace LCDonald.Core.Games
                 _ballPosition = _rougePosition + 10;
                 _ballDirection = false;
 
-                // As the level goes up, the AI requires more counterhits to score
+                // As the level goes up, the """AI""" requires more counterhits to score
                 _aiResistance = _level switch
                 {
-                    0 => _rng.Next(1, 4),
+                    0 => _rng.Next(1, 2),
                     1 => _rng.Next(1, 6),
-                    2 => _rng.Next(1, 9),
-                    3 => _rng.Next(1, 10),
-                    4 => _rng.Next(1, 19),
+                    2 => _rng.Next(2, 9),
+                    3 => _rng.Next(3, 10),
+                    4 => _rng.Next(6, 19),
                     _ => _aiResistance
                 };
             }
@@ -231,7 +236,7 @@ namespace LCDonald.Core.Games
             if (_ballPosition < 20 && _ballPosition != -1 && _aiResistance > 0 && _ballDirection)
             {
                 _aiResistance--;
-                QueueSound(new LCDGameSound("hit.ogg"));
+                QueueSound(new LCDGameSound("hit_return.ogg"));
                 _ballDirection = false;
 
                 // move rouge in front of ball 
@@ -242,7 +247,7 @@ namespace LCDonald.Core.Games
             {
                 _currentScore++;
                 _ballPosition = -1;
-                QueueSound(new LCDGameSound("../common/hit.ogg"));
+                QueueSound(new LCDGameSound("score.ogg"));
             }
 
             if (_currentScore == 4)
@@ -250,7 +255,7 @@ namespace LCDonald.Core.Games
                 LevelUpAnimation();
 
                 // Speed up
-                _customUpdateSpeed -= 65;
+                _customUpdateSpeed -= 60;
             }
 
             if (_level == 5)
@@ -269,6 +274,8 @@ namespace LCDonald.Core.Games
         private void LevelUpAnimation()
         {
             _isInputBlocked = true;
+            // Wait for previous sound to finish playing
+            System.Threading.Thread.Sleep(200);
             _currentScore = 0;
 
             var levelUpFrame0 = new List<string>(GetVisibleGameElements()) { SCORE_CENTER };
@@ -277,7 +284,7 @@ namespace LCDonald.Core.Games
             var levelUpFrame3 = new List<string>(GetVisibleGameElements()) { SCORE_A3 };
             
             var levelUpAnimation = new List<List<string>> { levelUpFrame0, levelUpFrame1,  levelUpFrame2, levelUpFrame3, };
-            QueueSound(new LCDGameSound("../common/level_up.ogg"));
+            QueueSound(new LCDGameSound("level_up.ogg"));
             PlayAnimation(levelUpAnimation);
             _level++;
         }
@@ -290,9 +297,9 @@ namespace LCDonald.Core.Games
             _ballPosition = -1;
             _currentScore = 0;
 
-            QueueSound(new LCDGameSound("../common/game_over.ogg"));
+            QueueSound(new LCDGameSound("game_over.ogg"));
 
-            // hit blink + advantage bar animation
+            // miss blink + advantage bar animation
             var victoryFrame1 = new List<string> { SCORE_CENTER };
             var victoryFrame2 = new List<string> { SCORE_R1 };
             var victoryFrame3 = new List<string> { SCORE_R2 };
@@ -321,17 +328,17 @@ namespace LCDonald.Core.Games
             _ballPosition = -1;
             _currentScore = 0;
 
-            QueueSound(new LCDGameSound("../common/game_win_short.ogg"));
+            QueueSound(new LCDGameSound("game_win.ogg"));
 
-            // amy blink + advantage bar animation
+            // all amy blink + advantage bar animation
             var victoryFrame1 = new List<string> { SCORE_CENTER };
             var victoryFrame2 = new List<string> { SCORE_A1 };
             var victoryFrame3 = new List<string> { SCORE_A2 };
             var victoryFrame4 = new List<string> { SCORE_A3 };
-            var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_2, TENNIS_2 };
-            var victoryFrame2s = new List<string> { SCORE_A1, AMY_2, TENNIS_2 };
-            var victoryFrame3s = new List<string> { SCORE_A2, AMY_2, TENNIS_2 };
-            var victoryFrame4s = new List<string> { SCORE_A3, AMY_2, TENNIS_2 };
+            var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_1, AMY_2, AMY_3, TENNIS_2 };
+            var victoryFrame2s = new List<string> { SCORE_A1, AMY_1, AMY_2, AMY_3, TENNIS_2 };
+            var victoryFrame3s = new List<string> { SCORE_A2, AMY_1, AMY_2, AMY_3, TENNIS_2 };
+            var victoryFrame4s = new List<string> { SCORE_A3, AMY_1, AMY_2, AMY_3, TENNIS_2 };
 
 
             var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,
