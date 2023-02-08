@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
+		<image file="ktreasure_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="ktreasure_front.jpg" />
@@ -51,7 +51,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="773" height="773" />
+			<bounds x="0" y="0" width="895" height="896" />
 		</element>
 	</view>
 </mamelayout>
@@ -60,6 +60,6 @@
 Knuckles Treasure Hunt
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-
+- Manual scan by NovaSquirrel
 -->
 
