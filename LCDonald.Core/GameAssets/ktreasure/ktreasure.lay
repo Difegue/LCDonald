@@ -51,7 +51,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="895" height="896" />
+			<bounds x="0" y="0" width="2343" height="2378" />
 		</element>
 	</view>
 </mamelayout>
