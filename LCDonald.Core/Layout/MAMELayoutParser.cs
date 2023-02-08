@@ -93,6 +93,7 @@ namespace LCDonald.Core.Layout
                 res.Add(new MAMEElementRef
                 {
                     Ref = ((XmlNode)element).Attributes["ref"].Value,
+                    InputTag = ((XmlNode)element).Attributes["inputtag"]?.Value,
                     Height = int.Parse(boundsNode.Attributes["height"].Value),
                     Width = int.Parse(boundsNode.Attributes["width"].Value),
                     X = int.Parse(boundsNode.Attributes["x"].Value),

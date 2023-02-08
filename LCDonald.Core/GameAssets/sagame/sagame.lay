@@ -29,6 +29,9 @@
 		<element ref="front">
 			<bounds x="0" y="0" width="3968" height="2600" />
 		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2555" y="1521" width="400" height="400" />
+		</element>
 		<element ref="game_bg_crop">
 			<bounds x="1490" y="1303" width="786" height="605" />
 		</element>

@@ -9,6 +9,7 @@
     public record MAMEElementRef
     {
         public string Ref { get; init; } = default!;
+        public string InputTag { get; init; } = default!;
         public int X { get; init; }
         public int Y { get; init; }
         public int Width { get; init; }

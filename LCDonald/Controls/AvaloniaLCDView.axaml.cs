@@ -109,7 +109,7 @@ namespace LCDonald.Controls
 
             KeyDown += HandleInput;
             KeyUp += ClearInputs;
-            PointerPressed += (s, e) => Focus();
+            PointerPressed += HandleMouseInput;
             LostFocus += (s, e) => CurrentGame?.Pause();         
         }
 
@@ -161,6 +161,28 @@ namespace LCDonald.Controls
                     }
                 });
             e.Handled = true;
+        }
+
+        private void HandleMouseInput(object? sender, PointerPressedEventArgs e)
+        {
+            Focus();
+
+            // Check if the mouse is over a game element
+            var mousePos = e.GetPosition(_lcdCanvas);
+
+            // Look in the gameElements if there's a button whose bounds contain this position
+            var element = _currentView.Elements.FirstOrDefault(el => el.InputTag != null && 
+                            el.X <= mousePos.X && el.Y <= mousePos.Y && el.X + el.Width >= mousePos.X && el.Y + el.Height >= mousePos.Y);
+
+            if (element != null)
+            {
+                // Get the input associated with this element
+                var input = _currentGame.GetAvailableInputs().FirstOrDefault(i => i.Name == element.InputTag);
+                if (input != null)
+                {
+                    _inputBuffer.Add(input);
+                }
+            }
         }
 
         private void ClearInputs(object? sender, KeyEventArgs e)
@@ -229,7 +251,10 @@ namespace LCDonald.Controls
             
             foreach (var element in view.Elements)
             {
-                var elementPicture = _gameLayout?.Elements[element.Ref].Image.File;
+                if (_gameLayout == null) continue;
+                if (!_gameLayout.Elements.ContainsKey(element.Ref)) continue;
+
+                var elementPicture = _gameLayout.Elements[element.Ref].Image.File;
                 if (elementPicture == null) continue;
 
                 // This is jank af
