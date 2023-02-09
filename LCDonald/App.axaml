@@ -18,6 +18,6 @@
 
 	<Application.Styles>
 		<sty:FluentAvaloniaTheme />
-		<StyleInclude Source="/Controls/OptionsDisplayItemStyles.axaml" />
+		<StyleInclude Source="avares://FluentAvalonia.UI.Windowing/Styles/FAWindowingStyles.axaml" />
 	</Application.Styles>
 </Application>

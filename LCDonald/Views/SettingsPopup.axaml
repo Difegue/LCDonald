@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:ui="using:FluentAvalonia.UI.Controls"
 			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
-			 xmlns:controls="using:LCDonald.Controls"
 			 xmlns:system="using:System"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="LCDonald.Views.SettingsPopup">
@@ -16,36 +15,35 @@
 
 	<StackPanel Spacing="8" >
 
-		<controls:OptionsDisplayItem Header="Application Theme"
-									 Description="Choose your theme!"
-                                  Icon="ColorFill"
-								  CornerRadius="{StaticResource ControlCornerRadius}">
-			<controls:OptionsDisplayItem.ActionButton>
+		<ui:SettingsExpander Header="Application Theme"
+							 Description="Choose your theme!"
+							 IconSource="ColorFill">
+			<ui:SettingsExpander.Footer>
 				<ComboBox SelectedIndex="{Binding ApplicationTheme}">
 					<ComboBoxItem>System</ComboBoxItem>
 					<ComboBoxItem>Hero</ComboBoxItem>
 					<ComboBoxItem>Dark</ComboBoxItem>
 				</ComboBox>
-			</controls:OptionsDisplayItem.ActionButton>
-		</controls:OptionsDisplayItem>
+			</ui:SettingsExpander.Footer>
+		</ui:SettingsExpander>
 
-		<controls:OptionsDisplayItem Header="Darken game backgrounds"
-								  Description="This doesn't apply to Closeup views."
-								  Icon="DarkTheme"
-							      CornerRadius="{StaticResource ControlCornerRadius}">
-			<controls:OptionsDisplayItem.ActionButton>
+		<ui:SettingsExpander Header="Darken game backgrounds"
+							 Description="This doesn't apply to Closeup views."
+							 IconSource="DarkTheme"
+							 CornerRadius="{StaticResource ControlCornerRadius}">
+			<ui:SettingsExpander.Footer>
 				<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding DarkenGameBackgrounds}"/>
-			</controls:OptionsDisplayItem.ActionButton>
-		</controls:OptionsDisplayItem>
+			</ui:SettingsExpander.Footer>
+		</ui:SettingsExpander>
 
-		<controls:OptionsDisplayItem Header="Mute in-game sound"
-                                  Description="If I hear these beeps one more time i'm gonna flip"
-                                  Icon="Mute" 
-								  CornerRadius="{StaticResource ControlCornerRadius}">
-			<controls:OptionsDisplayItem.ActionButton>
-			<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding MuteSound}"/>
-			</controls:OptionsDisplayItem.ActionButton>
-		</controls:OptionsDisplayItem>
+		<ui:SettingsExpander Header="Mute in-game sound"
+                             Description="If I hear these beeps one more time i'm gonna flip"
+							 IconSource="Mute" 
+							 CornerRadius="{StaticResource ControlCornerRadius}">
+			<ui:SettingsExpander.Footer>
+				<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding MuteSound}"/>
+			</ui:SettingsExpander.Footer>
+		</ui:SettingsExpander>
 		
 		<Separator/>
 		

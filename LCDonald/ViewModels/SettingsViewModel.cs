@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
 using FluentAvalonia.Styling;
+using Avalonia.Styling;
 
 namespace LCDonald.ViewModels
 {
@@ -69,26 +70,22 @@ namespace LCDonald.ViewModels
         {
             CurrentSettings.ApplicationTheme = value switch
             {
-                0 => "System",
+                0 => "Default",
                 1 => "Light",
                 2 => "Dark",
-                _ => "System",
+                _ => "Default",
             };
         
             SaveSettings();
 
             var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
 
-            if (CurrentSettings.ApplicationTheme == "System")
-            {
+            if (CurrentSettings.ApplicationTheme == "Default" || SettingsViewModel.CurrentSettings.ApplicationTheme == "System")
                 thm.PreferSystemTheme = true;
-                thm.RequestedTheme = null;
-            }
             else
-            {
                 thm.PreferSystemTheme = false;
-                thm.RequestedTheme = CurrentSettings.ApplicationTheme;
-            }   
+
+            Application.Current.RequestedThemeVariant = new ThemeVariant(CurrentSettings.ApplicationTheme, ThemeVariant.Light);
         }
 
         partial void OnDrawLCDShadowsChanged(bool value)

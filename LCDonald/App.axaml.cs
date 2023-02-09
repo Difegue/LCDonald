@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Styling;
 using FluentAvalonia.Styling;
 using LCDonald.ViewModels;
 using LCDonald.Views;
@@ -32,19 +33,14 @@ namespace LCDonald
                 thm?.ForceWin32WindowToTheme(desktop.MainWindow); // Window is the Window object you want to force
 
                 
-                if (SettingsViewModel.CurrentSettings.ApplicationTheme == "System")
-                {
+                if (SettingsViewModel.CurrentSettings.ApplicationTheme == "System" || SettingsViewModel.CurrentSettings.ApplicationTheme == "Default")
                     thm.PreferSystemTheme = true;
-                    thm.RequestedTheme = null;
-                }
                 else
-                {
                     thm.PreferSystemTheme = false;
-                    thm.RequestedTheme = SettingsViewModel.CurrentSettings.ApplicationTheme;
-                }
-                    
 
-                if (System.OperatingSystem.IsMacOS())   
+                RequestedThemeVariant = new ThemeVariant(SettingsViewModel.CurrentSettings.ApplicationTheme, ThemeVariant.Light);
+
+                if (OperatingSystem.IsMacOS())   
                 {
                     // Macify the styling a bit
                     Resources.Add("ControlContentThemeFontSize", (double)13);

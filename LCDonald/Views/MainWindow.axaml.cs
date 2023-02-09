@@ -3,16 +3,15 @@ using Avalonia.Markup.Xaml;
 using Avalonia;
 using Avalonia.Input;
 using FluentAvalonia.UI.Controls;
-using System.Diagnostics;
 using FluentAvalonia.Styling;
-using Avalonia.Metadata;
 using Avalonia.Controls.Templates;
 using System;
 using LCDonald.ViewModels;
+using FluentAvalonia.UI.Windowing;
 
 namespace LCDonald.Views
 {
-    public partial class MainWindow : CoreWindow
+    public partial class MainWindow : AppWindow
     {
         public SettingsViewModel Settings { get; set; }
         
@@ -31,8 +30,7 @@ namespace LCDonald.Views
                 NavView.IsPaneToggleButtonVisible = false;
                 PaneBottomPadding.Height = 32;
 
-                var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
-                if (thm?.RequestedTheme == "Dark") // Custom outer border to simulate macOS' dark theme window decoration
+                if (Application.Current.RequestedThemeVariant == Avalonia.Styling.ThemeVariant.Dark) // Custom outer border to simulate macOS' dark theme window decoration
                     MacWindowBorder.IsVisible = true;
             }
         }
