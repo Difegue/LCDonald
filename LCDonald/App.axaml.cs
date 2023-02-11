@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Styling;
 using FluentAvalonia.Styling;
+using LCDonald.Core.Layout;
 using LCDonald.ViewModels;
 using LCDonald.Views;
 using System;
@@ -19,26 +20,29 @@ namespace LCDonald
 
         public override void OnFrameworkInitializationCompleted()
         {
+            var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
+            var settings = new SettingsViewModel();
+            
+            if (SettingsViewModel.CurrentSettings.ApplicationTheme == "System" || SettingsViewModel.CurrentSettings.ApplicationTheme == "Default") 
+            {
+                RequestedThemeVariant = ThemeVariant.Default;
+                thm.PreferSystemTheme = true;
+            }
+            else
+            {
+                RequestedThemeVariant = new ThemeVariant(SettingsViewModel.CurrentSettings.ApplicationTheme, ThemeVariant.Dark);
+                thm.PreferSystemTheme = false;
+            }
+
+            var mainView = new MainView
+            {
+                DataContext = new MainWindowViewModel(),
+                Settings = settings
+            };
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var settings = new SettingsViewModel();
-
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                    Settings = settings
-                };
-
-                var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
-                thm?.ForceWin32WindowToTheme(desktop.MainWindow); // Window is the Window object you want to force
-
-                
-                if (SettingsViewModel.CurrentSettings.ApplicationTheme == "System" || SettingsViewModel.CurrentSettings.ApplicationTheme == "Default")
-                    thm.PreferSystemTheme = true;
-                else
-                    thm.PreferSystemTheme = false;
-
-                RequestedThemeVariant = new ThemeVariant(SettingsViewModel.CurrentSettings.ApplicationTheme, ThemeVariant.Light);
+                desktop.MainWindow = new MainWindow(mainView);
 
                 if (OperatingSystem.IsMacOS())   
                 {
@@ -51,7 +55,11 @@ namespace LCDonald
                     Resources.Add("NavigationViewDefaultPaneBackground", Colors.Transparent);
                 }
             }
-
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                singleViewPlatform.MainView = mainView;
+            }
+            
             base.OnFrameworkInitializationCompleted();
         }
 
@@ -59,7 +67,7 @@ namespace LCDonald
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && desktop.MainWindow is MainWindow win)
             {
-                win.Open_Settings(sender, null);
+                win.WindowContent.Open_Settings(sender, null);
             }
         }
     }

@@ -80,12 +80,17 @@ namespace LCDonald.ViewModels
 
             var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
 
-            if (CurrentSettings.ApplicationTheme == "Default" || SettingsViewModel.CurrentSettings.ApplicationTheme == "System")
+            if (CurrentSettings.ApplicationTheme == "System" || CurrentSettings.ApplicationTheme == "Default")
+            {
+                Application.Current.RequestedThemeVariant = ThemeVariant.Default;
                 thm.PreferSystemTheme = true;
+            }
             else
+            {
+                Application.Current.RequestedThemeVariant = new ThemeVariant(CurrentSettings.ApplicationTheme, ThemeVariant.Dark);
                 thm.PreferSystemTheme = false;
+            }
 
-            Application.Current.RequestedThemeVariant = new ThemeVariant(CurrentSettings.ApplicationTheme, ThemeVariant.Light);
         }
 
         partial void OnDrawLCDShadowsChanged(bool value)

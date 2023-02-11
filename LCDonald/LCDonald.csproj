@@ -7,8 +7,6 @@
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
 		<None Remove=".gitignore" />
-		<None Remove="Assets\app-icon.ico" />
-		<None Remove="Assets\SAGE22LOGOSVG.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

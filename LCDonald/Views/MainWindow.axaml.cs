@@ -13,46 +13,24 @@ namespace LCDonald.Views
 {
     public partial class MainWindow : AppWindow
     {
-        public SettingsViewModel Settings { get; set; }
-        
-        public MainWindow()
+        public MainView WindowContent { get; set; }
+
+        public MainWindow(MainView view)
         {
             InitializeComponent();
+
+            WindowContent = view;
+            ViewContainer.Children.Add(view);
+
             ExtendClientAreaChromeHints =
                Avalonia.Platform.ExtendClientAreaChromeHints.PreferSystemChrome |
                Avalonia.Platform.ExtendClientAreaChromeHints.OSXThickTitleBar;
 
             if (OperatingSystem.IsMacOS())
             {
-                // More Macification
-                NavView.PaneDisplayMode = NavigationViewPaneDisplayMode.Left;
-                NavView.OpenPaneLength = 248;
-                NavView.IsPaneToggleButtonVisible = false;
-                PaneBottomPadding.Height = 32;
-
                 if (Application.Current.RequestedThemeVariant == Avalonia.Styling.ThemeVariant.Dark) // Custom outer border to simulate macOS' dark theme window decoration
                     MacWindowBorder.IsVisible = true;
             }
-        }
-
-        public async void Open_Settings(object sender, PointerPressedEventArgs e)
-        {
-            // Kinda unclean to do this in codebehind but this is a simple game, itll do
-            var dialog = new ContentDialog()
-            {
-                Title = "Settings",
-                Content = new SettingsPopup(),
-                DataContext = Settings,
-                DefaultButton = ContentDialogButton.Primary,
-                PrimaryButtonText = "Close",
-                TitleTemplate = (IDataTemplate)Resources["DialogTitleTemplate"]
-            };
-
-            await dialog.ShowAsync();
-
-            // Refresh Game View
-            var lcdView = this.FindControl<Controls.AvaloniaLCDView>("LCDView");
-            lcdView.CurrentView = lcdView.CurrentView; // heh
         }
 
         #region Custom Drag area implementation
@@ -60,6 +38,7 @@ namespace LCDonald.Views
         private PixelPoint startPosition = new PixelPoint(0, 0);
         private Point mouseOffsetToOrigin = new Point(0, 0);
 
+        // TODO PointerPressed="BeginListenForDrag" PointerMoved="HandlePotentialDrag" PointerReleased="HandlePotentialDrop"
         private void HandlePotentialDrop(object sender, PointerReleasedEventArgs e)
         {
             var pos = e.GetPosition(this);
@@ -84,6 +63,7 @@ namespace LCDonald.Views
             mouseOffsetToOrigin = e.GetPosition(this);
             isPointerPressed = true;
         }
+
         #endregion
     }
 }
