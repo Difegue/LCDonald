@@ -9,6 +9,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Svg.Skia;
 using Avalonia.Threading;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using LCDonald.Core.Controller;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
@@ -26,15 +27,13 @@ namespace LCDonald.Controls
 {
     public partial class AvaloniaLCDView : UserControl, ILCDView
     {
+        private IInteropService _interopService;
+
         // View stuff
-        private Canvas? _lcdCanvas;
-        private Slider? _scaleSlider;
-        private ZoomBorder? _zoomBorder;
         private SKPictureControl _svgElement;
         private SvgDocument? _svgDocument;
 
         // Game stuff
-        private string _gameAssetFolder;
         private MAMELayout? _gameLayout;
         private LCDLogicProcessor? _logicProcessor;
 
@@ -72,7 +71,6 @@ namespace LCDonald.Controls
             set { SetAndRaise(AvailableViewsProperty, ref _gameViews, value); }
         }
 
-
         public static readonly DirectProperty<AvaloniaLCDView, MAMEView> CurrentViewProperty =
            AvaloniaProperty.RegisterDirect<AvaloniaLCDView, MAMEView>(
                nameof(CurrentView),
@@ -97,15 +95,12 @@ namespace LCDonald.Controls
             _gameElements = new List<string>();
             _visibleGameElements = new List<string>();
             _inputBuffer = new List<LCDGameInput>();
-            
-            _lcdCanvas = this.FindControl<Canvas>("LCDCanvas");
-            _lcdCanvas.EffectiveViewportChanged += ComputeScale;
-            
-            _scaleSlider = this.FindControl<Slider>("ScaleSlider");
-            _scaleSlider.PropertyChanged += ForceScale;
 
-            _zoomBorder = this.FindControl<ZoomBorder>("ZoomBorder");
-            _zoomBorder.ZoomChanged += HandleZoom;
+            _interopService = Ioc.Default.GetRequiredService<IInteropService>();
+            
+            LCDCanvas.EffectiveViewportChanged += ComputeScale;
+            ScaleSlider.PropertyChanged += ForceScale;
+            ZoomBorder.ZoomChanged += HandleZoom;
 
             KeyDown += HandleInput;
             KeyUp += ClearInputs;
@@ -116,34 +111,34 @@ namespace LCDonald.Controls
         private void HandleScroll(object? sender, PointerWheelEventArgs e)
         {
             if (e.Delta.Y > 0)
-                _zoomBorder.ZoomIn();
+                ZoomBorder.ZoomIn();
             else
-                _zoomBorder.ZoomOut();
+                ZoomBorder.ZoomOut();
         }
 
         private void HandleZoom(object sender, ZoomChangedEventArgs e)
         {
-            if (_zoomBorder.ZoomX != _scaleSlider.Value)
-                _scaleSlider.Value = _zoomBorder.ZoomX;
+            if (ZoomBorder.ZoomX != ScaleSlider.Value)
+                ScaleSlider.Value = ZoomBorder.ZoomX;
         }
 
         private void ForceScale(object? sender, AvaloniaPropertyChangedEventArgs e)
         {
             if (e.Property.Name == "Value")
             {
-                _zoomBorder.Zoom(_scaleSlider.Value, 0,0);
+                ZoomBorder.Zoom(ScaleSlider.Value, 0,0);
             }
         }
         private void ComputeScale(object? sender, Avalonia.Layout.EffectiveViewportChangedEventArgs e)
         {
             // Get the largest child of the canvas
-            var largestChild = _lcdCanvas.Children.OrderByDescending(c => c.Width * c.Height).First();
+            var largestChild = LCDCanvas.Children.OrderByDescending(c => c.Width * c.Height).First();
 
             // Scale the canvas so that it fits in the current window size
             var scale = Math.Min(Bounds.Width / largestChild.Width, Bounds.Height / largestChild.Height);
             if (scale > 0)
             {
-                _scaleSlider.Value = scale;
+                ScaleSlider.Value = scale;
             }
         }
 
@@ -168,7 +163,7 @@ namespace LCDonald.Controls
             Focus();
 
             // Check if the mouse is over a game element
-            var mousePos = e.GetPosition(_lcdCanvas);
+            var mousePos = e.GetPosition(LCDCanvas);
 
             // Look in the gameElements if there's a button whose bounds contain this position
             var element = _currentView.Elements.FirstOrDefault(el => el.InputTag != null && 
@@ -217,8 +212,6 @@ namespace LCDonald.Controls
         private void LoadGame()
         {
             var gameID = _currentGame.ShortName;
-            var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            _gameAssetFolder = Path.Combine(appFolder, "GameAssets", gameID);
 
             // Clear previous game if any
             _logicProcessor?.Dispose();
@@ -229,14 +222,14 @@ namespace LCDonald.Controls
 
             // Load SVG 
             // TODO: Hide all screen elements after 3 seconds to simulate LCD game init?
-            _svgDocument = SvgExtensions.Open(Path.Combine(_gameAssetFolder, $"{gameID}.svg"));
+            _svgDocument = SvgExtensions.Open(_interopService.GetGameAsset(gameID, $"{gameID}.svg"));
 
             // Load layout
-            _gameLayout = new MAMELayoutParser().Parse(Path.Combine(_gameAssetFolder, $"{gameID}.lay"));
+            _gameLayout = new MAMELayoutParser().Parse(_interopService.GetGameAsset(gameID, $"{gameID}.lay"));
             _gameElements = _currentGame.GetAllGameElements();
 
             // Create logic processor
-            _logicProcessor = new LCDLogicProcessor(_currentGame, this);
+            _logicProcessor = new LCDLogicProcessor(_currentGame, this, _interopService);
 
             // View selection is handled by the viewmodel hosting this control
             AvailableViews = _gameLayout.Views.Values.ToList();
@@ -247,7 +240,7 @@ namespace LCDonald.Controls
             if (_logicProcessor != null)
                 _logicProcessor.MuteSound = SettingsViewModel.CurrentSettings.MuteSound;
             
-            _lcdCanvas?.Children.Clear();
+            LCDCanvas?.Children.Clear();
             
             foreach (var element in view.Elements)
             {
@@ -261,18 +254,19 @@ namespace LCDonald.Controls
                 var darkenBackground = view.Name.ToLower().Contains("front") && element.Ref.ToLower().Contains("bg") && SettingsViewModel.CurrentSettings.DarkenGameBackgrounds;
 
                 // Define child Canvas element
+                var asset = _interopService.GetGameAsset(_currentGame.ShortName, elementPicture);
                 var imageControl = new Image
                 {
                     Width = element.Width,
                     Height = element.Height,
                     Opacity = darkenBackground ? 0.6 : 1,
-                    Source = new Bitmap(Path.Combine(_gameAssetFolder,elementPicture))
+                    Source = new Bitmap(asset)
                 };
                 Canvas.SetTop(imageControl, element.Y);
                 Canvas.SetLeft(imageControl, element.X);
 
                 // Add child elements to the Canvas' Children collection
-                _lcdCanvas?.Children.Add(imageControl);
+                LCDCanvas?.Children.Add(imageControl);
             }
 
             // Draw screen
@@ -294,7 +288,7 @@ namespace LCDonald.Controls
                 Canvas.SetTop(_svgElement, view.ScreenY);
                 Canvas.SetLeft(_svgElement, view.ScreenX);
 
-                _lcdCanvas?.Children.Add(_svgElement);
+                LCDCanvas?.Children.Add(_svgElement);
                 
             }
 

@@ -14,31 +14,28 @@ namespace LCDonald.Core.Controller
     {
         private readonly ILCDGame _currentGame;
         private readonly ILCDView _currentView;
+        private readonly IInteropService _interopService;
         private readonly AudioEngine _gameAudio;
 
         private bool _isPaused = false;
         private bool _isStopped = true;
         private Timer? _gameTimer;
 
-        private string _gameAssetFolder;
-
         private List<SoundStream> _soundsPlaying;
         
-        public LCDLogicProcessor(ILCDGame game, ILCDView view)
+        public LCDLogicProcessor(ILCDGame game, ILCDView view, IInteropService platformService)
         {
             _currentGame = game;
             _currentView = view;
+            _interopService = platformService;
             
-            _gameAudio = AudioEngine.CreateDefault();
+            //_gameAudio = AudioEngine.CreateDefault();
             _soundsPlaying = new List<SoundStream>();
 
             _currentGame.Started += StartGame;
             _currentGame.Stopped += StopGame;
             _currentGame.Paused += PauseResumeGame;
             _currentGame.Resumed += PauseResumeGame;
-
-            var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            _gameAssetFolder = Path.Combine(appFolder, "GameAssets", _currentGame.ShortName);
         }
 
         public bool MuteSound { get; set; }
@@ -117,7 +114,7 @@ namespace LCDonald.Core.Controller
                 if (sound == null || _gameAudio == null) continue;
                 
                 // TODO preload files into memory
-                var soundFile = File.OpenRead(Path.Combine(_gameAssetFolder, sound.AudioFileName));
+                var soundFile = _interopService.GetGameAsset(_currentGame.ShortName, sound.AudioFileName);
                 var soundStream = new SoundStream(soundFile, _gameAudio)
                 {
                     Volume = 0.5f

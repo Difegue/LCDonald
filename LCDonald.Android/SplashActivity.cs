@@ -4,6 +4,9 @@ using Android.OS;
 using Application = Android.App.Application;
 using Avalonia;
 using Avalonia.Android;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using LCDonald.Core.Controller;
 
 namespace LCDonald.Android;
 
@@ -12,6 +15,11 @@ public class SplashActivity : AvaloniaSplashActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        Ioc.Default.ConfigureServices(
+             new ServiceCollection()
+             .AddSingleton<IInteropService, AndroidInteropService>()
+             .BuildServiceProvider());
+
         return base.CustomizeAppBuilder(builder);
     }
 

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Reflection.PortableExecutable;
 using Avalonia;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using LCDonald.Core.Controller;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LCDonald.Desktop;
 
@@ -19,5 +22,14 @@ class Program
                 .UsePlatformDetect()
                 .With(new Win32PlatformOptions { AllowEglInitialization = true })
                 .With(new SkiaOptions { MaxGpuResourceSizeBytes = 256000000 })
+                .AfterSetup(CustomizeAppBuilder)
                 .LogToTrace();
+
+    private static void CustomizeAppBuilder(AppBuilder builder)
+    {
+        Ioc.Default.ConfigureServices(
+             new ServiceCollection()
+             .AddSingleton<IInteropService, DesktopInteropService>()
+             .BuildServiceProvider());
+    }
 }

@@ -15,7 +15,7 @@
     <AndroidResource Include="Icon.png">
       <Link>Resources\drawable\Icon.png</Link>
     </AndroidResource>
-	  <AndroidAsset Include="..\LCDonald.Core\GameAssets\**\*" >
+	  <AndroidAsset Include="..\LCDonald.Core\GameAssets\**\*">
 		  <Link>GameAssets\%(RecursiveDir)/%(FileName)%(Extension)</Link>
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </AndroidAsset>
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" Version="11.0.0-preview5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

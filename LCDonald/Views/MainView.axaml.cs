@@ -41,8 +41,7 @@ namespace LCDonald.Views
             await dialog.ShowAsync();
 
             // Refresh Game View
-            var lcdView = this.FindControl<Controls.AvaloniaLCDView>("LCDView");
-            lcdView.CurrentView = lcdView.CurrentView; // heh
+            LCDView.CurrentView = LCDView.CurrentView; // heh
         }
     }
 }

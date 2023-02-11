@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace LCDonald.Core.Layout
@@ -17,11 +18,11 @@ namespace LCDonald.Core.Layout
         {
         }
 
-        public MAMELayout Parse(string xmlPath)
+        public MAMELayout Parse(Stream fileStream)
         {
             var layout = new MAMELayout();
             var doc = new XmlDocument();
-            doc.Load(xmlPath);
+            doc.Load(fileStream);
 
             var root = doc.DocumentElement;
             if (root.Name != "mamelayout")
