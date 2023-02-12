@@ -57,13 +57,13 @@
 			</Grid.ColumnDefinitions>
 
 			<StackPanel Grid.Column="0">
-				<TextBlock >
+				<TextBlock TextWrapping="Wrap">
 A monument to the everlasting symbiotic relationship between
 Sonic the Hedgehog and ultracapitalist fast food joints. 🏛️
-
+<LineBreak/><LineBreak/>
 Years are approximate, since some games were released at 
 different years in different countries.
-
+<LineBreak/><LineBreak/>
 Powered by Avalonia and the LCDonald engine.
 Feel free to contribute to the project on GitHub!
 				</TextBlock>

@@ -150,10 +150,9 @@
 		<ui:NavigationView.MenuItemTemplateSelector>
 			<vm:MenuItemTemplateSelector>
 				<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
-					<ui:NavigationViewItem Content="{Binding Name}" Height="56" Classes="Game">
+					<ui:NavigationViewItem Content="{Binding Name}" Height="56" Classes="Game" >
 						<ui:NavigationViewItem.IconSource>
-							<ui:BitmapIconSource UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}"
-											    />
+							<ui:BitmapIconSource UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}" />
 						</ui:NavigationViewItem.IconSource>
 					</ui:NavigationViewItem>
 				</DataTemplate>
@@ -162,8 +161,7 @@
 					<DataTemplate DataType="{x:Type core:LCDGameBase}" x:CompileBindings="True">
 						<ui:NavigationViewItem Content="{Binding Name}" Classes="GameMac">
 							<ui:NavigationViewItem.IconSource>
-								<ui:BitmapIconSource UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}"
-												    />
+								<ui:BitmapIconSource UriSource="{Binding ShortName, Converter={StaticResource GameIconConverter}}" />
 							</ui:NavigationViewItem.IconSource>
 						</ui:NavigationViewItem>
 					</DataTemplate>
@@ -205,7 +203,7 @@
 							<DataTemplate>
 								<!-- I can't believe this works -->
 								<ui:CommandBarToggleButton Label="{Binding}" IconSource="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}"
-														   Command="{Binding #Root.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
+														   Command="{Binding #NavView.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
 														   ToolTip.Tip="{Binding}">
 									<ui:CommandBarToggleButton.IsChecked>
 										<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
@@ -240,7 +238,7 @@
 										<ItemsRepeater.ItemTemplate>
 											<DataTemplate>
 												<StackPanel Orientation="Horizontal" Spacing="4">
-													<Border CornerRadius="4" BorderBrush="{StaticResource ComboBoxBorderThemeBrush}" BorderThickness="1"
+													<Border CornerRadius="4" BorderBrush="{DynamicResource ComboBoxBorderBrush}" BorderThickness="1"
 															Width="84">
 														<Label Content="{Binding KeyCode, Converter={StaticResource KeyCodeConverter}}"
 															   HorizontalAlignment="Center"/>

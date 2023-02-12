@@ -32,7 +32,7 @@ namespace LCDonald.Converters
                     symbol = Symbol.PreviewLink;
             }
 
-            return new SymbolIcon { Symbol = symbol };
+            return new SymbolIconSource { Symbol = symbol };
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
