@@ -65,10 +65,10 @@
 
 								<Border Name="IconColumn" Grid.Column="1">
 									<Viewbox Name="IconBox"
-                                         Height="{DynamicResource NavigationViewItemOnLeftIconBoxHeight}"
+                                         Width="38" Height="32"
 										 HorizontalAlignment="Center"
-                                         Margin="4,0">
-										<ContentPresenter Name="Icon"
+                                         Margin="4,0" >
+										<ContentPresenter Name="Icon"  
 														  Content="{TemplateBinding IconSource}" />
 									</Viewbox>
 								</Border>
@@ -113,14 +113,13 @@
 								  HorizontalAlignment="Stretch"
 								  ColumnDefinitions="Auto,*,Auto,Auto">
 
-								<Border Name="IconColumn" Margin="0,0,8,0">
-									<Viewbox Name="IconBox"
-											 Width="112"
-											 Height="36"
-											 HorizontalAlignment="Center"
-											 >
+								<Border Name="IconColumn" Margin="14,0">
+									<Viewbox Name="IconBox" 
+											 Width="38" Height="42"
+											 HorizontalAlignment="Center">
 										<ContentPresenter Name="Icon"
-														  Content="{TemplateBinding IconSource}" />
+                                                      Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"
+                                                      Foreground="{DynamicResource NavigationViewItemForeground}"/>
 									</Viewbox>
 								</Border>
 
