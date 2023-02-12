@@ -19,11 +19,11 @@
 				CornerRadius="{StaticResource ControlCornerRadius}">
 			
 			<StackPanel Orientation="Vertical" Spacing="4" ToolTip.Tip="Zoom on Game">
-				<Label Content="➕" HorizontalAlignment="Center"/>
+				<Label Content="➕" HorizontalAlignment="Center" PointerPressed="ZoomIn"/>
 				<Slider Orientation="Vertical" Margin="0,0,0,-4"
 						x:Name="ScaleSlider" PointerWheelChanged="HandleScroll"
 						Minimum="0.1" Maximum="0.99" Height="125"/>
-				<Label Content="➖" HorizontalAlignment="Center"/>
+				<Label Content="➖" HorizontalAlignment="Center" PointerPressed="ZoomOut"/>
 			</StackPanel>
 		</Border>
 	</Grid>

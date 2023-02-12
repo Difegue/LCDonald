@@ -116,6 +116,9 @@ namespace LCDonald.Controls
                 ZoomBorder.ZoomOut();
         }
 
+        private void ZoomIn(object? sender, PointerPressedEventArgs e) => ZoomBorder.ZoomIn();
+        private void ZoomOut(object? sender, PointerPressedEventArgs e) => ZoomBorder.ZoomOut();
+
         private void HandleZoom(object sender, ZoomChangedEventArgs e)
         {
             if (ZoomBorder.ZoomX != ScaleSlider.Value)
@@ -179,6 +182,7 @@ namespace LCDonald.Controls
                 }
             }
         }
+
 
         private void ClearInputs(object? sender, KeyEventArgs e)
         {
