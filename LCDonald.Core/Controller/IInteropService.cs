@@ -13,5 +13,13 @@ namespace LCDonald.Core.Controller
     public interface IInteropService
     {
         Stream GetGameAsset(string game, string assetName);
+        ISoundStream PlayAudio(string game, string assetName, float v);
+    }
+
+    public interface ISoundStream
+    {
+        bool IsPlaying { get; }
+        void Dispose();
+        void Stop();
     }
 }

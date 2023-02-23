@@ -1,10 +1,6 @@
 ﻿using LCDonald.Core.Model;
-using SharpAudio;
-using SharpAudio.Codec;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -15,13 +11,12 @@ namespace LCDonald.Core.Controller
         private readonly ILCDGame _currentGame;
         private readonly ILCDView _currentView;
         private readonly IInteropService _interopService;
-        private readonly AudioEngine _gameAudio;
 
         private bool _isPaused = false;
         private bool _isStopped = true;
         private Timer? _gameTimer;
 
-        private List<SoundStream> _soundsPlaying;
+        private List<ISoundStream> _soundsPlaying;
         
         public LCDLogicProcessor(ILCDGame game, ILCDView view, IInteropService platformService)
         {
@@ -29,8 +24,7 @@ namespace LCDonald.Core.Controller
             _currentView = view;
             _interopService = platformService;
             
-            //_gameAudio = AudioEngine.CreateDefault();
-            _soundsPlaying = new List<SoundStream>();
+            _soundsPlaying = new List<ISoundStream>();
 
             _currentGame.Started += StartGame;
             _currentGame.Stopped += StopGame;
@@ -111,15 +105,9 @@ namespace LCDonald.Core.Controller
         {
             foreach (var sound in gameSounds)
             {
-                if (sound == null || _gameAudio == null) continue;
+                if (sound == null) continue;
                 
-                // TODO preload files into memory
-                var soundFile = _interopService.GetGameAsset(_currentGame.ShortName, sound.AudioFileName);
-                var soundStream = new SoundStream(soundFile, _gameAudio)
-                {
-                    Volume = 0.5f
-                };
-                soundStream.Play();
+                var soundStream = _interopService.PlayAudio(_currentGame.ShortName, sound.AudioFileName, 0.5f);
                 _soundsPlaying.Add(soundStream);
             }
         }
@@ -139,7 +127,6 @@ namespace LCDonald.Core.Controller
             _gameTimer?.Dispose();
 
             FlushSounds();
-            _gameAudio?.Dispose();
             
             _currentGame.Started -= StartGame;
             _currentGame.Stopped -= StopGame;
