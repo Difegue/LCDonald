@@ -234,6 +234,11 @@ namespace LCDonald.Controls
 
             // Create logic processor
             _logicProcessor = new LCDLogicProcessor(_currentGame, this, _interopService);
+            
+            // Memes
+            if (!SettingsViewModel.CurrentSettings.MuteSound && 
+                (gameID == "artennis" || gameID == "cflower" || gameID == "kbaseball" || gameID == "sbasketball" || gameID == "sskateboard" || gameID == "tsoccer"))
+                _interopService.PlayAudio("memes", gameID + ".ogg", 0.6f);
 
             // View selection is handled by the viewmodel hosting this control
             AvailableViews = _gameLayout.Views.Values.ToList();
