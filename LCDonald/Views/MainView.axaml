@@ -6,9 +6,9 @@
 			xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
 			xmlns:controls="using:LCDonald.Controls"
 			xmlns:core="using:LCDonald.Core.Model"
-			xmlns:converters="using:LCDonald.Converters"
+			xmlns:converters="using:LCDonald.Converters" 
 			xmlns:vm="using:LCDonald.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="600"
+             mc:Ignorable="d" d:DesignWidth="940" d:DesignHeight="600" 
              x:Class="LCDonald.Views.MainView">
 
 	<Design.DataContext>
@@ -30,6 +30,7 @@
 					   TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
 					   HorizontalAlignment="Stretch" VerticalAlignment="Center"
 					   FontFamily="{StaticResource ContentControlThemeFontFamily}"
+					   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                        FontSize="18" FontWeight="SemiBold"/>
 		</DataTemplate>
 	</UserControl.Resources>
