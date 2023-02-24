@@ -35,6 +35,12 @@
 		<element ref="front_open">
 			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1386" y="1892" width="210" height="275" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2322" y="1871" width="210" height="286" />
+		</element>
 		<element ref="game_bg_crop">
 			<bounds x="1796" y="1387" width="315" height="400" />
 		</element>
@@ -44,6 +50,12 @@
 		<screen index="0">
 			<bounds x="31" y="30" width="806" height="1016" />
 		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="436" height="1119" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="437" y="0" width="436" height="1119" />
+		</element>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="872" height="1119" />
 		</element>
@@ -52,6 +64,12 @@
 	<view name="Front Closed">
 		<element ref="front_closed">
 			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1386" y="1892" width="210" height="275" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2322" y="1871" width="210" height="286" />
 		</element>
 	</view>
 

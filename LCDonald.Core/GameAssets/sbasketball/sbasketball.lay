@@ -29,6 +29,15 @@
 		<element ref="front">
 			<bounds x="0" y="0" width="2237" height="2600" />
 		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="468" y="1773" width="227" height="244" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="695" y="1773" width="240" height="236" />
+		</element>
+		<element ref="button" inputtag="Basket">
+			<bounds x="1430" y="1721" width="381" height="369" />
+		</element>
 		<element ref="game_bg_crop">
 			<bounds x="866" y="445" width="536" height="677" />
 		</element>
@@ -38,6 +47,15 @@
 		<screen index="0">
 			<bounds x="8" y="-16" width="886" height="1120" />
 		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Basket">
+			<bounds x="0" y="0" width="884" height="559" />
+		</element>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="884" height="1118" />
 		</element>

@@ -41,6 +41,9 @@
 		<screen index="0">
 			<bounds x="24" y="43" width="786" height="605" />
 		</screen>
+		<element ref="button" inputtag="Jump">
+			<bounds x="0" y="0" width="836" height="665" />
+		</element>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="836" height="665" />
 		</element>

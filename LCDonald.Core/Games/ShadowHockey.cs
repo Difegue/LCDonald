@@ -79,8 +79,8 @@ namespace LCDonald.Core.Games
                 },
                 new LCDGameInput
                 {
-                    Name = "Basket",
-                    Description = "Make a basket",
+                    Name = "Hockey",
+                    Description = "Shoot a puck",
                     KeyCode = 18, // space
                 }
             };

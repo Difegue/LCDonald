@@ -32,6 +32,15 @@
 		<element ref="front_open">
 			<bounds x="0" y="0" width="3959" height="2639" />
 		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1428" y="1723" width="157" height="173" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1580" y="1722" width="167" height="173" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="2297" y="1695" width="184" height="245" />
+		</element>
 		<element ref="game_bg">
 			<bounds x="1832" y="1313" width="300" height="380" />
 		</element>
@@ -41,6 +50,15 @@
 		<screen index="0">
 			<bounds x="0" y="0" width="900" height="1140" />
 		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="570" width="450" height="569" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="570" width="450" height="569" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="0" y="0" width="900" height="569" />
+		</element>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="900" height="1140" />
 		</element>
@@ -49,6 +67,15 @@
 	<view name="Front Closed">
 		<element ref="front_closed">
 			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1428" y="1723" width="157" height="173" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1580" y="1722" width="167" height="173" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="2297" y="1695" width="184" height="245" />
 		</element>
 	</view>
 
