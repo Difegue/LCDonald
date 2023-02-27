@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
+		<image file="abanana_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="abanana_front.jpg" />
@@ -63,7 +63,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="773" height="773" />
+			<bounds x="0" y="0" width="1183" height="1086" />
 		</element>
 	</view>
 </mamelayout>
