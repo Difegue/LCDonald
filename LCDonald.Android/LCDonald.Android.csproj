@@ -2,6 +2,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0-android</TargetFramework>
+	<RuntimeIdentifiers>android-arm;android-arm64;android-x64</RuntimeIdentifiers>
+	  
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ApplicationId>com.tvc16.lcdonald</ApplicationId>
@@ -9,7 +11,10 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+
+	 <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
+	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AndroidStoreUncompressedFileExtensions>ogg</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
