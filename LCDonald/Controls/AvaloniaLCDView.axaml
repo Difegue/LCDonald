@@ -6,14 +6,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LCDonald.Controls.AvaloniaLCDView">
 	<Grid>
-
-		<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-				CornerRadius="{StaticResource ControlCornerRadius}" 
-				ClipToBounds="True">
-			<Image Source="avares://LCDonald/Assets/McD_2003_Promotion.jpg"
-			   Stretch="UniformToFill" Opacity="0.2"/>
-		</Border>
-
 		<paz:ZoomBorder Name="ZoomBorder" ZoomSpeed="1.2" PanButton="Left" MaxZoomX="1" MaxZoomY="1" MinZoomX="0.1" MinZoomY="0.1"
 						ClipToBounds="True" Focusable="False" 
 						CornerRadius="{StaticResource ControlCornerRadius}"

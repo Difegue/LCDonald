@@ -18,6 +18,7 @@
 	<UserControl.Resources>
 		<converters:KeyCodeConverter x:Key="KeyCodeConverter"/>
 		<converters:GameIconConverter x:Key="GameIconConverter"/>
+		<converters:GameBackgroundConverter x:Key="GameBackgroundConverter"/>
 		<converters:ViewIconConverter x:Key="ViewIconConverter"/>
 		<converters:ObjectEqualsConverter x:Key="ObjectEqualityConverter"/>
 		<DataTemplate x:Key="DialogTitleTemplate">
@@ -191,6 +192,14 @@
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
+
+				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						Grid.Row="0" Grid.Column="0" Margin="0,4,0,0"
+						CornerRadius="{StaticResource ControlCornerRadius}"
+						ClipToBounds="True">
+					<Image Source="{Binding Game.ShortName, Converter={StaticResource GameBackgroundConverter}}"
+						   Stretch="UniformToFill" Opacity="0.2"/>
+				</Border>
 				<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0"
 					   Margin="8,0,0,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
 
@@ -256,6 +265,14 @@
 						</ui:CommandBarButton.Flyout>
 					</ui:CommandBarButton>
 				</StackPanel>
+
+				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						CornerRadius="{StaticResource ControlCornerRadius}" 
+						Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+						ClipToBounds="True">
+					<Image Source="avares://LCDonald/Assets/bg_1.jpg"
+					   Stretch="UniformToFill" Opacity="0.2"/>
+				</Border>
 
 				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
 										  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

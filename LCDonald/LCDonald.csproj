@@ -7,7 +7,12 @@
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
 		<None Remove=".gitignore" />
-		<None Remove="Assets\McD_2003_Promotion.jpg" />
+		<None Remove="Assets\Backgrounds\2003_series.jpg" />
+		<None Remove="Assets\Backgrounds\2004_series.jpg" />
+		<None Remove="Assets\Backgrounds\2005_series.jpg" />
+		<None Remove="Assets\Backgrounds\2005_series_2.jpg" />
+		<None Remove="Assets\bg_1.jpg" />
+		<None Remove="Assets\bg_2.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
