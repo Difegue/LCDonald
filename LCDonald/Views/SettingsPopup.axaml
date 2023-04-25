@@ -69,7 +69,7 @@ Feel free to contribute to the project on GitHub!
 				</TextBlock>
 
 				<ui:HyperlinkButton Margin="0,8,0,0" Content="View Source Code on GitHub" NavigateUri="http://github.com/Difegue/LCDonald"  />
-				<ui:HyperlinkButton Content="Part of SAGE 2022 🌴" NavigateUri="https://sonicfangameshq.com/forums/showcase/"  />
+				<ui:HyperlinkButton Content="Part of SAGE 2023 🃏" NavigateUri="https://sonicfangameshq.com/forums/showcase/"  />
 				<ui:HyperlinkButton Content="Special Thanks to Sonic Retro" NavigateUri="https://info.sonicretro.org/McDonald%27s_Sonic_LCD_games"  />
 			</StackPanel>
 
@@ -78,7 +78,7 @@ Feel free to contribute to the project on GitHub!
 					<CrossFade Duration="0.5"/>
 				</Carousel.PageTransition>
 				<Image Source="avares://LCDonald/Assets/app-icon.ico"/>
-				<Svg   Path="avares://LCDonald/Assets/SAGE22LOGOSVG.svg"/>
+				<Svg   Path="avares://LCDonald/Assets/SAGE2023LOGOSVG.svg"/>
 			</Carousel>
 		</Grid>
 

@@ -13,6 +13,7 @@
 		<None Remove="Assets\Backgrounds\2005_series_2.jpg" />
 		<None Remove="Assets\bg_1.jpg" />
 		<None Remove="Assets\bg_2.jpg" />
+		<None Remove="Assets\SAGE2023LOGOSVG.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
