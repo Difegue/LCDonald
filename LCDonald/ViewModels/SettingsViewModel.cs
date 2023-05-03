@@ -87,8 +87,7 @@ namespace LCDonald.ViewModels
             }
             else
             {
-                Application.Current.RequestedThemeVariant = new ThemeVariant(CurrentSettings.ApplicationTheme, ThemeVariant.Dark);
-                thm.PreferSystemTheme = false;
+                Application.Current.RequestedThemeVariant = CurrentSettings.ApplicationTheme == "Light" ? ThemeVariant.Light : ThemeVariant.Dark;
             }
 
         }

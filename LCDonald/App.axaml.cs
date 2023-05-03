@@ -30,8 +30,7 @@ namespace LCDonald
             }
             else
             {
-                RequestedThemeVariant = new ThemeVariant(SettingsViewModel.CurrentSettings.ApplicationTheme, ThemeVariant.Dark);
-                thm.PreferSystemTheme = false;
+                RequestedThemeVariant = SettingsViewModel.CurrentSettings.ApplicationTheme == "Light" ? ThemeVariant.Light : ThemeVariant.Dark;
             }
 
             var mainView = new MainView

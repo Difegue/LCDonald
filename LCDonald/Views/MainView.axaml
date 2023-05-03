@@ -259,7 +259,7 @@
 									</ItemsRepeater>
 
 									<ui:InfoBadge Classes="Attention Dot" Margin="-12,16,12,-16" HorizontalAlignment="Left"/>
-									<TextBlock TextWrapping="Wrap" FontSize="10" Text="You can use the mouse to pan and zoom over the games." />
+									<TextBlock TextWrapping="Wrap" FontSize="10" Text="You can use touch/mouse to pan, zoom and control the games." />
 								</StackPanel>
 							</Flyout>
 						</ui:CommandBarButton.Flyout>
