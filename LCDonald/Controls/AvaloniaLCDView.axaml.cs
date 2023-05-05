@@ -134,6 +134,8 @@ namespace LCDonald.Controls
         }
         private void ComputeScale(object? sender, Avalonia.Layout.EffectiveViewportChangedEventArgs e)
         {
+            if (LCDCanvas.Children.Count == 0) return;
+
             // Get the largest child of the canvas
             var largestChild = LCDCanvas.Children.OrderByDescending(c => c.Width * c.Height).First();
 

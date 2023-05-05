@@ -31,7 +31,7 @@
 		<CFBundleShortVersionString>1.0.0</CFBundleShortVersionString>
 		<CFBundlePackageType>APPL</CFBundlePackageType>
 		<CFBundleSignature>????</CFBundleSignature>
-		<CFBundleExecutable>LCDonald</CFBundleExecutable>
+		<CFBundleExecutable>LCDonald.Desktop</CFBundleExecutable>
 		<CFBundleIconFile>AppIcon.icns</CFBundleIconFile>
 		<!-- Will be copied from output directory -->
 		<NSPrincipalClass>NSApplication</NSPrincipalClass>
