@@ -43,9 +43,9 @@
 	</ItemGroup>
 
   <ItemGroup>
-		<PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview7" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview5" />
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview7" />
 		<PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="SharpAudio" Version="1.0.53-beta" />
