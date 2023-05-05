@@ -1,6 +1,7 @@
 ﻿using LCDonald.Core.Controller;
 using SharpAudio;
 using SharpAudio.Codec;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -13,7 +14,7 @@ namespace LCDonald.Desktop
 
         public DesktopInteropService()
         {
-            var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var appFolder = AppContext.BaseDirectory;
             _gameAssetFolder = Path.Combine(appFolder, "GameAssets");
 
             _gameAudio = AudioEngine.CreateDefault();

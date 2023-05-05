@@ -6,12 +6,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <RuntimeIdentifiers>win10-x64;linux-x64;osx-x64</RuntimeIdentifiers>
     <Nullable>enable</Nullable>
+
+	<!-- Turn off trimming as it breaks the published files on 11 preview for now -->
+	<PublishTrimmed>false</PublishTrimmed>
+	<PublishSingleFile>true</PublishSingleFile>
 	  
-    <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
-	<TrimMode>copyused</TrimMode>
-	  
-	<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-	<PublishTrimmed>true</PublishTrimmed>
 	<ApplicationIcon>..\LCDonald\Assets\app-icon.ico</ApplicationIcon>
 	<UseAppHost>true</UseAppHost>
   </PropertyGroup>
