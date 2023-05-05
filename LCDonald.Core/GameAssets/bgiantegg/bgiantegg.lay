@@ -57,7 +57,7 @@
 			<bounds x="0" y="0" width="443" height="1142" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="444" y="0" width="192" height="1142" />
+			<bounds x="444" y="0" width="443" height="1142" />
 		</element>
 	</view>
 

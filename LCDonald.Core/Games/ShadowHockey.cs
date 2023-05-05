@@ -230,7 +230,7 @@ namespace LCDonald.Core.Games
                     _shadowPosition++;
                     QueueSound(new LCDGameSound("move.ogg"));
                 }
-                else if (input.Name == "Basket" && _ballPosition == 0)
+                else if (input.Name == "Hockey" && _ballPosition == 0)
                 {
                     _ballPosition = _shadowPosition + 10;
                     SetBallSlowdown(true);
