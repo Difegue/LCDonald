@@ -25,13 +25,13 @@ All scanned/photographied materials in this repository are ©️SEGA, 2004/2005/
 
 ```
 # Windows
-cd LCDonald.Desktop && dotnet publish .\LCDonald.Desktop.csproj -c release -r win-x64
+cd LCDonald.Desktop && dotnet restore && dotnet publish .\LCDonald.Desktop.csproj -c release -r win-x64
 
 # Linux
-cd LCDonald.Desktop && dotnet publish .\LCDonald.Desktop.csproj -c release -r linux-x64
+cd LCDonald.Desktop && dotnet restore && dotnet publish .\LCDonald.Desktop.csproj -c release -r linux-x64
 
 # macOS
-cd LCDonald.Desktop && dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release
+cd LCDonald.Desktop && dotnet restore && dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release
 
 # Android (Release is busted for now)
 cd LCDonald.Android && dotnet build .\LCDonald.Android.csproj -c debug 
