@@ -32,7 +32,7 @@
 							 IconSource="DarkTheme"
 							 CornerRadius="{StaticResource ControlCornerRadius}">
 			<ui:SettingsExpander.Footer>
-				<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding DarkenGameBackgrounds}"/>
+				<ToggleSwitch IsChecked="{Binding DarkenGameBackgrounds}"/>
 			</ui:SettingsExpander.Footer>
 		</ui:SettingsExpander>
 
@@ -41,7 +41,7 @@
 							 IconSource="Mute" 
 							 CornerRadius="{StaticResource ControlCornerRadius}">
 			<ui:SettingsExpander.Footer>
-				<ToggleSwitch Margin="0,0,-80,0" IsChecked="{Binding MuteSound}"/>
+				<ToggleSwitch IsChecked="{Binding MuteSound}"/>
 			</ui:SettingsExpander.Footer>
 		</ui:SettingsExpander>
 		
