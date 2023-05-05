@@ -68,10 +68,10 @@
 								<Border Name="IconColumn" Grid.Column="1">
 									<Viewbox Name="IconBox"
                                          Width="38" Height="32"
-										 HorizontalAlignment="Center"
-                                         Margin="4,0" >
-										<ContentPresenter Name="Icon"  
-														  Content="{TemplateBinding IconSource}" />
+										 HorizontalAlignment="Center">
+										<ContentPresenter Name="Icon" Margin="40,0"
+                                                      Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"
+                                                      Foreground="{DynamicResource NavigationViewItemForeground}"/>
 									</Viewbox>
 								</Border>
 
