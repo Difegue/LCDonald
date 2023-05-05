@@ -33,7 +33,7 @@
 			<bounds x="1025" y="1274" width="453" height="483" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="2658" y="2143" width="463" height="492" />
+			<bounds x="2658" y="1274" width="463" height="492" />
 		</element>
 		<element ref="game_bg_crop">
 			<bounds x="1769" y="574" width="585" height="711" />
