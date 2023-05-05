@@ -2,12 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:ui="using:FluentAvalonia.UI.Controls"
-			 xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
-			 xmlns:controls="using:LCDonald.Controls"
-			 xmlns:core="using:LCDonald.Core.Model"
-			 xmlns:converters="using:LCDonald.Converters" 
-			 xmlns:vm="using:LCDonald.ViewModels"
+			xmlns:ui="using:FluentAvalonia.UI.Controls"
+			xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
+			xmlns:controls="using:LCDonald.Controls"
+			xmlns:core="using:LCDonald.Core.Model"
+			xmlns:converters="using:LCDonald.Converters" 
+			xmlns:vm="using:LCDonald.ViewModels"
              mc:Ignorable="d" d:DesignWidth="940" d:DesignHeight="600" 
              x:Class="LCDonald.Views.MainView">
 
@@ -144,9 +144,8 @@
 	<ui:NavigationView Name="NavView"
 						   CompactPaneLength="72"
 						   OpenPaneLength="296"
-					       CompactModeThresholdWidth="0"
 						   IsSettingsVisible="False"
-						   MenuItemsSource="{Binding AvailableGames}"
+						   MenuItems="{Binding AvailableGames}"
 						   SelectedItem="{Binding Game}">
 
 		<ui:NavigationView.MenuItemTemplateSelector>
@@ -205,7 +204,7 @@
 					   Margin="8,0,0,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
 
 				<ScrollViewer Grid.Row="0" Grid.Column="1" >
-					<ItemsRepeater ItemsSource="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
+					<ItemsRepeater Items="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
 						<ItemsRepeater.Layout>
 							<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
 						</ItemsRepeater.Layout>
@@ -214,7 +213,7 @@
 								<!-- I can't believe this works -->
 								<ui:CommandBarToggleButton Label="{Binding}" IconSource="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}"
 														   Command="{Binding #NavView.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
-														   ToolTip.Tip="{Binding}"   >
+														   ToolTip.Tip="{Binding}">
 									<ui:CommandBarToggleButton.IsChecked>
 										<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
 										<MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
@@ -241,7 +240,7 @@
 
 								<StackPanel Orientation="Vertical" Spacing="8" Width="256" Margin="8,8,8,0">
 
-									<ItemsRepeater ItemsSource="{Binding CurrentInputs}">
+									<ItemsRepeater Items="{Binding CurrentInputs}">
 										<ItemsRepeater.Layout>
 											<UniformGridLayout Orientation="Vertical" MinRowSpacing="8" ItemsJustification="End" />
 										</ItemsRepeater.Layout>
