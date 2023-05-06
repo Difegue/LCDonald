@@ -21,6 +21,7 @@
 		<converters:GameBackgroundConverter x:Key="GameBackgroundConverter"/>
 		<converters:ViewIconConverter x:Key="ViewIconConverter"/>
 		<converters:ObjectEqualsConverter x:Key="ObjectEqualityConverter"/>
+		<converters:MinimalDisplayModeConverter x:Key="MinimalDisplayModeConverter"/>
 		<DataTemplate x:Key="DialogTitleTemplate">
 			<TextBlock Text="{Binding }"
 					   FontFamily="{StaticResource ContentControlThemeFontFamily}"
@@ -188,22 +189,23 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition MinWidth="96" MaxWidth="256"/>
-					<ColumnDefinition Width="*"/>
+					<ColumnDefinition MinWidth="32" Width="*" MaxWidth="256" />
+					<ColumnDefinition Width="2.5*"/>
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
 
-				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-						Grid.Row="0" Grid.Column="0" Margin="0,4,0,0"
+				<Border Grid.Row="0" Grid.Column="0" Margin="0,4,0,0"
 						CornerRadius="{StaticResource ControlCornerRadius}"
-						ClipToBounds="True">
+						ClipToBounds="True" MinWidth="128"
+						IsVisible="{Binding #NavView.DisplayMode, Converter={StaticResource MinimalDisplayModeConverter}}">
 					<Image Source="{Binding Game.ShortName, Converter={StaticResource GameBackgroundConverter}}"
 						   Stretch="UniformToFill" Opacity="0.2"/>
 				</Border>
-				<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0"
-					   Margin="8,0,0,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
+				<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0" MinWidth="128"
+					   IsVisible="{Binding #NavView.DisplayMode, Converter={StaticResource MinimalDisplayModeConverter}}"
+					   Margin="8,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
 
-				<ScrollViewer Grid.Row="0" Grid.Column="1" >
+				<ScrollViewer Grid.Row="0" Grid.Column="1">
 					<ItemsRepeater Items="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
 						<ItemsRepeater.Layout>
 							<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
