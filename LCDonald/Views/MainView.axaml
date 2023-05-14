@@ -2,12 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			xmlns:ui="using:FluentAvalonia.UI.Controls"
-			xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
-			xmlns:controls="using:LCDonald.Controls"
-			xmlns:core="using:LCDonald.Core.Model"
-			xmlns:converters="using:LCDonald.Converters" 
-			xmlns:vm="using:LCDonald.ViewModels"
+			 xmlns:ui="using:FluentAvalonia.UI.Controls"
+			 xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
+			 xmlns:controls="using:LCDonald.Controls"
+			 xmlns:core="using:LCDonald.Core.Model"
+			 xmlns:converters="using:LCDonald.Converters" 
+			 xmlns:vm="using:LCDonald.ViewModels"
              mc:Ignorable="d" d:DesignWidth="940" d:DesignHeight="600" 
              x:Class="LCDonald.Views.MainView">
 
@@ -146,7 +146,7 @@
 						   CompactPaneLength="72"
 						   OpenPaneLength="296"
 						   IsSettingsVisible="False"
-						   MenuItems="{Binding AvailableGames}"
+						   MenuItemsSource="{Binding AvailableGames}"
 						   SelectedItem="{Binding Game}">
 
 		<ui:NavigationView.MenuItemTemplateSelector>
@@ -205,8 +205,8 @@
 					   IsVisible="{Binding #NavView.DisplayMode, Converter={StaticResource MinimalDisplayModeConverter}}"
 					   Margin="8,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
 
-				<ScrollViewer Grid.Row="0" Grid.Column="1">
-					<ItemsRepeater Items="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
+				<ScrollViewer Grid.Row="0" Grid.Column="1" >
+					<ItemsRepeater ItemsSource="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
 						<ItemsRepeater.Layout>
 							<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
 						</ItemsRepeater.Layout>
@@ -242,7 +242,7 @@
 
 								<StackPanel Orientation="Vertical" Spacing="8" Width="256" Margin="8,8,8,0">
 
-									<ItemsRepeater Items="{Binding CurrentInputs}">
+									<ItemsRepeater ItemsSource="{Binding CurrentInputs}">
 										<ItemsRepeater.Layout>
 											<UniformGridLayout Orientation="Vertical" MinRowSpacing="8" ItemsJustification="End" />
 										</ItemsRepeater.Layout>
