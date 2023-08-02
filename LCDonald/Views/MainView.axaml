@@ -276,7 +276,7 @@
 					   Stretch="UniformToFill" Opacity="0.2"/>
 				</Border>
 
-				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0" Focusable="True"
 										  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 										  AvailableViews="{Binding AvailableViews, Mode=OneWayToSource}"
 										  CurrentGame="{Binding Game}" CurrentView="{Binding SelectedView, Mode=OneWay}"/>
