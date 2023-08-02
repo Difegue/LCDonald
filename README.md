@@ -33,7 +33,7 @@ cd LCDonald.Desktop && dotnet restore && dotnet publish .\LCDonald.Desktop.cspro
 # macOS
 cd LCDonald.Desktop && dotnet restore && dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release
 
-# Android (Release is busted for now)
-cd LCDonald.Android && dotnet build .\LCDonald.Android.csproj -c debug 
+# Android 
+cd LCDonald.Android && dotnet build .\LCDonald.Android.csproj -c release 
 
 ```
