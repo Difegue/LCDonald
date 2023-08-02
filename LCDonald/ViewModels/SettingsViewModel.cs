@@ -78,7 +78,7 @@ namespace LCDonald.ViewModels
         
             SaveSettings();
 
-            var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
+            var thm = Application.Current?.Styles.OfType<FluentAvaloniaTheme>().FirstOrDefault();
 
             if (CurrentSettings.ApplicationTheme == "System" || CurrentSettings.ApplicationTheme == "Default")
             {

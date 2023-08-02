@@ -46,8 +46,7 @@ namespace LCDonald.Converters
                 _ => "avares://LCDonald/Assets/Backgrounds/2003_series.jpg",
             };
 
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-            var asset = assets.Open(new Uri(url));
+            var asset = AssetLoader.Open(new Uri(url));
             
             return new Bitmap(asset);
         }

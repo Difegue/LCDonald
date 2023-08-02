@@ -8,6 +8,7 @@ using LCDonald.Core.Layout;
 using LCDonald.ViewModels;
 using LCDonald.Views;
 using System;
+using System.Linq;
 
 namespace LCDonald
 {
@@ -20,7 +21,7 @@ namespace LCDonald
 
         public override void OnFrameworkInitializationCompleted()
         {
-            var thm = AvaloniaLocator.Current.GetService<FluentAvaloniaTheme>();
+            var thm = Application.Current?.Styles.OfType<FluentAvaloniaTheme>().FirstOrDefault();
             var settings = new SettingsViewModel();
             
             if (SettingsViewModel.CurrentSettings.ApplicationTheme == "System" || SettingsViewModel.CurrentSettings.ApplicationTheme == "Default") 
