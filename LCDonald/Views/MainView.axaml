@@ -116,7 +116,7 @@
 								  HorizontalAlignment="Stretch"
 								  ColumnDefinitions="Auto,*,Auto,Auto">
 
-								<Border Name="IconColumn" Margin="14,0">
+								<Border Name="IconColumn">
 									<Viewbox Name="IconBox" 
 											 Width="38" Height="42"
 											 HorizontalAlignment="Center">
