@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="kbaseball_manual.jpg" />
+		<image file="kbaseball_manual.png" />
 	</element>
 	<element name="front">
 		<image file="kbaseball_front.jpg" />
@@ -63,7 +63,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="307" height="307" />
+			<bounds x="0" y="0" width="897" height="910" />
 		</element>
 	</view>
 </mamelayout>
@@ -72,6 +72,6 @@
 Knuckles Baseball
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-- Manual scan from Sonic Retro.
+- Instructions scan provided by Nightsy.
 -->
 

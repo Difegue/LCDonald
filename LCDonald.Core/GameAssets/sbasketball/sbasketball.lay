@@ -69,7 +69,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="778" height="826" />
+			<bounds x="0" y="0" width="897" height="910" />
 		</element>
 	</view>
 </mamelayout>
@@ -78,6 +78,6 @@
 Shadow Basketball
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-- Manual scan from Sonic Retro.
+- Instructions scan provided by Nightsy.
 -->
 

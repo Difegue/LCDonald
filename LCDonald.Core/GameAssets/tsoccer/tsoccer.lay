@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="tsoccer_manual.jpg" />
+		<image file="tsoccer_manual.png" />
 	</element>
 	<element name="front">
 		<image file="tsoccer_front.jpg" />
@@ -63,7 +63,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="432" height="422" />
+			<bounds x="0" y="0" width="897" height="910" />
 		</element>
 	</view>
 </mamelayout>
@@ -72,7 +72,6 @@
 Tails Soccer
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-- Manual taken from Sonic Retro.
-
+- Instructions scan provided by Nightsy.
 -->
 
