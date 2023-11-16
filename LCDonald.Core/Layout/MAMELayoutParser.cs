@@ -74,7 +74,8 @@ namespace LCDonald.Core.Layout
                 ScreenHeight = screenBounds != null ? int.Parse(screenBounds.Attributes["height"].Value) : -1,
                 ScreenWidth = screenBounds != null ? int.Parse(screenBounds.Attributes["width"].Value) : -1,
                 ScreenX = screenBounds != null ? int.Parse(screenBounds.Attributes["x"].Value) : -1,
-                ScreenY = screenBounds != null ? int.Parse(screenBounds.Attributes["y"].Value) : -1
+                ScreenY = screenBounds != null ? int.Parse(screenBounds.Attributes["y"].Value) : -1,
+                ScreenIndex = int.Parse(node.SelectSingleNode("screen")?.Attributes["index"]?.Value ?? "-1")
 
             };
             view.Elements.AddRange(ParseViewElements(node));

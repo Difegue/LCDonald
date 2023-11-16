@@ -9,6 +9,7 @@ namespace LCDonald.Core.Layout
         public int ScreenY { get; init; }
         public int ScreenWidth { get; init; }
         public int ScreenHeight { get; init; }
+        public int ScreenIndex { get; init; }
 
         public List<MAMEElementRef> Elements { get; init; } = new List<MAMEElementRef>();
 
