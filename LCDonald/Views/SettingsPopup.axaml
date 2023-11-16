@@ -76,7 +76,7 @@
 					<CrossFade Duration="0.5"/>
 				</Carousel.PageTransition>
 				<Image Source="avares://LCDonald/Assets/app-icon.ico" Width="160"/>
-				<Svg   Path="avares://LCDonald/Assets/SAGE2023LOGOSVG.svg"/>
+				<Svg   Path="avares://LCDonald/Assets/CHRISTMASSAGELOGOMONOSVG.svg"/>
 			</Carousel>
 		</Grid>
 
