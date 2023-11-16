@@ -189,8 +189,8 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition MinWidth="32" Width="*" MaxWidth="256" />
-					<ColumnDefinition Width="2.5*"/>
+					<ColumnDefinition MinWidth="32" Width="*" MaxWidth="400" />
+					<ColumnDefinition MinWidth="124" Width="*" />
 					<ColumnDefinition Width="268"/>
 				</Grid.ColumnDefinitions>
 
@@ -205,29 +205,42 @@
 					   IsVisible="{Binding #NavView.DisplayMode, Converter={StaticResource MinimalDisplayModeConverter}}"
 					   Margin="8,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
 
-				<ScrollViewer Grid.Row="0" Grid.Column="1" >
-					<ItemsRepeater ItemsSource="{Binding AvailableViews}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,12,0">
-						<ItemsRepeater.Layout>
-							<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
-						</ItemsRepeater.Layout>
-						<ItemsRepeater.ItemTemplate>
-							<DataTemplate>
-								<!-- I can't believe this works -->
-								<ui:CommandBarToggleButton Label="{Binding}" IconSource="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}"
-														   Command="{Binding #NavView.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
-														   ToolTip.Tip="{Binding}">
-									<ui:CommandBarToggleButton.IsChecked>
-										<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
-										<MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
-											<Binding />
-											<Binding Path="#LCDView.CurrentView" />
-										</MultiBinding>
-									</ui:CommandBarToggleButton.IsChecked>
-								</ui:CommandBarToggleButton>
-							</DataTemplate>
-						</ItemsRepeater.ItemTemplate>
-					</ItemsRepeater>
-				</ScrollViewer>
+					<ui:CommandBarButton Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="120" Margin="0,0,8,0"
+										 IconSource="{Binding #LCDView.CurrentView, Mode=OneWay, Converter={StaticResource ViewIconConverter}}" 
+										 Label="{Binding #LCDView.CurrentView}" 
+										 ToolTip.Tip="Change View">
+						<ui:CommandBarButton.Flyout>
+							<Flyout>
+
+								<StackPanel Orientation="Vertical">
+									<TextBlock Text="Available views" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+									<ItemsRepeater ItemsSource="{Binding AvailableViews}" Margin="-8,0,0,0"
+												   HorizontalAlignment="Left" VerticalAlignment="Top"
+												   Width="256" >
+										<ItemsRepeater.Layout>
+											<UniformGridLayout Orientation="Horizontal" MinColumnSpacing="8" ItemsJustification="End" />
+										</ItemsRepeater.Layout>
+										<ItemsRepeater.ItemTemplate>
+											<DataTemplate>
+												<!-- I can't believe this works -->
+												<ui:CommandBarToggleButton Label="{Binding}" IconSource="{Binding, Mode=OneWay, Converter={StaticResource ViewIconConverter}}"
+																		   Command="{Binding #NavView.DataContext.SetCurrentViewCommand}" CommandParameter="{Binding}"
+																		   ToolTip.Tip="{Binding}" Width="120">
+													<ui:CommandBarToggleButton.IsChecked>
+														<!-- MultiBinding is used here to check for equality between our view and the LCD control's current view -->
+														<MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+															<Binding />
+															<Binding Path="#LCDView.CurrentView" />
+														</MultiBinding>
+													</ui:CommandBarToggleButton.IsChecked>
+												</ui:CommandBarToggleButton>
+											</DataTemplate>
+										</ItemsRepeater.ItemTemplate>
+									</ItemsRepeater>
+								</StackPanel>
+							</Flyout>
+						</ui:CommandBarButton.Flyout>
+					</ui:CommandBarButton>
 
 				<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
 

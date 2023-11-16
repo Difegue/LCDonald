@@ -17,7 +17,7 @@
 		<image file="sbasketball_bg_crop.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="sbasketball_bg.jpg" />
+		<image file="sbasketball_bg.png" />
 	</element>
 	
 <!-- Define Views -->
