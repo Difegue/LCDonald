@@ -39,6 +39,7 @@ namespace LCDonald.Controls
 
         private List<string> _gameElements;
         private List<string> _visibleGameElements;
+        private int _currentScreenIndex = -1;
         private readonly List<LCDGameInput> _inputBuffer;
 
         #region DependencyProperties
@@ -201,7 +202,7 @@ namespace LCDonald.Controls
 
         public void UpdateDisplay(List<string> visibleElements)
         {
-            if (_visibleGameElements.SequenceEqual(visibleElements))
+            if (_svgDocument == null || _visibleGameElements.SequenceEqual(visibleElements))
                 return; // Nothing to update
 
             _svgDocument.ApplyRecursive(e => {
@@ -221,14 +222,13 @@ namespace LCDonald.Controls
 
             // Clear previous game if any
             _logicProcessor?.Dispose();
+            _currentScreenIndex = 0;
 
             // Add handlers to focus the control when the game starts/resumes
             _currentGame.Started += (s, e) => Focus();
             _currentGame.Resumed += (s, e) => Focus();
 
-            // Load SVG 
-            // TODO: Hide all screen elements after 3 seconds to simulate LCD game init?
-            _svgDocument = SvgExtensions.Open(_interopService.GetGameAsset(gameID, $"{gameID}.svg"));
+            _svgDocument = SvgExtensions.Open(_interopService.GetGameAsset(gameID, $"{gameID}_0.svg"));
 
             // Load layout
             _gameLayout = new MAMELayoutParser().Parse(_interopService.GetGameAsset(gameID, $"{gameID}.lay"));
@@ -252,7 +252,16 @@ namespace LCDonald.Controls
                 _logicProcessor.MuteSound = SettingsViewModel.CurrentSettings.MuteSound;
             
             LCDCanvas?.Children.Clear();
-            
+
+            // (Re)load SVG if a screen element is present
+            var gameID = _currentGame.ShortName;
+            if (view.ScreenIndex > -1 && view.ScreenIndex != _currentScreenIndex)
+            {
+                _currentScreenIndex = view.ScreenIndex;
+                _visibleGameElements.Clear(); // Force a redraw
+                _svgDocument = SvgExtensions.Open(_interopService.GetGameAsset(gameID, $"{gameID}_{view.ScreenIndex}.svg"));
+            }
+
             foreach (var element in view.Elements)
             {
                 if (_gameLayout == null) continue;
@@ -300,7 +309,7 @@ namespace LCDonald.Controls
                 Canvas.SetLeft(_svgElement, view.ScreenX);
 
                 LCDCanvas?.Children.Add(_svgElement);
-                
+                UpdateDisplay(_currentGame.GetVisibleGameElements());
             }
 
             ComputeScale(this, new Avalonia.Layout.EffectiveViewportChangedEventArgs(new Rect()));

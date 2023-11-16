@@ -230,6 +230,10 @@ namespace LCDonald.Core.Model
 
         public List<string> GetVisibleGameElements() 
         {
+            // TODO: Hide all screen elements after 3 seconds to simulate LCD game init?
+            if (_isStopped)
+                return GetAllGameElements();
+
             // If there's an animation, disregard the game and play it directly
             if (_currentAnimation != null)
             {

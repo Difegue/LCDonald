@@ -19,6 +19,22 @@
 	<element name="game_bg">
 		<image file="artennis_bg.jpg" />
 	</element>
+
+	<element name="manual_espn">
+		<image file="artennis_manual_espn.jpg" />
+	</element>
+	<element name="front_espn">
+		<image file="artennis_front_espn.jpg" />
+	</element>
+	<element name="back_espn">
+		<image file="artennis_back_espn.jpg" />
+	</element>
+	<element name="game_bg_crop_espn">
+		<image file="artennis_bg_crop.jpg" />
+	</element>
+	<element name="game_bg_espn">
+		<image file="artennis_bg_espn.jpg" />
+	</element>
 	
 <!-- Define Views -->
 	
@@ -69,6 +85,57 @@
 
 	<view name="Instructions">
 		<element ref="manual">
+			<bounds x="0" y="0" width="2343" height="2723" />
+		</element>
+	</view>
+
+	<view name="Front (ESPN)">
+		<screen index="0">
+			<bounds x="882" y="555" width="474" height="597" />
+		</screen>
+		<element ref="front_espn">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="479" y="1397" width="233" height="257" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="712" y="1397" width="233" height="257" />
+		</element>
+		<element ref="button" inputtag="Tennis">
+			<bounds x="1401" y="1356" width="355" height="364" />
+		</element>
+		<element ref="game_bg_crop_espn">
+			<bounds x="882" y="560" width="474" height="597" />
+		</element>
+	</view>
+
+	<view name="Closeup (ESPN)">
+		<screen index="0">
+			<bounds x="56" y="46" width="779" height="981" />
+		</screen>
+		<element ref="game_bg_espn">
+			<bounds x="0" y="0" width="911" height="1152" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="303" height="1152" />
+		</element>
+		<element ref="button" inputtag="Tennis">
+			<bounds x="304" y="0" width="303" height="1152" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="907" y="0" width="303" height="1152" />
+		</element>
+	</view>
+
+	<view name="Back (ESPN)">
+		<element ref="back_espn">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions (ESPN)">
+		<element ref="manual_espn">
 			<bounds x="0" y="0" width="2343" height="2723" />
 		</element>
 	</view>
