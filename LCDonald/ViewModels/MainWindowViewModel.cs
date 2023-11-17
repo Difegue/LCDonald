@@ -83,7 +83,11 @@ namespace LCDonald.ViewModels
             var viewList = views;
             if (viewList.Count > 0)
             {
-                SelectedView = viewList[0];
+                // Find all the front views
+                var frontViews = viewList.Where(v => v.Name.Contains("Front") && !v.Name.Contains("Closed")).ToList();
+
+                // And pick one at random
+                SelectedView = frontViews[new Random().Next(0, frontViews.Count)];
             }
         }
 
