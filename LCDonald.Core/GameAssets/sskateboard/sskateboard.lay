@@ -27,7 +27,7 @@
 	</element>
 
 	<element name="manual_espn">
-		<image file="sskateboard_manual_espn.png" />
+		<image file="sskateboard_manual_espn.jpg" />
 	</element>
 	<element name="front_open_espn">
 		<image file="sskateboard_front_open_espn.jpg" />
@@ -70,7 +70,7 @@
 
 	<view name="Front Open (ESPN)">
 		<screen index="0">
-			<bounds x="1796" y="1387" width="315" height="397" />
+			<bounds x="1796" y="1400" width="315" height="397" />
 		</screen>
 		<element ref="front_open_espn">
 			<bounds x="0" y="0" width="3900" height="2600" />
@@ -82,7 +82,7 @@
 			<bounds x="2322" y="1871" width="210" height="286" />
 		</element>
 		<element ref="game_bg_crop_espn">
-			<bounds x="1796" y="1387" width="315" height="400" />
+			<bounds x="1796" y="1400" width="315" height="400" />
 		</element>
 	</view>
 
@@ -169,7 +169,7 @@
 			<bounds x="0" y="0" width="897" height="910" />
 		</element>
 	</view>
-	
+
 	<view name="Instructions (ESPN)">
 		<element ref="manual_espn">
 			<bounds x="0" y="0" width="897" height="910" />

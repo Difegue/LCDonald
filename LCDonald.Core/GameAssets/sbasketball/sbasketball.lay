@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="sbasketball_manual.jpg" />
+		<image file="sbasketball_manual.png" />
 	</element>
 	<element name="front">
 		<image file="sbasketball_front.jpg" />
@@ -17,7 +17,7 @@
 		<image file="sbasketball_bg_crop.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="sbasketball_bg.png" />
+		<image file="sbasketball_bg.jpg" />
 	</element>
 
 	<element name="manual_espn">
@@ -33,7 +33,7 @@
 		<image file="sbasketball_bg_crop.jpg" />
 	</element>
 	<element name="game_bg_espn">
-		<image file="sbasketball_bg_espn.png" />
+		<image file="sbasketball_bg_espn.jpg" />
 	</element>
 	
 <!-- Define Views -->
