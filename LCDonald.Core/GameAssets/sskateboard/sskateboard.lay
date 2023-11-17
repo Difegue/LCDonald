@@ -69,7 +69,7 @@
 	</view>
 
 	<view name="Front Open (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="1796" y="1400" width="315" height="397" />
 		</screen>
 		<element ref="front_open_espn">
@@ -150,7 +150,7 @@
 	</view>
 
 	<view name="Closeup (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="0" y="30" width="806" height="1016" />
 		</screen>
 		<element ref="button" inputtag="Left">

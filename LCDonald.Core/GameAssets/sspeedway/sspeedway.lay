@@ -80,7 +80,7 @@
 	</view>
 
 	<view name="Front (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="1576" y="844" width="690" height="535" />
 		</screen>
 		<element ref="front_espn">
@@ -131,7 +131,7 @@
 	</view>
 
 	<view name="Closeup (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="2" y="2" width="690" height="535" />
 		</screen>
 		<element ref="button" inputtag="Left">
