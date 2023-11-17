@@ -124,7 +124,7 @@
 
 	<view name="Instructions (ESPN)">
 		<element ref="manual_espn">
-			<bounds x="0" y="0" width="897" height="910" />
+			<bounds x="0" y="0" width="2730" height="2723" />
 		</element>
 	</view>
 </mamelayout>
