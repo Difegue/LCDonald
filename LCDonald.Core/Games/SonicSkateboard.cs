@@ -217,7 +217,7 @@ namespace LCDonald.Core.Games
                 {
                     QueueSound(new LCDGameSound("../common/miss.ogg"));
                     _bombsHit++;
-                    _isInputBlocked = true;
+
                     BlinkElement(GetSonicElement(), 1);
                 }
             }
@@ -230,6 +230,8 @@ namespace LCDonald.Core.Games
             if (_bombsHit == 5)
             {
                 _lives--;
+                _bombsHit = 0;
+
                 if (_lives == 0)
                     GameOver();
                 return;
