@@ -25,6 +25,28 @@
 	<element name="game_bg">
 		<image file="sskateboard_bg.jpg" />
 	</element>
+
+	<element name="manual_espn">
+		<image file="sskateboard_manual_espn.png" />
+	</element>
+	<element name="front_open_espn">
+		<image file="sskateboard_front_open_espn.jpg" />
+	</element>
+	<element name="front_closed_espn">
+		<image file="sskateboard_front_closed_espn.jpg" />
+	</element>
+	<element name="back_open_espn">
+		<image file="sskateboard_back_open_espn.jpg" />
+	</element>
+	<element name="back_closed_espn">
+		<image file="sskateboard_back_closed_espn.jpg" />
+	</element>
+	<element name="game_bg_crop_espn">
+		<image file="sskateboard_bg_crop.jpg" />
+	</element>
+	<element name="game_bg_espn">
+		<image file="sskateboard_bg_espn.jpg" />
+	</element>
 	
 <!-- Define Views -->
 	
@@ -46,6 +68,24 @@
 		</element>
 	</view>
 
+	<view name="Front Open (ESPN)">
+		<screen index="0">
+			<bounds x="1796" y="1387" width="315" height="397" />
+		</screen>
+		<element ref="front_open_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1386" y="1892" width="210" height="275" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2322" y="1871" width="210" height="286" />
+		</element>
+		<element ref="game_bg_crop_espn">
+			<bounds x="1796" y="1387" width="315" height="400" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="31" y="30" width="806" height="1016" />
@@ -57,6 +97,21 @@
 			<bounds x="437" y="0" width="436" height="1119" />
 		</element>
 		<element ref="game_bg">
+			<bounds x="0" y="0" width="872" height="1119" />
+		</element>
+	</view>
+
+	<view name="Closeup (ESPN)">
+		<screen index="0">
+			<bounds x="31" y="30" width="806" height="1016" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="436" height="1119" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="437" y="0" width="436" height="1119" />
+		</element>
+		<element ref="game_bg_espn">
 			<bounds x="0" y="0" width="872" height="1119" />
 		</element>
 	</view>
@@ -73,8 +128,26 @@
 		</element>
 	</view>
 
+	<view name="Front Closed (ESPN)">
+		<element ref="front_closed_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1386" y="1892" width="210" height="275" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2322" y="1871" width="210" height="286" />
+		</element>
+	</view>
+
 	<view name="Back Open">
 		<element ref="back_open">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back Open (ESPN)">
+		<element ref="back_open_espn">
 			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
@@ -85,17 +158,29 @@
 		</element>
 	</view>
 
+	<view name="Back Closed (ESPN)">
+		<element ref="back_closed_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
 	<view name="Instructions">
 		<element ref="manual">
+			<bounds x="0" y="0" width="897" height="910" />
+		</element>
+	</view>
+	
+	<view name="Instructions (ESPN)">
+		<element ref="manual_espn">
 			<bounds x="0" y="0" width="897" height="910" />
 		</element>
 	</view>
 </mamelayout>
 
 <!--
-Sonic Skateboard
+Sonic Skateboard / Tony Hawk Skateboard
 - Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
+- McDonald's Sonic/ESPN Games Assets by Difegue
 - Instructions scan provided by Nightsy.
 -->
 

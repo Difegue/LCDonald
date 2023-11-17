@@ -7,6 +7,9 @@
 	<element name="manual">
 		<image file="sspeedway_manual.jpg" />
 	</element>
+	<element name="manual_espn">
+		<image file="sspeedway_manual_espn.jpg" />
+	</element>
 	<element name="front">
 		<image file="sspeedway_front.jpg" />
 	</element>
@@ -19,11 +22,23 @@
 	<element name="back_us">
 		<image file="sspeedway_back_us.jpg" />
 	</element>
+	<element name="front_espn">
+		<image file="sspeedway_front_espn.jpg" />
+	</element>
+	<element name="back_espn">
+		<image file="sspeedway_back_espn.jpg" />
+	</element>
 	<element name="game_bg_crop">
 		<image file="sspeedway_bg_crop.png" />
 	</element>
 	<element name="game_bg">
 		<image file="sspeedway_bg.png" />
+	</element>
+	<element name="game_bg_crop_espn">
+		<image file="sspeedway_bg_crop.png" />
+	</element>
+	<element name="game_bg_espn">
+		<image file="sspeedway_bg_espn.png" />
 	</element>
 	
 <!-- Define Views -->
@@ -64,6 +79,24 @@
 		</element>
 	</view>
 
+	<view name="Front (ESPN)">
+		<screen index="0">
+			<bounds x="1576" y="1088" width="690" height="535" />
+		</screen>
+		<element ref="front_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1005" y="1235" width="361" height="350" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2462" y="1233" width="351" height="371" />
+		</element>
+		<element ref="game_bg_crop_espn">
+			<bounds x="1579" y="1087" width="690" height="531" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="2" y="2" width="690" height="535" />
@@ -74,7 +107,22 @@
 		<element ref="button" inputtag="Right">
 			<bounds x="357" y="0" width="356" height="551" />
 		</element>
-		<element ref="game_bg">
+		<element ref="game_bg_espn">
+			<bounds x="0" y="0" width="712" height="551" />
+		</element>
+	</view>
+
+	<view name="Closeup (ESPN)">
+		<screen index="0">
+			<bounds x="2" y="2" width="690" height="535" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="356" height="551" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="357" y="0" width="356" height="551" />
+		</element>
+		<element ref="game_bg_espn">
 			<bounds x="0" y="0" width="712" height="551" />
 		</element>
 	</view>
@@ -91,17 +139,29 @@
 		</element>
 	</view>
 
+	<view name="Back (ESPN)">
+		<element ref="back_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
 	<view name="Instructions">
 		<element ref="manual">
+			<bounds x="0" y="0" width="1225" height="1155" />
+		</element>
+	</view>
+
+	<view name="Instructions (ESPN)">
+		<element ref="manual_espn">
 			<bounds x="0" y="0" width="1225" height="1155" />
 		</element>
 	</view>
 </mamelayout>
 
 <!--
-Sonic Speedway
+Sonic Speedway / Tony Stewart Racing 
 - Artwork type: Photo, Background, ripped flash game 
-- McDonald's Sonic Games Assets by Difegue
+- McDonald's Sonic/ESPN Games Assets by Difegue
 - Manual taken from Sonic Retro.
 -->
 

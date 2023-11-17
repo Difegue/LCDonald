@@ -59,36 +59,6 @@
 		</element>
 	</view>
 
-	<view name="Closeup">
-		<screen index="0">
-			<bounds x="56" y="46" width="779" height="981" />
-		</screen>
-		<element ref="game_bg">
-			<bounds x="0" y="0" width="911" height="1152" />
-		</element>
-		<element ref="button" inputtag="Left">
-			<bounds x="0" y="0" width="303" height="1152" />
-		</element>
-		<element ref="button" inputtag="Tennis">
-			<bounds x="304" y="0" width="303" height="1152" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="907" y="0" width="303" height="1152" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="2237" height="2600" />
-		</element>
-	</view>
-
-	<view name="Instructions">
-		<element ref="manual">
-			<bounds x="0" y="0" width="2343" height="2723" />
-		</element>
-	</view>
-
 	<view name="Front (ESPN)">
 		<screen index="0">
 			<bounds x="882" y="555" width="474" height="597" />
@@ -110,6 +80,24 @@
 		</element>
 	</view>
 
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="56" y="46" width="779" height="981" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="911" height="1152" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="303" height="1152" />
+		</element>
+		<element ref="button" inputtag="Tennis">
+			<bounds x="304" y="0" width="303" height="1152" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="607" y="0" width="303" height="1152" />
+		</element>
+	</view>
+
 	<view name="Closeup (ESPN)">
 		<screen index="0">
 			<bounds x="56" y="46" width="779" height="981" />
@@ -124,13 +112,25 @@
 			<bounds x="304" y="0" width="303" height="1152" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="907" y="0" width="303" height="1152" />
+			<bounds x="607" y="0" width="303" height="1152" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="2237" height="2600" />
 		</element>
 	</view>
 
 	<view name="Back (ESPN)">
 		<element ref="back_espn">
 			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="2343" height="2723" />
 		</element>
 	</view>
 
@@ -142,9 +142,9 @@
 </mamelayout>
 
 <!--
-Amy & Rouge Tennis
+Amy & Rouge Tennis / Serena & Venus Williams Tennis
 - Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
+- McDonald's Sonic/ESPN Games Assets by Difegue
 
 -->
 
