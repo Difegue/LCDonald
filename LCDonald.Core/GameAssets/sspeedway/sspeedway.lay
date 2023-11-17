@@ -93,7 +93,25 @@
 			<bounds x="2495" y="1422" width="423" height="437" />
 		</element>
 		<element ref="game_bg_crop_espn">
-			<bounds x="1579" y="1087" width="690" height="531" />
+			<bounds x="1579" y="844" width="690" height="531" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (US)">
+		<element ref="back_us">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (ESPN)">
+		<element ref="back_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
 
@@ -124,24 +142,6 @@
 		</element>
 		<element ref="game_bg_espn">
 			<bounds x="0" y="0" width="712" height="551" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (US)">
-		<element ref="back_us">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (ESPN)">
-		<element ref="back_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
 

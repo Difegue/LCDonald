@@ -62,6 +62,54 @@
 		</element>
 	</view>
 
+	<view name="Front Open (ESPN)">
+		<screen index="0">
+			<bounds x="1796" y="1400" width="315" height="397" />
+		</screen>
+		<element ref="front_open_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1386" y="1892" width="210" height="275" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2322" y="1871" width="210" height="286" />
+		</element>
+		<element ref="game_bg_crop_espn">
+			<bounds x="1796" y="1400" width="315" height="400" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3970" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back Open (ESPN)">
+		<element ref="back_open_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Front Closed (ESPN)">
+		<element ref="front_closed_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1386" y="1892" width="210" height="275" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2322" y="1871" width="210" height="286" />
+		</element>
+	</view>
+
+	<view name="Back Closed (ESPN)">
+		<element ref="back_closed_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="16" y="28" width="856" height="1040" />
@@ -77,9 +125,18 @@
 		</element>
 	</view>
 
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3970" height="2600" />
+	<view name="Closeup (ESPN)">
+		<screen index="0">
+			<bounds x="16" y="28" width="856" height="1040" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="444" height="1122" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="445" y="0" width="444" height="1122" />
+		</element>
+		<element ref="game_bg_espn">
+			<bounds x="0" y="0" width="889" height="1122" />
 		</element>
 	</view>
 

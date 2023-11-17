@@ -46,21 +46,6 @@
 		</element>
 	</view>
 
-	<view name="Closeup">
-		<screen index="0">
-			<bounds x="-8" y="32" width="877" height="1089" />
-		</screen>
-		<element ref="game_bg">
-			<bounds x="0" y="0" width="887" height="1142" />
-		</element>
-		<element ref="button" inputtag="Left">
-			<bounds x="0" y="0" width="443" height="1142" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="444" y="0" width="443" height="1142" />
-		</element>
-	</view>
-
 	<view name="Front Closed">
 		<element ref="front_closed">
 			<bounds x="0" y="0" width="3900" height="2600" />
@@ -76,6 +61,21 @@
 	<view name="Back Closed">
 		<element ref="back_closed">
 			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="-8" y="32" width="877" height="1089" />
+		</screen>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="887" height="1142" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="443" height="1142" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="0" width="443" height="1142" />
 		</element>
 	</view>
 

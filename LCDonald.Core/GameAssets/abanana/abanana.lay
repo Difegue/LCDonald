@@ -40,6 +40,12 @@
 		</element>
 	</view>
 
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="20" y="57" width="850" height="991" />
@@ -52,12 +58,6 @@
 		</element>
 		<element ref="button" inputtag="Right">
 			<bounds x="439" y="0" width="438" height="1114" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
 

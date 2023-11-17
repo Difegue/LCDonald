@@ -80,6 +80,18 @@
 		</element>
 	</view>
 
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (ESPN)">
+		<element ref="back_espn">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="56" y="46" width="779" height="981" />
@@ -113,18 +125,6 @@
 		</element>
 		<element ref="button" inputtag="Right">
 			<bounds x="607" y="0" width="303" height="1152" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="2237" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (ESPN)">
-		<element ref="back_espn">
-			<bounds x="0" y="0" width="2237" height="2600" />
 		</element>
 	</view>
 

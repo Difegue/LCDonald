@@ -40,6 +40,12 @@
 		</element>
 	</view>
 
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="5" y="26" width="866" height="1074" />
@@ -52,12 +58,6 @@
 		</element>
 		<element ref="game_bg">
 			<bounds x="0" y="0" width="889" height="1143" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
 

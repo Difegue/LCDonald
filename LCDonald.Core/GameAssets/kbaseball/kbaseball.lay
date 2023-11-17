@@ -74,6 +74,18 @@
 		</element>
 	</view>
 
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (ESPN)">
+		<element ref="back_espn">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
 	<view name="Closeup">
 		<screen index="0">
 			<bounds x="100" y="102" width="999" height="753" />
@@ -101,18 +113,6 @@
 		</element>
 		<element ref="game_bg_espn">
 			<bounds x="0" y="0" width="1160" height="910" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (ESPN)">
-		<element ref="back_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
 		</element>
 	</view>
 
