@@ -30,7 +30,7 @@
 		<image file="artennis_back_espn.jpg" />
 	</element>
 	<element name="game_bg_crop_espn">
-		<image file="artennis_bg_crop.jpg" />
+		<image file="artennis_bg_crop_espn.jpg" />
 	</element>
 	<element name="game_bg_espn">
 		<image file="artennis_bg_espn.jpg" />

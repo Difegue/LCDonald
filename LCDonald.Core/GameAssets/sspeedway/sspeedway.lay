@@ -35,7 +35,7 @@
 		<image file="sspeedway_bg.png" />
 	</element>
 	<element name="game_bg_crop_espn">
-		<image file="sspeedway_bg_crop.png" />
+		<image file="sspeedway_bg_crop_espn.jpg" />
 	</element>
 	<element name="game_bg_espn">
 		<image file="sspeedway_bg_espn.jpg" />

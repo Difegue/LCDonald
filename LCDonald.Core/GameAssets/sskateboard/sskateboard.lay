@@ -42,7 +42,7 @@
 		<image file="sskateboard_back_closed_espn.jpg" />
 	</element>
 	<element name="game_bg_crop_espn">
-		<image file="sskateboard_bg_crop.jpg" />
+		<image file="sskateboard_bg_crop_espn.jpg" />
 	</element>
 	<element name="game_bg_espn">
 		<image file="sskateboard_bg_espn.jpg" />
@@ -151,7 +151,7 @@
 
 	<view name="Closeup (ESPN)">
 		<screen index="0">
-			<bounds x="31" y="30" width="806" height="1016" />
+			<bounds x="0" y="30" width="806" height="1016" />
 		</screen>
 		<element ref="button" inputtag="Left">
 			<bounds x="0" y="0" width="436" height="1119" />
