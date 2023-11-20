@@ -63,8 +63,8 @@
 	</view>
 
 	<view name="Front Open (ESPN)">
-		<screen index="0">
-			<bounds x="1796" y="1400" width="315" height="397" />
+		<screen index="1">
+			<bounds x="1767" y="1470" width="315" height="397" />
 		</screen>
 		<element ref="front_open_espn">
 			<bounds x="0" y="0" width="3900" height="2600" />
@@ -76,7 +76,7 @@
 			<bounds x="2322" y="1871" width="210" height="286" />
 		</element>
 		<element ref="game_bg_crop_espn">
-			<bounds x="1796" y="1400" width="315" height="400" />
+			<bounds x="1767" y="1473" width="315" height="405" />
 		</element>
 	</view>
 
@@ -126,7 +126,7 @@
 	</view>
 
 	<view name="Closeup (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="16" y="28" width="856" height="1040" />
 		</screen>
 		<element ref="button" inputtag="Left">
