@@ -60,7 +60,7 @@
 	</view>
 
 	<view name="Front (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="882" y="555" width="474" height="597" />
 		</screen>
 		<element ref="front_espn">
@@ -111,7 +111,7 @@
 	</view>
 
 	<view name="Closeup (ESPN)">
-		<screen index="0">
+		<screen index="1">
 			<bounds x="56" y="46" width="779" height="981" />
 		</screen>
 		<element ref="game_bg_espn">
