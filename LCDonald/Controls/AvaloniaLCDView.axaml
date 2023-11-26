@@ -9,6 +9,7 @@
 		<paz:ZoomBorder Name="ZoomBorder" ZoomSpeed="1.2" PanButton="Left" MaxZoomX="1" MaxZoomY="1" MinZoomX="0.1" MinZoomY="0.1"
 						ClipToBounds="True" Focusable="False" 
 						CornerRadius="{StaticResource ControlCornerRadius}"
+						PointerWheelChanged="HandleScrollImage"
 						EnableGestureZoom="True" EnableGestureTranslation="True">
 
 			<Canvas x:Name="LCDCanvas" />
@@ -24,7 +25,7 @@
 			<StackPanel Orientation="Vertical" Spacing="4" ToolTip.Tip="Zoom on Game">
 				<Label Content="➕" HorizontalAlignment="Center" PointerPressed="ZoomIn"/>
 				<Slider Orientation="Vertical" Margin="0,0,0,-4"
-						x:Name="ScaleSlider" PointerWheelChanged="HandleScroll"
+						x:Name="ScaleSlider" PointerWheelChanged="HandleScrollBar"
 						Minimum="0.1" Maximum="0.99" Height="125"/>
 				<Label Content="➖" HorizontalAlignment="Center" PointerPressed="ZoomOut"/>
 			</StackPanel>

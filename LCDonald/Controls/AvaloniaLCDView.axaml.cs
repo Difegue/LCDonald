@@ -109,11 +109,22 @@ namespace LCDonald.Controls
             LostFocus += (s, e) => CurrentGame?.Pause();         
         }
 
-        private void HandleScroll(object? sender, PointerWheelEventArgs e)
+        private void HandleScrollImage(object? sender, PointerWheelEventArgs e)
         {
-            if (e.Delta.Y > 0)
+            // Intercept normal scroll events in case we're maxed out
+            if (e.Delta.Y > 0 && ZoomBorder.ZoomX == ZoomBorder.MaxZoomX || e.Delta.Y < 0 && ZoomBorder.ZoomX == ZoomBorder.MinZoomX)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void HandleScrollBar(object? sender, PointerWheelEventArgs e)
+        {
+            if (e.Delta.Y > 0 && ZoomBorder.ZoomX < ZoomBorder.MaxZoomX)
                 ZoomBorder.ZoomIn();
-            else
+
+            if (e.Delta.Y < 0 && ZoomBorder.ZoomX > ZoomBorder.MinZoomX)
                 ZoomBorder.ZoomOut();
         }
 
