@@ -245,6 +245,7 @@
 				<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
 
 				<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
+					<ui:CommandBarButton IconSource="RepeatAll" Label="ENDLESS" ToolTip.Tip="Play" Command="{Binding StartEndlessCommand}"/>
 					<ui:CommandBarButton IconSource="Play" Label="Play" ToolTip.Tip="Play" Command="{Binding StartGameCommand}"/>
 					<ui:CommandBarButton IconSource="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"/>
 					<ui:CommandBarButton IconSource="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"/>

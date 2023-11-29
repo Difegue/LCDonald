@@ -98,12 +98,12 @@ namespace LCDonald.Core.Games
             _sonicPosition = 1;
             _platformsDodged = 0;
             _platformsHit = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _platformPositions = new List<int>();
             _ringPositions = new List<int>();
 
-            _customUpdateSpeed = 800;
+            _customUpdateSpeed = _isEndlessMode ? 200 : 800;
 
             StartupMusic();
         }
@@ -137,7 +137,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_platformsDodged >= 20)
+            if (_platformsDodged >= 20 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _platformsHit = 0;

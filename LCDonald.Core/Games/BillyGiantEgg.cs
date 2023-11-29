@@ -123,12 +123,12 @@ namespace LCDonald.Core.Games
         {
             _billyPosition = 2;
             _fruitsCollected = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _bombPositions = new List<int>();
             _fruitPositions = new List<int>();
 
-            _customUpdateSpeed = 950;
+            _customUpdateSpeed = _isEndlessMode ? 250 : 950;
 
             StartupMusic("game_start.ogg");
         }
@@ -181,7 +181,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_fruitsCollected >= 20)
+            if (_fruitsCollected >= 20 && !_isEndlessMode)
             {
                 if (_level == 3)
                 {

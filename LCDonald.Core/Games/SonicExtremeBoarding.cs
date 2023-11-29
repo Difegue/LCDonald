@@ -115,7 +115,7 @@ namespace LCDonald.Core.Games
             _sonicPosition = 4;
             _ringsCollected = 0;
             _bombsHit = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _bombPositions = new List<int>();
             _ringPosition = -1;
@@ -124,7 +124,7 @@ namespace LCDonald.Core.Games
             // Special gamestart case: don't show the spawn indicator right away, it'll show on first customupdate
             _showRingSpawnIndicator = false;
 
-            _customUpdateSpeed = 950;
+            _customUpdateSpeed = _isEndlessMode ? 400 : 950;
 
             StartupMusic("game_start.ogg", 2);
         }
@@ -181,7 +181,7 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            if (_ringsCollected >= 20) 
+            if (_ringsCollected >= 20 && !_isEndlessMode) 
             {
                 if (_level == 4)
                 {

@@ -116,10 +116,10 @@ namespace LCDonald.Core.Games
             _aiaiPosition = 2;
             _bananasCollected = 0;
             _bananasMissed = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _bananaPositions = new List<int>();
-            _customUpdateSpeed = 900;
+            _customUpdateSpeed = _isEndlessMode ? 400 : 900;
 
             StartupMusic();
         }
@@ -160,7 +160,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_bananasCollected >= 30)
+            if (_bananasCollected >= 30 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _bananasMissed = 0;

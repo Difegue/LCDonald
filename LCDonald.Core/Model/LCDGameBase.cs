@@ -20,6 +20,7 @@ namespace LCDonald.Core.Model
         protected int _customUpdateSpeed = 100;
         protected int _blockedCustomUpdates;
         protected bool _isInputBlocked;
+        protected bool _isEndlessMode;
         protected Random _rng = new();
         
         private bool _isPaused;
@@ -163,9 +164,10 @@ namespace LCDonald.Core.Model
             PlayAnimation(victoryAnimation);
         }
 
-        public void Start()
+        public void Start(bool isEndless = false)
         {
             _isInputBlocked = false;
+            _isEndlessMode = isEndless;
             InitializeGameState();
 
             _customTimer?.Stop();
@@ -204,6 +206,8 @@ namespace LCDonald.Core.Model
             _isStopped = true;
             _isPaused = false;
             _customTimer?.Stop();
+            _currentAnimation = null;
+
             Stopped?.Invoke(this, new EventArgs());
         }
 

@@ -172,9 +172,15 @@ namespace LCDonald.Core.Games
             _handPositions = new() { 2 };
             _goalsScored = 0;
             _ballsIntercepted = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 6 : 0;
 
-            _customUpdateSpeed = 800;
+            _customUpdateSpeed = _isEndlessMode ? 200 : 800;
+
+            if (_isEndlessMode)
+            {
+                AddOmega();
+                AddOmega();
+            }
 
             StartupMusic();
         }
@@ -260,7 +266,7 @@ namespace LCDonald.Core.Games
         {
             _isInputBlocked = false;
 
-            if (_goalsScored >= 18)
+            if (_goalsScored >= 18 && !_isEndlessMode)
             {
                 _isInputBlocked = true;
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
@@ -327,8 +333,9 @@ namespace LCDonald.Core.Games
                 }
             
             // 33% chance to raise hands (+20 to pos so it matches ball positioning)
-            for (var i = 0; i < _handPositions.Count; i++)
-                _handPositions[i] = _rng.Next(0, 3) == 0 ? _handPositions[i] % 10 + 20 : _handPositions[i] % 10;
+            if (_ballPosition == 0)
+                for (var i = 0; i < _handPositions.Count; i++)
+                    _handPositions[i] = _rng.Next(0, 3) == 0 ? _handPositions[i] % 10 + 20 : _handPositions[i] % 10;
             
             if (_ballsIntercepted >= 5)
             {

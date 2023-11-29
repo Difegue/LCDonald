@@ -116,10 +116,10 @@ namespace LCDonald.Core.Games
             _creamPosition = 2;
             _flowersCollected = 0;
             _flowersMissed = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _flowerPositions = new List<int>();
-            _customUpdateSpeed = 900;
+            _customUpdateSpeed = _isEndlessMode ? 600 : 900;
 
             StartupMusic();
         }
@@ -160,7 +160,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_flowersCollected >= 30)
+            if (_flowersCollected >= 30 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _flowersMissed = 0;

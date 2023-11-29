@@ -88,7 +88,7 @@ namespace LCDonald.Core.Games
         private int _level;
         private int _currentScore;
 
-        private int _aiResistance;
+        private int _aiResistance = int.MaxValue;
         private int _nextBallSpawn;
 
         private bool _batEngaged;
@@ -128,10 +128,10 @@ namespace LCDonald.Core.Games
             
             // record this initial spawn so it can be mirrored for each new ball
             _nextBallSpawn = _rng.Next(1, 3);
-            _level = 0;
-            _currentScore = 0;
 
-            _customUpdateSpeed = 500;
+            _level = _isEndlessMode ? 6 : 0;
+            _currentScore = _isEndlessMode ? -3 : 0;
+            _customUpdateSpeed = _isEndlessMode ? 200 : 500;
 
             StartupMusic("game_start.ogg");
         }

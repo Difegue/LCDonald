@@ -110,14 +110,14 @@ namespace LCDonald.Core.Games
         public override void InitializeGameState()
         {
             _tailsPosition = 2;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _ballsIntercepted = 0;
             _ballsMissed = 0;
 
             _ballPos = -1;
 
-            _customUpdateSpeed = 500;
+            _customUpdateSpeed = _isEndlessMode ? 150 : 500;
             StartupMusic();
         }        
 
@@ -145,7 +145,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_ballsIntercepted == 15)
+            if (_ballsIntercepted == 15 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _ballsIntercepted = 0;

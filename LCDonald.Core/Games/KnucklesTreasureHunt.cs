@@ -151,7 +151,7 @@ namespace LCDonald.Core.Games
         public override void InitializeGameState()
         {
             _lifeCount = 3;
-            _level = 1;
+            _level = _isEndlessMode ? 7 : 1;
 
             _emeraldsCollected = 0;
             _isFirstEmerald = true;
@@ -163,7 +163,7 @@ namespace LCDonald.Core.Games
             _platformPositions = new List<int>();
             _emeraldPositions = new List<int>();
 
-            _customUpdateSpeed = 1000;
+            _customUpdateSpeed = _isEndlessMode ? 400 : 1000;
             StartupMusic("game_start.ogg", 2);
         }
 
@@ -173,7 +173,11 @@ namespace LCDonald.Core.Games
             _hasKnucklesMoved = false;
 
             // Spawn as many emeralds as the current level
-            for (var i = 0; i < _level; i++)
+            if (_level >= 5)
+            {
+                _emeraldPositions = new List<int> { 1, 2, 3, 4, 5 };
+            }
+            else for (var i = 0; i < _level; i++)
             {
                 var emeraldPosition = GetRandomEmeraldPosition();
                 _emeraldPositions.Add(emeraldPosition);

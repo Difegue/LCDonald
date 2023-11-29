@@ -93,11 +93,11 @@ namespace LCDonald.Core.Games
             _shadowPosition = 1;
             _gapsDodged = 0;
             _misses = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
             _spawnFirstGap = true;
 
             _railPositions = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7};
-            _customUpdateSpeed = 800;
+            _customUpdateSpeed = _isEndlessMode ? 200 : 800;
 
             StartupMusic();
         }
@@ -122,7 +122,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_gapsDodged >= 15)
+            if (_gapsDodged >= 15 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _misses = 0;

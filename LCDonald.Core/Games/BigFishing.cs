@@ -136,7 +136,7 @@ namespace LCDonald.Core.Games
         public override void InitializeGameState()
         {
             _rodPosition = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _fishCaught = 0;
             _fishMissed = 0;
@@ -144,7 +144,7 @@ namespace LCDonald.Core.Games
             _hasLure = true;
             _fishPos = -1;
 
-            _customUpdateSpeed = 850;
+            _customUpdateSpeed = _isEndlessMode ? 450 : 850;
             StartupMusic("game_start.ogg");
         }
 
@@ -203,7 +203,7 @@ namespace LCDonald.Core.Games
         public override void CustomUpdate()
         {
 
-            if (_fishCaught == 10)
+            if (_fishCaught == 10 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("level_up.ogg"));
                 _fishCaught = 0;

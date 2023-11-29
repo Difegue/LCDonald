@@ -140,7 +140,7 @@ namespace LCDonald.Core.Games
         {
             _tailsPosition = 2;
             _lifeCount = 3;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _enemiesHit = 0;
             _enemiesMissed = 0;
@@ -148,7 +148,7 @@ namespace LCDonald.Core.Games
             _projectilePos = -1;
             _enemyPos = -1;
 
-            _customUpdateSpeed = 900;
+            _customUpdateSpeed = _isEndlessMode ? 400 : 900;
             StartupMusic("game_start.ogg", 0);
         }        
 
@@ -195,7 +195,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_enemiesHit == 15)
+            if (_enemiesHit == 15 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("level_up.ogg"));
                 _enemiesHit = 0;

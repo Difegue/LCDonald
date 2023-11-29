@@ -60,7 +60,7 @@ namespace LCDonald.Core.Model
         /// <summary>
         /// (Re)start the game, initializing the gamestate.
         /// </summary>
-        public void Start();
+        public void Start(bool isEndless = false);
 
         /// <summary>
         /// Pause the game

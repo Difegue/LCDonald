@@ -110,10 +110,10 @@ namespace LCDonald.Core.Games
             _tailsPosition = 2;
             _ringsCollected = 0;
             _ringsMissed = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _ringPositions = new List<int>();
-            _customUpdateSpeed = 900;
+            _customUpdateSpeed = _isEndlessMode ? 400 : 900;
 
             StartupMusic();
         }
@@ -154,7 +154,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_ringsCollected >= 30)
+            if (_ringsCollected >= 30 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _ringsMissed = 0;

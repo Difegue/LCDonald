@@ -111,10 +111,10 @@ namespace LCDonald.Core.Games
             _sonicPosition = 2;
             _carRowsDodged = 0;
             _carsHit = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
 
             _carPositions = new List<int>();
-            _customUpdateSpeed = 800;
+            _customUpdateSpeed = _isEndlessMode ? 300 : 800;
             
             StartupMusic();
         }
@@ -143,7 +143,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_carRowsDodged >= 30)
+            if (_carRowsDodged >= 30 && !_isEndlessMode)
             {
                 QueueSound(new LCDGameSound("../common/level_up.ogg"));
                 _carsHit = 0;

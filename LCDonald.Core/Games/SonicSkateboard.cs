@@ -140,13 +140,13 @@ namespace LCDonald.Core.Games
             _sonicPosition = 2;
             _ringsCollected = 0;
             _bombsHit = 0;
-            _level = 0;
+            _level = _isEndlessMode ? 5 : 0;
             _lives = 3;
 
             _bombPositions = new List<int>();
             _ringPositions = new List<int>();
 
-            _customUpdateSpeed = 950;
+            _customUpdateSpeed = _isEndlessMode ? 400 : 950;
 
             StartupMusic();
         }
@@ -186,7 +186,7 @@ namespace LCDonald.Core.Games
 
         public override void CustomUpdate()
         {
-            if (_ringsCollected >= 30)
+            if (_ringsCollected >= 30 && !_isEndlessMode)
             {
                 if (_level == 3)
                 {

@@ -113,6 +113,17 @@ namespace LCDonald.ViewModels
                 Game.Start();
         }
 
+        [RelayCommand]
+        private void StartEndless()
+        {
+            if (_isPaused)
+            {
+                Game.Resume();
+            }
+            else if (!_isGameRunning)
+                Game.Start(true);
+        }
+
         [RelayCommand(CanExecute = "IsGameRunning")] 
         private void PauseGame()
         {
