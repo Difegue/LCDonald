@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0-android</TargetFramework>
-	<RuntimeIdentifiers>android-arm;android-arm64;android-x64</RuntimeIdentifiers>
+	<RuntimeIdentifiers>android-arm;android-arm64;android-x64;android-x86</RuntimeIdentifiers>
 	  
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
