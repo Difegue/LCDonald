@@ -153,6 +153,7 @@ namespace LCDonald.Core.Games
                     QueueSound(new LCDGameSound("../common/hit.ogg"));
                     _bananaPositions.Remove(banPos);
                     _bananasCollected++;
+                    IncrementScore();
                 }
             }
 

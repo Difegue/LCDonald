@@ -171,6 +171,7 @@ namespace LCDonald.Core.Games
                     QueueSound(new LCDGameSound("hit.ogg"));
                     _flowerPositions.Remove(fPos);
                     _flowersCollected++;
+                    IncrementScore();
 
                     // blink the matching hit bubble
                     switch (digit)

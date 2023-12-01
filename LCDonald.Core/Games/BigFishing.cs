@@ -290,6 +290,7 @@ namespace LCDonald.Core.Games
             PlayAnimation(reelAnimation);
 
             _fishCaught++;
+            IncrementScore();
             _hasLure = true;
 
             _rodPosition = 0;

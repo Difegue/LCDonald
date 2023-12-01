@@ -199,6 +199,7 @@ namespace LCDonald.Core.Games
             {
                 QueueSound(new LCDGameSound("../common/hit.ogg"));
                 _carRowsDodged++;
+                IncrementScore();
             }
 
             if (_carsHit == 5)

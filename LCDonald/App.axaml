@@ -13,6 +13,7 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<x:Double x:Key="ContentDialogMaxWidth">848</x:Double>
+			<FontFamily x:Key="DSEG7">avares://LCDonald/Assets#DSEG7 Classic</FontFamily>
 		</ResourceDictionary>
 	</Application.Resources>
 

@@ -180,6 +180,7 @@ namespace LCDonald.Core.Games
                     _ringPositions.Remove(ringPos);
                     QueueSound(new LCDGameSound("../common/hit.ogg"));
                     _ringsCollected++;
+                    IncrementScore();
                 }
             }
         }

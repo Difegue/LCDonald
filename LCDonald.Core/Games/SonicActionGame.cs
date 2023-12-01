@@ -216,6 +216,7 @@ namespace LCDonald.Core.Games
             {
                 QueueSound(new LCDGameSound("../common/hit.ogg"));
                 _platformsDodged++;
+                IncrementScore();
             }
 
             if (_platformsHit == 5)

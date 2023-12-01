@@ -15,6 +15,7 @@ namespace LCDonald.Core.Model
         public event EventHandler Paused;
         public event EventHandler Resumed;
         public event EventHandler Stopped;
+        public event EventHandler Scored;
 #pragma warning restore CS8618
         
         protected int _customUpdateSpeed = 100;
@@ -210,6 +211,8 @@ namespace LCDonald.Core.Model
 
             Stopped?.Invoke(this, new EventArgs());
         }
+
+        public void IncrementScore() => Scored?.Invoke(this, new EventArgs());
 
         public void Update()
         {

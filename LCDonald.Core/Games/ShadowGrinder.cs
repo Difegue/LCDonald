@@ -154,6 +154,7 @@ namespace LCDonald.Core.Games
                     case 2:
                         QueueSound(new LCDGameSound("../common/hit.ogg"));
                         _gapsDodged++;
+                        IncrementScore();
                         break;
                 } 
             } 

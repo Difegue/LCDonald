@@ -183,7 +183,7 @@ namespace LCDonald.Core.Games
                 QueueSound(new LCDGameSound("hit.ogg"));
                 _enemyPos = _projectilePos = -1;
                 _enemiesHit++;
-
+                IncrementScore();
             }
 
             // Move projectile forward

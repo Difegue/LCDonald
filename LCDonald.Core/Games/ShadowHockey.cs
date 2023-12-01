@@ -273,7 +273,8 @@ namespace LCDonald.Core.Games
             {
                 QueueSound(new LCDGameSound("score.ogg"));
                 _goalsScored++;
-                
+                IncrementScore();
+
                 // hack to make the ball unshootable for 2 cycles
                 _ballPosition = -10; 
                 _ballHalfStep = true;

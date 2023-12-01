@@ -231,6 +231,7 @@ namespace LCDonald.Core.Games
             if (_ballPosition < 20 && _ballPosition != -1 && _aiResistance > 0 && _ballDirection)
             {
                 _aiResistance--;
+                IncrementScore();
                 QueueSound(new LCDGameSound("hit.ogg"));
                 _ballDirection = false;
 

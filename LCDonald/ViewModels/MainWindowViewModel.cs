@@ -68,13 +68,16 @@ namespace LCDonald.ViewModels
                 Game.Paused -= Game_Paused;
                 Game.Resumed -= Game_Resumed;
                 Game.Stopped -= Game_Stopped;
+                Game.Scored -= Game_Scored;
             }
 
             game.Started += Game_Started;
             game.Paused += Game_Paused;
             game.Resumed += Game_Resumed;
             game.Stopped += Game_Stopped;
+            game.Scored += Game_Scored;
 
+            IsEndless = false;
             _currentInputs = game.GetAvailableInputs();
         }
 
@@ -95,6 +98,12 @@ namespace LCDonald.ViewModels
         private bool _isPaused;
 
         [ObservableProperty]
+        private bool _isEndless;
+
+        [ObservableProperty]
+        private int _score;
+
+        [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(PauseGameCommand))]
         [NotifyCanExecuteChangedFor(nameof(StopGameCommand))]
         private bool _isGameRunning;
@@ -110,7 +119,10 @@ namespace LCDonald.ViewModels
                 Game.Resume();
             }
             else if (!_isGameRunning)
+            {
+                IsEndless = false;
                 Game.Start();
+            }       
         }
 
         [RelayCommand]
@@ -121,7 +133,11 @@ namespace LCDonald.ViewModels
                 Game.Resume();
             }
             else if (!_isGameRunning)
+            {
+                IsEndless = true;
+                Score = 0;
                 Game.Start(true);
+            }
         }
 
         [RelayCommand(CanExecute = "IsGameRunning")] 
@@ -161,7 +177,13 @@ namespace LCDonald.ViewModels
                 IsGameRunning = false;
                 IsPaused = false;
             });
-
+        }
+        private void Game_Scored(object? sender, EventArgs e)
+        {
+            if (IsEndless)
+            {
+                Score++;
+            }
         }
     }
 

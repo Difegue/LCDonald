@@ -147,6 +147,7 @@ namespace LCDonald.Core.Games
                     QueueSound(new LCDGameSound("../common/hit.ogg"));
                     _ringPositions.Remove(ringPos);
                     _ringsCollected++;
+                    IncrementScore();
                 }
             }
 

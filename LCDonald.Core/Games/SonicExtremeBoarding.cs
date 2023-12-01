@@ -158,7 +158,8 @@ namespace LCDonald.Core.Games
                     _ringPosition = 0;
                     QueueSound(new LCDGameSound("ring_hit.ogg"));
                     _ringsCollected++;
-                    
+                    IncrementScore();
+
                     // swap ring spawn point
                     _ringSpawn = _ringSpawn == 11 ? 17 : 11;
                 }

@@ -160,6 +160,7 @@ namespace LCDonald.Core.Games
                 if (horizontalPos == _billyPosition)
                 {
                     _fruitPositions.Remove(ringPos);
+                    IncrementScore();
 
                     if (horizontalPos == 1 || horizontalPos == 2)
                         BlinkElement(GET_LEFT, 1);

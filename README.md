@@ -19,6 +19,7 @@ Feel free to look at the [issues](https://github.com/Difegue/LCDonald/issues) if
 * [AvaloniaUI](http://avaloniaui.net/)-based frontend, runs on Windows/Mac/Linux -- Backend is pure .NET and can run on (mostly)anything!
 
 All scanned/photographied materials in this repository are ©️SEGA, 2004/2005/2006.  
+This uses the [DSEG 7-segment font.](https://www.keshikan.net/fonts-e.html)  
 
 ## Build instructions 
 

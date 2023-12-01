@@ -169,6 +169,7 @@ namespace LCDonald.Core.Games
                     if (digit == _knucklesPosition)
                     {
                         _ballsIntercepted++;
+                        IncrementScore();
                         QueueSound(new LCDGameSound("../common/hit.ogg"));
                     } 
                     else

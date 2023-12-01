@@ -81,6 +81,7 @@ namespace LCDonald.Core.Model
         event EventHandler Paused;
         event EventHandler Resumed;
         event EventHandler Stopped;
+        event EventHandler Scored;
 
     }
 

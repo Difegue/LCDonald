@@ -189,9 +189,9 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition MinWidth="32" Width="*" MaxWidth="400" />
-					<ColumnDefinition MinWidth="124" Width="*" />
-					<ColumnDefinition Width="268"/>
+					<ColumnDefinition MinWidth="32" Width="3*" MaxWidth="400" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
 				<Border Grid.Row="0" Grid.Column="0" Margin="0,4,0,0"
@@ -204,12 +204,14 @@
 				<ContentControl Content="{Binding Game.Name}" Grid.Row="0" Grid.Column="0" MinWidth="128"
 					   IsVisible="{Binding #NavView.DisplayMode, Converter={StaticResource MinimalDisplayModeConverter}}"
 					   Margin="8,0" ContentTemplate="{StaticResource GameTitleTemplate}" />
-
-					<ui:CommandBarButton Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="120" Margin="0,0,8,0"
+				
+				<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0" HorizontalAlignment="Right">
+					
+					<ui:CommandBarButton Width="120" Margin="0,0,8,0"
 										 IconSource="{Binding #LCDView.CurrentView, Mode=OneWay, Converter={StaticResource ViewIconConverter}}" 
 										 Label="{Binding #LCDView.CurrentView}" 
 										 ToolTip.Tip="Change View">
-						<ui:CommandBarButton.Flyout>
+					<ui:CommandBarButton.Flyout>
 							<Flyout>
 
 								<StackPanel Orientation="Vertical">
@@ -242,13 +244,26 @@
 						</ui:CommandBarButton.Flyout>
 					</ui:CommandBarButton>
 
-				<ui:CommandBarSeparator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
+					<ui:CommandBarSeparator />
 
-				<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
-					<ui:CommandBarButton IconSource="RepeatAll" Label="ENDLESS" ToolTip.Tip="Play" Command="{Binding StartEndlessCommand}"/>
-					<ui:CommandBarButton IconSource="Play" Label="Play" ToolTip.Tip="Play" Command="{Binding StartGameCommand}"/>
-					<ui:CommandBarButton IconSource="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"/>
-					<ui:CommandBarButton IconSource="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"/>
+					<TextBlock FontFamily="{StaticResource DSEG7}" Margin="4,0" HorizontalAlignment="Left"
+							   IsVisible="{Binding IsEndless, Mode=OneWay}" Width="80"
+							   Text="{Binding Score, StringFormat=\{0:000\}}" FontSize="32" VerticalAlignment="Center"/>
+
+					<ui:CommandBarButton IconSource="Play" Label="Play" ToolTip.Tip="Play" Command="{Binding StartGameCommand}"
+										 IsVisible="{Binding !IsGameRunning, Mode=OneWay}"/>
+					<ui:CommandBarButton IconSource="RepeatAll" Label="ENDLESS" ToolTip.Tip="Play (ENDLESS Mode)" Command="{Binding StartEndlessCommand}"
+										 IsVisible="{Binding !IsGameRunning, Mode=OneWay}"/>
+					
+					<StackPanel IsVisible="{Binding IsGameRunning, Mode=OneWay}" Orientation="Horizontal">
+						<ui:CommandBarButton IconSource="Play" Label="Resume" ToolTip.Tip="Resume" Command="{Binding StartGameCommand}"
+										 IsVisible="{Binding IsPaused, Mode=OneWay}"/>
+						<ui:CommandBarButton IconSource="Pause" Label="Pause" ToolTip.Tip="Pause" Command="{Binding PauseGameCommand}"
+											 IsVisible="{Binding !IsPaused, Mode=OneWay}"/>
+						<ui:CommandBarButton IconSource="Stop" Label="Stop" ToolTip.Tip="Stop" Command="{Binding StopGameCommand}"
+											 IsVisible="True"/>
+					</StackPanel>
+
 					<ui:CommandBarSeparator />
 					<ui:CommandBarButton IconSource="Keyboard" Label="Controls" ToolTip.Tip="Controls">
 						<ui:CommandBarButton.Flyout>
@@ -285,9 +300,18 @@
 				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 						CornerRadius="{StaticResource ControlCornerRadius}" 
 						Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+						IsVisible="{Binding !IsEndless, Mode=OneWay}"
 						ClipToBounds="True">
 					<Image Source="avares://LCDonald/Assets/bg_1.jpg"
-					   Stretch="UniformToFill" Opacity="0.2"/>
+						   Stretch="UniformToFill" Opacity="0.2"/>
+				</Border>
+				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						CornerRadius="{StaticResource ControlCornerRadius}"
+						Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
+						IsVisible="{Binding IsEndless, Mode=OneWay}"
+						ClipToBounds="True">
+					<Image Source="avares://LCDonald/Assets/bg_2.jpg"
+						   Stretch="UniformToFill" Opacity="0.2"/>
 				</Border>
 
 				<controls:AvaloniaLCDView x:Name="LCDView" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0" Focusable="True"

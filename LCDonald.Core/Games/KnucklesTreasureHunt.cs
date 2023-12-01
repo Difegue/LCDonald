@@ -302,6 +302,7 @@ namespace LCDonald.Core.Games
                 if (IsInFrontOfEmerald(emerald) && _hasKnucklesMoved)
                 {
                     _emeraldsCollected++;
+                    IncrementScore();
                     QueueSound(new LCDGameSound("emerald_get.ogg"));
                     _emeraldPositions.Remove(emerald);
                 }
