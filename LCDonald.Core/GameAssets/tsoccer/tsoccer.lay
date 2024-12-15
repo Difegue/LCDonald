@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="tsoccer_manual.png" />
+		<image file="tsoccer_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="tsoccer_front.jpg" />
@@ -142,7 +142,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="897" height="910" />
+			<bounds x="0" y="0" width="1144" height="1142" />
 		</element>
 	</view>
 	
@@ -157,6 +157,6 @@
 Tails Soccer / Mia Hamm Soccer
 - Artwork type: Photo, Background
 - McDonald's Sonic/ESPN Games Assets by Difegue
-- Instructions scan provided by Nightsy.
+- Instructions scan provided by Nightsy and Georgedude.
 -->
 

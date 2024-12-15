@@ -13,6 +13,12 @@
 	<element name="back">
 		<image file="shockey_back.jpg" />
 	</element>
+	<element name="front_rare">
+		<image file="shockey_rare_front.jpg" />
+	</element>
+	<element name="back_rare">
+		<image file="shockey_rare_back.jpg" />
+	</element>
 	<element name="game_bg_crop">
 		<image file="shockey_bg_crop.jpg" />
 	</element>
@@ -67,6 +73,33 @@
 		</element>
 	</view>
 
+	<view name="Front (Rare)">
+		<screen index="0">
+			<bounds x="1731" y="680" width="523" height="668" />
+		</screen>
+		<element ref="front_rare">
+			<bounds x="0" y="0" width="3901" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1079" y="1461" width="265" height="253" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1348" y="1466" width="287" height="238" />
+		</element>
+		<element ref="button" inputtag="Hockey">
+			<bounds x="2446" y="1400" width="355" height="357" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1715" y="662" width="549" height="703" />
+		</element>
+	</view>
+
+	<view name="Back (Rare)">
+		<element ref="back_rare">
+			<bounds x="0" y="0" width="3901" height="2600" />
+		</element>
+	</view>
+
 	<view name="Instructions">
 		<element ref="manual">
 			<bounds x="0" y="0" width="773" height="773" />
@@ -78,5 +111,6 @@
 Shadow Hockey
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
+- Silver variant photos by rhumbaboi
 -->
 

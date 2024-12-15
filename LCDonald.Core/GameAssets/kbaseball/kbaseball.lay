@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="kbaseball_manual.png" />
+		<image file="kbaseball_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="kbaseball_front.jpg" />
@@ -118,7 +118,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="897" height="910" />
+			<bounds x="0" y="0" width="1136" height="1139" />
 		</element>
 	</view>
 
@@ -133,6 +133,6 @@
 Knuckles Baseball / Michael Vick Football 
 - Artwork type: Photo, Background
 - McDonald's Sonic/ESPN Games Assets by Difegue
-- Instructions scan provided by Nightsy.
+- Instructions scan provided by Nightsy and Georgedude.
 -->
 

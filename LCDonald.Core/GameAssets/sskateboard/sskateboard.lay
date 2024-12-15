@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="sskateboard_manual.png" />
+		<image file="sskateboard_manual.jpg" />
 	</element>
 	<element name="front_open">
 		<image file="sskateboard_front_open.jpg" />
@@ -166,7 +166,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="897" height="910" />
+			<bounds x="0" y="0" width="1138" height="1142" />
 		</element>
 	</view>
 
@@ -181,6 +181,6 @@
 Sonic Skateboard / Tony Hawk Skateboard
 - Artwork type: Photo, Background
 - McDonald's Sonic/ESPN Games Assets by Difegue
-- Instructions scan provided by Nightsy.
+- Instructions scan provided by Georgedude.
 -->
 

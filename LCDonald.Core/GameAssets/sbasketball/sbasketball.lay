@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="sbasketball_manual.png" />
+		<image file="sbasketball_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="sbasketball_front.jpg" />
@@ -130,7 +130,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="897" height="910" />
+			<bounds x="0" y="0" width="1137" height="1138" />
 		</element>
 	</view>
 
@@ -145,6 +145,6 @@
 Shadow Basketball / Vince Carter Basketball
 - Artwork type: Photo, Background
 - McDonald's Sonic/ESPN Games Assets by Difegue
-- Instructions scan provided by Nightsy.
+- Instructions scan provided by Nightsy and Georgedude.
 -->
 
