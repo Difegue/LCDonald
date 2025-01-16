@@ -69,7 +69,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="859" height="867" />
+			<bounds x="0" y="0" width="2548" height="2548" />
 		</element>
 	</view>
 </mamelayout>
@@ -78,6 +78,6 @@
 Amy & Rouge Volleyball
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-- Manual photo by Ender_Onryo
+- Manual photo by SonnerX
 -->
 
