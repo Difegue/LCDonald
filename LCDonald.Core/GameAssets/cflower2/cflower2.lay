@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="cflower_manual.jpg" />
+		<image file="cflower2_manual.jpg" />
 	</element>
 	<element name="front_open">
 		<image file="cflower2_front_open.jpg" />
@@ -87,7 +87,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="1138" height="1145" />
+			<bounds x="0" y="0" width="2679" height="2589" />
 		</element>
 	</view>
 </mamelayout>
@@ -96,6 +96,6 @@
 Cream Flower Catch (v2)
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-- Instructions scan provided by Georgedude.
+- Manual photo by SonnerX
 -->
 
