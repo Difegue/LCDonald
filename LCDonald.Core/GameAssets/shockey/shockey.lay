@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
+		<image file="shockey_manual.jpg" />
 	</element>
 	<element name="front">
 		<image file="shockey_front.jpg" />
@@ -102,7 +102,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="773" height="773" />
+			<bounds x="0" y="0" width="2756" height="2632" />
 		</element>
 	</view>
 </mamelayout>
@@ -112,5 +112,6 @@ Shadow Hockey
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
 - Silver variant photos by rhumbaboi
+- Manual photo by SonnerX
 -->
 
