@@ -10,8 +10,14 @@
 	<element name="front">
 		<image file="sxtremeboard_front.jpg" />
 	</element>
+	<element name="front_us">
+		<image file="sxtremeboard_front_us.jpg" />
+	</element>
 	<element name="back">
 		<image file="sxtremeboard_back.jpg" />
+	</element>
+	<element name="back_us">
+		<image file="sxtremeboard_back_us.jpg" />
 	</element>
 	<element name="game_bg_crop">
 		<image file="sxtremeboard_bg_crop.jpg" />
@@ -40,8 +46,32 @@
 		</element>
 	</view>
 
+	<view name="Front (US)">
+		<screen index="0">
+			<bounds x="1734" y="809" width="481" height="361" />
+		</screen>
+		<element ref="front_us">
+			<bounds x="0" y="0" width="3968" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1324" y="1190" width="264" height="264" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2367" y="1190" width="264" height="264" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1710" y="775" width="523" height="399" />
+		</element>
+	</view>
+
 	<view name="Back">
 		<element ref="back">
+			<bounds x="0" y="0" width="3968" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (US)">
+		<element ref="back_us">
 			<bounds x="0" y="0" width="3968" height="2600" />
 		</element>
 	</view>
@@ -72,6 +102,6 @@
 Sonic Extreme Boarding
 - Artwork type: Photo, Background, Manual scan
 - McDonald's Sonic Games Assets by Difegue
-
+- US version source photos by SonnerX
 -->
 
