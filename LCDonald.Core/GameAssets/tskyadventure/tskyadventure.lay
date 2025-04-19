@@ -4,6 +4,9 @@
 
 <!-- Define Elements -->
 
+	<element name="manual">
+		<image file="tskyadventure_manual.png" />
+	</element>
 	<element name="manual_fr">
 		<image file="tskyadventure_manual.jpg" />
 	</element>
@@ -96,12 +99,17 @@
 			<bounds x="0" y="0" width="2343" height="2343" />
 		</element>
 	</view>
+	<view name="Instructions (US)">
+		<element ref="manual">
+			<bounds x="0" y="0" width="591" height="605" />
+		</element>
+	</view>
 </mamelayout>
 
 <!--
 Tails' Sky Adventure
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-
+- US Manual scan by Pokefan2098
 -->
 
