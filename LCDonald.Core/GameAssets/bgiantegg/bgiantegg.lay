@@ -81,7 +81,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="653" height="647" />
+			<bounds x="0" y="0" width="625" height="650" />
 		</element>
 	</view>
 </mamelayout>
@@ -90,6 +90,6 @@
 Billy's Giant Egg
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-
+- Manual scanned by Pokefan2098.
 -->
 
