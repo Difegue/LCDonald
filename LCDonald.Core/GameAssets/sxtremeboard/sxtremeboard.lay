@@ -7,6 +7,9 @@
 	<element name="manual">
 		<image file="sxtremeboard_manual.jpg" />
 	</element>
+	<element name="manual2">
+		<image file="sxtremeboard_manual2.jpg" />
+	</element>
 	<element name="front">
 		<image file="sxtremeboard_front.jpg" />
 	</element>
@@ -96,6 +99,12 @@
 			<bounds x="0" y="0" width="2343" height="2343" />
 		</element>
 	</view>
+
+	<view name="Instructions (US)">
+		<element ref="manual2">
+			<bounds x="0" y="0" width="591" height="600" />
+		</element>
+	</view>
 </mamelayout>
 
 <!--
@@ -103,5 +112,6 @@ Sonic Extreme Boarding
 - Artwork type: Photo, Background, Manual scan
 - McDonald's Sonic Games Assets by Difegue
 - US version source photos by SonnerX
+- US/Australia manual scan by Pokefan2098.
 -->
 
