@@ -4,6 +4,15 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<!-- Configuration for BURGER builds -->
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+		<DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+		<DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
 		<None Remove=".gitignore" />

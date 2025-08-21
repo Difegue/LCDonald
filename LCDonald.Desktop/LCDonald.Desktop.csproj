@@ -15,6 +15,17 @@
 	<UseAppHost>true</UseAppHost>
   </PropertyGroup>
 
+  <!-- Configuration for BURGER builds -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+    <ApplicationIcon>..\LCDonald\Assets\burger-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+    <ApplicationIcon>..\LCDonald\Assets\burger-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
   <!-- Windows -->
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -37,8 +48,17 @@
 		<NSHighResolutionCapable>true</NSHighResolutionCapable>
 	</PropertyGroup>
 
+  <!-- macOS BURGER configuration -->
+  <PropertyGroup Condition="$(DefineConstants.Contains('BURGER'))">
+		<CFBundleName>Burger Bard</CFBundleName>
+		<CFBundleDisplayName>Burger Bard</CFBundleDisplayName>
+		<CFBundleIdentifier>com.tvc16.burgerbard</CFBundleIdentifier>
+		<CFBundleIconFile>BurgerIcon.icns</CFBundleIconFile>
+	</PropertyGroup>
+
   <ItemGroup>
     <AvaloniaResource Include="AppIcon.icns" />
+    <AvaloniaResource Include="BurgerIcon.icns" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -60,6 +80,9 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="AppIcon.icns">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="BurgerIcon.icns">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

@@ -8,7 +8,11 @@ namespace LCDonald.Core.Games
     public class TailsSoccer : LCDGameBase
     {
         public override string ShortName => "tsoccer";
+#if BURGER
+        public override string Name => "Burger Kick Soccer (WIP)";
+#else
         public override string Name => "Tails Soccer (2004)";
+#endif
 
         #region SVG Group Names
         public const string LEVEL_1 = "level-1";
