@@ -23,6 +23,7 @@ This uses the [DSEG 7-segment font.](https://www.keshikan.net/fonts-e.html)
 
 ## Build instructions 
 
+### Standard Build (Sonic McOrigins)
 
 ```
 # Windows
@@ -38,3 +39,28 @@ cd LCDonald.Desktop && dotnet restore && dotnet msbuild -t:BundleApp -p:RuntimeI
 cd LCDonald.Android && dotnet build .\LCDonald.Android.csproj -c release 
 
 ```
+
+### White Label Build (Burger Bard)
+
+The project supports a white label "BURGER" version with different app name, icon, and game names:
+
+```
+# Windows (Burger version)
+cd LCDonald.Desktop && dotnet restore && dotnet publish .\LCDonald.Desktop.csproj -c release-burger -r win-x64
+
+# Linux (Burger version)
+cd LCDonald.Desktop && dotnet restore && dotnet publish .\LCDonald.Desktop.csproj -c release-burger -r linux-x64
+
+# macOS (Burger version)
+cd LCDonald.Desktop && dotnet restore && dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release-Burger
+
+# Android (Burger version)
+cd LCDonald.Android && dotnet build .\LCDonald.Android.csproj -c release-burger
+
+```
+
+**BURGER version changes:**
+- App name: "Burger Bard" instead of "Sonic McOrigins"
+- App icon: Uses burger-themed icon
+- Game names: All games get burger-themed WIP names (e.g., "Burger Jump Adventure (WIP)")
+- Bundle/Package ID: Uses different identifiers for separate distribution
