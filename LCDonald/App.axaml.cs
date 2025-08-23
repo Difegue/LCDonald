@@ -14,6 +14,7 @@ namespace LCDonald
 {
     public partial class App : Application
     {
+        public static string? SelectedGameShortName { get; set; }
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -34,9 +35,10 @@ namespace LCDonald
                 RequestedThemeVariant = SettingsViewModel.CurrentSettings.ApplicationTheme == "Light" ? ThemeVariant.Light : ThemeVariant.Dark;
             }
 
+            var selectedGameShortName = SelectedGameShortName;
             var mainView = new MainView
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainWindowViewModel(selectedGameShortName),
                 Settings = settings
             };
 

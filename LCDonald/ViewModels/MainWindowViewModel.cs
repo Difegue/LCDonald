@@ -17,7 +17,7 @@ namespace LCDonald.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {
-        public MainWindowViewModel()
+        public MainWindowViewModel(string? selectedGameShortName = null)
         {
             _availableGames = new List<ILCDGame>
             {
@@ -43,8 +43,16 @@ namespace LCDonald.ViewModels
                 new BillyGiantEgg()
             };
 
-            // Pick a random game
-            Game = _availableGames[new Random().Next(0, _availableGames.Count)];
+            // Select game based on command line argument or pick a random one
+            if (!string.IsNullOrEmpty(selectedGameShortName))
+            {
+                var selectedGame = _availableGames.FirstOrDefault(g => g.ShortName.Equals(selectedGameShortName, StringComparison.OrdinalIgnoreCase));
+                Game = selectedGame ?? _availableGames[new Random().Next(0, _availableGames.Count)];
+            }
+            else
+            {
+                Game = _availableGames[new Random().Next(0, _availableGames.Count)];
+            }
         }
 
         [ObservableProperty]
