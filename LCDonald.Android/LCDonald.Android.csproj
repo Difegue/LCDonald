@@ -14,6 +14,17 @@
 
 	 <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
+
+  <!-- Configuration for BURGER builds -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+    <ApplicationId>com.tvc16.burgerbard</ApplicationId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+    <ApplicationId>com.tvc16.burgerbard</ApplicationId>
+  </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AndroidStoreUncompressedFileExtensions>ogg</AndroidStoreUncompressedFileExtensions>

@@ -9,7 +9,11 @@ namespace LCDonald.Core.Games
     public class SonicSpeedway : LCDGameBase
     {
         public override string ShortName => "sspeedway";
+#if BURGER
+        public override string Name => "Burger Dash Racing (WIP)";
+#else
         public override string Name => "Sonic Speedway (2003)";
+#endif
 
         #region SVG Group Names
         public const string HIT_LEFT = "hit-left";

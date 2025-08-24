@@ -6,6 +6,15 @@
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
+  <!-- Configuration for BURGER builds -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="IsExternalInit" Version="1.0.3">
       <PrivateAssets>all</PrivateAssets>

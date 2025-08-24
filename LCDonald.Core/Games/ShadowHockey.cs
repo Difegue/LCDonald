@@ -9,7 +9,11 @@ namespace LCDonald.Core.Games
     public class ShadowHockey : LCDGameBase
     {
         public override string ShortName => "shockey"; 
+#if BURGER
+        public override string Name => "Burger Puck Slam (WIP)";
+#else
         public override string Name => "Shadow Hockey (2004)";
+#endif
 
         #region SVG Group Names
         public const string SEGMENT_21 = "segment-21";

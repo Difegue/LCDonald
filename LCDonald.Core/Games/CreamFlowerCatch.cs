@@ -12,7 +12,11 @@ namespace LCDonald.Core.Games
     public class CreamFlowerCatch : LCDGameBase
     {
         public override string ShortName => "cflower";
+#if BURGER
+        public override string Name => "Burger Catch Frenzy (WIP)";
+#else
         public override string Name => "Cream Flower Catch (2004)";
+#endif
 
         #region SVG Group Names
         public const string LEVEL_1 = "level-1";
