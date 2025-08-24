@@ -4,14 +4,15 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>9.0</LangVersion>
+    <Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>
   </PropertyGroup>
 
   <!-- Configuration for BURGER builds -->
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+  <PropertyGroup Condition="'$(Configuration)' == 'DebugBurger'">
     <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+  <PropertyGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
     <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
   </PropertyGroup>
 

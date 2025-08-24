@@ -11,17 +11,18 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
-
-	 <PublishTrimmed>true</PublishTrimmed>
+	  
+	<Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>
+	<PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
   <!-- Configuration for BURGER builds -->
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+  <PropertyGroup Condition="'$(Configuration)' == 'DebugBurger'">
     <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
     <ApplicationId>com.tvc16.burgerbard</ApplicationId>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+  <PropertyGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
     <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
     <ApplicationId>com.tvc16.burgerbard</ApplicationId>
   </PropertyGroup>

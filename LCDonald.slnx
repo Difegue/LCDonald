@@ -1,0 +1,16 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugBurger" />
+    <BuildType Name="Release" />
+    <BuildType Name="ReleaseBurger" />
+  </Configurations>
+  <Project Path="LCDonald.Android/LCDonald.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="LCDonald.Core/LCDonald.Core.csproj">
+  </Project>
+  <Project Path="LCDonald.Desktop/LCDonald.Desktop.csproj" />
+  <Project Path="LCDonald/LCDonald.csproj">
+  </Project>
+</Solution>

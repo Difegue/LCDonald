@@ -10,18 +10,19 @@
 	<!-- Turn off trimming as it breaks the published files on 11 preview for now -->
 	<PublishTrimmed>false</PublishTrimmed>
 	<PublishSingleFile>true</PublishSingleFile>
-	  
+
+	<Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>
 	<ApplicationIcon>..\LCDonald\Assets\app-icon.ico</ApplicationIcon>
 	<UseAppHost>true</UseAppHost>
   </PropertyGroup>
 
   <!-- Configuration for BURGER builds -->
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug-Burger'">
+  <PropertyGroup Condition="'$(Configuration)' == 'DebugBurger'">
     <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
     <ApplicationIcon>..\LCDonald\Assets\burger-icon.ico</ApplicationIcon>
   </PropertyGroup>
   
-  <PropertyGroup Condition="'$(Configuration)' == 'Release-Burger'">
+  <PropertyGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
     <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
     <ApplicationIcon>..\LCDonald\Assets\burger-icon.ico</ApplicationIcon>
   </PropertyGroup>
