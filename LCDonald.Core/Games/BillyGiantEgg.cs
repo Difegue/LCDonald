@@ -9,7 +9,11 @@ namespace LCDonald.Core.Games
     public class BillyGiantEgg : LCDGameBase
     {
         public override string ShortName => "bgiantegg";
+#if BURGER
+        public override string Name => "Halmon's Egg Catch";
+#else
         public override string Name => "Billy's Giant Egg (2005)";
+#endif
 
         #region SVG Group Names
         public const string EGG_1 = "egg-1";

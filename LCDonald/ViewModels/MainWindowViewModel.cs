@@ -19,8 +19,29 @@ namespace LCDonald.ViewModels
     {
         public MainWindowViewModel(string? selectedGameShortName = null)
         {
-            _availableGames = new List<ILCDGame>
-            {
+#if BURGER
+            _availableGames =
+            [
+                new SonicActionGame(),
+                new TailsSkyPatrol(),
+                new ShadowGrinder(),
+                new SonicSpeedway(),
+                new SonicExtremeBoarding(),
+                new TailsSoccer(),
+                new KnucklesBaseball(),
+                new ShadowHockey(),
+                new AmyRougeVolleyball(),
+                new BigFishing(),
+                new SonicSkateboard(),
+                new TailsSkyAdventure(),
+                new KnucklesTreasureHunt(),
+                new ShadowBasketball(),
+                new CreamFlowerCatch2005(),
+                new BillyGiantEgg()
+            ];
+#else
+            _availableGames = 
+            [
                 new SonicActionGame(),
                 new TailsSkyPatrol(),
                 new KnucklesSoccer(),
@@ -41,7 +62,8 @@ namespace LCDonald.ViewModels
                 new AmyRougeTennis(),
                 new CreamFlowerCatch2005(),
                 new BillyGiantEgg()
-            };
+            ];
+#endif
 
             // Select game based on command line argument or pick a random one
             if (!string.IsNullOrEmpty(selectedGameShortName))

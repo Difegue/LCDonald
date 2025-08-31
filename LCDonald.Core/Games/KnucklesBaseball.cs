@@ -9,7 +9,7 @@ namespace LCDonald.Core.Games
     {
         public override string ShortName => "kbaseball";
 #if BURGER
-        public override string Name => "Burger Toss Challenge (WIP)";
+        public override string Name => "King Beareon's Football Catch";
 #else
         public override string Name => "Knuckles Baseball (2004)";
 #endif

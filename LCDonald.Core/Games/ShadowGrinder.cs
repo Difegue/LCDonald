@@ -9,7 +9,11 @@ namespace LCDonald.Core.Games
     public class ShadowGrinder : LCDGameBase
     {
         public override string ShortName => "sgrinder";
+#if BURGER
+        public override string Name => "Vibes Rail Grinder";
+#else
         public override string Name => "Shadow Grinder (2003)";
+#endif
 
         #region SVG Group Names
         public const string LEVEL_1 = "level-1";

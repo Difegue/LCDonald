@@ -8,11 +8,7 @@ namespace LCDonald.Core.Games
     public class KnucklesSoccer : LCDGameBase
     {
         public override string ShortName => "ksoccer";
-#if BURGER
-        public override string Name => "Burger Goal Kicker (WIP)";
-#else
         public override string Name => "Knuckles Soccer (2003)";
-#endif
 
         #region SVG Group Names
         public const string LEVEL_1 = "level-1";

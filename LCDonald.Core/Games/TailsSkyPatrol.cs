@@ -9,7 +9,11 @@ namespace LCDonald.Core.Games
     public class TailsSkyPatrol : LCDGameBase
     {
         public override string ShortName => "tskypatrol";
+#if BURGER
+        public override string Name => "Soakey's Shell Catch";
+#else
         public override string Name => "Tails' Sky Patrol (2003)";
+#endif
 
         #region SVG Group Names
         public const string MISS_CENTER = "miss-center";

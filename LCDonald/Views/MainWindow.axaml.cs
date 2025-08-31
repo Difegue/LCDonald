@@ -19,6 +19,10 @@ namespace LCDonald.Views
         {
             InitializeComponent();
 
+#if BURGER
+            Title = "Burger Bard";
+#endif
+
             WindowContent = view;
             ViewContainer.Children.Add(view);
 

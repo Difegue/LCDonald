@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>
 	</PropertyGroup>
 
@@ -22,7 +22,6 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-
 
 	<ItemGroup>
 		<None Update="GameAssets\**">

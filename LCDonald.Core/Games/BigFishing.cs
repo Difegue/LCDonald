@@ -8,7 +8,11 @@ namespace LCDonald.Core.Games
     public class BigFishing : LCDGameBase
     {
         public override string ShortName => "bfishing";
+#if BURGER
+        public override string Name => "Burger Bard Fishing";
+#else
         public override string Name => "Big's Fishing (2004)";
+#endif
 
         #region SVG Group Names
         public const string LEVEL_1 = "level-1";

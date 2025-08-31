@@ -10,7 +10,7 @@ namespace LCDonald.Core.Games
     {
         public override string ShortName => "sspeedway";
 #if BURGER
-        public override string Name => "Burger Dash Racing (WIP)";
+        public override string Name => "Burger Bard Speedway Racing";
 #else
         public override string Name => "Sonic Speedway (2003)";
 #endif

@@ -8,7 +8,11 @@ namespace LCDonald.Core.Games
     public class TailsSkyAdventure : LCDGameBase
     {
         public override string ShortName => "tskyadventure";
+#if BURGER
+        public override string Name => "Taco Sal's Target Shooting";
+#else
         public override string Name => "Tails' Sky Adventure (2005)";
+#endif
 
         #region SVG Group Names
         public const string LIFE_1 = "life-1";
