@@ -1,0 +1,82 @@
+<!-- shockey.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="../common/manual_placeholder.jpg" />
+	</element>
+	<element name="front">
+		<image file="shockey_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="shockey_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="shockey_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="shockey_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1731" y="680" width="523" height="668" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3901" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1079" y="1461" width="265" height="253" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1348" y="1466" width="287" height="238" />
+		</element>
+		<element ref="button" inputtag="Hockey">
+			<bounds x="2446" y="1400" width="355" height="357" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1715" y="662" width="549" height="703" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3901" height="2600" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="63" y="85" width="779" height="997" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Hockey">
+			<bounds x="0" y="0" width="884" height="559" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="896" height="1120" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="773" height="773" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Shadow Hockey
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+-->
+

@@ -1,0 +1,77 @@
+<!-- sxtremeboard.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="sxtremeboard_manual.jpg" />
+	</element>
+	<element name="front">
+		<image file="sxtremeboard_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="sxtremeboard_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="sxtremeboard_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="sxtremeboard_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="1734" y="809" width="481" height="361" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="3968" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1324" y="1190" width="264" height="264" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2367" y="1190" width="264" height="264" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1710" y="775" width="523" height="399" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3968" height="2600" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="54" y="90" width="1014" height="761" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="561" height="895" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="562" y="0" width="561" height="895" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="1122" height="895" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="2343" height="2343" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Sonic Extreme Boarding
+- Artwork type: Photo, Background, Manual scan
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+

@@ -5,6 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="600"
         x:Class="LCDonald.Views.MainWindow"
 		x:Name="Root"
+		Icon="/Assets/app-icon.ico"
 		Width="1490"
 		Height="900"
 		MinWidth="640"

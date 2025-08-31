@@ -1,0 +1,101 @@
+<!-- cflower2.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="../common/manual_placeholder.jpg" />
+	</element>
+	<element name="front_open">
+		<image file="cflower2_front_open.jpg" />
+	</element>
+	<element name="front_closed">
+		<image file="cflower2_front_closed.jpg" />
+	</element>
+	<element name="back_open">
+		<image file="cflower2_back_open.jpg" />
+	</element>
+	<element name="back_closed">
+		<image file="cflower2_back_closed.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="cflower2_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="cflower2_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front Open">
+		<screen index="0">
+			<bounds x="1770" y="1405" width="444" height="566" />
+		</screen>
+		<element ref="front_open">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1529" y="2125" width="256" height="256" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2224" y="2125" width="256" height="256" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="1777" y="1399" width="444" height="566" />
+		</element>
+	</view>
+
+	<view name="Front Closed">
+		<element ref="front_closed">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1529" y="2125" width="256" height="256" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2224" y="2125" width="256" height="256" />
+		</element>
+	</view>
+
+	<view name="Back Open">
+		<element ref="back_open">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back Closed">
+		<element ref="back_closed">
+			<bounds x="0" y="0" width="3900" height="2600" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="35" y="35" width="810" height="1079" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="436" height="1079" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="437" y="0" width="436" height="1079" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="872" height="1119" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="773" height="773" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Cream Flower Catch (v2)
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+

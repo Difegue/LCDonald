@@ -1,0 +1,107 @@
+<!-- tskyadventure.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual_fr">
+		<image file="tskyadventure_manual.jpg" />
+	</element>
+	<element name="front_open">
+		<image file="tskyadventure_front_open.jpg" />
+	</element>
+	<element name="front_closed">
+		<image file="tskyadventure_front_closed.jpg" />
+	</element>
+	<element name="back_open">
+		<image file="tskyadventure_back_open.jpg" />
+	</element>
+	<element name="back_closed">
+		<image file="tskyadventure_back_closed.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="tskyadventure_bg.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front Open">
+		<screen index="0">
+			<bounds x="1832" y="1313" width="300" height="380" />
+		</screen>
+		<element ref="front_open">
+			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1428" y="1723" width="157" height="173" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1580" y="1722" width="167" height="173" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="2297" y="1695" width="184" height="245" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="1832" y="1313" width="300" height="380" />
+		</element>
+	</view>
+
+	<view name="Front Closed">
+		<element ref="front_closed">
+			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="1428" y="1723" width="157" height="173" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1580" y="1722" width="167" height="173" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="2297" y="1695" width="184" height="245" />
+		</element>
+	</view>
+
+	<view name="Back Open">
+		<element ref="back_open">
+			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+	</view>
+
+	<view name="Back Closed">
+		<element ref="back_closed">
+			<bounds x="0" y="0" width="3959" height="2639" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="0" y="0" width="900" height="1140" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="570" width="450" height="569" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="570" width="450" height="569" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="0" y="0" width="900" height="569" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="900" height="1140" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual_fr">
+			<bounds x="0" y="0" width="2343" height="2343" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Tails' Sky Adventure
+- Artwork type: Photo, Background
+- McDonald's Sonic Games Assets by Difegue
+
+-->
+
