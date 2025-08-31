@@ -1,32 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\Assets.targets" />
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
-    <LangVersion>9.0</LangVersion>
-    <Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>
-  </PropertyGroup>
+	<!-- Configuration for BURGER builds -->
+	<PropertyGroup Condition="'$(Configuration)' == 'DebugBurger'">
+		<DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+	</PropertyGroup>
 
-  <!-- Configuration for BURGER builds -->
-  <PropertyGroup Condition="'$(Configuration)' == 'DebugBurger'">
-    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
+		<DefineConstants>$(DefineConstants);BURGER</DefineConstants>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
-    <DefineConstants>$(DefineConstants);BURGER</DefineConstants>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="IsExternalInit" Version="1.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="IsExternalInit" Version="1.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
 
-  <ItemGroup>
-    <None Update="GameAssets\**">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="GameAssets\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
