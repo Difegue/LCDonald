@@ -49,8 +49,8 @@ namespace LCDonald.Core.Games
 
         public override List<string> GetAllGameElements()
         {
-            return new List<string>()
-            {
+            List<string> elements = 
+            [
                 EGG_1, EGG_2, EGG_3, EGG_4,
 
                          FRUIT_11,    FRUIT_12,    FRUIT_13,
@@ -61,7 +61,18 @@ namespace LCDonald.Core.Games
                          BOMB_31,     BOMB_32,     BOMB_33,
                            GET_LEFT,         GET_RIGHT,
                    BILLYLEFT,     BILLYCENTER,       BILLYRIGHT
-            };
+            ];
+
+#if BURGER
+            // Additional "common" group. 
+            elements.AddRange([
+                "common-11", "common-12", "common-13",
+                "common-21", "common-22", "common-23",
+                "common-31", "common-32", "common-33"
+                ]);
+#endif
+
+            return elements;
         }
 
         public override List<LCDGameInput> GetAvailableInputs()
@@ -102,6 +113,13 @@ namespace LCDonald.Core.Games
 
             foreach (var fruitPos in ThreadSafeFruitList())
                 elements.Add("fruit-" + fruitPos);
+
+#if BURGER
+            // All nine Bombs and Fruit should also have a "common" group which appears when either bombs or fruit is present,
+            // so that bombs and fruit can have some design features in common.
+            foreach (var commonPos in ThreadSafeBombList().Concat(ThreadSafeFruitList()))
+                elements.Add("common-" + commonPos);
+#endif
 
             if (_fruitsCollected >= 5)
                 elements.Add(EGG_1);
@@ -294,6 +312,12 @@ namespace LCDonald.Core.Games
             _fruitsCollected = 0;
             _billyPosition = 2;
 
+#if BURGER
+            // Eggs 1-3 should still be onscreen when "egg-4" is present.
+            BlinkElement(EGG_1, 6);
+            BlinkElement(EGG_2, 6);
+            BlinkElement(EGG_3, 6);
+#endif
             BlinkElement(EGG_4, 6);
             QueueSound(new LCDGameSound("egg_hatch.ogg"));
 

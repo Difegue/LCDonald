@@ -171,11 +171,13 @@ namespace LCDonald.Core.Games
                 }
             }
 
+#if !BURGER
             // If sonic is at position 1 or 7, bring him down to 2/6
             if (_sonicPosition == 1 || _sonicPosition == 7)
             {
                 _sonicPosition = _sonicPosition == 1 ? 2 : 6;
             }
+#endif
 
         }
 
@@ -287,6 +289,15 @@ namespace LCDonald.Core.Games
                     _bombPositions.Add(thirdBomb);
                 }
             }
+
+#if BURGER
+            // In Burger Bard version, the hang position is updated in the main cycle instead of being on a single frame
+            // If sonic is at position 1 or 7, bring him down to 2/6
+            if (_sonicPosition == 1 || _sonicPosition == 7)
+            {
+                _sonicPosition = _sonicPosition == 1 ? 2 : 6;
+            }
+#endif
         }
 
         private int SpawnBomb()

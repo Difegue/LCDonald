@@ -242,6 +242,12 @@ namespace LCDonald.Controls
             _gameLayout = new MAMELayoutParser().Parse(_interopService.GetGameAsset(gameID, $"{gameID}.lay"));
             _gameElements = _currentGame.GetAllGameElements();
 
+#if BURGER
+            // Additional whitelabel elements available in all games
+            // Adding them here ensures they'll be hidden alongside the rest when inactive.  
+            _gameElements.AddRange("win", "score-0", "score-1");
+#endif
+
             // Create logic processor
             _logicProcessor = new LCDLogicProcessor(_currentGame, this, _interopService);
             

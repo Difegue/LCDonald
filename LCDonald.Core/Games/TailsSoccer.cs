@@ -184,7 +184,12 @@ namespace LCDonald.Core.Games
                     else
                     {
                         _ballsMissed++;
+#if BURGER
+                        // More time for miss animation
+                        BlinkElement(BALL_MISS, 3);
+#else
                         BlinkElement(BALL_MISS, 1);
+#endif
                         QueueSound(new LCDGameSound("../common/miss.ogg"));
                     }
 

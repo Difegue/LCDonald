@@ -22,6 +22,11 @@ namespace LCDonald.Core.Model
         protected int _blockedCustomUpdates;
         protected bool _isInputBlocked;
         protected bool _isEndlessMode;
+
+#if BURGER
+        protected bool _showHiddenGroup;
+#endif
+
         protected Random _rng = new();
         
         private bool _isPaused;
@@ -149,6 +154,11 @@ namespace LCDonald.Core.Model
             var victoryFrame2 = new List<string>();
             var victoryFrame3 = GetAllGameElements();
 
+#if BURGER
+            // Add additional "win" images to display during a win
+            victoryFrame3.Add("win");
+#endif
+
             var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
                                                             victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
                                                             victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
@@ -250,6 +260,11 @@ namespace LCDonald.Core.Model
             // Get the shown elements from the game implementation
             var visibleElements = GetVisibleElements();
 
+#if BURGER
+            if (_showHiddenGroup)
+                visibleElements.Add("score-1");
+#endif
+
             // Add elements that are blinking, remove the ones that aren't
             foreach (var element in _blinkingElements.Keys)
             {
@@ -290,6 +305,11 @@ namespace LCDonald.Core.Model
                 _isInputBlocked = false;
                 CustomUpdate();
             }
+
+#if BURGER
+            // 10% chance on every update to show the hidden group
+            _showHiddenGroup = _rng.Next(1, 10) == 1;
+#endif
 
             // Update speed in case the game sped it up
             ((Timer)sender).Interval = _customUpdateSpeed;
