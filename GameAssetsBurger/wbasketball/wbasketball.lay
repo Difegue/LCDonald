@@ -1,0 +1,150 @@
+<!-- sbasketball.lay -->
+
+<mamelayout version="2">
+
+<!-- Define Elements -->
+
+	<element name="manual">
+		<image file="sbasketball_manual.png" />
+	</element>
+	<element name="front">
+		<image file="sbasketball_front.jpg" />
+	</element>
+	<element name="back">
+		<image file="sbasketball_back.jpg" />
+	</element>
+	<element name="game_bg_crop">
+		<image file="sbasketball_bg_crop.jpg" />
+	</element>
+	<element name="game_bg">
+		<image file="sbasketball_bg.jpg" />
+	</element>
+
+	<element name="manual_espn">
+		<image file="sbasketball_manual_espn.jpg" />
+	</element>
+	<element name="front_espn">
+		<image file="sbasketball_front_espn.jpg" />
+	</element>
+	<element name="back_espn">
+		<image file="sbasketball_back_espn.jpg" />
+	</element>
+	<element name="game_bg_crop_espn">
+		<image file="sbasketball_bg_crop_espn.jpg" />
+	</element>
+	<element name="game_bg_espn">
+		<image file="sbasketball_bg_espn.jpg" />
+	</element>
+	
+<!-- Define Views -->
+	
+	<view name="Front">
+		<screen index="0">
+			<bounds x="866" y="445" width="536" height="677" />
+		</screen>
+		<element ref="front">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="468" y="1773" width="227" height="244" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="695" y="1773" width="240" height="236" />
+		</element>
+		<element ref="button" inputtag="Basket">
+			<bounds x="1430" y="1721" width="381" height="369" />
+		</element>
+		<element ref="game_bg_crop">
+			<bounds x="866" y="445" width="536" height="677" />
+		</element>
+	</view>
+
+	<view name="Front (ESPN)">
+		<screen index="1">
+			<bounds x="866" y="455" width="536" height="677" />
+		</screen>
+		<element ref="front_espn">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="468" y="1773" width="227" height="244" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="695" y="1773" width="240" height="236" />
+		</element>
+		<element ref="button" inputtag="Basket">
+			<bounds x="1430" y="1721" width="381" height="369" />
+		</element>
+		<element ref="game_bg_crop_espn">
+			<bounds x="866" y="445" width="536" height="677" />
+		</element>
+	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Back (ESPN)">
+		<element ref="back_espn">
+			<bounds x="0" y="0" width="2237" height="2600" />
+		</element>
+	</view>
+
+	<view name="Closeup">
+		<screen index="0">
+			<bounds x="8" y="-16" width="886" height="1120" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Basket">
+			<bounds x="0" y="0" width="884" height="559" />
+		</element>
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="884" height="1118" />
+		</element>
+	</view>
+
+	<view name="Closeup (ESPN)">
+		<screen index="1">
+			<bounds x="-10" y="25" width="886" height="1120" />
+		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="444" y="560" width="443" height="559" />
+		</element>
+		<element ref="button" inputtag="Basket">
+			<bounds x="0" y="0" width="884" height="559" />
+		</element>
+		<element ref="game_bg_espn">
+			<bounds x="0" y="0" width="884" height="1118" />
+		</element>
+	</view>
+
+	<view name="Instructions">
+		<element ref="manual">
+			<bounds x="0" y="0" width="897" height="910" />
+		</element>
+	</view>
+
+	<view name="Instructions (ESPN)">
+		<element ref="manual_espn">
+			<bounds x="0" y="0" width="2730" height="2723" />
+		</element>
+	</view>
+</mamelayout>
+
+<!--
+Shadow Basketball / Vince Carter Basketball
+- Artwork type: Photo, Background
+- McDonald's Sonic/ESPN Games Assets by Difegue
+- Instructions scan provided by Nightsy.
+-->
+
