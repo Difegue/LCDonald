@@ -1,13 +1,9 @@
-﻿using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Input;
-using FluentAvalonia.UI.Controls;
-using FluentAvalonia.Styling;
-using Avalonia.Controls.Templates;
-using System;
-using LCDonald.ViewModels;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using FluentAvalonia.UI.Windowing;
+using System;
 
 namespace LCDonald.Views
 {
@@ -20,7 +16,10 @@ namespace LCDonald.Views
             InitializeComponent();
 
 #if BURGER
-            Title = "Burger Bard";
+            Title = "Burger Bard Crystalectrics";
+
+            var asset = AssetLoader.Open(new Uri("avares://LCDonald/Assets/burger-icon.ico"));
+            Icon = new Bitmap(asset);
 #endif
 
             WindowContent = view;
