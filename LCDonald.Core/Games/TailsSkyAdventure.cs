@@ -7,10 +7,12 @@ namespace LCDonald.Core.Games
 {
     public class TailsSkyAdventure : LCDGameBase
     {
-        public override string ShortName => "tskyadventure";
+
 #if BURGER
+        public override string ShortName => "targetshoot";
         public override string Name => "Taco Sal's Target Shooting";
 #else
+        public override string ShortName => "tskyadventure";
         public override string Name => "Tails' Sky Adventure (2005)";
 #endif
 

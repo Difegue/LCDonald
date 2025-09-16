@@ -8,10 +8,12 @@ namespace LCDonald.Core.Games
 {
     public class ShadowHockey : LCDGameBase
     {
-        public override string ShortName => "shockey"; 
+
 #if BURGER
+        public override string ShortName => "magicbattle";
         public override string Name => "Bat Magic's Magic Battle";
 #else
+        public override string ShortName => "shockey"; 
         public override string Name => "Shadow Hockey (2004)";
 #endif
 

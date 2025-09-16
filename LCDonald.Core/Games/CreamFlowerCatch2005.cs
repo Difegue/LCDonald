@@ -9,11 +9,13 @@ namespace LCDonald.Core.Games
 
     public class CreamFlowerCatch2005 : LCDGameBase
     {
-        public override string ShortName => "cflower2";
+
 
 #if BURGER
+        public override string ShortName => "heartmooncatch";
         public override string Name => "Honey's Heart-Moon Catch";
 #else
+        public override string ShortName => "cflower2";
         public override string Name => "Cream Flower Catch (2005)";
 #endif
 

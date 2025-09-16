@@ -7,10 +7,12 @@ namespace LCDonald.Core.Games
 {
     public class KnucklesBaseball: LCDGameBase
     {
-        public override string ShortName => "kbaseball";
+
 #if BURGER
+        public override string ShortName => "football";
         public override string Name => "King Beareon's Football Catch";
 #else
+        public override string ShortName => "kbaseball";
         public override string Name => "Knuckles Baseball (2004)";
 #endif
 

@@ -8,10 +8,12 @@ namespace LCDonald.Core.Games
 {
     public class AmyRougeVolleyball : LCDGameBase
     {
-        public override string ShortName => "arvolleyball";
+
 #if BURGER
+        public override string ShortName => "volleyball";
         public override string Name => "Curly Frenchie Volleyball (Fry Friends Volleyball)";
 #else
+        public override string ShortName => "arvolleyball";
         public override string Name => "Amy & Rouge Volleyball (2004)";
 #endif
 

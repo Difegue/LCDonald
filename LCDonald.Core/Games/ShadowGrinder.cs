@@ -8,10 +8,12 @@ namespace LCDonald.Core.Games
 {
     public class ShadowGrinder : LCDGameBase
     {
-        public override string ShortName => "sgrinder";
+
 #if BURGER
+        public override string ShortName => "railgrinder";
         public override string Name => "Vibes Rail Grinder";
 #else
+        public override string ShortName => "sgrinder";
         public override string Name => "Shadow Grinder (2003)";
 #endif
 

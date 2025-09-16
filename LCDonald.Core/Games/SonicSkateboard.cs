@@ -8,10 +8,12 @@ namespace LCDonald.Core.Games
 {
     public class SonicSkateboard : LCDGameBase
     {
-        public override string ShortName => "sskateboard";
+
 #if BURGER
+        public override string ShortName => "skateboard";
         public override string Name => "Vibes Skateboarding";
 #else
+        public override string ShortName => "sskateboard";
         public override string Name => "Sonic Skateboard (2005)";
 #endif
 

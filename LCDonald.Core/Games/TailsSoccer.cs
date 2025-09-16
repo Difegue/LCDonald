@@ -7,10 +7,12 @@ namespace LCDonald.Core.Games
 {
     public class TailsSoccer : LCDGameBase
     {
-        public override string ShortName => "tsoccer";
+
 #if BURGER
+        public override string ShortName => "ksoccer";
         public override string Name => "Kola Bear's Soccer";
 #else
+        public override string ShortName => "tsoccer";
         public override string Name => "Tails Soccer (2004)";
 #endif
 

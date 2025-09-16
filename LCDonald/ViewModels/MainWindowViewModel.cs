@@ -8,7 +8,6 @@ using LCDonald.Core.Controller;
 using LCDonald.Core.Games;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
-using LCDonald.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,22 +21,25 @@ namespace LCDonald.ViewModels
 #if BURGER
             _availableGames =
             [
-                new SonicActionGame(),
-                new TailsSkyPatrol(),
-                new ShadowGrinder(),
-                new SonicSpeedway(),
-                new SonicExtremeBoarding(),
-                new TailsSoccer(),
-                new KnucklesBaseball(),
-                new ShadowHockey(),
                 new AmyRougeVolleyball(),
                 new BigFishing(),
-                new SonicSkateboard(),
-                new TailsSkyAdventure(),
-                new KnucklesTreasureHunt(),
-                new ShadowBasketball(),
+                new BillyGiantEgg(),
+                new BillyGiantEgg2(),
                 new CreamFlowerCatch2005(),
-                new BillyGiantEgg()
+                new KnucklesBaseball(),
+                new KnucklesTreasureHunt(),
+                new KnucklesTreasureHunt2(),
+                new SonicActionGame(),
+                //new SonicActionGame2(),
+                new ShadowBasketball(),
+                new ShadowGrinder(),
+                new ShadowHockey(),
+                new SonicSkateboard(),
+                new SonicSpeedway(),
+                new SonicExtremeBoarding(),
+                new TailsSkyAdventure(),
+                new TailsSkyPatrol(),
+                new TailsSoccer()
             ];
 #else
             _availableGames = 
@@ -64,6 +66,9 @@ namespace LCDonald.ViewModels
                 new BillyGiantEgg()
             ];
 #endif
+
+            Game = new TailsSoccer();
+            return;
 
             // Select game based on command line argument or pick a random one
             if (!string.IsNullOrEmpty(selectedGameShortName))
