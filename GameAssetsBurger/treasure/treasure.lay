@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="manual_egg_treasure.png" />
+		<image file="manual_bard_treasure.png" />
 	</element>
 	<element name="game_bg_crop">
 		<image file="treasure_bg.jpg" />

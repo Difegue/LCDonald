@@ -30,7 +30,7 @@ namespace LCDonald.ViewModels
                 new KnucklesTreasureHunt(),
                 new KnucklesTreasureHunt2(),
                 new SonicActionGame(),
-                //new SonicActionGame2(),
+                new SonicActionGame2(),
                 new ShadowBasketball(),
                 new ShadowGrinder(),
                 new ShadowHockey(),
