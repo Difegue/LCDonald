@@ -5,93 +5,187 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="sgrinder_manual.jpg" />
-	</element>
-	<element name="front">
-		<image file="sgrinder_front.jpg" />
-	</element>
-	<element name="back">
-		<image file="sgrinder_back.jpg" />
-	</element>
-	<element name="front_us">
-		<image file="sgrinder_front_us.jpg" />
-	</element>
-	<element name="back_us">
-		<image file="sgrinder_back_us.jpg" />
+		<image file="manual_rail_grinder.png" />
 	</element>
 	<element name="game_bg_crop">
-		<image file="sgrinder_bg_crop.jpg" />
+		<image file="railgrinder_bg.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="sgrinder_bg.jpg" />
+		<image file="railgrinder_bg.jpg" />
 	</element>
+	<element name="front">
+		<image file="railgrinder_hardware_01.jpg" />
+	</element>
+	<element name="front2">
+		<image file="railgrinder_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="railgrinder_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="railgrinder_hardware_04.jpg" />
+	</element>
+	<element name="front5">
+		<image file="railgrinder_hardware_05.jpg" />
+	</element>
+	<element name="front6">
+		<image file="railgrinder_hardware_06.jpg" />
+	</element>
+	<element name="front7">
+		<image file="railgrinder_hardware_07.jpg" />
+	</element>
+	<element name="front8">
+		<image file="railgrinder_hardware_08.jpg" />
+	</element>
+	<element name="front9">
+		<image file="railgrinder_hardware_09.jpg" />
+	</element>
+	<element name="front10">
+		<image file="railgrinder_hardware_10.jpg" />
+	</element>
+	<element name="front11">
+		<image file="railgrinder_hardware_11.jpg" />
+	</element>
+	<element name="back">
+		<image file="railgrinder_hardware_12.jpg" />
+	</element>
+	<element name="diagram">
+		<image file="railgrinder_hardware_13.png />
+	</element>
+
 	
 <!-- Define Views -->
-	
+
 	<view name="Front">
+<!-- Fishing Hardware 1 button -->
 		<screen index="0">
-			<bounds x="737" y="662" width="719" height="558" />
+			<bounds x="1052" y="387" width="894" height="657" />
 		</screen>
 		<element ref="front">
-			<bounds x="0" y="0" width="2237" height="2600" />
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Jump">
-			<bounds x="1273" y="1674" width="343" height="349" />
+			<bounds x="2101" y="628" width="317" height="317" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="761" y="678" width="693" height="527" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
 		</element>
 	</view>
 
-	<view name="Front (US)">
+
+	<view name="Front11">
+<!-- Extreme Hardware 1 button -->
 		<screen index="0">
-			<bounds x="737" y="662" width="719" height="558" />
+			<bounds x="1016" y="378" width="967" height="703" />
 		</screen>
-		<element ref="front_us">
-			<bounds x="0" y="0" width="2237" height="2600" />
+		<element ref="front11">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Jump">
-			<bounds x="1273" y="1674" width="343" height="349" />
+			<bounds x="2234" y="894" width="471" height="478" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="761" y="678" width="693" height="527" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="2237" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (US)">
-		<element ref="back_us">
-			<bounds x="0" y="0" width="2237" height="2600" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
 		</element>
 	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="3" y="-1" width="1126" height="872" />
+			<bounds x="0" y="0" width="3097" height="2400" />
 		</screen>
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="561" height="895" />
+		</element>
 		<element ref="button" inputtag="Jump">
-			<bounds x="0" y="0" width="1129" height="884" />
+			<bounds x="562" y="0" width="561" height="895" />
 		</element>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="1129" height="884" />
+			<bounds x="0" y="0" width="3097" height="2400" />
 		</element>
 	</view>
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="2343" height="2343" />
+			<bounds x="0" y="0" width="6130" height="6119" />
 		</element>
 	</view>
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+	</view>
+
+	<view name="Front 3">
+<!-- Fishing Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front3">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
+	<view name="Front 7">
+<!-- Extreme Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1016" y="378" width="967" height="703" />
+		</screen>
+		<element ref="front7">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2234" y="894" width="471" height="478" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
+		</element>
+	</view>
+
+	<view name="Front 5">
+<!-- Fishing Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front5">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
+	<view name="Front 4">
+<!-- Fishing Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front4">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
 </mamelayout>
 
 <!--
-Shadow Grinder
-- Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
+Vibes' Rail Grinder
+- Artwork type: Photo, Background, Manual scan
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
-

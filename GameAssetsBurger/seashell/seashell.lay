@@ -5,50 +5,48 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="tskypatrol_manual.jpg" />
+		<image file="manual_soakey_shell.png" />
 	</element>
 	<element name="front">
-		<image file="tskypatrol_front.jpg" />
+		<image file="seashell_hardware_01.jpg" />
 	</element>
-	<element name="back">
-		<image file="tskypatrol_back.jpg" />
+	<element name="front2">
+		<image file="seashell_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="seashell_hardware_03.jpg" />
 	</element>
 	<element name="game_bg_crop">
-		<image file="tskypatrol_bg_crop.jpg" />
+		<image file="seashell_bg.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="tskypatrol_bg.jpg" />
+		<image file="seashell_bg.jpg" />
 	</element>
 	
 <!-- Define Views -->
 	
 	<view name="Front">
+<!-- Extreme Hardware Up/Down -->
 		<screen index="0">
-			<bounds x="1530" y="1391" width="643" height="500" />
+			<bounds x="1016" y="378" width="967" height="703" />
 		</screen>
 		<element ref="front">
-			<bounds x="0" y="0" width="3968" height="2600" />
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Up">
-			<bounds x="2467" y="1215" width="350" height="350" />
+			<bounds x="2325" y="850" width="262" height="227" />
 		</element>
 		<element ref="button" inputtag="Down">
-			<bounds x="2467" y="1691" width="350" height="350"  />
+			<bounds x="2325" y="1078" width="262" height="228" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1510" y="1366" width="713" height="545" />
-		</element>
-	</view>
-
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3968" height="2600" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
 		</element>
 	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="81" y="72" width="1016" height="793" />
+			<bounds x="0" y="0" width="3079" height="2400" />
 		</screen>
 		<element ref="button" inputtag="Up">
 			<bounds x="0" y="0" width="1160" height="455" />
@@ -57,22 +55,60 @@
 			<bounds x="0" y="456" width="1160" height="455" />
 		</element>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="1160" height="910" />
+			<bounds x="0" y="0" width="3079" height="2400" />
 		</element>
 	</view>
 
-
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="2343" height="2343" />
+			<bounds x="0" y="0" width="6130" height="6119" />
+		</element>
+	</view>
+
+	<view name="Front 2">
+<!-- Extreme Hardware Up/Down -->
+		<screen index="0">
+			<bounds x="1016" y="378" width="967" height="703" />
+		</screen>
+		<element ref="front2">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Up">
+			<bounds x="2325" y="850" width="262" height="227" />
+		</element>
+		<element ref="button" inputtag="Down">
+			<bounds x="2325" y="1078" width="262" height="228" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
+		</element>
+	</view>
+
+	<view name="Front 3">
+<!-- Extreme Hardware Up/Down -->
+		<screen index="0">
+			<bounds x="1016" y="378" width="967" height="703" />
+		</screen>
+		<element ref="front3">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Up">
+			<bounds x="2325" y="850" width="262" height="227" />
+		</element>
+		<element ref="button" inputtag="Down">
+			<bounds x="2325" y="1078" width="262" height="228" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
 		</element>
 	</view>
 </mamelayout>
 
 <!--
-Tails' Sky Patrol
-- Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
-
+Soakey's Seashell Hunt
+- Artwork type: Photo, Background, Manual scan
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
 

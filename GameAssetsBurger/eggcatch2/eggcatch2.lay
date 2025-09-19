@@ -5,71 +5,102 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
-	</element>
-	<element name="front_open">
-		<image file="bgiantegg_front_open.jpg" />
-	</element>
-	<element name="front_closed">
-		<image file="bgiantegg_front_closed.jpg" />
-	</element>
-	<element name="back_open">
-		<image file="bgiantegg_back_open.jpg" />
-	</element>
-	<element name="back_closed">
-		<image file="bgiantegg_back_closed.jpg" />
-	</element>
-	<element name="game_bg_crop">
-		<image file="bgiantegg_bg_crop.jpg" />
+		<image file="manual_eggcatch2.png" />
 	</element>
 	<element name="game_bg">
-		<image file="bgiantegg_bg.jpg" />
+		<image file="eggcatch2_bg.png" />
 	</element>
+	<element name="game_bg_crop">
+		<image file="eggcatch2_bg.png" />
+	</element>
+	<element name="front1">
+		<image file="eggcatch2_hardware_01.jpg" />
+	</element>
+	<element name="front2">
+		<image file="eggcatch2_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="eggcatch2_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="eggcatch2_hardware_04.jpg" />
+	</element>
+	<element name="front5">
+		<image file="eggcatch2_hardware_05.jpg" />
+	</element>
+	<element name="front6">
+		<image file="eggcatch2_hardware_06.jpg" />
+	</element>
+	<element name="front7">
+		<image file="eggcatch2_hardware_07.jpg" />
+	</element>
+	<element name="front8">
+		<image file="eggcatch2_hardware_08.jpg" />
+	</element>
+	<element name="front9">
+		<image file="eggcatch2_hardware_09.jpg" />
+	</element>
+	<element name="front10">
+		<image file="eggcatch2_hardware_10.jpg" />
+	</element>
+	<element name="front11">
+		<image file="eggcatch2_hardware_11.jpg" />
+	</element>
+	<element name="front12">
+		<image file="eggcatch2_hardware_12.jpg" />
+	</element>
+
 	
 <!-- Define Views -->
-	
-	<view name="Front Open">
+
+	<view name="Front 2">
+<!-- Skateboard 2 button Hardware -->
 		<screen index="0">
-			<bounds x="1776" y="1445" width="351" height="436" />
+			<bounds x="1190" y="434" width="618" height="760" />
 		</screen>
-		<element ref="front_open">
-			<bounds x="0" y="0" width="3900" height="2600" />
+		<element ref="front2">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="1400" y="1693" width="194" height="277" />
+			<bounds x="762" y="1319" width="264" height="257" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="2310" y="1693" width="192" height="274" />
+			<bounds x="1973" y="1319" width="266" height="257" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1776" y="1445" width="351" height="436" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1381" y="1411" width="237" height="150" />
+		</element>
+			<element ref="game_bg_crop">
+			<bounds x="1190" y="434" width="618" height="760" />
+		</element>
+	</view>
+	
+	<view name="Front 7">
+<!-- Volleyball 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front7">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="420" y="918" width="409" height="412" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
 		</element>
 	</view>
 
-	<view name="Front Closed">
-		<element ref="front_closed">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back Open">
-		<element ref="back_open">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back Closed">
-		<element ref="back_closed">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="-8" y="32" width="877" height="1089" />
+			<bounds x="0" y="0" width="1932" height="2400" />
 		</screen>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="887" height="1142" />
+			<bounds x="0" y="0" width="1932" height="2400" />
 		</element>
 		<element ref="button" inputtag="Left">
 			<bounds x="0" y="0" width="443" height="1142" />
@@ -81,15 +112,92 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="773" height="773" />
+			<bounds x="0" y="0" width="6130" height="6119" />
 		</element>
 	</view>
+
+	<view name="Front 8">
+<!-- SkyAdventure 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1117" y="374" width="764" height="892" />
+		</screen>
+		<element ref="front8">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="500" y="1023" width="358" height="358" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2138" y="1023" width="360" height="358" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
+		</element>
+	</view>
+
+	<view name="Front 10">
+<!-- Treasure 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</screen>
+		<element ref="front10">
+			<bounds x="0" y="0" width="2666" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="855" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1587" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1233" y="1567" width="196" height="38" />
+		</element>
+	</view>
+
+	<view name="Front 4">
+<!-- Skateboard 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1190" y="434" width="618" height="760" />
+		</screen>
+		<element ref="front4">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="762" y="1319" width="264" height="257" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1973" y="1319" width="266" height="257" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1381" y="1411" width="237" height="150" />
+		</element>
+	</view>
+
+	<view name="Front 6">
+<!-- Skateboard 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1190" y="434" width="618" height="760" />
+		</screen>
+		<element ref="front6">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="762" y="1319" width="264" height="257" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1973" y="1319" width="266" height="257" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1381" y="1411" width="237" height="150" />
+		</element>
+	</view>
+
 </mamelayout>
 
 <!--
-Billy's Giant Egg
-- Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
-
+Egg Catch (Unknown Alternate Version)
+- Artwork type: Photo, Background, Manual scan
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
-

@@ -7,9 +7,6 @@
 	<element name="manual">
 		<image file="manual_kola_soccer.png" />
 	</element>
-	<element name="front">
-		<image file="soccer_hardware_21.jpg" />
-	</element>
 	<element name="back">
 		<image file="soccer_hardware_23.jpg" />
 	</element>
@@ -19,64 +16,97 @@
 	<element name="game_bg">
 		<image file="ksoccer_bg.jpg" />
 	</element>
+	<element name="front1">
+		<image file="soccer_hardware_01.jpg" />
+	</element>
+	<element name="front2">
+		<image file="soccer_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="soccer_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="soccer_hardware_04.jpg" />
+	</element>
+	<element name="front5">
+		<image file="soccer_hardware_05.jpg" />
+	</element>
+	<element name="front6">
+		<image file="soccer_hardware_06.jpg" />
+	</element>
+	<element name="front7">
+		<image file="soccer_hardware_07.jpg" />
+	</element>
+	<element name="front8">
+		<image file="soccer_hardware_08.jpg" />
+	</element>
+	<element name="front9">
+		<image file="soccer_hardware_09.jpg" />
+	</element>
+	<element name="front10">
+		<image file="soccer_hardware_10.jpg" />
+	</element>
+	<element name="front11">
+		<image file="soccer_hardware_11.jpg" />
+	</element>
+	<element name="front12">
+		<image file="soccer_hardware_12.jpg" />
+	</element>
+	<element name="front13">
+		<image file="soccer_hardware_13.jpg" />
+	</element>
+	<element name="front14">
+		<image file="soccer_hardware_14.jpg" />
+	</element>
+	<element name="front15">
+		<image file="soccer_hardware_15.jpg" />
+	</element>
+	<element name="front16">
+		<image file="soccer_hardware_16.jpg" />
+	</element>
+	<element name="front17">
+		<image file="soccer_hardware_17.jpg" />
+	</element>
+	<element name="front18">
+		<image file="soccer_hardware_18.jpg" />
+	</element>
+	<element name="front19">
+		<image file="soccer_hardware_19.jpg" />
+	</element>
+	<element name="front20">
+		<image file="soccer_hardware_20.jpg" />
+	</element>
+	<element name="front21">
+		<image file="soccer_hardware_21.jpg" />
+	</element>
+	<element name="front22">
+		<image file="soccer_hardware_22.jpg" />
+	</element>
 
-	<element name="manual_espn">
-		<image file="tsoccer_manual_espn.jpg" />
-	</element>
-	<element name="front_open_espn">
-		<image file="tsoccer_front_open_espn.jpg" />
-	</element>
-	<element name="back_open_espn">
-		<image file="tsoccer_back_open_espn.jpg" />
-	</element>
-	<element name="front_closed_espn">
-		<image file="tsoccer_front_closed_espn.jpg" />
-	</element>
-	<element name="back_closed_espn">
-		<image file="tsoccer_back_closed_espn.jpg" />
-	</element>
-	<element name="game_bg_crop_espn">
-		<image file="tsoccer_bg_crop_espn.jpg" />
-	</element>
-	<element name="game_bg_espn">
-		<image file="tsoccer_bg_espn.jpg" />
-	</element>
+
+
 	
 <!-- Define Views -->
 	
 	<view name="Front">
+<!-- Skateboard 2 button Hardware -->
 		<screen index="0">
-			<bounds x="1772" y="579" width="579" height="703" />
+			<bounds x="1190" y="434" width="618" height="760" />
 		</screen>
-		<element ref="front">
-			<bounds x="0" y="0" width="3970" height="2600" />
+		<element ref="front21">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="1025" y="1274" width="453" height="483" />
+			<bounds x="762" y="1319" width="264" height="257" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="2658" y="1274" width="463" height="492" />
+			<bounds x="1973" y="1319" width="266" height="257" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1769" y="574" width="585" height="711" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1381" y="1411" width="237" height="150" />
 		</element>
-	</view>
-
-	<view name="Front Open (ESPN)">
-		<screen index="1">
-			<bounds x="1767" y="1470" width="315" height="397" />
-		</screen>
-		<element ref="front_open_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-		<element ref="button" inputtag="Left">
-			<bounds x="1386" y="1892" width="210" height="275" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="2322" y="1871" width="210" height="286" />
-		</element>
-		<element ref="game_bg_crop_espn">
-			<bounds x="1767" y="1473" width="315" height="405" />
+			<element ref="game_bg_crop">
+			<bounds x="1190" y="434" width="618" height="760" />
 		</element>
 	</view>
 
@@ -86,33 +116,9 @@
 		</element>
 	</view>
 
-	<view name="Back Open (ESPN)">
-		<element ref="back_open_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Front Closed (ESPN)">
-		<element ref="front_closed_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-		<element ref="button" inputtag="Left">
-			<bounds x="1386" y="1892" width="210" height="275" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="2322" y="1871" width="210" height="286" />
-		</element>
-	</view>
-
-	<view name="Back Closed (ESPN)">
-		<element ref="back_closed_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="16" y="28" width="856" height="1040" />
+			<bounds x="0" y="0" width="1975" height="2400" />
 		</screen>
 		<element ref="button" inputtag="Left">
 			<bounds x="0" y="0" width="444" height="1122" />
@@ -121,22 +127,7 @@
 			<bounds x="445" y="0" width="444" height="1122" />
 		</element>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="889" height="1122" />
-		</element>
-	</view>
-
-	<view name="Closeup (ESPN)">
-		<screen index="1">
-			<bounds x="16" y="28" width="856" height="1040" />
-		</screen>
-		<element ref="button" inputtag="Left">
-			<bounds x="0" y="0" width="444" height="1122" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="445" y="0" width="444" height="1122" />
-		</element>
-		<element ref="game_bg_espn">
-			<bounds x="0" y="0" width="889" height="1122" />
+			<bounds x="0" y="0" width="1975" height="2400" />
 		</element>
 	</view>
 
@@ -146,17 +137,101 @@
 		</element>
 	</view>
 	
-	<view name="Instructions (ESPN)">
-		<element ref="manual_espn">
-			<bounds x="0" y="0" width="2730" height="2723" />
+	<view name="Front 15">
+<!-- Volleyball 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front15">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="420" y="918" width="409" height="412" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
 		</element>
 	</view>
+
+	<view name="Front 18">
+<!-- Skateboard 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1190" y="434" width="618" height="760" />
+		</screen>
+		<element ref="front18">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="762" y="1319" width="264" height="257" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1973" y="1319" width="266" height="257" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1381" y="1411" width="237" height="150" />
+		</element>
+			<element ref="game_bg_crop">
+			<bounds x="1190" y="434" width="618" height="760" />
+		</element>
+	</view>
+
+	<view name="Front 4">
+<!-- SkyAdventure 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1117" y="374" width="764" height="892" />
+		</screen>
+		<element ref="front4">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="500" y="1023" width="358" height="358" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2138" y="1023" width="360" height="358" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
+		</element>
+			<element ref="game_bg_crop">
+			<bounds x="1190" y="434" width="618" height="760" />
+		</element>
+	</view>
+
+	<view name="Front 7">
+<!-- Treasure 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</screen>
+		<element ref="front7">
+			<bounds x="0" y="0" width="2666" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="855" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1587" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1233" y="1567" width="196" height="38" />
+		</element>
+			<element ref="game_bg_crop">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</element>
+	</view>
+
+
+
 </mamelayout>
 
 <!--
-Tails Soccer / Mia Hamm Soccer
-- Artwork type: Photo, Background
-- McDonald's Sonic/ESPN Games Assets by Difegue
-- Instructions scan provided by Nightsy.
+Kola Bear Soccer / Football
+- Artwork type: Photo, Background, Manual scan
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
+
 

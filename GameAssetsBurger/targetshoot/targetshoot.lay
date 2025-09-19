@@ -4,104 +4,239 @@
 
 <!-- Define Elements -->
 
-	<element name="manual_fr">
-		<image file="tskyadventure_manual.jpg" />
+	<element name="manual">
+		<image file="manual_target_shooting.png" />
 	</element>
-	<element name="front_open">
-		<image file="tskyadventure_front_open.jpg" />
-	</element>
-	<element name="front_closed">
-		<image file="tskyadventure_front_closed.jpg" />
-	</element>
-	<element name="back_open">
-		<image file="tskyadventure_back_open.jpg" />
-	</element>
-	<element name="back_closed">
-		<image file="tskyadventure_back_closed.jpg" />
+	<element name="game_bg_crop">
+		<image file="targetshoot_bg.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="tskyadventure_bg.jpg" />
+		<image file="targetshoot_bg.jpg" />
+	</element>
+	<element name="front">
+		<image file="targetshoot_hardware_01.jpg" />
+	</element>
+	<element name="front2">
+		<image file="targetshoot_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="targetshoot_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="targetshoot_hardware_04.jpg" />
+	</element>
+	<element name="front5">
+		<image file="targetshoot_hardware_05.jpg" />
+	</element>
+	<element name="front6">
+		<image file="targetshoot_hardware_06.jpg" />
+	</element>
+	<element name="front7">
+		<image file="targetshoot_hardware_07.jpg" />
+	</element>
+	<element name="front8">
+		<image file="targetshoot_hardware_08.jpg" />
+	</element>
+	<element name="front9">
+		<image file="targetshoot_hardware_09.jpg" />
+	</element>
+	<element name="front10">
+		<image file="targetshoot_hardware_10.jpg" />
+	</element>
+	<element name="front11">
+		<image file="targetshoot_hardware_11.jpg" />
+	</element>
+	<element name="front12">
+		<image file="targetshoot_hardware_12.jpg" />
+	</element>
+	<element name="front13">
+		<image file="targetshoot_hardware_13.jpg" />
+	</element>
+	<element name="back">
+		<image file="targetshoot_hardware_14.jpg" />
+	</element>
+	<element name="back2">
+		<image file="targetshoot_hardware_15.jpg" />
+	</element>
+	<element name="diagram">
+		<image file="targetshoot_hardware_16.png" />
 	</element>
 	
 <!-- Define Views -->
-	
-	<view name="Front Open">
+	<view name="Front">
+<!-- SkyAdventure 3 button Hardware -->
 		<screen index="0">
-			<bounds x="1832" y="1313" width="300" height="380" />
+			<bounds x="1117" y="374" width="764" height="892" />
 		</screen>
-		<element ref="front_open">
-			<bounds x="0" y="0" width="3959" height="2639" />
+		<element ref="front">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="1428" y="1723" width="157" height="173" />
+			<bounds x="462" y="1115" width="196" height="213" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="1580" y="1722" width="167" height="173" />
+			<bounds x="659" y="1115" width="194" height="213" />
 		</element>
 		<element ref="button" inputtag="Fire">
-			<bounds x="2297" y="1695" width="184" height="245" />
+			<bounds x="2138" y="1023" width="360" height="358" />
 		</element>
-		<element ref="game_bg">
-			<bounds x="1832" y="1313" width="300" height="380" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
 		</element>
 	</view>
 
-	<view name="Front Closed">
-		<element ref="front_closed">
-			<bounds x="0" y="0" width="3959" height="2639" />
+	
+	<view name="Front 13">
+<!-- Volleyball 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front13">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="1428" y="1723" width="157" height="173" />
+			<bounds x="357" y="974" width="223" height="256" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="1580" y="1722" width="167" height="173" />
+			<bounds x="581" y="974" width="226" height="256" />
 		</element>
 		<element ref="button" inputtag="Fire">
-			<bounds x="2297" y="1695" width="184" height="245" />
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
 		</element>
 	</view>
 
-	<view name="Back Open">
-		<element ref="back_open">
-			<bounds x="0" y="0" width="3959" height="2639" />
-		</element>
-	</view>
-
-	<view name="Back Closed">
-		<element ref="back_closed">
-			<bounds x="0" y="0" width="3959" height="2639" />
-		</element>
-	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="0" y="0" width="900" height="1140" />
+			<bounds x="0" y="0" width="1883" height="2400" />
 		</screen>
-		<element ref="button" inputtag="Left">
-			<bounds x="0" y="570" width="450" height="569" />
+		<element ref="game_bg">
+			<bounds x="0" y="0" width="1883" height="2400" />
 		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="444" y="570" width="450" height="569" />
+		<element ref="button" inputtag="Left">
+			<bounds x="0" y="0" width="296" height="1131" />
 		</element>
 		<element ref="button" inputtag="Fire">
-			<bounds x="0" y="0" width="900" height="569" />
+			<bounds x="297" y="0" width="296" height="1131" />
 		</element>
-		<element ref="game_bg">
-			<bounds x="0" y="0" width="900" height="1140" />
+		<element ref="button" inputtag="Right">
+			<bounds x="593" y="0" width="296" height="1131" />
 		</element>
 	</view>
 
 	<view name="Instructions">
-		<element ref="manual_fr">
-			<bounds x="0" y="0" width="2343" height="2343" />
+		<element ref="manual">
+			<bounds x="0" y="0" width="6130" height="6119" />
 		</element>
 	</view>
+
+
+	<view name="Back">
+		<element ref="back">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+	</view>
+
+	<view name="Front 9">
+<!-- Treasure 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</screen>
+		<element ref="front9">
+			<bounds x="0" y="0" width="2666" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="742" y="1269" width="157" height="186" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="900" y="1269" width="159" height="186" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="1587" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1233" y="1567" width="196" height="38" />
+		</element>
+	</view>
+
+
+	<view name="Front 2">
+<!-- SkyAdventure 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1117" y="374" width="764" height="892" />
+		</screen>
+		<element ref="front2">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="462" y="1115" width="196" height="213" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="659" y="1115" width="194" height="213" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="2138" y="1023" width="360" height="358" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
+		</element>
+	</view>
+	<view name="Front 3">
+<!-- SkyAdventure 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1117" y="374" width="764" height="892" />
+		</screen>
+		<element ref="front3">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="462" y="1115" width="196" height="213" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="659" y="1115" width="194" height="213" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="2138" y="1023" width="360" height="358" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
+		</element>
+	</view>
+	<view name="Front 6">
+<!-- Treasure 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</screen>
+		<element ref="front6">
+			<bounds x="0" y="0" width="2666" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="742" y="1269" width="157" height="186" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="900" y="1269" width="159" height="186" />
+		</element>
+		<element ref="button" inputtag="Fire">
+			<bounds x="1587" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1233" y="1567" width="196" height="38" />
+		</element>
+	</view>
+
+
+
+
 </mamelayout>
 
 <!--
-Tails' Sky Adventure
+Taco Sal's Target Shooting
 - Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
-
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
 

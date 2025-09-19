@@ -5,18 +5,30 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="../common/manual_placeholder.jpg" />
+		<image file="manual_fishing.png" />
 	</element>
 	<element name="front">
-		<image file="bfishing_front.jpg" />
+		<image file="fishing_hardware_01.jpg" />
+	</element>
+	<element name="front2">
+		<image file="fishing_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="fishing_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="fishing_hardware_04.jpg" />
 	</element>
 	<element name="back">
-		<image file="bfishing_back.jpg" />
+		<image file="fishing_hardware_05.jpg" />
 	</element>
-	<element name="game_bg_crop">
-		<image file="bfishing_bg_crop.jpg" />
+	<element name="diagram">
+		<image file="fishing_hardware_06.png" />
 	</element>
 	<element name="game_bg">
+		<image file="bfishing_bg.jpg" />
+	</element>
+	<element name="game_bg_crop">
 		<image file="bfishing_bg.jpg" />
 	</element>
 	
@@ -24,37 +36,37 @@
 	
 	<view name="Front">
 		<screen index="0">
-			<bounds x="1505" y="685" width="830" height="639" />
+			<bounds x="1052" y="380" width="894" height="688" />
 		</screen>
 		<element ref="front">
-			<bounds x="0" y="0" width="3900" height="2600" />
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Up">
-			<bounds x="791" y="859" width="403" height="353" />
+			<bounds x="625" y="576" width="341" height="268" />
 		</element>
 		<element ref="button" inputtag="Down">
-			<bounds x="791" y="1213" width="403" height="358" />
+			<bounds x="625" y="845" width="341" height="271" />
 		</element>
 		<element ref="button" inputtag="Reel">
-			<bounds x="2603" y="1249" width="481" height="489" />
+			<bounds x="2101" y="628" width="317" height="317" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1522" y="698" width="805" height="602" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
 		</element>
 	</view>
 
 	<view name="Back">
 		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="10" y="10" width="1074" height="828" />
+			<bounds x="0" y="0" width="3116" height="2400" />
 		</screen>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="1133" height="884" />
+			<bounds x="0" y="0" width="3116" height="2400" />
 		</element>
 		<element ref="button" inputtag="Up">
 			<bounds x="0" y="0" width="697" height="413" />
@@ -69,14 +81,78 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="773" height="773" />
+			<bounds x="0" y="0" width="6130" height="6119" />
 		</element>
 	</view>
+
+	<view name="Front 2">
+		<screen index="0">
+			<bounds x="1052" y="380" width="894" height="688" />
+		</screen>
+		<element ref="front2">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Up">
+			<bounds x="625" y="576" width="341" height="268" />
+		</element>
+		<element ref="button" inputtag="Down">
+			<bounds x="625" y="845" width="341" height="271" />
+		</element>
+		<element ref="button" inputtag="Reel">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+	<view name="Front 3">
+		<screen index="0">
+			<bounds x="1052" y="380" width="894" height="688" />
+		</screen>
+		<element ref="front3">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Up">
+			<bounds x="625" y="576" width="341" height="268" />
+		</element>
+		<element ref="button" inputtag="Down">
+			<bounds x="625" y="845" width="341" height="271" />
+		</element>
+		<element ref="button" inputtag="Reel">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+	<view name="Front 4">
+		<screen index="0">
+			<bounds x="1052" y="380" width="894" height="688" />
+		</screen>
+		<element ref="front4">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Up">
+			<bounds x="625" y="576" width="341" height="268" />
+		</element>
+		<element ref="button" inputtag="Down">
+			<bounds x="625" y="845" width="341" height="271" />
+		</element>
+		<element ref="button" inputtag="Reel">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
+
 </mamelayout>
 
 <!--
-Big's Fishing
-- Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
+Burger Bard's Fun Fishing
+- Artwork type: Photo, Background, Manual scan
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
-

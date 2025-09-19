@@ -5,163 +5,193 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="sspeedway_manual.jpg" />
-	</element>
-	<element name="manual_espn">
-		<image file="sspeedway_manual_espn.jpg" />
-	</element>
-	<element name="front">
-		<image file="sspeedway_front.jpg" />
-	</element>
-	<element name="back">
-		<image file="sspeedway_back.jpg" />
-	</element>
-	<element name="front_us">
-		<image file="sspeedway_front_us.jpg" />
-	</element>
-	<element name="back_us">
-		<image file="sspeedway_back_us.jpg" />
-	</element>
-	<element name="front_espn">
-		<image file="sspeedway_front_espn.jpg" />
-	</element>
-	<element name="back_espn">
-		<image file="sspeedway_back_espn.jpg" />
+		<image file="manual_speedway.png" />
 	</element>
 	<element name="game_bg_crop">
-		<image file="sspeedway_bg_crop.png" />
+		<image file="speedway_bg.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="sspeedway_bg.png" />
+		<image file="speedway_bg.jpg" />
 	</element>
-	<element name="game_bg_crop_espn">
-		<image file="sspeedway_bg_crop_espn.jpg" />
+	<element name="front">
+		<image file="speedway_hardware_01.jpg" />
 	</element>
-	<element name="game_bg_espn">
-		<image file="sspeedway_bg_espn.jpg" />
+	<element name="front2">
+		<image file="speedway_hardware_02.jpg" />
 	</element>
-	
+	<element name="front3">
+		<image file="speedway_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="speedway_hardware_04.jpg" />
+	</element>
+	<element name="front5">
+		<image file="speedway_hardware_05.jpg" />
+	</element>
+	<element name="front6">
+		<image file="speedway_hardware_06.jpg" />
+	</element>
+	<element name="front7">
+		<image file="speedway_hardware_07.jpg" />
+	</element>
+	<element name="front8">
+		<image file="speedway_hardware_08.jpg" />
+	</element>
+	<element name="front9">
+		<image file="speedway_hardware_09.jpg" />
+	</element>
+	<element name="front10">
+		<image file="speedway_hardware_10.jpg" />
+	</element>
+	<element name="front11">
+		<image file="speedway_hardware_11.jpg" />
+	</element>
+
 <!-- Define Views -->
 	
-	<view name="Front">
+	<view name="Front 2">
+<!-- Fishing Hardware 2 buttons -->
 		<screen index="0">
-			<bounds x="1576" y="1088" width="690" height="535" />
+			<bounds x="1052" y="387" width="894" height="657" />
 		</screen>
-		<element ref="front">
-			<bounds x="0" y="0" width="3900" height="2600" />
+		<element ref="front2">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="999" y="1223" width="363" height="363" />
+			<bounds x="587" y="628" width="315" height="317" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="2451" y="1223" width="363" height="363" />
+			<bounds x="2101" y="628" width="317" height="317" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1579" y="1087" width="690" height="531" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
 		</element>
 	</view>
 
-	<view name="Front (US)">
+	<view name="Front 8">
+<!-- Extreme Hardware 2 buttons -->
 		<screen index="0">
-			<bounds x="1576" y="1088" width="690" height="535" />
+			<bounds x="1016" y="378" width="967" height="703" />
 		</screen>
-		<element ref="front_us">
-			<bounds x="0" y="0" width="3900" height="2600" />
+		<element ref="front8">
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="1005" y="1235" width="361" height="350" />
+			<bounds x="285" y="894" width="475" height="478" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="2462" y="1233" width="351" height="371" />
+			<bounds x="2234" y="894" width="471" height="478" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1579" y="1087" width="690" height="531" />
-		</element>
-	</view>
-
-	<view name="Front (ESPN)">
-		<screen index="1">
-			<bounds x="1576" y="844" width="690" height="535" />
-		</screen>
-		<element ref="front_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-		<element ref="button" inputtag="Left">
-			<bounds x="927" y="1422" width="423" height="459" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="2495" y="1422" width="423" height="437" />
-		</element>
-		<element ref="game_bg_crop_espn">
-			<bounds x="1579" y="844" width="690" height="531" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
 		</element>
 	</view>
 
-	<view name="Back">
-		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (US)">
-		<element ref="back_us">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
-
-	<view name="Back (ESPN)">
-		<element ref="back_espn">
-			<bounds x="0" y="0" width="3900" height="2600" />
-		</element>
-	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="2" y="2" width="690" height="535" />
+			<bounds x="0" y="0" width="3103" height="2400" />
 		</screen>
 		<element ref="button" inputtag="Left">
-			<bounds x="0" y="0" width="356" height="551" />
+			<bounds x="0" y="0" width="561" height="895" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="357" y="0" width="356" height="551" />
+			<bounds x="562" y="0" width="561" height="895" />
 		</element>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="712" height="551" />
-		</element>
-	</view>
-
-	<view name="Closeup (ESPN)">
-		<screen index="1">
-			<bounds x="2" y="2" width="690" height="535" />
-		</screen>
-		<element ref="button" inputtag="Left">
-			<bounds x="0" y="0" width="356" height="551" />
-		</element>
-		<element ref="button" inputtag="Right">
-			<bounds x="357" y="0" width="356" height="551" />
-		</element>
-		<element ref="game_bg_espn">
-			<bounds x="0" y="0" width="712" height="551" />
+			<bounds x="0" y="0" width="3103" height="2400" />
 		</element>
 	</view>
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="1225" height="1155" />
+			<bounds x="0" y="0" width="6130" height="6119" />
 		</element>
 	</view>
 
-	<view name="Instructions (ESPN)">
-		<element ref="manual_espn">
-			<bounds x="0" y="0" width="2730" height="2723" />
+
+	<view name="Front 3">
+<!-- Fishing Hardware 2 buttons -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front3">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="587" y="628" width="315" height="317" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
+	<view name="Front 7">
+<!-- Extreme Hardware 2 buttons -->
+		<screen index="0">
+			<bounds x="1016" y="378" width="967" height="703" />
+		</screen>
+		<element ref="front7">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="285" y="894" width="475" height="478" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2234" y="894" width="471" height="478" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
+		</element>
+	</view>
+
+	<view name="Front 4">
+<!-- Fishing Hardware 2 buttons -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front4">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="587" y="628" width="315" height="317" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
+	<view name="Front 11">
+<!-- Extreme Hardware 2 buttons -->
+		<screen index="0">
+			<bounds x="1016" y="378" width="967" height="703" />
+		</screen>
+		<element ref="front11">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="285" y="894" width="475" height="478" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2234" y="894" width="471" height="478" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
 		</element>
 	</view>
 </mamelayout>
 
 <!--
-Sonic Speedway / Tony Stewart Racing 
-- Artwork type: Photo, Background, ripped flash game 
-- McDonald's Sonic/ESPN Games Assets by Difegue
-- Manual taken from Sonic Retro.
+Burger Bard Speedway Racing
+- Artwork type: Photo, Background, Manual scan
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
 

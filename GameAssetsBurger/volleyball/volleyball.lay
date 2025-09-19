@@ -1,60 +1,138 @@
-<!-- arvolleyball.lay -->
+<!-- volleyball.lay -->
 
 <mamelayout version="2">
 
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="arvolleyball_manual.jpg" />
-	</element>
-	<element name="front">
-		<image file="arvolleyball_front.jpg" />
-	</element>
-	<element name="back">
-		<image file="arvolleyball_back.jpg" />
+		<image file="manual_volleyball.png" />
 	</element>
 	<element name="game_bg_crop">
-		<image file="arvolleyball_bg_crop.jpg" />
+		<image file="volleyball_bg.jpg" />
 	</element>
 	<element name="game_bg">
-		<image file="arvolleyball_bg.jpg" />
+		<image file="volleyball_bg.jpg" />
 	</element>
+	<element name="front">
+		<image file="volleyball_hardware_01.jpg" />
+	</element>
+	<element name="front2">
+		<image file="volleyball_hardware_02.jpg" />
+	</element>
+	<element name="front3">
+		<image file="volleyball_hardware_03.jpg" />
+	</element>
+	<element name="front4">
+		<image file="volleyball_hardware_04.jpg" />
+	</element>
+	<element name="front5">
+		<image file="volleyball_hardware_05.jpg" />
+	</element>
+	<element name="front6">
+		<image file="volleyball_hardware_06.jpg" />
+	</element>
+	<element name="front7">
+		<image file="volleyball_hardware_07.jpg" />
+	</element>
+	<element name="front8">
+		<image file="volleyball_hardware_08.jpg" />
+	</element>
+	<element name="front9">
+		<image file="volleyball_hardware_09.jpg" />
+	</element>
+	<element name="front10">
+		<image file="volleyball_hardware_10.jpg" />
+	</element>
+	<element name="front11">
+		<image file="volleyball_hardware_11.jpg" />
+	</element>
+	<element name="front12">
+		<image file="volleyball_hardware_12.jpg" />
+	</element>
+	<element name="front13">
+		<image file="volleyball_hardware_13.jpg" />
+	</element>
+	<element name="front14">
+		<image file="volleyball_hardware_14.jpg" />
+	</element>
+	<element name="front15">
+		<image file="volleyball_hardware_15.jpg" />
+	</element>
+	<element name="front16">
+		<image file="volleyball_hardware_16.jpg" />
+	</element>
+	<element name="front17">
+		<image file="volleyball_hardware_17.jpg" />
+	</element>
+	<element name="front18">
+		<image file="volleyball_hardware_18.jpg" />
+	</element>
+	<element name="front19">
+		<image file="volleyball_hardware_19.jpg" />
+	</element>
+	<element name="front20">
+		<image file="volleyball_hardware_20.jpg" />
+	</element>
+	<element name="front21">
+		<image file="volleyball_hardware_21.jpg" />
+	</element>
+	<element name="front22">
+		<image file="volleyball_hardware_22.jpg" />
+	</element>
+	<element name="back2">
+		<image file="volleyball_hardware_23.jpg" />
+	</element>
+	<element name="back">
+		<image file="volleyball_hardware_24.jpg" />
+	</element>
+	<element name="back3">
+		<image file="volleyball_hardware_25.jpg" />
+	</element>
+	<element name="back4">
+		<image file="volleyball_hardware_26.jpg" />
+	</element>
+	<element name="diagram">
+		<image file="volleyball_hardware_27.png" />
+	</element>
+
 	
 <!-- Define Views -->
 	
 	<view name="Front">
+<!-- Volleyball 3 button Hardware -->
 		<screen index="0">
-			<bounds x="1656" y="758" width="561" height="718" />
+			<bounds x="1144" y="320" width="710" height="899" />
 		</screen>
 		<element ref="front">
-			<bounds x="0" y="0" width="3900" height="2600" />
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="890" y="1358" width="269" height="300" />
+			<bounds x="357" y="974" width="223" height="256" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="1157" y="1358" width="269" height="300" />
+			<bounds x="581" y="974" width="226" height="256" />
 		</element>
 		<element ref="button" inputtag="Volley">
-			<bounds x="2437" y="1325" width="377" height="388" />
+			<bounds x="2179" y="918" width="411" height="412" />
 		</element>
-		<element ref="game_bg_crop">
-			<bounds x="1656" y="758" width="561" height="719" />
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
 		</element>
 	</view>
 
+
 	<view name="Back">
 		<element ref="back">
-			<bounds x="0" y="0" width="3900" height="2600" />
+			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 	</view>
 
 	<view name="Closeup">
 		<screen index="0">
-			<bounds x="56" y="62" width="787" height="1007" />
+			<bounds x="0" y="0" width="1875" height="2400" />
 		</screen>
 		<element ref="game_bg">
-			<bounds x="0" y="0" width="889" height="1131" />
+			<bounds x="0" y="0" width="1875" height="2400" />
 		</element>
 		<element ref="button" inputtag="Left">
 			<bounds x="0" y="0" width="296" height="1131" />
@@ -69,15 +147,150 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="859" height="867" />
+			<bounds x="0" y="0" width="6130" height="6119" />
 		</element>
 	</view>
+
+
+	<view name="Front 18">
+<!-- SkyAdventure 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1117" y="374" width="764" height="892" />
+		</screen>
+		<element ref="front18">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="462" y="1115" width="196" height="213" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="659" y="1115" width="194" height="213" />
+		</element>
+		<element ref="button" inputtag="Volley">
+			<bounds x="2138" y="1023" width="360" height="358" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
+		</element>
+	</view>
+
+	<view name="Front 20">
+<!-- Treasure 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</screen>
+		<element ref="front20">
+			<bounds x="0" y="0" width="2666" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="742" y="1269" width="157" height="186" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="900" y="1269" width="159" height="186" />
+		</element>
+		<element ref="button" inputtag="Volley">
+			<bounds x="1587" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1233" y="1567" width="196" height="38" />
+		</element>
+	</view>
+
+	<view name="Front 2">
+<!-- Volleyball 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front2">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="357" y="974" width="223" height="256" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="581" y="974" width="226" height="256" />
+		</element>
+		<element ref="button" inputtag="Volley">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
+		</element>
+	</view>
+	<view name="Front 3">
+<!-- Volleyball 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front3">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="357" y="974" width="223" height="256" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="581" y="974" width="226" height="256" />
+		</element>
+		<element ref="button" inputtag="Volley">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
+		</element>
+	</view>
+
+	<view name="Front 10">
+<!-- Volleyball 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front10">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="357" y="974" width="223" height="256" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="581" y="974" width="226" height="256" />
+		</element>
+		<element ref="button" inputtag="Volley">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
+		</element>
+	</view>
+
+	<view name="Front 11">
+<!-- Volleyball 3 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front11">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="357" y="974" width="223" height="256" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="581" y="974" width="226" height="256" />
+		</element>
+		<element ref="button" inputtag="Volley">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
+		</element>
+	</view>
+
+
 </mamelayout>
 
 <!--
-Amy & Rouge Volleyball
+Curly & Frenchie Volleyball (Fry Friends Volleyball)
 - Artwork type: Photo, Background
-- McDonald's Sonic Games Assets by Difegue
-- Manual photo by Ender_Onryo
+- Crystalectrics Games Code and Assets by Difegue
+- Art Assets Courtesy of Ramscot Animation Archive
+- (c) Burger Bard Holding Company 1999-2003
 -->
 
