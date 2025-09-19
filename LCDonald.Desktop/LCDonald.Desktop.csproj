@@ -51,8 +51,8 @@
 
   <!-- macOS BURGER configuration -->
   <PropertyGroup Condition="$(DefineConstants.Contains('BURGER'))">
-		<CFBundleName>Burger Bard</CFBundleName>
-		<CFBundleDisplayName>Burger Bard</CFBundleDisplayName>
+		<CFBundleName>Burger Bard Crystalectrics</CFBundleName>
+		<CFBundleDisplayName>Burger Bard Crystalectrics</CFBundleDisplayName>
 		<CFBundleIdentifier>com.tvc16.burgerbard</CFBundleIdentifier>
 		<CFBundleIconFile>BurgerIcon.icns</CFBundleIconFile>
 	</PropertyGroup>
