@@ -8,10 +8,12 @@ namespace LCDonald.Core.Games
 {
     public class KnucklesTreasureHunt : LCDGameBase
     {
-        public override string ShortName => "ktreasure";
+
 #if BURGER
-        public override string Name => "Halmon's Egg Hunt";
+        public override string ShortName => "treasure";
+        public override string Name => "Bard's Burger Hunt";
 #else
+        public override string ShortName => "ktreasure";
         public override string Name => "Knuckles Treasure Hunt (2005)";
 #endif
 

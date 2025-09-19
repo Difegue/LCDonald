@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="manual_kola_platform.png" />
+		<image file="manual_bard_platform.png" />
 	</element>
 	<element name="game_bg_crop">
 		<image file="platform_bg.jpg" />
@@ -50,12 +50,12 @@
 	
 <!-- Define Views -->
 
-	<view name="Front">
+	<view name="Front 2">
 <!-- Extreme Hardware 1 button -->
 		<screen index="0">
 			<bounds x="1016" y="378" width="967" height="703" />
 		</screen>
-		<element ref="front">
+		<element ref="front2">
 			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Jump">
@@ -67,12 +67,12 @@
 	</view>
 
 
-	<view name="Front 8">
+	<view name="Front 5">
 <!-- Fishing Hardware 1 button -->
 		<screen index="0">
 			<bounds x="1052" y="387" width="894" height="657" />
 		</screen>
-		<element ref="front8">
+		<element ref="front5">
 			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Jump">
@@ -105,44 +105,12 @@
 		</element>
 	</view>
 
-	<view name="Front 9">
+	<view name="Front 6">
 <!-- Fishing Hardware 1 button -->
 		<screen index="0">
 			<bounds x="1052" y="387" width="894" height="657" />
 		</screen>
-		<element ref="front9">
-			<bounds x="0" y="0" width="3000" height="2000" />
-		</element>
-		<element ref="button" inputtag="Jump">
-			<bounds x="2101" y="628" width="317" height="317" />
-		</element>
-		<element ref="button" inputtag="Start">
-			<bounds x="1326" y="1153" width="346" height="118" />
-		</element>
-	</view>
-
-	<view name="Front 3">
-<!-- Extreme Hardware 1 button -->
-		<screen index="0">
-			<bounds x="1016" y="378" width="967" height="703" />
-		</screen>
-		<element ref="front3">
-			<bounds x="0" y="0" width="3000" height="2000" />
-		</element>
-		<element ref="button" inputtag="Jump">
-			<bounds x="2234" y="894" width="471" height="478" />
-		</element>
-		<element ref="button" inputtag="Start">
-			<bounds x="1274" y="1173" width="450" height="92" />
-		</element>
-	</view>
-
-	<view name="Front 7">
-<!-- Fishing Hardware 1 button -->
-		<screen index="0">
-			<bounds x="1052" y="387" width="894" height="657" />
-		</screen>
-		<element ref="front7">
+		<element ref="front6">
 			<bounds x="0" y="0" width="3000" height="2000" />
 		</element>
 		<element ref="button" inputtag="Jump">
@@ -166,6 +134,38 @@
 		</element>
 		<element ref="button" inputtag="Start">
 			<bounds x="1274" y="1173" width="450" height="92" />
+		</element>
+	</view>
+
+	<view name="Front 8">
+<!-- Fishing Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front8">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
+		</element>
+	</view>
+
+	<view name="Front 7">
+<!-- Fishing Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1052" y="387" width="894" height="657" />
+		</screen>
+		<element ref="front7">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2101" y="628" width="317" height="317" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1326" y="1153" width="346" height="118" />
 		</element>
 	</view>
 

@@ -5,8 +5,8 @@
 /// </summary>
 public class KnucklesTreasureHunt2 : KnucklesTreasureHunt
 {
-    public override string ShortName => "treasurehunt";
+    public override string ShortName => "treasure2";
 #if BURGER
-    public override string Name => "Bard's Burger Hunt";
+    public override string Name => "Halmon's Egg Hunt";
 #endif
 }
