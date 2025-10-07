@@ -180,6 +180,22 @@
 		</element>
 	</view>
 
+	<view name="Front 10">
+<!-- Extreme Hardware 1 button -->
+		<screen index="0">
+			<bounds x="1016" y="378" width="967" height="703" />
+		</screen>
+		<element ref="front10">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Jump">
+			<bounds x="2234" y="894" width="471" height="478" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1274" y="1173" width="450" height="92" />
+		</element>
+	</view>
+
 </mamelayout>
 
 <!--

@@ -100,21 +100,21 @@
 	
 
 	<view name="Front 5">
-<!-- treasure 2 button Hardware -->
+<!-- Treasure 2 button Hardware -->
 		<screen index="0">
-			<bounds x="1190" y="434" width="618" height="760" />
+			<bounds x="1053" y="340" width="555" height="743" />
 		</screen>
-		<element ref="front5">
-			<bounds x="0" y="0" width="3000" height="2000" />
+		<element ref="front4">
+			<bounds x="0" y="0" width="2666" height="2000" />
 		</element>
 		<element ref="button" inputtag="Left">
-			<bounds x="762" y="1319" width="264" height="257" />
+			<bounds x="855" y="1235" width="231" height="233" />
 		</element>
 		<element ref="button" inputtag="Right">
-			<bounds x="1973" y="1319" width="266" height="257" />
+			<bounds x="1587" y="1235" width="231" height="233" />
 		</element>
 		<element ref="button" inputtag="Start">
-			<bounds x="1381" y="1411" width="237" height="150" />
+			<bounds x="1233" y="1567" width="196" height="38" />
 		</element>
 	</view>
 
