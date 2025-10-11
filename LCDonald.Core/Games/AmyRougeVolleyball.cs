@@ -11,7 +11,7 @@ namespace LCDonald.Core.Games
 
 #if BURGER
         public override string ShortName => "volleyball";
-        public override string Name => "Curly Frenchie Volleyball (Fry Friends Volleyball)";
+        public override string Name => "Curly & Frenchie's Volleyball";
 #else
         public override string ShortName => "arvolleyball";
         public override string Name => "Amy & Rouge Volleyball (2004)";
@@ -70,13 +70,21 @@ namespace LCDonald.Core.Games
                 new LCDGameInput
                 {
                     Name = "Left",
+#if BURGER
+                    Description = "Move Player Left",
+#else
                     Description = "Move Amy Left",
+#endif
                     KeyCode = 23, // left
                 },
                 new LCDGameInput
                 {
                     Name = "Right",
+#if BURGER
+                    Description = "Move Player Left",
+#else
                     Description = "Move Amy Right",
+#endif
                     KeyCode = 25, // right
                 },
                 new LCDGameInput
