@@ -300,7 +300,6 @@
 				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 						CornerRadius="{StaticResource ControlCornerRadius}"
 						Grid.Row="1" Grid.ColumnSpan="3" Margin="0,8,0,0"
-						IsVisible="{Binding IsEndless, Mode=OneWay}"
 						ClipToBounds="True">
 					<Image Source="{Binding GameBackground, Mode=OneWay}"
 						   Stretch="UniformToFill" Opacity="0.2"/>
