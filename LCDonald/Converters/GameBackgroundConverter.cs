@@ -42,7 +42,29 @@ namespace LCDonald.Converters
                 "bgiantegg" => "avares://LCDonald/Assets/Backgrounds/2005_series_2.jpg",
                 "ktreasure" => "avares://LCDonald/Assets/Backgrounds/2005_series_2.jpg",
                 "sxtremeboard" => "avares://LCDonald/Assets/Backgrounds/2005_series_2.jpg",
-                
+
+#if BURGER
+                "eggcatch" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "eggcatch2" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "extremeboard" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "fishing" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "football" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "heartmooncatch" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "kosoccer" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "magicbattle" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "platform" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "platform2" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "railgrinder" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "seashell" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "skateboard" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "speedway" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "targetshoot" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "treasure" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "treasure2" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "volleyball" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+                "wbasketball" => "avares://LCDonald/Assets/Backgrounds/burger.jpg",
+#endif
+
                 _ => "avares://LCDonald/Assets/Backgrounds/2003_series.jpg",
             };
 
