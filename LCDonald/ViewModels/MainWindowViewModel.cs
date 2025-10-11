@@ -68,9 +68,6 @@ namespace LCDonald.ViewModels
             ];
 #endif
 
-            Game = new TailsSoccer();
-            return;
-
             // Select game based on command line argument or pick a random one
             if (!string.IsNullOrEmpty(selectedGameShortName))
             {
