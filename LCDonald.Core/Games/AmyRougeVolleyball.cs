@@ -199,7 +199,9 @@ namespace LCDonald.Core.Games
                 // hit noball sound
                 QueueSound(new LCDGameSound("hit.ogg"));
             }
+#if !BURGER
             _batEngaged = false;
+#endif
         }
 
         public override void CustomUpdate()
@@ -279,6 +281,11 @@ namespace LCDonald.Core.Games
                 _ballPosition = -1;
                 QueueSound(new LCDGameSound("score.ogg"));
             }
+
+#if BURGER
+            // Disengage bat later in burger version
+            _batEngaged = false;
+#endif
 
             if (_currentScore == 4)
             {

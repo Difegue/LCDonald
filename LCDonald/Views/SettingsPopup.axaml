@@ -49,7 +49,7 @@
 		
 		<TextBlock Text="About" FontSize="20" FontWeight="SemiBold"></TextBlock>
 
-		<Grid>
+		<Grid IsVisible="{Binding !IsBurger, Mode=OneWay}">
 
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="400"/>
@@ -78,6 +78,32 @@
 				<Image Source="avares://LCDonald/Assets/app-icon.ico" Width="160"/>
 				<Svg   Path="avares://LCDonald/Assets/CHRISTMASSAGELOGOMONOSVG.svg"/>
 			</Carousel>
+		</Grid>
+
+		<Grid IsVisible="{Binding IsBurger, Mode=OneWay}">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="400"/>
+				<ColumnDefinition Width="200"/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0">
+				<TextBlock>
+					©️ Burger Bard Holding Company, 1999. All rights reserved.
+				</TextBlock>
+				<TextBlock>
+					Artwork ©️ Ramscot Animation, 1999.
+				</TextBlock>
+				<TextBlock>
+					Game Design ©️ Crystalectrics, 1999.
+				</TextBlock>
+
+				<ui:HyperlinkButton Margin="0,8" Content="Visit BurgerBard.com on the World Wide Web" NavigateUri="https://burgerbard.com"  />
+
+				<TextBox Width="240" Watermark="?????????" Text="{Binding Password}"></TextBox>
+			</StackPanel>
+
+			<Image Grid.Column="1" Source="avares://LCDonald/Assets/burger-icon.ico" Width="160"/>
 		</Grid>
 
 		

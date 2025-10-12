@@ -25,7 +25,6 @@ namespace LCDonald.ViewModels
                 new AmyRougeVolleyball(),
                 new BigFishing(),
                 new BillyGiantEgg(),
-                new BillyGiantEgg2(),
                 new CreamFlowerCatch2005(),
                 new KnucklesBaseball(),
                 new KnucklesTreasureHunt(),
@@ -42,6 +41,20 @@ namespace LCDonald.ViewModels
                 new TailsSkyPatrol(),
                 new TailsSoccer()
             ];
+
+            if (SettingsViewModel.CurrentSettings.UnlockedGames.Contains("bgiantegg2"))
+            {
+                _availableGames.Insert(0, new BillyGiantEgg2());
+            } 
+            else
+            {
+                SettingsViewModel.GameUnlocked += (s, e) =>
+                {
+                    var list = _availableGames;
+                    list.Add(new BillyGiantEgg2());
+                    AvailableGames = list;
+                };
+            }
 #else
             _availableGames = 
             [
