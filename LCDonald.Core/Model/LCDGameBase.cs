@@ -24,7 +24,8 @@ namespace LCDonald.Core.Model
         protected bool _isEndlessMode;
 
 #if BURGER
-        protected bool _showHiddenGroup;
+        protected bool _hasTriggeredHiddenGroup;
+        protected int _hiddenGroupCounter;
 #endif
 
         protected Random _rng = new();
@@ -179,6 +180,12 @@ namespace LCDonald.Core.Model
         {
             _isInputBlocked = false;
             _isEndlessMode = isEndless;
+
+#if BURGER
+            _hiddenGroupCounter = 0;
+            _hasTriggeredHiddenGroup = false;
+#endif
+
             InitializeGameState();
 
             _customTimer?.Stop();
@@ -261,8 +268,11 @@ namespace LCDonald.Core.Model
             var visibleElements = GetVisibleElements();
 
 #if BURGER
-            if (_showHiddenGroup)
+            if (_hiddenGroupCounter > 0)
+            {
                 visibleElements.Add("score-1");
+                _hiddenGroupCounter--;
+            }
 #endif
 
             // Add elements that are blinking, remove the ones that aren't
@@ -307,8 +317,12 @@ namespace LCDonald.Core.Model
             }
 
 #if BURGER
-            // 10% chance on every update to show the hidden group
-            _showHiddenGroup = _rng.Next(1, 10) == 1;
+            // 10% chance on every update to show the hidden group for 5 frames
+            if (_rng.Next(1, 10) == 1 && !_hasTriggeredHiddenGroup)
+            {
+                _hasTriggeredHiddenGroup = true;
+                _hiddenGroupCounter = 5;
+            }
 #endif
 
             // Update speed in case the game sped it up

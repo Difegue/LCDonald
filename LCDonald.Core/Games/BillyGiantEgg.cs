@@ -83,7 +83,7 @@ namespace LCDonald.Core.Games
                 {
                     Name = "Left",
 #if BURGER
-                    Description = "Move character Left",
+                    Description = "Move Character Left",
 #else
                     Description = "Move Billy Left",
 #endif
@@ -93,7 +93,7 @@ namespace LCDonald.Core.Games
                 {
                     Name = "Right",
 #if BURGER
-                    Description = "Move character Left",
+                    Description = "Move Character Left",
 #else
                     Description = "Move Billy Right",
 #endif
