@@ -144,8 +144,13 @@ namespace LCDonald.ViewModels
                 // Find all the front views
                 var frontViews = viewList.Where(v => v.Name.Contains("Front") && !v.Name.Contains("Closed")).ToList();
 
+#if BURGER
+                // And pick one at random
+                SelectedView = frontViews[new Random().Next(0, frontViews.Count)];
+#else
                 // And pick the first one
                 SelectedView = frontViews[0];
+#endif
             }
         }
 
