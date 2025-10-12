@@ -9,6 +9,7 @@
 
 	<!-- Turn off trimming as it breaks the published files on 11 preview for now -->
 	<PublishTrimmed>false</PublishTrimmed>
+	<SelfContained>true</SelfContained>
 	<PublishSingleFile>true</PublishSingleFile>
 
 	<Configurations>Debug;Release;DebugBurger;ReleaseBurger</Configurations>

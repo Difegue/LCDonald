@@ -11,20 +11,20 @@
           Condition="'$(Configuration)' == 'ReleaseBurger'">
     <Message Text="Copying Burger assets" Importance="high" />
 	<Exec Command="rd /s /q &quot;$(ProjectDir)GameAssets&quot;" />
-    <Exec Command="xcopy &quot;$(ProjectDir)..\GameAssets&quot; &quot;$(ProjectDir)GameAssets\&quot; /Y /S" />
+    <Exec Command="xcopy &quot;$(ProjectDir)..\GameAssetsBurger&quot; &quot;$(ProjectDir)GameAssets\&quot; /Y /S" />
   </Target>
 
   <Target Name="CopyNormalAssets" BeforeTargets="Build"
           Condition="'$(Configuration)' == 'Release'">
     <Message Text="Copying McD assets" Importance="high" />
 	<Exec Command="rd /s /q &quot;$(ProjectDir)GameAssets&quot;" />
-    <Exec Command="xcopy &quot;$(ProjectDir)..\Branding\Camo&quot; &quot;$(ProjectDir)GameAssets\&quot; /Y /S" />
+    <Exec Command="xcopy &quot;$(ProjectDir)..\GameAssets&quot; &quot;$(ProjectDir)GameAssets\&quot; /Y /S" />
   </Target>
   <Target Name="CopyNormalAssetsDebug" BeforeTargets="Build"
           Condition="'$(Configuration)' == 'Debug'">
     <Message Text="Copying McD assets" Importance="high" />
 	<Exec Command="rd /s /q &quot;$(ProjectDir)GameAssets&quot;" />
-    <Exec Command="xcopy &quot;$(ProjectDir)..\Branding\CamoTest&quot; &quot;$(ProjectDir)GameAssets\&quot; /Y /S" />
+    <Exec Command="xcopy &quot;$(ProjectDir)..\GameAssets&quot; &quot;$(ProjectDir)GameAssets\&quot; /Y /S" />
   </Target>
 
 </Project>
