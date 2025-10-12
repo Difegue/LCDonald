@@ -9,20 +9,135 @@
 	<PropertyGroup Condition="'$(Configuration)' == 'DebugBurger'">
 		<DefineConstants>$(DefineConstants);BURGER</DefineConstants>
 	</PropertyGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'DebugBurger'">
+		<AvaloniaResource Include="Assets\bg_burg1.jpg" />
+		<AvaloniaResource Include="Assets\bg_burg2.jpg" />
+		<AvaloniaResource Include="Assets\burger-icon.ico" />
+
+		<AvaloniaResource Include="Assets\Icons\fishing.png"/>
+		<AvaloniaResource Include="Assets\Icons\football.png"/>
+		<AvaloniaResource Include="Assets\Icons\heartmooncatch.png"/>
+		<AvaloniaResource Include="Assets\Icons\kosoccer.png"/>
+		<AvaloniaResource Include="Assets\Icons\magicbattle.png"/>
+		<AvaloniaResource Include="Assets\Icons\platform.png"/>
+		<AvaloniaResource Include="Assets\Icons\railgrinder.png"/>
+		<AvaloniaResource Include="Assets\Icons\seashell.png"/>
+		<AvaloniaResource Include="Assets\Icons\skateboard.png"/>
+		<AvaloniaResource Include="Assets\Icons\speedway.png"/>
+		<AvaloniaResource Include="Assets\Icons\targetshoot.png"/>
+		<AvaloniaResource Include="Assets\Icons\treasure.png"/>
+		<AvaloniaResource Include="Assets\Icons\volleyball.png"/>
+		<AvaloniaResource Include="Assets\Icons\wbasketball.png"/>
+		<AvaloniaResource Include="Assets\Icons\platform2.png"/>
+		<AvaloniaResource Include="Assets\Icons\treasure2.png"/>
+		<AvaloniaResource Include="Assets\Icons\eggcatch.png"/>
+		<AvaloniaResource Include="Assets\Icons\eggcatch2.png"/>
+		<AvaloniaResource Include="Assets\Icons\extremeboard.png"/>
+	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
 		<DefineConstants>$(DefineConstants);BURGER</DefineConstants>
 	</PropertyGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'ReleaseBurger'">
+		<AvaloniaResource Include="Assets\bg_burg1.jpg" />
+		<AvaloniaResource Include="Assets\bg_burg2.jpg" />
+		<AvaloniaResource Include="Assets\burger-icon.ico" />
+
+		<AvaloniaResource Include="Assets\Icons\fishing.png"/>
+		<AvaloniaResource Include="Assets\Icons\football.png"/>
+		<AvaloniaResource Include="Assets\Icons\heartmooncatch.png"/>
+		<AvaloniaResource Include="Assets\Icons\kosoccer.png"/>
+		<AvaloniaResource Include="Assets\Icons\magicbattle.png"/>
+		<AvaloniaResource Include="Assets\Icons\platform.png"/>
+		<AvaloniaResource Include="Assets\Icons\railgrinder.png"/>
+		<AvaloniaResource Include="Assets\Icons\seashell.png"/>
+		<AvaloniaResource Include="Assets\Icons\skateboard.png"/>
+		<AvaloniaResource Include="Assets\Icons\speedway.png"/>
+		<AvaloniaResource Include="Assets\Icons\targetshoot.png"/>
+		<AvaloniaResource Include="Assets\Icons\treasure.png"/>
+		<AvaloniaResource Include="Assets\Icons\volleyball.png"/>
+		<AvaloniaResource Include="Assets\Icons\wbasketball.png"/>
+		<AvaloniaResource Include="Assets\Icons\platform2.png"/>
+		<AvaloniaResource Include="Assets\Icons\treasure2.png"/>
+		<AvaloniaResource Include="Assets\Icons\eggcatch.png"/>
+		<AvaloniaResource Include="Assets\Icons\eggcatch2.png"/>
+		<AvaloniaResource Include="Assets\Icons\extremeboard.png"/>
+	</ItemGroup>
+
+
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<AvaloniaResource Include="Assets\bg_1.jpg" />
+		<AvaloniaResource Include="Assets\bg_2.jpg" />
+		<AvaloniaResource Include="Assets\bg_3.jpg" />
+		<AvaloniaResource Include="Assets\bg_4.jpg" />
+
+		<AvaloniaResource Include="Assets\Icons\kbaseball.png" />
+		<AvaloniaResource Include="Assets\Icons\cflower2.png" />
+		<AvaloniaResource Include="Assets\Icons\cflower.png" />
+		<AvaloniaResource Include="Assets\Icons\tsoccer.png" />
+		<AvaloniaResource Include="Assets\Icons\sgrinder.png" />
+		<AvaloniaResource Include="Assets\Icons\abanana.png" />
+		<AvaloniaResource Include="Assets\Icons\ksoccer.png" />
+		<AvaloniaResource Include="Assets\Icons\artennis.png" />
+		<AvaloniaResource Include="Assets\Icons\sxtremeboard.png" />
+		<AvaloniaResource Include="Assets\Icons\sskateboard.png" />
+		<AvaloniaResource Include="Assets\Icons\tskyadventure.png" />
+		<AvaloniaResource Include="Assets\Icons\sspeedway.png" />
+		<AvaloniaResource Include="Assets\Icons\tskypatrol.png" />
+		<AvaloniaResource Include="Assets\Icons\sagame.png" />
+		<AvaloniaResource Include="Assets\Icons\shockey.png" />
+		<AvaloniaResource Include="Assets\Icons\sbasketball.png" />
+		<AvaloniaResource Include="Assets\Icons\arvolleyball.png" />
+		<AvaloniaResource Include="Assets\Icons\bfishing.png" />
+		<AvaloniaResource Include="Assets\Icons\ktreasure.png" />
+		<AvaloniaResource Include="Assets\Icons\bgiantegg.png" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<AvaloniaResource Include="Assets\bg_1.jpg" />
+		<AvaloniaResource Include="Assets\bg_2.jpg" />
+		<AvaloniaResource Include="Assets\bg_3.jpg" />
+		<AvaloniaResource Include="Assets\bg_4.jpg" />
+
+		<AvaloniaResource Include="Assets\Icons\kbaseball.png" />
+		<AvaloniaResource Include="Assets\Icons\cflower2.png" />
+		<AvaloniaResource Include="Assets\Icons\cflower.png" />
+		<AvaloniaResource Include="Assets\Icons\tsoccer.png" />
+		<AvaloniaResource Include="Assets\Icons\sgrinder.png" />
+		<AvaloniaResource Include="Assets\Icons\abanana.png" />
+		<AvaloniaResource Include="Assets\Icons\ksoccer.png" />
+		<AvaloniaResource Include="Assets\Icons\artennis.png" />
+		<AvaloniaResource Include="Assets\Icons\sxtremeboard.png" />
+		<AvaloniaResource Include="Assets\Icons\sskateboard.png" />
+		<AvaloniaResource Include="Assets\Icons\tskyadventure.png" />
+		<AvaloniaResource Include="Assets\Icons\sspeedway.png" />
+		<AvaloniaResource Include="Assets\Icons\tskypatrol.png" />
+		<AvaloniaResource Include="Assets\Icons\sagame.png" />
+		<AvaloniaResource Include="Assets\Icons\shockey.png" />
+		<AvaloniaResource Include="Assets\Icons\sbasketball.png" />
+		<AvaloniaResource Include="Assets\Icons\arvolleyball.png" />
+		<AvaloniaResource Include="Assets\Icons\bfishing.png" />
+		<AvaloniaResource Include="Assets\Icons\ktreasure.png" />
+		<AvaloniaResource Include="Assets\Icons\bgiantegg.png" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<AvaloniaResource Include="Assets\**" />
+		<AvaloniaResource Include="Assets\Backgrounds\**" />
+		<AvaloniaResource Include="Assets\app-icon.ico" />
+		<AvaloniaResource Include="Assets\CHRISTMASSAGELOGOMONOSVG.svg" />
+		<AvaloniaResource Include="Assets\DSEG7Classic-Italic.ttf" />
+		<AvaloniaResource Include="Assets\SF-Pro-Text-Regular.otf" />
+		<AvaloniaResource Include="Assets\SF-Pro-Text-Semibold.otf" />
+		
 		<None Remove=".gitignore" />
-		<None Remove="Assets\Backgrounds\2003_series.jpg" />
-		<None Remove="Assets\Backgrounds\2004_series.jpg" />
-		<None Remove="Assets\Backgrounds\2005_series.jpg" />
-		<None Remove="Assets\Backgrounds\2005_series_2.jpg" />
+		<None Remove="Assets\Backgrounds\**" />
+		<None Remove="Assets\Icons\**" />
 		<None Remove="Assets\bg_1.jpg" />
 		<None Remove="Assets\bg_2.jpg" />
+		<None Remove="Assets\bg_3.jpg" />
+		<None Remove="Assets\bg_4.jpg" />
+		<None Remove="Assets\bg_burg1.jpg" />
+		<None Remove="Assets\bg_burg2.jpg" />
 		<None Remove="Assets\CHRISTMASSAGELOGOMONOSVG.svg" />
 	</ItemGroup>
 

@@ -74,13 +74,21 @@ namespace LCDonald.Core.Games
                 new LCDGameInput
                 {
                     Name = "Left",
+#if BURGER
+                    Description = "Move Honey Left",
+#else
                     Description = "Move Cream Left",
+#endif
                     KeyCode = 23, // left
                 },
                 new LCDGameInput
                 {
                     Name = "Right",
+#if BURGER
+                    Description = "Move Honey Right",
+#else
                     Description = "Move Cream Right",
+#endif
                     KeyCode = 25, // right
                 }
             };          

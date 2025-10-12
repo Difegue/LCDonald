@@ -11,7 +11,7 @@ namespace LCDonald.Core.Games
 
 #if BURGER
         public override string ShortName => "volleyball";
-        public override string Name => "Curly Frenchie Volleyball (Fry Friends Volleyball)";
+        public override string Name => "Curly & Frenchie's Volleyball";
 #else
         public override string ShortName => "arvolleyball";
         public override string Name => "Amy & Rouge Volleyball (2004)";
@@ -45,7 +45,15 @@ namespace LCDonald.Core.Games
         public const string TENNIS_2 = "tennis-2";
         public const string TENNIS_3 = "tennis-3";
         public const string MISS = "miss";
-        #endregion SVG Group Names
+
+# if BURGER
+        // new hands groups
+        public const string HANDS_1 = "hands-1";
+        public const string HANDS_2 = "hands-2";
+        public const string HANDS_3 = "hands-3";
+#endif
+
+#endregion SVG Group Names
 
         public override List<string> GetAllGameElements()
         {
@@ -60,6 +68,9 @@ namespace LCDonald.Core.Games
                     BALL_31,                BALL_32,             BALL_33,
                   BALL_41,                  BALL_42,                BALL_43,
                TENNIS_1, AMY_1,         TENNIS_2, AMY_2,        TENNIS_3, AMY_3,
+#if BURGER
+               HANDS_1, HANDS_2, HANDS_3,
+#endif
             };
         }
 
@@ -70,13 +81,21 @@ namespace LCDonald.Core.Games
                 new LCDGameInput
                 {
                     Name = "Left",
+#if BURGER
+                    Description = "Move Player Left",
+#else
                     Description = "Move Amy Left",
+#endif
                     KeyCode = 23, // left
                 },
                 new LCDGameInput
                 {
                     Name = "Right",
+#if BURGER
+                    Description = "Move Player Left",
+#else
                     Description = "Move Amy Right",
+#endif
                     KeyCode = 25, // right
                 },
                 new LCDGameInput
@@ -120,8 +139,12 @@ namespace LCDonald.Core.Games
 
             if (_batEngaged)
                 elements.Add("tennis-" + _amyPosition);
+#if BURGER
+            else
+                elements.Add("hands-" + _amyPosition);
+#endif
 
-            return elements;
+                return elements;
         }
 
         private string GetAmyElement() => "amy-" + _amyPosition;
@@ -176,7 +199,9 @@ namespace LCDonald.Core.Games
                 // hit noball sound
                 QueueSound(new LCDGameSound("hit.ogg"));
             }
+#if !BURGER
             _batEngaged = false;
+#endif
         }
 
         public override void CustomUpdate()
@@ -256,6 +281,11 @@ namespace LCDonald.Core.Games
                 _ballPosition = -1;
                 QueueSound(new LCDGameSound("score.ogg"));
             }
+
+#if BURGER
+            // Disengage bat later in burger version
+            _batEngaged = false;
+#endif
 
             if (_currentScore == 4)
             {
@@ -342,10 +372,17 @@ namespace LCDonald.Core.Games
             var victoryFrame2 = new List<string> { SCORE_A1 };
             var victoryFrame3 = new List<string> { SCORE_A2 };
             var victoryFrame4 = new List<string> { SCORE_A3 };
+#if BURGER
+            var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
+            var victoryFrame2s = new List<string> { SCORE_A1, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
+            var victoryFrame3s = new List<string> { SCORE_A2, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
+            var victoryFrame4s = new List<string> { SCORE_A3, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
+#else
             var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_1, AMY_2, AMY_3, TENNIS_2 };
             var victoryFrame2s = new List<string> { SCORE_A1, AMY_1, AMY_2, AMY_3, TENNIS_2 };
             var victoryFrame3s = new List<string> { SCORE_A2, AMY_1, AMY_2, AMY_3, TENNIS_2 };
             var victoryFrame4s = new List<string> { SCORE_A3, AMY_1, AMY_2, AMY_3, TENNIS_2 };
+#endif
 
 
             var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame2, victoryFrame3, victoryFrame4, victoryFrame1s, victoryFrame2s, victoryFrame3s, victoryFrame4s,

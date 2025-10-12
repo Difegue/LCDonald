@@ -61,13 +61,21 @@ namespace LCDonald.Core.Games
                 new LCDGameInput
                 {
                     Name = "Up",
+#if BURGER
+                    Description = "Move Soakey Up",
+#else
                     Description = "Move Tails Up",
+                    #endif
                     KeyCode = 24, // up
                 },
                 new LCDGameInput
                 {
                     Name = "Down",
+#if BURGER
+                    Description = "Move Soakey Down",
+#else
                     Description = "Move Tails Down",
+                    #endif
                     KeyCode = 26, // down
                 }
             };

@@ -236,6 +236,63 @@
 		</element>
 	</view>
 
+	<view name="Front 18">
+<!-- Volleyball 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1144" y="320" width="710" height="899" />
+		</screen>
+		<element ref="front18">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="420" y="918" width="409" height="412" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2179" y="918" width="411" height="412" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1291" y="1429" width="417" height="119" />
+		</element>
+	</view>
+
+	<view name="Front 10">
+<!-- SkyAdventure 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1117" y="374" width="764" height="892" />
+		</screen>
+		<element ref="front10">
+			<bounds x="0" y="0" width="3000" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="500" y="1023" width="358" height="358" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="2138" y="1023" width="360" height="358" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1283" y="1491" width="430" height="106" />
+		</element>
+	</view>
+
+	<view name="Front 13">
+<!-- Treasure 2 button Hardware -->
+		<screen index="0">
+			<bounds x="1053" y="340" width="555" height="743" />
+		</screen>
+		<element ref="front13">
+			<bounds x="0" y="0" width="2666" height="2000" />
+		</element>
+		<element ref="button" inputtag="Left">
+			<bounds x="855" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Right">
+			<bounds x="1587" y="1235" width="231" height="233" />
+		</element>
+		<element ref="button" inputtag="Start">
+			<bounds x="1233" y="1567" width="196" height="38" />
+		</element>
+	</view>
+
 
 </mamelayout>
 

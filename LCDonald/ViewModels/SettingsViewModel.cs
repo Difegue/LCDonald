@@ -18,12 +18,15 @@ namespace LCDonald.ViewModels
         public bool MuteSound { get; set; }
         public string ApplicationTheme { get; set; } = "System";
         public bool DrawLCDShadows { get; set; }
+        public string UnlockedGames { get; set; } = "";
     }
 
     public partial class SettingsViewModel: ObservableObject
     {
         private static string SETTINGS_FILE = "lcdconf.json";
         public static Settings CurrentSettings;
+
+        public static event EventHandler? GameUnlocked;
 
         public SettingsViewModel()
         {
@@ -40,7 +43,18 @@ namespace LCDonald.ViewModels
                 "Dark" => 2,
                 _ => 0
             };
+
+#if BURGER
+            _isBurger = true;
+#endif
         }
+
+
+        [ObservableProperty]
+        public bool _isBurger;
+
+        [ObservableProperty]
+        public string _password;
 
         [ObservableProperty]
         private bool _darkenGameBackgrounds;
@@ -97,6 +111,18 @@ namespace LCDonald.ViewModels
             CurrentSettings.DrawLCDShadows = value;
             SaveSettings();
         }
+
+#if BURGER
+        partial void OnPasswordChanged(string value)
+        {
+            if (value == "43ARC2T642" && CurrentSettings.UnlockedGames != "bgiantegg2")
+            {
+                CurrentSettings.UnlockedGames = "bgiantegg2";
+                SaveSettings();
+                GameUnlocked?.Invoke(this, EventArgs.Empty);
+            }
+        }
+#endif
 
         private void SaveSettings()
         {

@@ -1,10 +1,11 @@
 using Avalonia.Controls.Templates;
+using Avalonia.Media.Imaging;
 using Avalonia.Metadata;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentAvalonia.UI.Controls;
-using LCDonald.Core.Controller;
 using LCDonald.Core.Games;
 using LCDonald.Core.Layout;
 using LCDonald.Core.Model;
@@ -24,7 +25,6 @@ namespace LCDonald.ViewModels
                 new AmyRougeVolleyball(),
                 new BigFishing(),
                 new BillyGiantEgg(),
-                new BillyGiantEgg2(),
                 new CreamFlowerCatch2005(),
                 new KnucklesBaseball(),
                 new KnucklesTreasureHunt(),
@@ -41,6 +41,20 @@ namespace LCDonald.ViewModels
                 new TailsSkyPatrol(),
                 new TailsSoccer()
             ];
+
+            if (SettingsViewModel.CurrentSettings.UnlockedGames.Contains("bgiantegg2"))
+            {
+                _availableGames.Insert(0, new BillyGiantEgg2());
+            } 
+            else
+            {
+                SettingsViewModel.GameUnlocked += (s, e) =>
+                {
+                    var list = _availableGames;
+                    list.Add(new BillyGiantEgg2());
+                    AvailableGames = list;
+                };
+            }
 #else
             _availableGames = 
             [
@@ -66,9 +80,6 @@ namespace LCDonald.ViewModels
                 new BillyGiantEgg()
             ];
 #endif
-
-            Game = new TailsSoccer();
-            return;
 
             // Select game based on command line argument or pick a random one
             if (!string.IsNullOrEmpty(selectedGameShortName))
@@ -114,6 +125,15 @@ namespace LCDonald.ViewModels
 
             IsEndless = false;
             _currentInputs = game.GetAvailableInputs();
+
+#if BURGER
+            var random = new Random().Next(1, 3);
+            var asset = AssetLoader.Open(new Uri($"avares://LCDonald/Assets/bg_burg{random}.jpg"));
+#else
+            var random = new Random().Next(1, 5);
+            var asset = AssetLoader.Open(new Uri($"avares://LCDonald/Assets/bg_{random}.jpg"));
+#endif
+            GameBackground = new Bitmap(asset);
         }
 
         partial void OnAvailableViewsChanged(List<MAMEView> views)
@@ -124,8 +144,13 @@ namespace LCDonald.ViewModels
                 // Find all the front views
                 var frontViews = viewList.Where(v => v.Name.Contains("Front") && !v.Name.Contains("Closed")).ToList();
 
+#if BURGER
+                // And pick one at random
+                SelectedView = frontViews[new Random().Next(0, frontViews.Count)];
+#else
                 // And pick the first one
                 SelectedView = frontViews[0];
+#endif
             }
         }
 
@@ -134,6 +159,9 @@ namespace LCDonald.ViewModels
 
         [ObservableProperty]
         private bool _isEndless;
+
+        [ObservableProperty]
+        private Bitmap _gameBackground;
 
         [ObservableProperty]
         private int _score;
