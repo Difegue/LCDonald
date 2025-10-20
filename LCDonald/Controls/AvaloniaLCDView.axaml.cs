@@ -230,6 +230,7 @@ namespace LCDonald.Controls
 
             // Clear previous game if any
             _logicProcessor?.Dispose();
+            _visibleGameElements.Clear(); 
             _currentScreenIndex = 0;
 
             // Add handlers to focus the control when the game starts/resumes
@@ -240,12 +241,13 @@ namespace LCDonald.Controls
 
             // Load layout
             _gameLayout = new MAMELayoutParser().Parse(_interopService.GetGameAsset(gameID, $"{gameID}.lay"));
-            _gameElements = _currentGame.GetAllGameElements();
 
 #if BURGER
             // Additional whitelabel elements available in all games
             // Adding them here ensures they'll be hidden alongside the rest when inactive.  
-            _gameElements.AddRange("win", "score-0", "score-1");
+            _gameElements = ["win", "score-0", "score-1", .. _currentGame.GetAllGameElements() ];
+#else
+            _gameElements = _currentGame.GetAllGameElements();
 #endif
 
             // Create logic processor
