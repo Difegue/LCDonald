@@ -392,6 +392,6 @@ namespace LCDonald.Core.Games
             Stop();
         }
 
-        private List<int> ThreadSafeBombList() => new List<int>(_bombPositions);
+        private List<int> ThreadSafeBombList() => [.. _bombPositions];
     }
 }
