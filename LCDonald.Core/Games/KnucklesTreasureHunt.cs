@@ -478,6 +478,10 @@ namespace LCDonald.Core.Games
             var victoryFrame1 = new List<string> { KNUCKLES_21 };
             var victoryFrame2 = new List<string> { KNUCKLES_21, EMERALD_1, EMERALD_2, EMERALD_3, EMERALD_4, EMERALD_5 };
 
+#if BURGER
+            victoryFrame2.Add("win");
+#endif
+
             var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 
                                                             victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame2,
                                                             victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame1, 

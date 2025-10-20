@@ -349,6 +349,11 @@ namespace LCDonald.Core.Games
             var victoryFrame2s = new List<string> { BIGRING_2, SONIC_CENTER };
             var victoryFrame3s = new List<string> { BIGRING_3, SONIC_CENTER };
 
+#if BURGER
+            victoryFrame1s.Add("win");
+            victoryFrame3s.Add("win");
+#endif
+
             var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2s, victoryFrame2s, victoryFrame2s, victoryFrame3, victoryFrame3, victoryFrame3,
                                                             victoryFrame1s, victoryFrame1s, victoryFrame1s, victoryFrame2, victoryFrame2, victoryFrame2, victoryFrame3s, victoryFrame3s, victoryFrame3s,
                                                             victoryFrame1, victoryFrame1, victoryFrame1, victoryFrame2s, victoryFrame2s, victoryFrame2s, victoryFrame3, victoryFrame3, victoryFrame3,
