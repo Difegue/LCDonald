@@ -1,14 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Text.Json;
+﻿using Avalonia;
+using Avalonia.Styling;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using FluentAvalonia.Styling;
+using LCDonald.Core.Controller;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Avalonia;
-using FluentAvalonia.Styling;
-using Avalonia.Styling;
 
 namespace LCDonald.ViewModels
 {
@@ -32,6 +34,8 @@ namespace LCDonald.ViewModels
         {
             CurrentSettings = new Settings();
             LoadSettings();
+
+            _interopService = Ioc.Default.GetRequiredService<IInteropService>();
 
             _darkenGameBackgrounds = CurrentSettings.DarkenGameBackgrounds;
             _drawLCDShadows = CurrentSettings.DrawLCDShadows;
@@ -67,6 +71,8 @@ namespace LCDonald.ViewModels
 
         [ObservableProperty]
         private bool _drawLCDShadows;
+
+        private IInteropService _interopService;
 
         partial void OnDarkenGameBackgroundsChanged(bool value)
         {
@@ -115,9 +121,10 @@ namespace LCDonald.ViewModels
 #if BURGER
         partial void OnPasswordChanged(string value)
         {
-            if (value == "43ARC2T642" && CurrentSettings.UnlockedGames != "bgiantegg2")
+            if (value == "43ARC2T642" && CurrentSettings.UnlockedGames != "eggcatch2")
             {
-                CurrentSettings.UnlockedGames = "bgiantegg2";
+                _interopService.PlayAudio("eggcatch2", "egg_hatch.ogg", 0.6f);
+                CurrentSettings.UnlockedGames = "eggcatch2";
                 SaveSettings();
                 GameUnlocked?.Invoke(this, EventArgs.Empty);
             }

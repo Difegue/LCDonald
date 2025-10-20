@@ -42,7 +42,7 @@ namespace LCDonald.ViewModels
                 new TailsSoccer()
             ];
 
-            if (SettingsViewModel.CurrentSettings.UnlockedGames.Contains("bgiantegg2"))
+            if (SettingsViewModel.CurrentSettings.UnlockedGames.Contains("eggcatch2"))
             {
                 _availableGames.Insert(0, new BillyGiantEgg2());
             } 
