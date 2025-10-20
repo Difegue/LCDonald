@@ -323,7 +323,11 @@ namespace LCDonald.Core.Games
             // hand catch level up serie, 2x
             var victoryFrame1 = new List<string> { BIG_HANDS };
             var victoryFrame2 = new List<string> { BIG_CATCH };
+#if BURGER
+            var victoryFrame3 = new List<string> { LEVEL_UP, "win" };
+#else
             var victoryFrame3 = new List<string> { LEVEL_UP };
+#endif
             var victoryFrame4 = new List<string> { }; 
 
 

@@ -114,7 +114,8 @@ namespace LCDonald.Core.Controller
 
         private void FlushSounds()
         {
-            foreach (var stream in _soundsPlaying)
+            List<ISoundStream> threadSafeCopy = [.. _soundsPlaying];
+            foreach (var stream in threadSafeCopy)
             {
                 stream.Stop();
                 stream.Dispose();

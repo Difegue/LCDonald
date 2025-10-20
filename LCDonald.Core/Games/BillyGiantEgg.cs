@@ -366,10 +366,17 @@ namespace LCDonald.Core.Games
 
             QueueSound(new LCDGameSound("game_win.ogg"));
 
+#if BURGER
+            var victoryFrame1 = new List<string> { BILLYCENTER, EGG_1 };
+            var victoryFrame2 = new List<string> { BILLYCENTER, EGG_2, "win" };
+            var victoryFrame3 = new List<string> { BILLYCENTER, EGG_3 };
+            var victoryFrame4 = new List<string> { BILLYCENTER, EGG_4, "win" };
+#else
             var victoryFrame1 = new List<string> { BILLYCENTER, EGG_1 };
             var victoryFrame2 = new List<string> { BILLYCENTER, EGG_2 };
             var victoryFrame3 = new List<string> { BILLYCENTER, EGG_3 };
             var victoryFrame4 = new List<string> { BILLYCENTER, EGG_4 };
+#endif
 
             var victoryAnimation = new List<List<string>> { victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame4, victoryFrame4,
                                                             victoryFrame1, victoryFrame1, victoryFrame2, victoryFrame2, victoryFrame3, victoryFrame3, victoryFrame4, victoryFrame4,

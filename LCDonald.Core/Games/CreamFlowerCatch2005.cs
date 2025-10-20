@@ -310,6 +310,15 @@ namespace LCDonald.Core.Games
             var victoryFrame3r = new List<string> { FLOWER_21, FLOWER_22, FLOWER_23, CREAM_RIGHT };
             var victoryFrame4r = new List<string> { FLOWER_11, FLOWER_12, FLOWER_13, CREAM_RIGHT };
 
+#if BURGER
+            victoryFrame2l.Add("win");
+            victoryFrame2c.Add("win");
+            victoryFrame2r.Add("win");
+            victoryFrame4l.Add("win");
+            victoryFrame4c.Add("win");
+            victoryFrame4r.Add("win");
+#endif
+
 
             var victoryAnimation = new List<List<string>> { victoryFrame1l, victoryFrame1l, victoryFrame1c, victoryFrame1c, victoryFrame2r, victoryFrame2r, victoryFrame2l, victoryFrame2l, 
                                                             victoryFrame3c, victoryFrame3c, victoryFrame3r, victoryFrame3r, victoryFrame4l, victoryFrame4l, victoryFrame4c, victoryFrame4c,

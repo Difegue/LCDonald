@@ -373,9 +373,9 @@ namespace LCDonald.Core.Games
             var victoryFrame3 = new List<string> { SCORE_A2 };
             var victoryFrame4 = new List<string> { SCORE_A3 };
 #if BURGER
-            var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
+            var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2, "win" };
             var victoryFrame2s = new List<string> { SCORE_A1, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
-            var victoryFrame3s = new List<string> { SCORE_A2, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
+            var victoryFrame3s = new List<string> { SCORE_A2, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2, "win" };
             var victoryFrame4s = new List<string> { SCORE_A3, AMY_1, AMY_2, AMY_3, HANDS_1, HANDS_2, HANDS_3, TENNIS_2 };
 #else
             var victoryFrame1s = new List<string> { SCORE_CENTER, AMY_1, AMY_2, AMY_3, TENNIS_2 };
