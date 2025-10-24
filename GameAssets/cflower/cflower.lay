@@ -87,7 +87,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="1138" height="1145" />
+			<bounds x="0" y="0" width="3553" height="3538" />
 		</element>
 	</view>
 </mamelayout>
@@ -96,6 +96,6 @@
 Cream Flower Catch (v1)
 - Artwork type: Photo, Background
 - McDonald's Sonic Games Assets by Difegue
-- Instructions scan provided by Nightsy and Georgedude.
+- Instructions scan provided by Georgedude.
 -->
 
