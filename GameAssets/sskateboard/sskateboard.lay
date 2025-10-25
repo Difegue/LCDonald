@@ -5,7 +5,7 @@
 <!-- Define Elements -->
 
 	<element name="manual">
-		<image file="sskateboard_manual.jpg" />
+		<image file="sskateboard_manual.png" />
 	</element>
 	<element name="front_open">
 		<image file="sskateboard_front_open.jpg" />
@@ -166,7 +166,7 @@
 
 	<view name="Instructions">
 		<element ref="manual">
-			<bounds x="0" y="0" width="1138" height="1142" />
+			<bounds x="0" y="0" width="3566" height="3552" />
 		</element>
 	</view>
 
