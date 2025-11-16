@@ -8,7 +8,7 @@ namespace LCDonald.Core.Games
 {
     public class SonicExtremeBoarding : LCDGameBase
     {
-        
+
 #if BURGER
         public override string ShortName => "extremeboard";
         public override string Name => "Vibes Extreme Skateboarding";
@@ -98,26 +98,28 @@ namespace LCDonald.Core.Games
         private int _ringsCollected;
         private int _bombsHit;
         private int _level;
-        
+
         private int _ringSpawn;
         private int _ringPosition;
         private bool _showRingSpawnIndicator;
 
-        private List<int> _bombPositions = new();
+        private List<int> _bombPositions = [];
 
         protected override List<string> GetVisibleElements()
         {
-            var elements = new List<string>();
-
-            elements.Add(GetSonicElement());
+            var elements = new List<string>
+            {
+                GetSonicElement()
+            };
 
             if (_showRingSpawnIndicator)
                 elements.Add(RING_0);
-            
+
             elements.Add("ring-" + _ringPosition);
 
-            foreach (var bombPos in ThreadSafeBombList())
-                elements.Add("bomb-" + bombPos);
+            lock (_bombPositions)
+                foreach (var bombPos in _bombPositions)
+                    elements.Add("bomb-" + bombPos);
 
             return elements;
         }
@@ -131,7 +133,7 @@ namespace LCDonald.Core.Games
             _bombsHit = 0;
             _level = _isEndlessMode ? 5 : 0;
 
-            _bombPositions = new List<int>();
+            _bombPositions = [];
             _ringPosition = -1;
             _ringSpawn = 11;
 
@@ -198,7 +200,7 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            if (_ringsCollected >= 20 && !_isEndlessMode) 
+            if (_ringsCollected >= 20 && !_isEndlessMode)
             {
                 if (_level == 4)
                 {
@@ -215,31 +217,37 @@ namespace LCDonald.Core.Games
             }
 
             // Move bombs forward
-            _bombPositions = ThreadSafeBombList().Select(x => x += 10).ToList();
-
-            foreach (var bombPos in ThreadSafeBombList().Where(b => b > 40))
+            lock (_bombPositions)
             {
-                _bombPositions.Remove(bombPos);
-                var horizontalPos = bombPos % 10;
+                _bombPositions = [.. _bombPositions.Select(x => x += 10)];
+                List<int> copyList = [.. _bombPositions.Where(b => b > 40)];
 
-                if (horizontalPos == _sonicPosition)
+                foreach (var bombPos in copyList)
                 {
-                    QueueSound(new LCDGameSound("bomb_hit.ogg"));
-                    _bombsHit++;
-                    
-                    BlinkElement(GetSonicElement(), 1);
-                    if (_sonicPosition == 2)
+                    _bombPositions.Remove(bombPos);
+                    var horizontalPos = bombPos % 10;
+
+                    if (horizontalPos == _sonicPosition)
                     {
-                        BlinkElement(HIT_1, 1);
-                        BlinkElement(HIT_2, 1);
-                    } else if (_sonicPosition == 4)
-                    {
-                        BlinkElement(HIT_3, 1);
-                        BlinkElement(HIT_4, 1);
-                    } else if (_sonicPosition == 6)
-                    {
-                        BlinkElement(HIT_5, 1);
-                        BlinkElement(HIT_6, 1);
+                        QueueSound(new LCDGameSound("bomb_hit.ogg"));
+                        _bombsHit++;
+
+                        BlinkElement(GetSonicElement(), 1);
+                        if (_sonicPosition == 2)
+                        {
+                            BlinkElement(HIT_1, 1);
+                            BlinkElement(HIT_2, 1);
+                        }
+                        else if (_sonicPosition == 4)
+                        {
+                            BlinkElement(HIT_3, 1);
+                            BlinkElement(HIT_4, 1);
+                        }
+                        else if (_sonicPosition == 6)
+                        {
+                            BlinkElement(HIT_5, 1);
+                            BlinkElement(HIT_6, 1);
+                        }
                     }
                 }
             }
@@ -271,33 +279,6 @@ namespace LCDonald.Core.Games
                 return;
             }
 
-            var bombsOnPreviousRow = ThreadSafeBombList().Where(r => r > 20 && r < 30).Count();
-
-            // 80% chance to spawn at least one bomb
-            if (bombsOnPreviousRow != 3 && _rng.Next(0, 100) < 80)
-            {
-                var firstBomb = SpawnBomb();
-                _bombPositions.Add(firstBomb);
-
-                // If we're on the same row as a ring, there's only one bomb max
-                if (_ringPosition == 11 || _ringPosition == 17)
-                    return;
-
-                // If the previous row only has one bomb, 50% chance to spawn a second bomb
-                if (bombsOnPreviousRow < 2 && _rng.Next(0, 100) < 33)
-                {
-                    var secondBomb = SpawnBomb();
-                    _bombPositions.Add(secondBomb);
-                }
-
-                // If the previous row was empty, 33% chance to spawn the third bomb
-                if (bombsOnPreviousRow == 0 && _rng.Next(0, 100) < 33)
-                {
-                    var thirdBomb = SpawnBomb();
-                    _bombPositions.Add(thirdBomb);
-                }
-            }
-
 #if BURGER
             // In Burger Bard version, the hang position is updated in the main cycle instead of being on a single frame
             // If sonic is at position 1 or 7, bring him down to 2/6
@@ -306,25 +287,69 @@ namespace LCDonald.Core.Games
                 _sonicPosition = _sonicPosition == 1 ? 2 : 6;
             }
 #endif
+
+            var bombsOnPreviousRow = 0;
+            lock (_bombPositions)
+            {
+                bombsOnPreviousRow = _bombPositions.Where(r => r > 20 && r < 30).Count();
+
+                // 80% chance to spawn at least one bomb
+                if (bombsOnPreviousRow != 3 && _rng.Next(0, 100) < 80)
+                {
+                    var firstBomb = SpawnBomb();
+                    if (firstBomb != -1)
+                        _bombPositions.Add(firstBomb);
+
+                    // If we're on the same row as a ring, there's only one bomb max
+                    if (_ringPosition == 11 || _ringPosition == 17)
+                        return;
+
+                    // If the previous row only has one bomb, 50% chance to spawn a second bomb
+                    if (bombsOnPreviousRow < 2 && _rng.Next(0, 100) < 33)
+                    {
+                        var secondBomb = SpawnBomb();
+                        if (secondBomb == -1)
+                            return;
+
+                        _bombPositions.Add(secondBomb);
+                    }
+
+                    // If the previous row was empty, 33% chance to spawn the third bomb
+                    if (bombsOnPreviousRow == 0 && _rng.Next(0, 100) < 33)
+                    {
+                        var thirdBomb = SpawnBomb();
+                        if (thirdBomb == -1)
+                            return;
+
+                        _bombPositions.Add(thirdBomb);
+                    }
+                }
+            }
+
         }
 
         private int SpawnBomb()
         {
-            var bombPos = _rng.Next(12, 18);
-            if (bombPos == 13) bombPos = 12;
-            if (bombPos == 15) bombPos = 14;
-            if (bombPos == 17) bombPos = 16;
+            List<int> possibleSpawns = [12, 14, 16];
 
-            // bomb can't be in the same lane as the previous bomb row
-            if (ThreadSafeBombList().Contains(bombPos + 10) || ThreadSafeBombList().Contains(bombPos))
-                return SpawnBomb();
+            List<int> bombList;
+            lock (_bombPositions) bombList = _bombPositions;
 
-            // bomb can't be next to the current ring
-            if (bombPos == 12 && _ringPosition == 11)
-                return SpawnBomb();
-            if (bombPos == 16 && _ringPosition == 17)
-                return SpawnBomb();
+            // bomb can't be next to the current ring or in the same lane as the previous bomb row
+            if (bombList.Contains(22) || bombList.Contains(12) || _ringPosition == 11)
+                possibleSpawns.Remove(12);
 
+            if (bombList.Contains(24) || bombList.Contains(14))
+                possibleSpawns.Remove(14);
+
+            if (bombList.Contains(26) || bombList.Contains(16) || _ringPosition == 17)
+                possibleSpawns.Remove(14);
+
+            if (possibleSpawns.Count == 0)
+                return -1;
+
+            // Pick a random spawn from the possible spawns
+            var bombPos = possibleSpawns[_rng.Next(0, possibleSpawns.Count)];
             return bombPos;
         }
 
@@ -339,10 +364,10 @@ namespace LCDonald.Core.Games
             var levelUpFrame2 = new List<string>(GetVisibleGameElements());
 
             var levelUpAnimation = new List<List<string>> { levelUpFrame1, levelUpFrame1, levelUpFrame1,
-                                                            levelUpFrame2, levelUpFrame2, levelUpFrame2, 
-                                                            levelUpFrame1, levelUpFrame1, levelUpFrame1, 
-                                                            levelUpFrame2, levelUpFrame2, levelUpFrame2, 
-                                                            levelUpFrame1, levelUpFrame1, levelUpFrame1, 
+                                                            levelUpFrame2, levelUpFrame2, levelUpFrame2,
+                                                            levelUpFrame1, levelUpFrame1, levelUpFrame1,
+                                                            levelUpFrame2, levelUpFrame2, levelUpFrame2,
+                                                            levelUpFrame1, levelUpFrame1, levelUpFrame1,
                                                             levelUpFrame2, levelUpFrame2, levelUpFrame2,};
             QueueSound(new LCDGameSound("level_up.ogg"));
             PlayAnimation(levelUpAnimation);
@@ -353,7 +378,7 @@ namespace LCDonald.Core.Games
         {
             _sonicPosition = -1;
             _level = 0;
-            _bombPositions.Clear();
+            lock (_bombPositions) _bombPositions.Clear();
             _ringPosition = -1;
 
             GenericGameOverAnimation(new List<string> { SONIC_4, BOMB_12, BOMB_14, BOMB_16, BOMB_22, BOMB_24, BOMB_26, BOMB_32, BOMB_34, BOMB_36 },
@@ -365,13 +390,13 @@ namespace LCDonald.Core.Games
         {
             _sonicPosition = -1;
             _level = 0;
-            _bombPositions.Clear();
+            lock (_bombPositions) _bombPositions.Clear();
             _ringPosition = -1;
 
             QueueSound(new LCDGameSound("game_win.ogg"));
 
             //5x slow blink sonic_4 + coolring
-            var victoryFrame1 = new List<string> {  };
+            var victoryFrame1 = new List<string> { };
             var victoryFrame2 = new List<string> { SONIC_4, COOLRING };
 
 #if BURGER
@@ -392,6 +417,5 @@ namespace LCDonald.Core.Games
             Stop();
         }
 
-        private List<int> ThreadSafeBombList() => [.. _bombPositions];
     }
 }
